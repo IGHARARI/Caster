@@ -1,0 +1,12 @@
+{
+  "modid": "thecaster",
+  "name": "The Caster",
+  "author_list": ["Korbo"],
+  "description": "The summoner.",
+  "version": "${project.version}",
+  "sts_version": "${SlayTheSpire.version}",
+  "mts_version": "${ModTheSpire.version}",
+  "dependencies": ["basemod", "stslib"],
+  "update_json": ""
+}
+
