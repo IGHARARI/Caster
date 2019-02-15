@@ -9,21 +9,27 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import sts.caster.characters.TheCaster;
 import sts.caster.delayedCards.DelayedCardEffect;
 
-public class CastDelayedCardAction extends AbstractGameAction {
+public class QueueDelayedCardAction extends AbstractGameAction {
     private AbstractCard card;
     private int turnsDelay;
     private ArrayList<AbstractGameAction> actions;
 
-    public CastDelayedCardAction(final AbstractCard card, final int turnsDelay, ArrayList<AbstractGameAction> actions)
-
-    {
+    public QueueDelayedCardAction(final AbstractCard card, final int turnsDelay, ArrayList<AbstractGameAction> actions) {
         this.card = card;
         this.turnsDelay = turnsDelay;
         this.actions = actions;
         actionType = ActionType.SPECIAL;
     }
 
-    @Override
+    public QueueDelayedCardAction(final AbstractCard card, final int turnsDelay, AbstractGameAction action) {
+        this.card = card;
+        this.turnsDelay = turnsDelay;
+        this.actions = new ArrayList<AbstractGameAction>();
+        this.actions.add(action);
+        actionType = ActionType.SPECIAL;
+	}
+
+	@Override
     public void update() {
     	if (AbstractDungeon.player instanceof TheCaster) {
     		TheCaster caster = (TheCaster) AbstractDungeon.player;

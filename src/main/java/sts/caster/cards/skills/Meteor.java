@@ -2,9 +2,6 @@ package sts.caster.cards.skills;
 
 import static sts.caster.CasterMod.makeCardPath;
 
-import java.util.ArrayList;
-
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
@@ -17,7 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import basemod.abstracts.CustomCard;
 import basemod.helpers.BaseModCardTags;
 import sts.caster.CasterMod;
-import sts.caster.actions.CastDelayedCardAction;
+import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.characters.TheCaster;
 
 public class Meteor extends CustomCard {
@@ -65,9 +62,7 @@ public class Meteor extends CustomCard {
     // Actions the card should do.
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    	actions.add(new DamageAction(m, new DamageInfo(p, damage, DamageType.NORMAL)));
-        AbstractDungeon.actionManager.addToBottom(new CastDelayedCardAction(this, 1, actions));
+        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, 1, new DamageAction(m, new DamageInfo(p, damage, DamageType.NORMAL))));
     }
 
     //Upgraded stats.

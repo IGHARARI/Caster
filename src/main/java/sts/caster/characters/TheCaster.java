@@ -178,8 +178,6 @@ public class TheCaster extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
 
         logger.info("Begin loading starter Deck Strings");
-
-
         retVal.add(Meteor.ID);
         retVal.add(Meteor.ID);
         retVal.add(Meteor.ID);

@@ -10,11 +10,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.combat.DarkOrbActivateEffect;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
@@ -30,6 +31,10 @@ public class DelayedCardEffect extends AbstractOrb {
 
 	// Standard ID/Description
 	public static final String ORB_ID = "DelayedCard:";
+	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.5f;
+	public static final float CARD_AREA_X_RIGHT_OFFSET = 400f * Settings.scale;
+	public static final float CARD_AREA_COLUMN_WIDTH = 100f * Settings.scale;
+	public static final float CARD_AREA_COLUMN_HEIGH = 280f * Settings.scale;
 
 	private float vfxTimer = 1.0f;
 	private float vfxIntervalMin = 0.1f;
@@ -176,25 +181,13 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	@Override
-	public void onEvoke() {
-//		logger.info("On evoke for delayed card");
-		//The dontTriggerOnUseCard is to prevent interactions with
-		//relics, powers, and cards that happen when you to play a card
-		AbstractMonster monster = AbstractDungeon.getRandomMonster();
-		delayedCard.calculateCardDamage(monster);
-		delayedCard.use(AbstractDungeon.player, AbstractDungeon.getRandomMonster());
-		
-		//TODO: Make multi-casting not duplicate card
-		AbstractDungeon.player.discardPile.addToBottom(delayedCard);
-	}
-
-	@Override
 	public void onStartOfTurn() {
 		turnsUntilFire--;
 		if (turnsUntilFire <= 0) {
 			for (AbstractGameAction action : delayedActions) {
 				AbstractDungeon.actionManager.addToBottom(action);
 			}
+			AbstractDungeon.actionManager.addToBottom(new WaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
 		}
 	}
 
@@ -232,11 +225,25 @@ public class DelayedCardEffect extends AbstractOrb {
 		}
 		return hb.hovered;
 	}
+	
+	@Override
+    public void setSlot(final int slotNum, final int maxOrbs) {
+        final float dist = 160.0f * Settings.scale + maxOrbs * 10.0f * Settings.scale;
+        float angle = 100.0f + maxOrbs * 12.0f;
+        final float offsetAngle = angle / 2.0f;
+        angle *= slotNum / (maxOrbs - 1.0f);
+        angle += 90.0f - offsetAngle;
+        this.tX = dist * MathUtils.cosDeg(angle) + AbstractDungeon.player.drawX;
+        this.tY = dist * MathUtils.sinDeg(angle) + AbstractDungeon.player.drawY + AbstractDungeon.player.hb_h / 2.0f;
+        if (maxOrbs == 1) {
+            this.tX = AbstractDungeon.player.drawX;
+            this.tY = 160.0f * Settings.scale + AbstractDungeon.player.drawY + AbstractDungeon.player.hb_h / 2.0f;
+        }
+        this.hb.move(this.tX, this.tY);
+    }
 
 	@Override
-	public void triggerEvokeAnimation() { // The evoke animation of this orb is the dark-orb activation effect.
-		AbstractDungeon.effectsQueue.add(new DarkOrbActivateEffect(this.cX, this.cY));
-	}
+	public void triggerEvokeAnimation() {}
 
 	@Override
 	public void playChannelSFX() { // When you channel this orb, the ATTACK_FIRE effect plays ("Fwoom").
@@ -247,4 +254,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	public AbstractOrb makeCopy() {
 		return new DelayedCardEffect(this.delayedCard, turnsUntilFire, delayedActions);
 	}
+
+	@Override
+	public void onEvoke() {}
 }
