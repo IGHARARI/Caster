@@ -3,7 +3,13 @@ package sts.caster.patches.delayedCards;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.modthespire.lib.LineFinder;
+import com.evacipated.cardcrawl.modthespire.lib.Matcher;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
@@ -11,23 +17,24 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
 
+import javassist.CannotCompileException;
+import javassist.CtBehavior;
 import sts.caster.characters.TheCaster;
-import sts.caster.delayedCards.DelayedCard;
+import sts.caster.delayedCards.DelayedCardEffect;
 
 
-public class RenderDelayedCardsPatch {
+public class DelayedCardEffectsPatch {
 
 	@SpirePatch(clz=AbstractPlayer.class, method="combatUpdate", paramtypez = {})
 	public static class inCombatUpdatePatch {
 
-	    public static void Postfix(AbstractPlayer __instance) {
-	    	if (__instance instanceof TheCaster) {
-	    		for (DelayedCard card : ((TheCaster)__instance).delayedCards) {
-	    			card.update();
-	    		}
-	    	}
+		public static void Postfix(AbstractPlayer __instance) {
+			if (__instance instanceof TheCaster) {
+				for (DelayedCardEffect card : ((TheCaster)__instance).delayedCards) {
+					card.update();
+				}
+			}
 		}
-
 	}
 	
 //	@SpirePatch(clz=AbstractPlayer.class, method="update", paramtypez = {})
@@ -53,11 +60,11 @@ public class RenderDelayedCardsPatch {
 	    		TheCaster caster = (TheCaster) __instance;
 		        if ((AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT || AbstractDungeon.getCurrRoom() instanceof MonsterRoom) && !caster.isDead) {
 		            if (!caster.delayedCards.isEmpty()) {
-		                for (final DelayedCard orbCard : caster.delayedCards) {
+		                for (final DelayedCardEffect orbCard : caster.delayedCards) {
 		                	orbCard.render(sb);
 		                }
-		                DelayedCard hoveredCard = null;
-		                for (final DelayedCard orbCard : caster.delayedCards) {
+		                DelayedCardEffect hoveredCard = null;
+		                for (final DelayedCardEffect orbCard : caster.delayedCards) {
 		                	if (orbCard.renderIfHovered(sb)) hoveredCard = orbCard;
 		                }
 		                float hovXLeft = 0f, hovXRight = 0f, hovYTop = 0f, hovYBot = 0f;
@@ -67,7 +74,7 @@ public class RenderDelayedCardsPatch {
 		                	hovYTop = hoveredCard.hb.cY + AbstractCard.IMG_HEIGHT_S*Settings.scale/2f;
 		                	hovYBot = hoveredCard.hb.cY - AbstractCard.IMG_HEIGHT_S*Settings.scale/2f;
 		                }
-		                for (final DelayedCard orbCard : caster.delayedCards) {
+		                for (final DelayedCardEffect orbCard : caster.delayedCards) {
 		                	if (hoveredCard != null && 
 		                			(hovXLeft < orbCard.hb.cX  && orbCard.hb.cX < hovXRight) && 
 		                				(hovYBot < orbCard.hb.cY  && orbCard.hb.cY < hovYTop)) {
@@ -88,8 +95,40 @@ public class RenderDelayedCardsPatch {
 		public static void Prefix(AbstractPlayer __instance) {
 			if (__instance instanceof TheCaster) {
 				TheCaster caster = (TheCaster) __instance;
-				caster.delayedCards = new ArrayList<DelayedCard>();
+				caster.delayedCards = new ArrayList<DelayedCardEffect>();
 			}
+		}
+	}
+	
+	@SpirePatch(clz=GameActionManager.class, method="getNextAction")
+	public static class onStartOfTurnTriggerPatch {
+		
+		@SpireInsertPatch(locator=Locator.class, localvars={})
+		public static void Insert(GameActionManager __instance) {
+			if (AbstractDungeon.player instanceof TheCaster) {
+				TheCaster caster = (TheCaster) AbstractDungeon.player;
+				ArrayList<DelayedCardEffect> cardsToRemove = new ArrayList<DelayedCardEffect>();
+                for (final DelayedCardEffect orbCard : caster.delayedCards) {
+                	orbCard.onStartOfTurn();
+                	if (orbCard.turnsUntilFire <= 0) {
+                		cardsToRemove.add(orbCard);
+                	}
+                }
+                for (final DelayedCardEffect orbCard : cardsToRemove) {
+                	orbCard.removeFromPlayer();
+                }
+                
+			}
+		}
+		
+		private static class Locator extends SpireInsertLocator {
+
+			@Override
+			public int[] Locate(CtBehavior ctMethod) throws CannotCompileException, PatchingException {
+				Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "applyStartOfTurnOrbs");
+				return LineFinder.findInOrder(ctMethod, new ArrayList<Matcher>(), finalMatcher);
+			}
+			
 		}
 	}
 }

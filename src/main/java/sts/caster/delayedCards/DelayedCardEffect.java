@@ -1,6 +1,7 @@
 package sts.caster.delayedCards;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,25 +21,23 @@ import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 
 import sts.caster.characters.TheCaster;
 
-public class DelayedCard extends AbstractOrb {
+public class DelayedCardEffect extends AbstractOrb {
 	
-	int turnsUntilFire;
+	public int turnsUntilFire;
+	private ArrayList<AbstractGameAction> delayedActions;
 
-	private static final Logger logger = LogManager.getLogger(DelayedCard.class.getName());
+	private static final Logger logger = LogManager.getLogger(DelayedCardEffect.class.getName());
 
 	// Standard ID/Description
 	public static final String ORB_ID = "DelayedCard:";
 
-	// Animation Rendering Numbers - You can leave these at default, or play around with them and see what they change.
 	private float vfxTimer = 1.0f;
 	private float vfxIntervalMin = 0.1f;
 	private float vfxIntervalMax = 0.4f;
-	private static final float ORB_WAVY_DIST = 0.04f;
-	private static final float PI_4 = 12.566371f;
 	
 	public AbstractCard delayedCard = null;
 	
-	public DelayedCard(AbstractCard card, int delayTurns) {
+	public DelayedCardEffect(AbstractCard card, int delayTurns, ArrayList<AbstractGameAction> delayedActions) {
 		super();
 		logger.info("Creating delayed card");
 		if (AbstractDungeon.player instanceof TheCaster) {
@@ -47,7 +47,8 @@ public class DelayedCard extends AbstractOrb {
 			img = ImageMaster.loadImage("orbs/default_orb.png");
 			
 			this.delayedCard = card;
-			turnsUntilFire = delayTurns;
+			this.turnsUntilFire = delayTurns;
+			this.delayedActions = delayedActions;
 			passiveAmount = this.basePassiveAmount = delayTurns;
 			
 			this.updateDescription();
@@ -61,6 +62,17 @@ public class DelayedCard extends AbstractOrb {
 				caster.delayedCards.get(i).setSlot(i, caster.delayedCards.size());
 			}
 			logger.info("Delayed card created and centered around character");
+		}
+	}
+	
+	public void removeFromPlayer() {
+		if (AbstractDungeon.player instanceof TheCaster) {
+			TheCaster caster = (TheCaster) AbstractDungeon.player;
+			
+			caster.delayedCards.remove(this);
+			for (int i = 0; i < caster.delayedCards.size(); ++i) {
+				caster.delayedCards.get(i).setSlot(i, caster.delayedCards.size());
+			}
 		}
 	}
 	
@@ -96,7 +108,7 @@ public class DelayedCard extends AbstractOrb {
 					return "[#ff6563]" + Integer.toString(delayedCard.magicNumber) + "[]";
 				}
 				default: {
-					DelayedCard.logger.info("KEY: " + key);
+					DelayedCardEffect.logger.info("KEY: " + key);
 					return Integer.toString(-99);
 				}
 			}
@@ -178,7 +190,12 @@ public class DelayedCard extends AbstractOrb {
 
 	@Override
 	public void onStartOfTurn() {
-		//No passive effect
+		turnsUntilFire--;
+		if (turnsUntilFire <= 0) {
+			for (AbstractGameAction action : delayedActions) {
+				AbstractDungeon.actionManager.addToBottom(action);
+			}
+		}
 	}
 
 	@Override
@@ -228,6 +245,6 @@ public class DelayedCard extends AbstractOrb {
 
 	@Override
 	public AbstractOrb makeCopy() {
-		return new DelayedCard(this.delayedCard, turnsUntilFire);
+		return new DelayedCardEffect(this.delayedCard, turnsUntilFire, delayedActions);
 	}
 }

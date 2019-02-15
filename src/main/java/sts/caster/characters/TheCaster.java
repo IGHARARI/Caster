@@ -45,7 +45,7 @@ import sts.caster.cards.skills.DefaultRareSkill;
 import sts.caster.cards.skills.DefaultSecondMagicNumberSkill;
 import sts.caster.cards.skills.DefaultUncommonSkill;
 import sts.caster.cards.skills.Meteor;
-import sts.caster.delayedCards.DelayedCard;
+import sts.caster.delayedCards.DelayedCardEffect;
 import sts.caster.relics.DefaultClickableRelic;
 import sts.caster.relics.PlaceholderRelic;
 import sts.caster.relics.PlaceholderRelic2;
@@ -75,7 +75,7 @@ public class TheCaster extends CustomPlayer {
 
     // =============== CHARACTER ENUMERATORS  =================
 
-    public ArrayList<DelayedCard> delayedCards;
+    public ArrayList<DelayedCardEffect> delayedCards;
     
     
     
