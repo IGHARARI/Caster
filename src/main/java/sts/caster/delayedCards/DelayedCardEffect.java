@@ -15,9 +15,9 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.vfx.combat.DarkOrbActivateEffect;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 
 import sts.caster.characters.TheCaster;
@@ -32,13 +32,15 @@ public class DelayedCardEffect extends AbstractOrb {
 	// Standard ID/Description
 	public static final String ORB_ID = "DelayedCard:";
 	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.5f;
-	public static final float CARD_AREA_X_RIGHT_OFFSET = 400f * Settings.scale;
+	public static final float CARD_AREA_X_RIGHT_OFFSET = 200f * Settings.scale;
+	public static final float VERT_SPACE_BTWN_CARDS = 65f * Settings.scale;
 	public static final float CARD_AREA_COLUMN_WIDTH = 100f * Settings.scale;
+	public static final float CARD_AREA_COLUMN_SPACER = 10f * Settings.scale;
 	public static final float CARD_AREA_COLUMN_HEIGH = 280f * Settings.scale;
 
 	private float vfxTimer = 1.0f;
-	private float vfxIntervalMin = 0.1f;
-	private float vfxIntervalMax = 0.4f;
+	private float vfxIntervalMin = 0.33f;
+	private float vfxIntervalMax = 0.88f;
 	
 	public AbstractCard delayedCard = null;
 	
@@ -61,12 +63,33 @@ public class DelayedCardEffect extends AbstractOrb {
 			angle = MathUtils.random(360.0f); // More Animation-related Numbers
 			channelAnimTimer = 0.5f;
 			
+			this.hb = new Hitbox(38.0f * Settings.scale, 65.0f * Settings.scale);
 			this.cX = caster.drawX + caster.hb_x;
 			this.cY = caster.drawY + caster.hb_y + caster.hb_h / 2.0f;
-			for (int i = 0; i < caster.delayedCards.size(); ++i) {
-				caster.delayedCards.get(i).setSlot(i, caster.delayedCards.size());
-			}
+			
 			logger.info("Delayed card created and centered around character");
+		}
+	}
+	
+	public static void redrawMiniCards() {
+		if (AbstractDungeon.player instanceof TheCaster) {
+			TheCaster caster = (TheCaster) AbstractDungeon.player;
+			for (int turnsRemaining = 1 ; turnsRemaining < 4; turnsRemaining++) {
+				int columnIndex = 0;
+				for (DelayedCardEffect card : caster.delayedCards) {
+					if (card.turnsUntilFire == turnsRemaining) {
+						card.setSlot(turnsRemaining, columnIndex);
+						columnIndex++;
+					}
+				}
+			}
+			int columnIndex = 0;
+			for (DelayedCardEffect card : caster.delayedCards) {
+				if (card.turnsUntilFire > 3) {
+					card.setSlot(4, columnIndex);
+					columnIndex++;
+				}
+			}
 		}
 	}
 	
@@ -75,9 +98,7 @@ public class DelayedCardEffect extends AbstractOrb {
 			TheCaster caster = (TheCaster) AbstractDungeon.player;
 			
 			caster.delayedCards.remove(this);
-			for (int i = 0; i < caster.delayedCards.size(); ++i) {
-				caster.delayedCards.get(i).setSlot(i, caster.delayedCards.size());
-			}
+			DelayedCardEffect.redrawMiniCards();
 		}
 	}
 	
@@ -136,8 +157,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	@Override
-	public void updateDescription() { // Set the on-hover description of the orb
-//		logger.info("updating description for delayed card");
+	public void updateDescription() {
 		delayedCard.initializeDescription();
 		String rawDescription = "";
 		for (int i=0; i<delayedCard.description.size(); i++){
@@ -183,6 +203,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	@Override
 	public void onStartOfTurn() {
 		turnsUntilFire--;
+		passiveAmount = turnsUntilFire;
 		if (turnsUntilFire <= 0) {
 			for (AbstractGameAction action : delayedActions) {
 				AbstractDungeon.actionManager.addToBottom(action);
@@ -214,7 +235,7 @@ public class DelayedCardEffect extends AbstractOrb {
 		hb.render(sb);
 	}
 	
-	public boolean renderIfHovered(SpriteBatch sb) {
+	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
 			AbstractCard bigCopy = delayedCard.makeStatEquivalentCopy();
 			bigCopy.current_x = cX;
@@ -226,19 +247,17 @@ public class DelayedCardEffect extends AbstractOrb {
 		return hb.hovered;
 	}
 	
+	
 	@Override
-    public void setSlot(final int slotNum, final int maxOrbs) {
-        final float dist = 160.0f * Settings.scale + maxOrbs * 10.0f * Settings.scale;
-        float angle = 100.0f + maxOrbs * 12.0f;
-        final float offsetAngle = angle / 2.0f;
-        angle *= slotNum / (maxOrbs - 1.0f);
-        angle += 90.0f - offsetAngle;
-        this.tX = dist * MathUtils.cosDeg(angle) + AbstractDungeon.player.drawX;
-        this.tY = dist * MathUtils.sinDeg(angle) + AbstractDungeon.player.drawY + AbstractDungeon.player.hb_h / 2.0f;
-        if (maxOrbs == 1) {
-            this.tX = AbstractDungeon.player.drawX;
-            this.tY = 160.0f * Settings.scale + AbstractDungeon.player.drawY + AbstractDungeon.player.hb_h / 2.0f;
+    public void setSlot(final int columnNumber, int indexInColumn) {
+        final float rightBorder = AbstractDungeon.player.drawX + CARD_AREA_X_RIGHT_OFFSET;
+        float columnXOffset = 0;
+        if (indexInColumn >= 5) {
+        	columnXOffset = CARD_AREA_COLUMN_WIDTH/2f;
+        	indexInColumn %= 5;
         }
+        this.tX = rightBorder - (CARD_AREA_COLUMN_WIDTH + CARD_AREA_COLUMN_SPACER) * (columnNumber-1) - columnXOffset;
+        this.tY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb_h + 20f + VERT_SPACE_BTWN_CARDS * indexInColumn;
         this.hb.move(this.tX, this.tY);
     }
 
@@ -246,7 +265,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	public void triggerEvokeAnimation() {}
 
 	@Override
-	public void playChannelSFX() { // When you channel this orb, the ATTACK_FIRE effect plays ("Fwoom").
+	public void playChannelSFX() {
 		CardCrawlGame.sound.play("ATTACK_FIRE", 0.1f);
 	}
 

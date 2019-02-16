@@ -65,7 +65,7 @@ public class DelayedCardEffectsPatch {
 		                }
 		                DelayedCardEffect hoveredCard = null;
 		                for (final DelayedCardEffect orbCard : caster.delayedCards) {
-		                	if (orbCard.renderIfHovered(sb)) hoveredCard = orbCard;
+		                	if (orbCard.renderPreviewIfHovered(sb)) hoveredCard = orbCard;
 		                }
 		                float hovXLeft = 0f, hovXRight = 0f, hovYTop = 0f, hovYBot = 0f;
 		                if (hoveredCard != null) {

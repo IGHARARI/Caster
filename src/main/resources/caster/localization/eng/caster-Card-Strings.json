@@ -15,6 +15,22 @@
     "NAME": "Meteor",
     "DESCRIPTION": "Deal !D! damage in 1 turn."
   },
+  "caster:Meteor2": {
+    "NAME": "Meteor2",
+    "DESCRIPTION": "Deal !D! damage in 2 turn."
+  },
+  "caster:Meteor3": {
+    "NAME": "Meteor3",
+    "DESCRIPTION": "Deal !D! damage in 3 turn."
+  },
+  "caster:Meteor4": {
+    "NAME": "Meteor4",
+    "DESCRIPTION": "Deal !D! damage in 4 turn."
+  },
+  "caster:Meteor5": {
+    "NAME": "Meteor5",
+    "DESCRIPTION": "Deal !D! damage in 5 turn."
+  },
   "caster:DefaultCommonPower": {
     "NAME": "Hold Place",
     "DESCRIPTION": "Gain !M! Keyword.",

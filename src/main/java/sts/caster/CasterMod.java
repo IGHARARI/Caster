@@ -41,6 +41,10 @@ import sts.caster.cards.skills.DefaultRareSkill;
 import sts.caster.cards.skills.DefaultSecondMagicNumberSkill;
 import sts.caster.cards.skills.DefaultUncommonSkill;
 import sts.caster.cards.skills.Meteor;
+import sts.caster.cards.skills.Meteor2;
+import sts.caster.cards.skills.Meteor3;
+import sts.caster.cards.skills.Meteor4;
+import sts.caster.cards.skills.Meteor5;
 import sts.caster.characters.TheCaster;
 import sts.caster.potions.PlaceholderPotion;
 import sts.caster.relics.DefaultClickableRelic;
@@ -288,6 +292,10 @@ public class CasterMod implements
 
         
         BaseMod.addCard(new Meteor());
+        BaseMod.addCard(new Meteor2());
+        BaseMod.addCard(new Meteor3());
+        BaseMod.addCard(new Meteor4());
+        BaseMod.addCard(new Meteor5());
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -307,6 +315,9 @@ public class CasterMod implements
 
         
         UnlockTracker.unlockCard(Meteor.ID);
+        UnlockTracker.unlockCard(Meteor2.ID);
+        UnlockTracker.unlockCard(Meteor3.ID);
+        UnlockTracker.unlockCard(Meteor4.ID);
 
         logger.info("Done adding cards!");
     }
