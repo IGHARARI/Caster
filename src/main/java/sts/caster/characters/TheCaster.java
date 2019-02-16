@@ -34,6 +34,10 @@ import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
 import sts.caster.CasterMod;
 import sts.caster.cards.attacks.DefaultCommonAttack;
+import sts.caster.cards.attacks.LAZER;
+import sts.caster.cards.skills.FlashFrost;
+import sts.caster.cards.skills.JupitelThunder;
+import sts.caster.cards.skills.LightningBolt;
 import sts.caster.cards.skills.Meteor;
 import sts.caster.delayedCards.DelayedCardEffect;
 import sts.caster.relics.DefaultClickableRelic;
@@ -172,14 +176,10 @@ public class TheCaster extends CustomPlayer {
         retVal.add(Meteor.ID);
         retVal.add(Meteor.ID);
         retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
+        retVal.add(JupitelThunder.ID);
+        retVal.add(LightningBolt.ID);
+        retVal.add(FlashFrost.ID);
+        retVal.add(LAZER.ID);
         return retVal;
     }
 

@@ -32,9 +32,8 @@ public class QueueDelayedCardAction extends AbstractGameAction {
 	@Override
     public void update() {
     	if (AbstractDungeon.player instanceof TheCaster) {
-    		TheCaster caster = (TheCaster) AbstractDungeon.player;
-    		caster.delayedCards.add(new DelayedCardEffect(card, turnsDelay, actions));
-    		DelayedCardEffect.redrawMiniCards();
+    		DelayedCardEffect delayedCard = new DelayedCardEffect(card, turnsDelay, actions);
+    		delayedCard.addToPlayer();
     	}
         isDone = true;
     }

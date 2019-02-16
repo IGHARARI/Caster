@@ -3,6 +3,14 @@
         "NAME": "Placeholder Power",
         "DESCRIPTIONS": ["You applied ", " keyword.", " keywords."]
 },
+"caster:Shocked": {
+        "NAME": "Shocked",
+        "DESCRIPTIONS": ["Shocked for ", "turns.", "turn.", " NL Shocked creatures lose #b20% of their block at the end of their turn. NL Earth attacks deal #b20% more damage to this creature."]
+},
+"caster:Frozen": {
+        "NAME": "Frozen",
+        "DESCRIPTIONS": ["Whenever you receive damage, lose ", "Whenever this creature takes damage, all enemies lose #r", " HP and Frozen is reduced by #b1."]
+},
 "caster:RarePower": {
         "NAME": "Placeholder Power",
         "DESCRIPTIONS": ["At the start of your turn, TOUCH ", " enemy." , " enemies."]

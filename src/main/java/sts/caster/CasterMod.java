@@ -33,13 +33,16 @@ import sts.caster.cards.attacks.DefaultAttackWithVariable;
 import sts.caster.cards.attacks.DefaultCommonAttack;
 import sts.caster.cards.attacks.DefaultRareAttack;
 import sts.caster.cards.attacks.DefaultUncommonAttack;
+import sts.caster.cards.attacks.LAZER;
 import sts.caster.cards.powers.DefaultCommonPower;
 import sts.caster.cards.powers.DefaultRarePower;
 import sts.caster.cards.powers.DefaultUncommonPower;
 import sts.caster.cards.skills.DefaultCommonSkill;
 import sts.caster.cards.skills.DefaultRareSkill;
-import sts.caster.cards.skills.DefaultSecondMagicNumberSkill;
 import sts.caster.cards.skills.DefaultUncommonSkill;
+import sts.caster.cards.skills.FlashFrost;
+import sts.caster.cards.skills.JupitelThunder;
+import sts.caster.cards.skills.LightningBolt;
 import sts.caster.cards.skills.Meteor;
 import sts.caster.cards.skills.Meteor2;
 import sts.caster.cards.skills.Meteor3;
@@ -51,7 +54,7 @@ import sts.caster.relics.DefaultClickableRelic;
 import sts.caster.relics.PlaceholderRelic;
 import sts.caster.util.TextureLoader;
 import sts.caster.variables.DefaultCustomVariable;
-import sts.caster.variables.DefaultSecondMagicNumber;
+import sts.caster.variables.DelayTurns;
 
 
 @SpireInitializer
@@ -272,11 +275,10 @@ public class CasterMod implements
         logger.info("Add variabls");
         // Add the Custom Dynamic variabls
         BaseMod.addDynamicVariable(new DefaultCustomVariable());
-        BaseMod.addDynamicVariable(new DefaultSecondMagicNumber());
+        BaseMod.addDynamicVariable(new DelayTurns());
 
         logger.info("Adding cards");
         // Add the cards
-        BaseMod.addCard(new DefaultSecondMagicNumberSkill());
         BaseMod.addCard(new DefaultCommonAttack());
         BaseMod.addCard(new DefaultAttackWithVariable());
         BaseMod.addCard(new DefaultCommonSkill());
@@ -291,17 +293,33 @@ public class CasterMod implements
         BaseMod.addCard(new DefaultRarePower());
 
         
+        BaseMod.addCard(new FlashFrost());
+        UnlockTracker.unlockCard(FlashFrost.ID);
+        BaseMod.addCard(new LightningBolt());
+        UnlockTracker.unlockCard(LightningBolt.ID);
+        BaseMod.addCard(new LAZER());
+        UnlockTracker.unlockCard(LAZER.ID);
+        BaseMod.addCard(new JupitelThunder());
+        UnlockTracker.unlockCard(JupitelThunder.ID);
+        
+        
+        
         BaseMod.addCard(new Meteor());
+        UnlockTracker.unlockCard(Meteor.ID);
         BaseMod.addCard(new Meteor2());
+        UnlockTracker.unlockCard(Meteor2.ID);
         BaseMod.addCard(new Meteor3());
+        UnlockTracker.unlockCard(Meteor3.ID);
         BaseMod.addCard(new Meteor4());
+        UnlockTracker.unlockCard(Meteor4.ID);
         BaseMod.addCard(new Meteor5());
+        UnlockTracker.unlockCard(Meteor5.ID);
+        
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
         // This is so that they are all "seen" in the library, for people who like to look at the card list
         // before playing your mod.
-        UnlockTracker.unlockCard(DefaultSecondMagicNumberSkill.ID);
         UnlockTracker.unlockCard(DefaultCommonAttack.ID);
         UnlockTracker.unlockCard(DefaultAttackWithVariable.ID);
         UnlockTracker.unlockCard(DefaultCommonSkill.ID);
@@ -313,11 +331,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(DefaultRareSkill.ID);
         UnlockTracker.unlockCard(DefaultRarePower.ID);
 
-        
-        UnlockTracker.unlockCard(Meteor.ID);
-        UnlockTracker.unlockCard(Meteor2.ID);
-        UnlockTracker.unlockCard(Meteor3.ID);
-        UnlockTracker.unlockCard(Meteor4.ID);
 
         logger.info("Done adding cards!");
     }

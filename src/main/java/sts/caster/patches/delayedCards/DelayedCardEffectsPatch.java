@@ -125,7 +125,7 @@ public class DelayedCardEffectsPatch {
 
 			@Override
 			public int[] Locate(CtBehavior ctMethod) throws CannotCompileException, PatchingException {
-				Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "applyStartOfTurnOrbs");
+				Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "applyStartOfTurnPostDrawPowers");
 				return LineFinder.findInOrder(ctMethod, new ArrayList<Matcher>(), finalMatcher);
 			}
 			

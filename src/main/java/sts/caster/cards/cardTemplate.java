@@ -15,7 +15,7 @@ import sts.caster.CasterMod;
 import sts.caster.characters.TheCaster;
 
 // public class ${NAME} extends AbstractDefaultCard
-public class cardTemplate extends AbstractDefaultCard {
+public class cardTemplate extends CasterCard {
 
     /*
      * "Hey, I wanna make a bunch of cards now." - You, probably.

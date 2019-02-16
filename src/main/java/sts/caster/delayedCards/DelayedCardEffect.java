@@ -102,6 +102,21 @@ public class DelayedCardEffect extends AbstractOrb {
 		}
 	}
 	
+	public void addToPlayer() {
+		if (AbstractDungeon.player instanceof TheCaster) {
+			TheCaster caster = (TheCaster) AbstractDungeon.player;
+			
+			caster.delayedCards.add(this);
+			DelayedCardEffect.redrawMiniCards();
+			if (turnsUntilFire == 0) {
+				evokeCardEffect();
+				removeFromPlayer();
+			}
+		}
+	}
+	
+	
+	
 	private String getDynamicValue(final String key) {
 //		return Integer.toString(turnsUntilFire);
 		if (key.length() == 1){
@@ -205,13 +220,17 @@ public class DelayedCardEffect extends AbstractOrb {
 		turnsUntilFire--;
 		passiveAmount = turnsUntilFire;
 		if (turnsUntilFire <= 0) {
-			for (AbstractGameAction action : delayedActions) {
-				AbstractDungeon.actionManager.addToBottom(action);
-			}
-			AbstractDungeon.actionManager.addToBottom(new WaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
+			evokeCardEffect();
 		}
 	}
 
+	public void evokeCardEffect(){
+		for (AbstractGameAction action : delayedActions) {
+			AbstractDungeon.actionManager.addToBottom(action);
+		}
+		AbstractDungeon.actionManager.addToBottom(new WaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
+	}
+	
 	@Override
 	public void updateAnimation() {
 		super.updateAnimation();

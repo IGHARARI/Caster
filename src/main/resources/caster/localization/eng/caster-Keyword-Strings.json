@@ -10,6 +10,32 @@
     "DESCRIPTION": "Whenever you play a card, gain 1 dexterity this turn only."
   },
   {
+    "NAMES": [
+      "Frost",
+      "frost",
+      "frost:"
+    ],
+    "DESCRIPTION": "This card has a chance of applying Frozen to enemies."
+  },
+  {
+    "NAMES": [
+      "Lightning",
+      "lightning",
+      "lightning:"
+    ],
+    "DESCRIPTION": "This card has a chance of applying Shocked to enemies."
+  },
+  {
+    "PROPER_NAME": "Cast Time",
+    "NAMES": [
+      "Cast Time",
+      "cast_time",
+      "Cast_time",
+      "Cast_Time"
+    ],
+    "DESCRIPTION": "The effects of this card will occur at the start of your turn, after an amount of turns equal to the card's #yCast #yTime has passed."
+  },
+  {
     "PROPER_NAME": "Multiword Keyword",
     "NAMES": [
       "Multiword Keyword",
