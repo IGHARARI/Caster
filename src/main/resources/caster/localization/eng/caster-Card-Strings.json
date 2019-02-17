@@ -13,19 +13,44 @@
   },
   "caster:LightningBolt": {
     "NAME": "LightningBolt",
-    "DESCRIPTION": "Cast_Time !caster:Delay!. NL Lightning. NL Deal !D! damage."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !D! damage."
   },
   "caster:FlashFrost": {
     "NAME": "Flash Frost",
-    "DESCRIPTION": "Frost. NL Apply !M! Frozen to all enemies."
+    "DESCRIPTION": "Frost. NL Apply !M! Frozen. NL Exhaust."
   },
   "caster:JupitelThunder": {
     "NAME": "Jupitel Thunder",
-    "DESCRIPTION": "Cast_Time !caster:Delay!. NL Lightning. NL Deal !D! damage !M! times."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !D! damage !M! times."
+  },
+  "caster:FrostDriver": {
+    "NAME": "Frost Driver",
+    "DESCRIPTION": "Gain !B! Block. NL Cast_Time !caster:Delay!: NL Frost. NL Deal !D! damage."
+  },
+  "caster:MagicResonance": {
+    "NAME": "Magic Resonance",
+    "DESCRIPTION": "Deal !D! damage for each spell you are currently casting."
+  },
+  "caster:Fissure": {
+    "NAME": "Fissure",
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
+  },
+  "caster:QuickCast": {
+    "NAME": "Quick Cast",
+    "DESCRIPTION": "Reduce the Cast_time of a random spell in your hand until it's played.",
+    "UPGRADE_DESCRIPTION": "Reduce the Cast_time of a spell in your hand until it's played."
+  },
+  "caster:WallOfThorns": {
+    "NAME": "Wall Of Thorns",
+    "DESCRIPTION": "Gain !B! Block. NL Cast_time !caster:Delay!: NL Gain !B! Block twice and !M! Thorns."
+  },
+  "caster:BookThrow": {
+    "NAME": "Book Throw",
+    "DESCRIPTION": "Deal !D! damage. NL Enemy loses !M! Strength for the rest of this turn."
   },
   "caster:Meteor": {
     "NAME": "Meteor",
-    "DESCRIPTION": "Cast_Time !caster:Delay!. NL Neutral. NL Deal !D! damage."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Neutral. NL Deal !D! damage."
   },
   "caster:Meteor2": {
     "NAME": "Meteor2",

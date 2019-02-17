@@ -41,9 +41,7 @@ public class FlashFrost extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
-    		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mon, p, new FrozenPower(mon, p, magicNumber), magicNumber));
-    	}
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new FrozenPower(m, p, magicNumber), magicNumber));
     }
 
     @Override
@@ -51,7 +49,7 @@ public class FlashFrost extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeMagicNumber(UPGRADE_FROST);;
+            upgradeMagicNumber(UPGRADE_FROST);
         }
     }
 }

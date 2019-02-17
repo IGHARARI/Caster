@@ -39,8 +39,8 @@ public class DelayedCardEffect extends AbstractOrb {
 	public static final float CARD_AREA_COLUMN_HEIGH = 280f * Settings.scale;
 
 	private float vfxTimer = 1.0f;
-	private float vfxIntervalMin = 0.33f;
-	private float vfxIntervalMax = 0.88f;
+	private float vfxIntervalMin = 0.77f;
+	private float vfxIntervalMax = 1.22f;
 	
 	public AbstractCard delayedCard = null;
 	
@@ -60,7 +60,7 @@ public class DelayedCardEffect extends AbstractOrb {
 			
 			this.updateDescription();
 			
-			angle = MathUtils.random(360.0f); // More Animation-related Numbers
+			angle = MathUtils.random(360.0f);
 			channelAnimTimer = 0.5f;
 			
 			this.hb = new Hitbox(38.0f * Settings.scale, 65.0f * Settings.scale);

@@ -32,6 +32,13 @@ public abstract class CasterCard extends CustomCard {
 
     }
 
+    @Override
+    public void resetAttributes() {
+    	super.resetAttributes();
+    	delayTurns = baseDelayTurns;
+    	isDelayTurnsModified = false;
+    }
+    
     public void upgradeDelayTurns(int amount) { // If we're upgrading (read: changing) the number. Note "upgrade" and NOT "upgraded" - 2 different things. One is a boolean, and then this one is what you will usually use - change the integer by how much you want to upgrade.
         baseDelayTurns += amount; // Upgrade the number by the amount you provide in your card.
         delayTurns = baseDelayTurns; // Set the number to be equal to the base value.

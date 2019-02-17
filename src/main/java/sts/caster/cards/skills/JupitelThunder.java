@@ -47,6 +47,7 @@ public class JupitelThunder extends CasterCard {
         baseDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
+        this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
     @Override

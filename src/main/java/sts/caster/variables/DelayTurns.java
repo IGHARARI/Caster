@@ -5,18 +5,15 @@ import sts.caster.cards.CasterCard;
 
 import static sts.caster.CasterMod.makeID;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.Settings;
 
 public class DelayTurns extends DynamicVariable {
-
-    //For in-depth comments, check the other variable(DefaultCustomVariable). It's nearly identical.
 
     @Override
     public String key() {
         return makeID("Delay");
-        // This is what you put between "!!" in your card strings to actually display the number.
-        // You can name this anything (no spaces), but please pre-phase it with your mod name as otherwise mod conflicts can occur.
-        // Remember, we're using makeID so it automatically puts "theDefault:" (or, your id) before the name.
     }
 
     @Override
@@ -38,5 +35,15 @@ public class DelayTurns extends DynamicVariable {
     @Override
     public boolean upgraded(AbstractCard card) {
         return ((CasterCard) card).upgradedDelayTurns;
+    }
+    
+    @Override
+    public Color getDecreasedValueColor() {
+    	return Settings.GREEN_TEXT_COLOR.cpy();
+    }
+    
+    @Override
+    public Color getIncreasedValueColor() {
+    	return Settings.RED_TEXT_COLOR.cpy();
     }
 }
