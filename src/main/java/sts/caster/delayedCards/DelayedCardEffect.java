@@ -44,6 +44,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	public static final float CARD_AREA_COLUMN_WIDTH = 100f * Settings.scale;
 	public static final float CARD_AREA_COLUMN_SPACER = 10f * Settings.scale;
 	public static final float CARD_AREA_COLUMN_HEIGH = 280f * Settings.scale;
+	private static final int MAX_CARDS_PER_COLUMN = 5;
 
 	private float vfxTimer = 1.0f;
 	private float vfxIntervalMin = 0.77f;
@@ -305,9 +306,9 @@ public class DelayedCardEffect extends AbstractOrb {
     public void setSlot(final int columnNumber, int indexInColumn) {
         final float rightBorder = AbstractDungeon.player.drawX + CARD_AREA_X_RIGHT_OFFSET;
         float columnXOffset = 0;
-        if (indexInColumn >= 5) {
+        if (indexInColumn >= MAX_CARDS_PER_COLUMN) {
         	columnXOffset = CARD_AREA_COLUMN_WIDTH/2f;
-        	indexInColumn %= 5;
+        	indexInColumn %= MAX_CARDS_PER_COLUMN;
         }
         this.tX = rightBorder - (CARD_AREA_COLUMN_WIDTH + CARD_AREA_COLUMN_SPACER) * (columnNumber-1) - columnXOffset;
         this.tY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb_h + 20f + VERT_SPACE_BTWN_CARDS * indexInColumn;
