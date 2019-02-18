@@ -44,4 +44,6 @@ public abstract class CasterCard extends CustomCard {
         delayTurns = baseDelayTurns; // Set the number to be equal to the base value.
         upgradedDelayTurns = true; // Upgraded = true - which does what the above method does.
     }
+    
+    public void onStartOfTurnDelayEffect() {}
 }

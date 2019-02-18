@@ -31,9 +31,26 @@
     "NAME": "Magic Resonance",
     "DESCRIPTION": "Deal !D! damage for each spell you are currently casting."
   },
+  "caster:MagicAttunement": {
+    "NAME": "Magic Attunement",
+    "DESCRIPTION": "At the start of your turn, add a Soul_Strike to your hand."
+  },
+  "caster:SoulStrike": {
+    "NAME": "Soul Strike",
+    "DESCRIPTION": "Ethereal. NL Cast_Time !caster:Delay!: NL Neutral. NL Deal !D! damage."
+  },
   "caster:Fissure": {
     "NAME": "Fissure",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
+  },
+  "caster:Explosion": {
+    "NAME": "Explosion",
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage. NL Reduce this card's damage by !M! for this combat."
+  },
+  "caster:Incantation": {
+    "NAME": "Incantation",
+    "DESCRIPTION": "At the start of your turn, reduce the Cast_Time of a random card in your hand by 1.",
+    "UPGRADE_DESCRIPTION": "At the start of your turn, reduce the Cast_Time of 2 random cards in your hand by 1."
   },
   "caster:QuickCast": {
     "NAME": "Quick Cast",

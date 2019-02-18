@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.utility.WaitAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -18,8 +18,15 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 
+import sts.caster.actions.DelayedEffectHideEvokedCard;
+import sts.caster.actions.DelayedEffectRemoveAction;
+import sts.caster.actions.DelayedEffectShowCardToEvoke;
+import sts.caster.actions.NonSkippableWaitAction;
+import sts.caster.actions.QueueRedrawMiniCardsAction;
+import sts.caster.cards.CasterCard;
 import sts.caster.characters.TheCaster;
 
 public class DelayedCardEffect extends AbstractOrb {
@@ -31,7 +38,7 @@ public class DelayedCardEffect extends AbstractOrb {
 
 	// Standard ID/Description
 	public static final String ORB_ID = "DelayedCard:";
-	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.5f;
+	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 1.1f;
 	public static final float CARD_AREA_X_RIGHT_OFFSET = 200f * Settings.scale;
 	public static final float VERT_SPACE_BTWN_CARDS = 65f * Settings.scale;
 	public static final float CARD_AREA_COLUMN_WIDTH = 100f * Settings.scale;
@@ -43,10 +50,13 @@ public class DelayedCardEffect extends AbstractOrb {
 	private float vfxIntervalMax = 1.22f;
 	
 	public AbstractCard delayedCard = null;
+	public AbstractCard cardMiniCopy = null;
+	public AbstractCard cardPreviewCopy = null;
+	public AbstractCard cardEvokeCopy = null;
+	public boolean showEvokeCardOnScreen = false;
 	
 	public DelayedCardEffect(AbstractCard card, int delayTurns, ArrayList<AbstractGameAction> delayedActions) {
 		super();
-		logger.info("Creating delayed card");
 		if (AbstractDungeon.player instanceof TheCaster) {
 			TheCaster caster = (TheCaster) AbstractDungeon.player;
 			ID = ORB_ID + card.uuid;
@@ -63,11 +73,24 @@ public class DelayedCardEffect extends AbstractOrb {
 			angle = MathUtils.random(360.0f);
 			channelAnimTimer = 0.5f;
 			
-			this.hb = new Hitbox(38.0f * Settings.scale, 65.0f * Settings.scale);
-			this.cX = caster.drawX + caster.hb_x;
-			this.cY = caster.drawY + caster.hb_y + caster.hb_h / 2.0f;
+			cX = caster.drawX + caster.hb_x;
+			cY = caster.drawY + caster.hb_y + caster.hb_h / 2.0f;
+			hb = new Hitbox(38.0f * Settings.scale, 65.0f * Settings.scale);
+			hb.move(cX, cY);
 			
-			logger.info("Delayed card created and centered around character");
+			cardMiniCopy = delayedCard.makeStatEquivalentCopy();
+			cardMiniCopy.current_x = cX;
+			cardMiniCopy.current_y = cY;
+			cardMiniCopy.hb.move(cX, cY);
+			cardMiniCopy.drawScale /= 5F;
+			
+
+			cardPreviewCopy = delayedCard.makeStatEquivalentCopy();
+			cardPreviewCopy.current_x = cX;
+			cardPreviewCopy.current_y = cY;
+			cardEvokeCopy = delayedCard.makeStatEquivalentCopy();
+			cardEvokeCopy.current_x = cX;
+			cardEvokeCopy.current_y = cY;
 		}
 	}
 	
@@ -98,7 +121,7 @@ public class DelayedCardEffect extends AbstractOrb {
 			TheCaster caster = (TheCaster) AbstractDungeon.player;
 			
 			caster.delayedCards.remove(this);
-			DelayedCardEffect.redrawMiniCards();
+			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
 		}
 	}
 	
@@ -107,7 +130,7 @@ public class DelayedCardEffect extends AbstractOrb {
 			TheCaster caster = (TheCaster) AbstractDungeon.player;
 			
 			caster.delayedCards.add(this);
-			DelayedCardEffect.redrawMiniCards();
+			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
 			if (turnsUntilFire == 0) {
 				evokeCardEffect();
 				removeFromPlayer();
@@ -219,16 +242,24 @@ public class DelayedCardEffect extends AbstractOrb {
 	public void onStartOfTurn() {
 		turnsUntilFire--;
 		passiveAmount = turnsUntilFire;
+		if (delayedCard instanceof CasterCard) ((CasterCard) delayedCard).onStartOfTurnDelayEffect();
 		if (turnsUntilFire <= 0) {
 			evokeCardEffect();
 		}
 	}
 
 	public void evokeCardEffect(){
+		// ADD SCALED DOWN EXHAUST EFFECT
+//		AbstractDungeon.actionManager.addToBottom(new VFXAction(new ExhaustCardEffect(displayCopy)));
+		AbstractDungeon.actionManager.addToBottom(new DelayedEffectShowCardToEvoke(this));
+		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
 		for (AbstractGameAction action : delayedActions) {
 			AbstractDungeon.actionManager.addToBottom(action);
 		}
-		AbstractDungeon.actionManager.addToBottom(new WaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
+		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
+		AbstractDungeon.actionManager.addToBottom(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
+		AbstractDungeon.actionManager.addToBottom(new DelayedEffectHideEvokedCard(this));
+       	AbstractDungeon.actionManager.addToBottom(new DelayedEffectRemoveAction(this));
 	}
 	
 	@Override
@@ -245,27 +276,30 @@ public class DelayedCardEffect extends AbstractOrb {
 	// Render the orb.
 	@Override
 	public void render(SpriteBatch sb) {
-		AbstractCard displayCopy = delayedCard.makeStatEquivalentCopy();
-		displayCopy.current_x = cX;
-		displayCopy.current_y = cY;
-		displayCopy.drawScale /= 5F;
-		displayCopy.render(sb);
+		cardMiniCopy.current_x = cX;
+		cardMiniCopy.current_y = cY;
+		cardMiniCopy.render(sb);
 		renderText(sb);
 		hb.render(sb);
+		if (showEvokeCardOnScreen) {
+			renderCardCopy(sb, cardEvokeCopy, Settings.WIDTH/2f, Settings.HEIGHT/2f);
+		}
 	}
 	
 	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
-			AbstractCard bigCopy = delayedCard.makeStatEquivalentCopy();
-			bigCopy.current_x = cX;
-			bigCopy.current_y = cY;
-			bigCopy.hb.cX = cX;
-			bigCopy.hb.cY = cY;
-			bigCopy.render(sb);
+			renderCardCopy(sb, cardPreviewCopy, cX, cY);
 		}
 		return hb.hovered;
 	}
 	
+	private void renderCardCopy(SpriteBatch sb, AbstractCard card, float targetX, float targetY) {
+		card.current_x = targetX;
+		card.current_y = targetY;
+		card.hb.cX = targetX;
+		card.hb.cY = targetY;
+		card.render(sb);
+	}
 	
 	@Override
     public void setSlot(final int columnNumber, int indexInColumn) {

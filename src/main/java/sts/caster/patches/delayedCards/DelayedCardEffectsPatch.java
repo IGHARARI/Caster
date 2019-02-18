@@ -19,6 +19,8 @@ import com.megacrit.cardcrawl.rooms.MonsterRoom;
 
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import sts.caster.actions.DelayedEffectOnStartOfTurnTriggerAction;
+import sts.caster.actions.QueueRedrawMiniCardsAction;
 import sts.caster.characters.TheCaster;
 import sts.caster.delayedCards.DelayedCardEffect;
 
@@ -107,17 +109,10 @@ public class DelayedCardEffectsPatch {
 		public static void Insert(GameActionManager __instance) {
 			if (AbstractDungeon.player instanceof TheCaster) {
 				TheCaster caster = (TheCaster) AbstractDungeon.player;
-				ArrayList<DelayedCardEffect> cardsToRemove = new ArrayList<DelayedCardEffect>();
                 for (final DelayedCardEffect orbCard : caster.delayedCards) {
-                	orbCard.onStartOfTurn();
-                	if (orbCard.turnsUntilFire <= 0) {
-                		cardsToRemove.add(orbCard);
-                	}
+                	AbstractDungeon.actionManager.addToBottom(new DelayedEffectOnStartOfTurnTriggerAction(orbCard));
                 }
-                for (final DelayedCardEffect orbCard : cardsToRemove) {
-                	orbCard.removeFromPlayer();
-                }
-                
+                AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
 			}
 		}
 		

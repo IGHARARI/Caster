@@ -15,19 +15,19 @@ public class QuickCastAction extends AbstractGameAction {
     
     private AbstractPlayer p;
 	private int reduceAmount;
-	private boolean upgraded;
+	private boolean canSelect;
 	
-    public QuickCastAction(int reduceAmount, boolean upgraded) {
+    public QuickCastAction(int reduceAmount, boolean canSelect) {
         this.actionType = ActionType.CARD_MANIPULATION;
         this.p = AbstractDungeon.player;
         this.duration = Settings.ACTION_DUR_FAST;
         this.reduceAmount = reduceAmount;
-        this.upgraded = upgraded;
+        this.canSelect = canSelect;
     }
     
     @Override
     public void update() {
-    	if (upgraded) {
+    	if (canSelect) {
     		if (this.duration != Settings.ACTION_DUR_FAST) {
     			if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
     				for (final AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group) {

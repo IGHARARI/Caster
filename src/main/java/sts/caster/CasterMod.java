@@ -39,9 +39,12 @@ import sts.caster.cards.attacks.MagicResonance;
 import sts.caster.cards.powers.DefaultCommonPower;
 import sts.caster.cards.powers.DefaultRarePower;
 import sts.caster.cards.powers.DefaultUncommonPower;
+import sts.caster.cards.powers.Incantation;
+import sts.caster.cards.powers.MagicAttunement;
 import sts.caster.cards.skills.DefaultCommonSkill;
 import sts.caster.cards.skills.DefaultRareSkill;
 import sts.caster.cards.skills.DefaultUncommonSkill;
+import sts.caster.cards.skills.Explosion;
 import sts.caster.cards.skills.Fissure;
 import sts.caster.cards.skills.FlashFrost;
 import sts.caster.cards.skills.FrostDriver;
@@ -53,6 +56,7 @@ import sts.caster.cards.skills.Meteor3;
 import sts.caster.cards.skills.Meteor4;
 import sts.caster.cards.skills.Meteor5;
 import sts.caster.cards.skills.QuickCast;
+import sts.caster.cards.skills.SoulStrike;
 import sts.caster.cards.skills.WallOfThorns;
 import sts.caster.characters.TheCaster;
 import sts.caster.potions.PlaceholderPotion;
@@ -299,6 +303,8 @@ public class CasterMod implements
         BaseMod.addCard(new DefaultRarePower());
 
         
+        BaseMod.addCard(new Meteor());
+        UnlockTracker.unlockCard(Meteor.ID);
         BaseMod.addCard(new FlashFrost());
         UnlockTracker.unlockCard(FlashFrost.ID);
         BaseMod.addCard(new LightningBolt());
@@ -319,11 +325,17 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Fissure.ID);
         BaseMod.addCard(new BookThrow());
         UnlockTracker.unlockCard(BookThrow.ID);
+        BaseMod.addCard(new Incantation());
+        UnlockTracker.unlockCard(Incantation.ID);
+        BaseMod.addCard(new MagicAttunement());
+        UnlockTracker.unlockCard(MagicAttunement.ID);
+        BaseMod.addCard(new SoulStrike());
+        UnlockTracker.unlockCard(SoulStrike.ID);
+        BaseMod.addCard(new Explosion());
+        UnlockTracker.unlockCard(Explosion.ID);
         
         
         
-        BaseMod.addCard(new Meteor());
-        UnlockTracker.unlockCard(Meteor.ID);
         BaseMod.addCard(new Meteor2());
         UnlockTracker.unlockCard(Meteor2.ID);
         BaseMod.addCard(new Meteor3());

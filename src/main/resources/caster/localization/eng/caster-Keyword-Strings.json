@@ -36,6 +36,16 @@
     "DESCRIPTION": "The effects of this card will occur at the start of your turn, after an amount of turns equal to the card's #yCast #yTime has passed."
   },
   {
+    "PROPER_NAME": "Soul Strike",
+    "NAMES": [
+      "Soul Strike",
+      "soul_strike",
+      "Soul_strike",
+      "Soul_Strike"
+    ],
+    "DESCRIPTION": "#ySoul #yStrike is a #b0 cost Ethereal Spell."
+  },
+  {
     "PROPER_NAME": "Multiword Keyword",
     "NAMES": [
       "Multiword Keyword",

@@ -33,11 +33,9 @@ public class Meteor extends CasterCard {
 
     private static final int COST = 1;
     private static final int DELAY_TURNS = 2;
-    private static final int BASE_DAMAGE = 15;
-    private static final int UPGRADE_DAMAGE = 5;
+    private static final int BASE_DAMAGE = 14;
+    private static final int UPGRADE_DAMAGE = 4;
 
-
-    // /STAT DECLARATION/
 
 
     public Meteor() {
@@ -47,13 +45,11 @@ public class Meteor extends CasterCard {
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
-    // Actions the card should do.
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, new DamageAction(m, new DamageInfo(p, delayTurns, DamageType.NORMAL), AttackEffect.FIRE)));
+        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, new DamageAction(m, new DamageInfo(p, damage, DamageType.NORMAL), AttackEffect.FIRE)));
     }
 
-    //Upgraded stats.
     @Override
     public void upgrade() {
         if (!upgraded) {

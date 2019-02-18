@@ -2,9 +2,11 @@ package sts.caster.cards.skills;
 
 import static sts.caster.CasterMod.makeCardPath;
 
+import java.util.ArrayList;
+
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,46 +16,48 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.CasterMod;
 import sts.caster.actions.QueueDelayedCardAction;
+import sts.caster.actions.ReduceExplosionDamageAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.characters.TheCaster;
 
-public class FrostDriver extends CasterCard {
+public class Explosion extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("FrostDriver");
+    public static final String ID = CasterMod.makeID("Explosion");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("Skill.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.COMMON;
+    private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_FROST = 3;
-    private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 7;
-    private static final int UPG_DAMAGE = 3;
-    private static final int BASE_BLOCK = 7;
-    private static final int UPG_BLOCK = 2;
+    private static final int BASE_DELAY = 3;
+    private static final int BASE_DAMAGE = 30;
+    private static final int BASE_DOWNGRADE = 10;
+    private static final int UPG_DOWNGRADE = -5;
 
 
-    public FrostDriver() {
+    public Explosion() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = BASE_FROST;
-        baseBlock = BASE_BLOCK;
-        baseDamage = BASE_DAMAGE;
         baseDelayTurns = delayTurns = BASE_DELAY;
+        baseDamage = BASE_DAMAGE;
+        magicNumber = baseMagicNumber = BASE_DOWNGRADE;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    	DamageAction damageAction = new DamageAction(m, new DamageInfo(p, damage), AttackEffect.BLUNT_HEAVY);
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, damageAction));
+    	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+
+    	
+    	actions.add(new DamageAction(m, new DamageInfo(p, this.damage), AttackEffect.FIRE));
+    	actions.add(new ReduceExplosionDamageAction(this, magicNumber));
+    	
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
     }
 
     @Override
@@ -61,8 +65,7 @@ public class FrostDriver extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeDamage(UPG_DAMAGE);
-            upgradeBlock(UPG_BLOCK);
+            upgradeMagicNumber(UPG_DOWNGRADE);
         }
     }
 }
