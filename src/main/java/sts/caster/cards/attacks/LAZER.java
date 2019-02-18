@@ -21,7 +21,7 @@ public class LAZER extends CasterCard {
 
     public static final String ID = CasterMod.makeID("LAZER");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("Attack.png");
+    public static final String IMG = makeCardPath("lazer.png");
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 

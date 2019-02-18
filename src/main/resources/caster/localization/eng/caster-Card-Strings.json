@@ -12,7 +12,7 @@
     "DESCRIPTION": "Deal !D! damage."
   },
   "caster:LightningBolt": {
-    "NAME": "LightningBolt",
+    "NAME": "Lightning Bolt",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !D! damage."
   },
   "caster:FlashFrost": {
@@ -54,8 +54,8 @@
   },
   "caster:QuickCast": {
     "NAME": "Quick Cast",
-    "DESCRIPTION": "Reduce the Cast_time of a random spell in your hand until it's played.",
-    "UPGRADE_DESCRIPTION": "Reduce the Cast_time of a spell in your hand until it's played."
+    "DESCRIPTION": "Reduce the Cast_time of a random spell in your hand by !M! until it's played.",
+    "UPGRADE_DESCRIPTION": "Reduce the Cast_time of a spell in your hand by !M! until it's played."
   },
   "caster:WallOfThorns": {
     "NAME": "Wall Of Thorns",

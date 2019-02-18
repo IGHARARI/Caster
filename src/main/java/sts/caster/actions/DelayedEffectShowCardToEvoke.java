@@ -19,11 +19,8 @@ public class DelayedEffectShowCardToEvoke extends AbstractGameAction {
     public void update() {
 		if (delayedCard != null) {
 			if (duration == Settings.ACTION_DUR_FAST) {
-				delayedCard.cardEvokeCopy.hb.move(Settings.WIDTH/2f, Settings.HEIGHT *2f);
+				delayedCard.showEvokeCardOnScreen = true;
 			}
-	    	if (!isDone) {
-					delayedCard.showEvokeCardOnScreen = true;
-	    	}
 		}
         tickDuration();
     }
