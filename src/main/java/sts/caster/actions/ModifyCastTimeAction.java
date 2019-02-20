@@ -5,15 +5,15 @@ import com.megacrit.cardcrawl.core.Settings;
 
 import sts.caster.cards.CasterCard;
 
-public class ReduceCastTimeAction extends AbstractGameAction {
+public class ModifyCastTimeAction extends AbstractGameAction {
     
-    private int reduceAmount;
+    private int modifyAmount;
     private CasterCard card;
 	
-    public ReduceCastTimeAction(CasterCard card, int reduceAmount) {
+    public ModifyCastTimeAction(CasterCard card, int modifyAmount) {
         this.actionType = ActionType.CARD_MANIPULATION;
         this.duration = Settings.ACTION_DUR_FAST;
-        this.reduceAmount = reduceAmount;
+        this.modifyAmount = modifyAmount;
         this.card = card;
     }
     
@@ -21,7 +21,7 @@ public class ReduceCastTimeAction extends AbstractGameAction {
     public void update() {
     	if (!isDone) {
     		if (card.delayTurns > 0) {
-    			card.delayTurns = Math.max(0, card.delayTurns - reduceAmount);
+    			card.delayTurns = Math.max(0, card.delayTurns - modifyAmount);
     			card.isDelayTurnsModified = true;
     			card.flash();
     			card.initializeDescription();

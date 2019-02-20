@@ -1,16 +1,15 @@
 package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 
-import sts.caster.cards.skills.Explosion;
+public class ModifyCardDamageAction extends AbstractGameAction {
 
-public class ReduceExplosionDamageAction extends AbstractGameAction {
-
-	Explosion card;
+	AbstractCard card;
 	
-	public ReduceExplosionDamageAction(Explosion explosionCard, int reduceAmount) {
+	public ModifyCardDamageAction(AbstractCard card, int reduceAmount) {
         actionType = ActionType.DAMAGE;
-        this.card = explosionCard;
+        this.card = card;
         this.amount = reduceAmount;
 	}
 

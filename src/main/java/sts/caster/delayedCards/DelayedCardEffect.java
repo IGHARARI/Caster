@@ -30,13 +30,11 @@ import sts.caster.cards.CasterCard;
 import sts.caster.characters.TheCaster;
 
 public class DelayedCardEffect extends AbstractOrb {
+	private static final Logger logger = LogManager.getLogger(DelayedCardEffect.class.getName());
 	
 	public int turnsUntilFire;
 	private ArrayList<AbstractGameAction> delayedActions;
 
-	private static final Logger logger = LogManager.getLogger(DelayedCardEffect.class.getName());
-
-	// Standard ID/Description
 	public static final String ORB_ID = "DelayedCard:";
 	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 1.1f;
 	public static final float CARD_AREA_X_RIGHT_OFFSET = 200f * Settings.scale;
@@ -45,10 +43,10 @@ public class DelayedCardEffect extends AbstractOrb {
 	public static final float CARD_AREA_COLUMN_SPACER = 10f * Settings.scale;
 	public static final float CARD_AREA_COLUMN_HEIGH = 280f * Settings.scale;
 	private static final int MAX_CARDS_PER_COLUMN = 5;
+	private static final float GLITTER_MIN_INTERVAL = 0.77f;
+	private static final float GLITTER_MAX_INTERVAL = 1.22f;
 
 	private float vfxTimer = 1.0f;
-	private float vfxIntervalMin = 0.77f;
-	private float vfxIntervalMax = 1.22f;
 	
 	public AbstractCard delayedCard = null;
 	public AbstractCard cardMiniCopy = null;
@@ -71,7 +69,6 @@ public class DelayedCardEffect extends AbstractOrb {
 			
 			this.updateDescription();
 			
-			angle = MathUtils.random(360.0f);
 			channelAnimTimer = 0.5f;
 			
 			cX = caster.drawX + caster.hb_x;
@@ -235,9 +232,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	@Override
-	public void applyFocus() {
-		//Not affected by focus
-	}
+	public void applyFocus() {}
 
 	@Override
 	public void onStartOfTurn() {
@@ -250,8 +245,6 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	public void evokeCardEffect(){
-		// ADD SCALED DOWN EXHAUST EFFECT
-//		AbstractDungeon.actionManager.addToBottom(new VFXAction(new ExhaustCardEffect(displayCopy)));
 		AbstractDungeon.actionManager.addToBottom(new DelayedEffectShowCardToEvoke(this));
 		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
 		for (AbstractGameAction action : delayedActions) {
@@ -266,11 +259,10 @@ public class DelayedCardEffect extends AbstractOrb {
 	@Override
 	public void updateAnimation() {
 		super.updateAnimation();
-		angle += Gdx.graphics.getDeltaTime() * 45.0f;
 		vfxTimer -= Gdx.graphics.getDeltaTime();
-		if (this.vfxTimer < 0.0f) {
+		if (vfxTimer < 0.0f) {
 			AbstractDungeon.effectList.add(new FrostOrbPassiveEffect(this.cX, this.cY));
-			this.vfxTimer = MathUtils.random(this.vfxIntervalMin, this.vfxIntervalMax);
+			vfxTimer = MathUtils.random(GLITTER_MIN_INTERVAL, GLITTER_MAX_INTERVAL);
 		}
 	}
 

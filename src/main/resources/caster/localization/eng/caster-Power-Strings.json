@@ -5,7 +5,7 @@
 	},
 	"caster:Shocked": {
 	        "NAME": "Shocked",
-	        "DESCRIPTIONS": ["Shocked for ", "turns.", "turn.", " NL Shocked creatures lose #b20% of their block at the end of their turn. NL Earth attacks deal #b20% more damage to this creature."]
+	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b", " block, then reduce Shocked by 1. NL Receives #b20% more damage from Earth attacks."]
 	},
 	"caster:Frozen": {
 	        "NAME": "Frozen",

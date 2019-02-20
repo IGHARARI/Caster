@@ -38,11 +38,10 @@ public class ApplyElementalEffectChanceAction extends AbstractGameAction {
 
 	@Override
     public void update() {
-    	if (!isDone) {
+    	if (!isDone && target != null && !target.isDeadOrEscaped()) {
     		int debuffCounter = 0;
     		for (int i = 0; i < timesToChance; i++) {
-    			float coinToss = AbstractDungeon.cardRandomRng.random();
-    			if (coinToss < chanceToApply) debuffCounter++;
+    			if (AbstractDungeon.cardRandomRng.randomBoolean(chanceToApply)) debuffCounter++;
     		}
     		AbstractPower powerToApply = null;
     		switch (element) {

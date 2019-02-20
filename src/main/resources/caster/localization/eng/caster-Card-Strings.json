@@ -41,11 +41,23 @@
   },
   "caster:Fissure": {
     "NAME": "Fissure",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Earth. NL Deal !D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
   },
   "caster:Explosion": {
     "NAME": "Explosion",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage. NL Reduce this card's damage by !M! for this combat."
+  },
+  "caster:Fireball": {
+    "NAME": "Fireball",
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage. NL Increase this card's damage by !M! for this combat."
+  },
+  "caster:LordOfVermillion": {
+    "NAME": "Lord Of Vermillion",
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage to a random enemy !M!*X times."
+  },
+  "caster:MeteorStorm": {
+    "NAME": "Meteor Storm",
+    "DESCRIPTION": "Shuffle !M! zero cost Meteors into your draw pile."
   },
   "caster:Incantation": {
     "NAME": "Incantation",
@@ -60,6 +72,10 @@
   "caster:WallOfThorns": {
     "NAME": "Wall Of Thorns",
     "DESCRIPTION": "Gain !B! Block. NL Cast_time !caster:Delay!: NL Gain !B! Block twice and !M! Thorns."
+  },
+  "caster:DivertFocus": {
+    "NAME": "Divert Focus",
+    "DESCRIPTION": "Gain !B! Block. NL Add !M! to the Cast_time of your casted Spells with the current lowest Cast_time."
   },
   "caster:BookThrow": {
     "NAME": "Book Throw",

@@ -33,7 +33,7 @@ public class QuickCastAction extends AbstractGameAction {
     				for (final AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
     					if (c instanceof CasterCard) {
     						CasterCard casterCard = (CasterCard) c;
-    						AbstractDungeon.actionManager.addToBottom(new ReduceCastTimeAction(casterCard, reduceAmount));
+    						AbstractDungeon.actionManager.addToBottom(new ModifyCastTimeAction(casterCard, reduceAmount));
     						p.hand.addToTop(c);
     					}
     				}
@@ -51,7 +51,7 @@ public class QuickCastAction extends AbstractGameAction {
 			}
 			if (delayedCards.size() > 0) {
 				AbstractCard card = delayedCards.get(AbstractDungeon.cardRandomRng.random(delayedCards.size()-1));
-				if (card instanceof CasterCard) AbstractDungeon.actionManager.addToBottom(new ReduceCastTimeAction((CasterCard)card, reduceAmount));
+				if (card instanceof CasterCard) AbstractDungeon.actionManager.addToBottom(new ModifyCastTimeAction((CasterCard)card, reduceAmount));
 			}    		
     	}
 		if (this.p.hand.isEmpty()) {

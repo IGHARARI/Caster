@@ -15,48 +15,45 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.CasterMod;
-import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.actions.ModifyCardDamageAction;
+import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.characters.TheCaster;
 
-public class Explosion extends CasterCard {
+public class Fireball extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("Explosion");
+    public static final String ID = CasterMod.makeID("Fireball");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("explosion.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.RARE;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
-    private static final int BASE_DELAY = 3;
-    private static final int BASE_DAMAGE = 30;
-    private static final int BASE_DOWNGRADE = 10;
-    private static final int UPG_DOWNGRADE = -5;
+    private static final int COST = 2;
+    private static final int BASE_DELAY = 2;
+    private static final int BASE_DAMAGE = 15;
+    private static final int BASE_UPGRADE = 5;
+    private static final int UPG_UPGRADE = 5;
 
 
-    public Explosion() {
+    public Fireball() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseDamage = BASE_DAMAGE;
-        magicNumber = baseMagicNumber = BASE_DOWNGRADE;
+        magicNumber = baseMagicNumber = BASE_UPGRADE;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-
-    	
     	actions.add(new DamageAction(m, new DamageInfo(p, this.damage), AttackEffect.FIRE));
     	actions.add(new ModifyCardDamageAction(this, magicNumber));
-    	
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
     }
 
@@ -65,7 +62,7 @@ public class Explosion extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeMagicNumber(UPG_DOWNGRADE);
+            upgradeMagicNumber(UPG_UPGRADE);
         }
     }
 }

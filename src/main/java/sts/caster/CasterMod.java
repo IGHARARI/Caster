@@ -30,26 +30,22 @@ import basemod.interfaces.EditRelicsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import sts.caster.cards.attacks.BookThrow;
-import sts.caster.cards.attacks.DefaultAttackWithVariable;
-import sts.caster.cards.attacks.DefaultCommonAttack;
 import sts.caster.cards.attacks.DefaultRareAttack;
-import sts.caster.cards.attacks.DefaultUncommonAttack;
 import sts.caster.cards.attacks.LAZER;
 import sts.caster.cards.attacks.MagicResonance;
 import sts.caster.cards.powers.DefaultCommonPower;
-import sts.caster.cards.powers.DefaultRarePower;
-import sts.caster.cards.powers.DefaultUncommonPower;
 import sts.caster.cards.powers.Incantation;
 import sts.caster.cards.powers.MagicAttunement;
-import sts.caster.cards.skills.DefaultCommonSkill;
-import sts.caster.cards.skills.DefaultRareSkill;
-import sts.caster.cards.skills.DefaultUncommonSkill;
+import sts.caster.cards.powers.MeteorStorm;
+import sts.caster.cards.skills.DivertFocus;
 import sts.caster.cards.skills.Explosion;
+import sts.caster.cards.skills.Fireball;
 import sts.caster.cards.skills.Fissure;
 import sts.caster.cards.skills.FlashFrost;
 import sts.caster.cards.skills.FrostDriver;
 import sts.caster.cards.skills.JupitelThunder;
 import sts.caster.cards.skills.LightningBolt;
+import sts.caster.cards.skills.LordOfVermillion;
 import sts.caster.cards.skills.Meteor;
 import sts.caster.cards.skills.Meteor2;
 import sts.caster.cards.skills.Meteor3;
@@ -290,10 +286,6 @@ public class CasterMod implements
         logger.info("Adding cards");
         // Add the cards
         BaseMod.addCard(new DefaultCommonPower());
-        
-        BaseMod.addCard(new DefaultUncommonSkill());
-        BaseMod.addCard(new DefaultUncommonAttack());
-        
         BaseMod.addCard(new DefaultRareAttack());
 
         
@@ -327,6 +319,14 @@ public class CasterMod implements
         UnlockTracker.unlockCard(SoulStrike.ID);
         BaseMod.addCard(new Explosion());
         UnlockTracker.unlockCard(Explosion.ID);
+        BaseMod.addCard(new DivertFocus());
+        UnlockTracker.unlockCard(DivertFocus.ID);
+        BaseMod.addCard(new Fireball());
+        UnlockTracker.unlockCard(Fireball.ID);
+        BaseMod.addCard(new LordOfVermillion());
+        UnlockTracker.unlockCard(LordOfVermillion.ID);
+        BaseMod.addCard(new MeteorStorm());
+        UnlockTracker.unlockCard(MeteorStorm.ID);
         
         
         
@@ -342,10 +342,6 @@ public class CasterMod implements
 
         logger.info("Done adding cards!");
     }
-
-    // There are better ways to do this than listing every single individual card, but I do not want to complicate things
-    // in a "tutorial" mod. This will do and it's completely ok to use. If you ever want to clean up and
-    // shorten all the imports, go look take a look at other mods, such conspire or Hubris.
 
     // ================ /ADD CARDS/ ===================
 

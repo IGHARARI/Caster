@@ -28,21 +28,16 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
-import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
 import sts.caster.CasterMod;
-import sts.caster.cards.attacks.DefaultCommonAttack;
-import sts.caster.cards.attacks.LAZER;
-import sts.caster.cards.skills.FlashFrost;
-import sts.caster.cards.skills.JupitelThunder;
-import sts.caster.cards.skills.LightningBolt;
+import sts.caster.cards.attacks.CasterStrike;
+import sts.caster.cards.skills.CasterDefend;
+import sts.caster.cards.skills.DivertFocus;
 import sts.caster.cards.skills.Meteor;
 import sts.caster.delayedCards.DelayedCardEffect;
-import sts.caster.relics.DefaultClickableRelic;
 import sts.caster.relics.PlaceholderRelic;
-import sts.caster.relics.PlaceholderRelic2;
 
 //Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
 //and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
@@ -173,15 +168,17 @@ public class TheCaster extends CustomPlayer {
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
 
-        logger.info("Begin loading starter Deck Strings");
         retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(Meteor.ID);
-        retVal.add(JupitelThunder.ID);
-        retVal.add(LightningBolt.ID);
-        retVal.add(FlashFrost.ID);
-        retVal.add(LAZER.ID);
+        retVal.add(DivertFocus.ID);
+        retVal.add(CasterStrike.ID);
+        retVal.add(CasterStrike.ID);
+        retVal.add(CasterStrike.ID);
+        retVal.add(CasterStrike.ID);
+        retVal.add(CasterDefend.ID);
+        retVal.add(CasterDefend.ID);
+        retVal.add(CasterDefend.ID);
+        retVal.add(CasterDefend.ID);
+        
         return retVal;
     }
 
@@ -190,12 +187,6 @@ public class TheCaster extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
 
         retVal.add(PlaceholderRelic.ID);
-        retVal.add(PlaceholderRelic2.ID);
-        retVal.add(DefaultClickableRelic.ID);
-
-        UnlockTracker.markRelicAsSeen(PlaceholderRelic.ID);
-        UnlockTracker.markRelicAsSeen(PlaceholderRelic2.ID);
-        UnlockTracker.markRelicAsSeen(DefaultClickableRelic.ID);
 
         return retVal;
     }
@@ -204,8 +195,7 @@ public class TheCaster extends CustomPlayer {
     @Override
     public void doCharSelectScreenSelectEffect() {
         CardCrawlGame.sound.playA("ATTACK_DAGGER_1", 1.25f); // Sound Effect
-        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.LOW, ScreenShake.ShakeDur.SHORT,
-                false); // Screen Effect
+        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.LOW, ScreenShake.ShakeDur.SHORT, false); // Screen Effect
     }
 
     // character Select on-button-press sound effect
@@ -249,7 +239,7 @@ public class TheCaster extends CustomPlayer {
     //Which card should be obtainable from the Match and Keep event?
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new DefaultCommonAttack();
+        return new CasterStrike();
     }
 
     // The class name as it appears next to your player name in-game
