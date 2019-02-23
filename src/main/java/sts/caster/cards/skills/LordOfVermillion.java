@@ -1,6 +1,6 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.ArrayList;
 
@@ -15,11 +15,11 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
-import sts.caster.CasterMod;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.actions.RandomTargetLightningDamageAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
 public class LordOfVermillion extends CasterCard {
 
@@ -39,11 +39,11 @@ public class LordOfVermillion extends CasterCard {
     private static final int DELAY_TURNS = 4;
     private static final int BASE_DAMAGE = 5;
     private static final int HIT_TIMES = 5;
-    private static final int UPGR_HIT_TIMES = 7;
+    private static final int UPGR_HIT_TIMES = 2;
 
     public LordOfVermillion() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseDamage = BASE_DAMAGE;
+        baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
@@ -56,7 +56,7 @@ public class LordOfVermillion extends CasterCard {
             energyOnUse = EnergyPanel.totalCount;
         }
     	for (int i = 0; i < energyOnUse*magicNumber; i++) {
-    		actions.add(new RandomTargetLightningDamageAction(new DamageInfo(p, damage, DamageType.NORMAL), AttackEffect.NONE));
+    		actions.add(new RandomTargetLightningDamageAction(new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.NONE));
     	}
     	
     	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));

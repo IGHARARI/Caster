@@ -1,4 +1,4 @@
-package sts.caster;
+package sts.caster.core;
 
 import java.nio.charset.StandardCharsets;
 
@@ -30,13 +30,16 @@ import basemod.interfaces.EditRelicsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import sts.caster.cards.attacks.BookThrow;
+import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.attacks.DefaultRareAttack;
 import sts.caster.cards.attacks.LAZER;
 import sts.caster.cards.attacks.MagicResonance;
-import sts.caster.cards.powers.DefaultCommonPower;
 import sts.caster.cards.powers.Incantation;
 import sts.caster.cards.powers.MagicAttunement;
 import sts.caster.cards.powers.MeteorStorm;
+import sts.caster.cards.skills.Accumulation;
+import sts.caster.cards.skills.AlternatingCurrent;
+import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.DivertFocus;
 import sts.caster.cards.skills.Explosion;
 import sts.caster.cards.skills.Fireball;
@@ -53,14 +56,16 @@ import sts.caster.cards.skills.Meteor4;
 import sts.caster.cards.skills.Meteor5;
 import sts.caster.cards.skills.QuickCast;
 import sts.caster.cards.skills.SoulStrike;
+import sts.caster.cards.skills.StormGust;
 import sts.caster.cards.skills.WallOfThorns;
-import sts.caster.characters.TheCaster;
 import sts.caster.potions.PlaceholderPotion;
 import sts.caster.relics.DefaultClickableRelic;
 import sts.caster.relics.PlaceholderRelic;
 import sts.caster.util.TextureLoader;
 import sts.caster.variables.DefaultCustomVariable;
 import sts.caster.variables.DelayTurns;
+import sts.caster.variables.SpellBlock;
+import sts.caster.variables.SpellDamage;
 
 
 @SpireInitializer
@@ -282,13 +287,18 @@ public class CasterMod implements
         // Add the Custom Dynamic variabls
         BaseMod.addDynamicVariable(new DefaultCustomVariable());
         BaseMod.addDynamicVariable(new DelayTurns());
+        BaseMod.addDynamicVariable(new SpellBlock());
+        BaseMod.addDynamicVariable(new SpellDamage());
 
         logger.info("Adding cards");
         // Add the cards
-        BaseMod.addCard(new DefaultCommonPower());
         BaseMod.addCard(new DefaultRareAttack());
 
         
+        BaseMod.addCard(new CasterStrike());
+        UnlockTracker.unlockCard(CasterStrike.ID);
+        BaseMod.addCard(new CasterDefend());
+        UnlockTracker.unlockCard(CasterDefend.ID);
         BaseMod.addCard(new Meteor());
         UnlockTracker.unlockCard(Meteor.ID);
         BaseMod.addCard(new FlashFrost());
@@ -327,6 +337,12 @@ public class CasterMod implements
         UnlockTracker.unlockCard(LordOfVermillion.ID);
         BaseMod.addCard(new MeteorStorm());
         UnlockTracker.unlockCard(MeteorStorm.ID);
+        BaseMod.addCard(new StormGust());
+        UnlockTracker.unlockCard(StormGust.ID);
+        BaseMod.addCard(new Accumulation());
+        UnlockTracker.unlockCard(Accumulation.ID);
+        BaseMod.addCard(new AlternatingCurrent());
+        UnlockTracker.unlockCard(AlternatingCurrent.ID);
         
         
         

@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -25,9 +26,7 @@ import sts.caster.actions.DelayedEffectHideEvokedCard;
 import sts.caster.actions.DelayedEffectRemoveAction;
 import sts.caster.actions.DelayedEffectShowCardToEvoke;
 import sts.caster.actions.NonSkippableWaitAction;
-import sts.caster.actions.QueueRedrawMiniCardsAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
 
 public class DelayedCardEffect extends AbstractOrb {
 	private static final Logger logger = LogManager.getLogger(DelayedCardEffect.class.getName());
@@ -36,13 +35,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	private ArrayList<AbstractGameAction> delayedActions;
 
 	public static final String ORB_ID = "DelayedCard:";
-	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 1.1f;
-	public static final float CARD_AREA_X_RIGHT_OFFSET = 200f * Settings.scale;
-	public static final float VERT_SPACE_BTWN_CARDS = 65f * Settings.scale;
-	public static final float CARD_AREA_COLUMN_WIDTH = 100f * Settings.scale;
-	public static final float CARD_AREA_COLUMN_SPACER = 10f * Settings.scale;
-	public static final float CARD_AREA_COLUMN_HEIGH = 280f * Settings.scale;
-	private static final int MAX_CARDS_PER_COLUMN = 5;
+	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.9f;
 	private static final float GLITTER_MIN_INTERVAL = 0.77f;
 	private static final float GLITTER_MAX_INTERVAL = 1.22f;
 
@@ -55,88 +48,41 @@ public class DelayedCardEffect extends AbstractOrb {
 	public boolean showEvokeCardOnScreen = false;
 	
 	public DelayedCardEffect(AbstractCard card, int delayTurns, ArrayList<AbstractGameAction> delayedActions) {
-		super();
-		if (AbstractDungeon.player instanceof TheCaster) {
-			TheCaster caster = (TheCaster) AbstractDungeon.player;
-			ID = ORB_ID + card.uuid;
-			name = "ORB: " + card.name;
-			img = ImageMaster.loadImage("orbs/default_orb.png");
-			
-			this.delayedCard = card;
-			this.turnsUntilFire = delayTurns;
-			this.delayedActions = delayedActions;
-			passiveAmount = this.basePassiveAmount = delayTurns;
-			
-			this.updateDescription();
-			
-			channelAnimTimer = 0.5f;
-			
-			cX = caster.drawX + caster.hb_x;
-			cY = caster.drawY + caster.hb_y + caster.hb_h / 2.0f;
-			hb = new Hitbox(38.0f * Settings.scale, 65.0f * Settings.scale);
-			hb.move(cX, cY);
-			
-			cardMiniCopy = delayedCard.makeStatEquivalentCopy();
-			cardMiniCopy.current_x = cX;
-			cardMiniCopy.current_y = cY;
-			cardMiniCopy.hb.move(cX, cY);
-			cardMiniCopy.drawScale /= 5F;
-			
+        super();
+        
+		ID = ORB_ID + card.uuid;
+		name = "ORB: " + card.name;
+		img = ImageMaster.loadImage("orbs/default_orb.png");
+		
+		this.delayedCard = card.makeStatEquivalentCopy();
+		this.turnsUntilFire = delayTurns;
+		this.delayedActions = delayedActions;
+		passiveAmount = basePassiveAmount = delayTurns;
+		
+		this.updateDescription();
+		
+		channelAnimTimer = 0.5f;
+		
+		AbstractPlayer p = AbstractDungeon.player;
+		cX = p.drawX + p.hb_x;
+		cY = p.drawY + p.hb_y + p.hb_h / 2.0f;
+		hb = new Hitbox(38.0f * Settings.scale, 65.0f * Settings.scale);
+		hb.move(cX, cY);
+		
+		cardMiniCopy = delayedCard.makeStatEquivalentCopy();
+		cardMiniCopy.current_x = cX;
+		cardMiniCopy.current_y = cY;
+		cardMiniCopy.hb.move(cX, cY);
+		cardMiniCopy.drawScale /= 5F;
+		
 
-			cardPreviewCopy = delayedCard.makeStatEquivalentCopy();
-			cardPreviewCopy.current_x = cX;
-			cardPreviewCopy.current_y = cY;
-			cardEvokeCopy = delayedCard.makeStatEquivalentCopy();
-			cardEvokeCopy.current_x = cX;
-			cardEvokeCopy.current_y = cY;
-		}
+		cardPreviewCopy = delayedCard.makeStatEquivalentCopy();
+		cardPreviewCopy.current_x = cX;
+		cardPreviewCopy.current_y = cY;
+		cardEvokeCopy = delayedCard.makeStatEquivalentCopy();
+		cardEvokeCopy.current_x = cX;
+		cardEvokeCopy.current_y = cY;
 	}
-	
-	public static void redrawMiniCards() {
-		if (AbstractDungeon.player instanceof TheCaster) {
-			TheCaster caster = (TheCaster) AbstractDungeon.player;
-			for (int turnsRemaining = 1 ; turnsRemaining < 4; turnsRemaining++) {
-				int columnIndex = 0;
-				for (DelayedCardEffect card : caster.delayedCards) {
-					if (card.turnsUntilFire == turnsRemaining) {
-						card.setSlot(turnsRemaining, columnIndex);
-						columnIndex++;
-					}
-				}
-			}
-			int columnIndex = 0;
-			for (DelayedCardEffect card : caster.delayedCards) {
-				if (card.turnsUntilFire > 3) {
-					card.setSlot(4, columnIndex);
-					columnIndex++;
-				}
-			}
-		}
-	}
-	
-	public void removeFromPlayer() {
-		if (AbstractDungeon.player instanceof TheCaster) {
-			TheCaster caster = (TheCaster) AbstractDungeon.player;
-			
-			caster.delayedCards.remove(this);
-			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
-		}
-	}
-	
-	public void addToPlayer() {
-		if (AbstractDungeon.player instanceof TheCaster) {
-			TheCaster caster = (TheCaster) AbstractDungeon.player;
-			
-			caster.delayedCards.add(this);
-			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
-			if (turnsUntilFire == 0) {
-				evokeCardEffect();
-				removeFromPlayer();
-			}
-		}
-	}
-	
-	
 	
 	private String getDynamicValue(final String key) {
 //		return Integer.toString(turnsUntilFire);
@@ -294,19 +240,6 @@ public class DelayedCardEffect extends AbstractOrb {
 		card.render(sb);
 	}
 	
-	@Override
-    public void setSlot(final int columnNumber, int indexInColumn) {
-        final float rightBorder = AbstractDungeon.player.drawX + CARD_AREA_X_RIGHT_OFFSET;
-        float columnXOffset = 0;
-        if (indexInColumn >= MAX_CARDS_PER_COLUMN) {
-        	columnXOffset = CARD_AREA_COLUMN_WIDTH/2f;
-        	indexInColumn %= MAX_CARDS_PER_COLUMN;
-        }
-        this.tX = rightBorder - (CARD_AREA_COLUMN_WIDTH + CARD_AREA_COLUMN_SPACER) * (columnNumber-1) - columnXOffset;
-        this.tY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb_h + 20f + VERT_SPACE_BTWN_CARDS * indexInColumn;
-        this.hb.move(this.tX, this.tY);
-    }
-
 	@Override
 	public void triggerEvokeAnimation() {}
 

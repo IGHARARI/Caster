@@ -2,7 +2,7 @@ package sts.caster.variables;
 
 import basemod.abstracts.DynamicVariable;
 
-import static sts.caster.CasterMod.makeID;
+import static sts.caster.core.CasterMod.makeID;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;

@@ -1,10 +1,10 @@
 package sts.caster.cards.attacks;
 
 import basemod.abstracts.CustomCard;
-import sts.caster.CasterMod;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;

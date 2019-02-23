@@ -1,6 +1,6 @@
 package sts.caster.cards.attacks;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -15,9 +15,9 @@ import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.GainStrengthPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
-import sts.caster.CasterMod;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
 public class BookThrow extends CasterCard {
 

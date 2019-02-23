@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.TheCaster;
 
 public class QuickCastAction extends AbstractGameAction {
     

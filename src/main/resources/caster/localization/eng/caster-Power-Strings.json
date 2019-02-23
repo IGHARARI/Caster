@@ -7,9 +7,17 @@
 	        "NAME": "Shocked",
 	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b", " block, then reduce Shocked by 1. NL Receives #b20% more damage from Earth attacks."]
 	},
-	"caster:Frozen": {
-	        "NAME": "Frozen",
-	        "DESCRIPTIONS": ["Whenever you receive damage, lose ", "Whenever this creature takes damage, all enemies lose #r", " HP and Frozen is reduced by #b1."]
+	"caster:Frost": {
+	        "NAME": "Frost",
+	        "DESCRIPTIONS": ["Whenever you receive damage, lose #r", "Whenever this creature takes damage, all enemies lose #r", " HP and Frost is reduced by #b1."]
+	},
+	"caster:Blazed": {
+	        "NAME": "Blazed",
+	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP. Decrease Blazed by half at the end of its turn."]
+	},
+	"caster:Mired": {
+	        "NAME": "Mired",
+	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #2 HP, then decreased Mired by half."]
 	},
 	"caster:MagicAttunement": {
 	        "NAME": "Magic Attunement",

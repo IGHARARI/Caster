@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import sts.caster.MagicElement;
+import sts.caster.core.MagicElement;
 import sts.caster.powers.FrozenPower;
 import sts.caster.powers.ShockedPower;
 

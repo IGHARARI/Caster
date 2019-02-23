@@ -11,11 +11,19 @@
   },
   {
     "NAMES": [
-      "Frost",
-      "frost",
-      "frost:"
+      "Ice",
+      "ice",
+      "ice:"
     ],
-    "DESCRIPTION": "This card has a chance of applying Frozen to enemies."
+    "DESCRIPTION": "This card has a chance of applying Frost to enemies."
+  },
+  {
+    "NAMES": [
+      "Freeze",
+      "freeze",
+      "freeze:"
+    ],
+    "DESCRIPTION": "Frozen cards are removed from play until end of combat."
   },
   {
     "NAMES": [

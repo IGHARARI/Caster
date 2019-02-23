@@ -1,4 +1,4 @@
-package sts.caster;
+package sts.caster.core;
 
 public enum MagicElement {
 	FIRE,

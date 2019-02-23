@@ -7,25 +7,42 @@
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
+  "caster:strike": {
+    "NAME": "Strike",
+    "DESCRIPTION": "Deal !D! Damage."
+  },
+  "caster:defend": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! Block."
+  },
   "caster:LAZER": {
     "NAME": "LAZER",
     "DESCRIPTION": "Deal !D! damage."
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !D! damage."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage."
   },
   "caster:FlashFrost": {
     "NAME": "Flash Frost",
-    "DESCRIPTION": "Frost. NL Apply !M! Frozen. NL Exhaust."
+    "DESCRIPTION": "Ice. NL Apply !M! Frost. NL Exhaust."
   },
   "caster:JupitelThunder": {
     "NAME": "Jupitel Thunder",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !D! damage !M! times."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage !M! times."
+  },
+  "caster:AlternatingCurrent": {
+    "NAME": "Alternating Current",
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage to a random enemy. NL Channel a copy of this card."
+  },
+  "caster:Accumulation": {
+    "NAME": "Accumulation",
+    "DESCRIPTION": "Gain !caster:B! block (equal to the sum of the Cast_time for your currently channeled spells).",
+    "UPGRADE_DESCRIPTION": "Gain !caster:B! block (equal to !M! + the sum of the Cast_time for your currently channeled spells)."
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
-    "DESCRIPTION": "Gain !B! Block. NL Cast_Time !caster:Delay!: NL Frost. NL Deal !D! damage."
+    "DESCRIPTION": "Gain !caster:B! Block. NL Cast_Time !caster:Delay!: NL Ice. NL Deal !caster:D! damage."
   },
   "caster:MagicResonance": {
     "NAME": "Magic Resonance",
@@ -37,23 +54,28 @@
   },
   "caster:SoulStrike": {
     "NAME": "Soul Strike",
-    "DESCRIPTION": "Ethereal. NL Cast_Time !caster:Delay!: NL Neutral. NL Deal !D! damage."
+    "DESCRIPTION": "Ethereal. NL Cast_Time !caster:Delay!: NL Neutral. NL Deal !caster:D! damage."
   },
   "caster:Fissure": {
     "NAME": "Fissure",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Earth. NL Deal !D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Earth. NL Deal !caster:D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
   },
   "caster:Explosion": {
     "NAME": "Explosion",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage. NL Reduce this card's damage by !M! for this combat."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Reduce this card's damage by !M! for this combat."
+  },
+  "caster:StormGust": {
+    "NAME": "Storm Gust",
+    "DESCRIPTION": "Freeze !M! cards. Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies.",
+    "UPGRADE_DESCRIPTION": "Freeze !M! card. Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies."
   },
   "caster:Fireball": {
     "NAME": "Fireball",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage. NL Increase this card's damage by !M! for this combat."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Increase this card's damage by !M! for this combat."
   },
   "caster:LordOfVermillion": {
     "NAME": "Lord Of Vermillion",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !D! damage to a random enemy !M!*X times."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M!*X times."
   },
   "caster:MeteorStorm": {
     "NAME": "Meteor Storm",
@@ -71,11 +93,11 @@
   },
   "caster:WallOfThorns": {
     "NAME": "Wall Of Thorns",
-    "DESCRIPTION": "Gain !B! Block. NL Cast_time !caster:Delay!: NL Gain !B! Block twice and !M! Thorns."
+    "DESCRIPTION": "Gain !caster:B! Block. NL Cast_time !caster:Delay!: NL Gain !caster:B! Block twice and !M! Thorns."
   },
   "caster:DivertFocus": {
     "NAME": "Divert Focus",
-    "DESCRIPTION": "Gain !B! Block. NL Add !M! to the Cast_time of your casted Spells with the current lowest Cast_time."
+    "DESCRIPTION": "Gain !caster:B! Block. NL Add !M! to the Cast_time of your casted Spells with the current lowest Cast_time."
   },
   "caster:BookThrow": {
     "NAME": "Book Throw",
@@ -83,15 +105,15 @@
   },
   "caster:Meteor": {
     "NAME": "Meteor",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Neutral. NL Deal !D! damage."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Neutral. NL Deal !caster:D! damage."
   },
   "caster:Meteor2": {
     "NAME": "Meteor2",
-    "DESCRIPTION": "Deal !D! damage in 2 turn."
+    "DESCRIPTION": "Deal !caster:D! damage in 2 turn."
   },
   "caster:Meteor3": {
     "NAME": "Meteor3",
-    "DESCRIPTION": "Deal !D! damage in 3 turn."
+    "DESCRIPTION": "Deal !caster:D! damage in 3 turn."
   },
   "caster:Meteor4": {
     "NAME": "Meteor4",

@@ -1,6 +1,6 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -12,10 +12,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.CasterMod;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
 public class FrostDriver extends CasterCard {
 
@@ -36,23 +36,23 @@ public class FrostDriver extends CasterCard {
     private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 7;
     private static final int UPG_DAMAGE = 3;
-    private static final int BASE_BLOCK = 7;
+    private static final int BASE_BLOCK = 6;
     private static final int UPG_BLOCK = 2;
 
 
     public FrostDriver() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_FROST;
-        baseBlock = BASE_BLOCK;
-        baseDamage = BASE_DAMAGE;
+        baseSpellBlock = spellBlock = BASE_BLOCK;
+        baseSpellDamage = spellDamage = BASE_DAMAGE;
         baseDelayTurns = delayTurns = BASE_DELAY;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    	DamageAction damageAction = new DamageAction(m, new DamageInfo(p, damage), AttackEffect.BLUNT_HEAVY);
+    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
+    	DamageAction damageAction = new DamageAction(m, new DamageInfo(p, spellDamage), AttackEffect.BLUNT_HEAVY);
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, damageAction));
     }
 
@@ -61,8 +61,8 @@ public class FrostDriver extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeDamage(UPG_DAMAGE);
-            upgradeBlock(UPG_BLOCK);
+            upgradeSpellDamage(UPG_DAMAGE);
+            upgradeSpellBlock(UPG_BLOCK);
         }
     }
 }

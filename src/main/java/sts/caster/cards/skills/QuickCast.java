@@ -1,6 +1,6 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -8,10 +8,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.CasterMod;
 import sts.caster.actions.QuickCastAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
 public class QuickCast extends CasterCard {
 

@@ -3,7 +3,7 @@ package sts.caster.variables;
 import basemod.abstracts.DynamicVariable;
 import sts.caster.cards.CasterCard;
 
-import static sts.caster.CasterMod.makeID;
+import static sts.caster.core.CasterMod.makeID;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;

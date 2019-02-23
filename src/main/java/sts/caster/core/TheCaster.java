@@ -1,11 +1,11 @@
-package sts.caster.characters;
+package sts.caster.core;
 
-import static sts.caster.CasterMod.THE_DEFAULT_CORPSE;
-import static sts.caster.CasterMod.THE_DEFAULT_SHOULDER_1;
-import static sts.caster.CasterMod.THE_DEFAULT_SHOULDER_2;
-import static sts.caster.CasterMod.THE_DEFAULT_SKELETON_ATLAS;
-import static sts.caster.CasterMod.THE_DEFAULT_SKELETON_JSON;
-import static sts.caster.characters.TheCaster.Enums.THE_CASTER_COLOR;
+import static sts.caster.core.CasterMod.THE_DEFAULT_CORPSE;
+import static sts.caster.core.CasterMod.THE_DEFAULT_SHOULDER_1;
+import static sts.caster.core.CasterMod.THE_DEFAULT_SHOULDER_2;
+import static sts.caster.core.CasterMod.THE_DEFAULT_SKELETON_ATLAS;
+import static sts.caster.core.CasterMod.THE_DEFAULT_SKELETON_JSON;
+import static sts.caster.core.TheCaster.Enums.THE_CASTER_COLOR;
 
 import java.util.ArrayList;
 
@@ -31,27 +31,14 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
 import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
-import sts.caster.CasterMod;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.DivertFocus;
 import sts.caster.cards.skills.Meteor;
-import sts.caster.delayedCards.DelayedCardEffect;
 import sts.caster.relics.PlaceholderRelic;
-
-//Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
-//and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
-//All text (starting description and loadout, anything labeled TEXT[]) can be found in DefaultMod-character-Strings.json in the resources
 
 public class TheCaster extends CustomPlayer {
     public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
-
-    // =============== CHARACTER ENUMERATORS =================
-    // These are enums for your Characters color (both general color and for the card library) as well as
-    // an enum for the name of the player class - IRONCLAD, THE_SILENT, DEFECT, YOUR_CLASS ...
-    // These are all necessary for creating a character. If you want to find out where and how exactly they are used
-    // in the basegame (for fun and education) Ctrl+click on the PlayerClass, CardColor and/or LibraryType below and go down the
-    // Ctrl+click rabbit hole
 
     public static class Enums {
         @SpireEnum
@@ -63,13 +50,6 @@ public class TheCaster extends CustomPlayer {
         @SpireEnum(name = "DELAYED_CARD")
         public static AbstractCard.CardTags DELAYED_CARD;
     }
-
-    // =============== CHARACTER ENUMERATORS  =================
-
-    public ArrayList<DelayedCardEffect> delayedCards;
-    
-    
-    
 
     // =============== BASE STATS =================
 
@@ -220,7 +200,7 @@ public class TheCaster extends CustomPlayer {
     // Should return a color object to be used to color the trail of moving cards
     @Override
     public Color getCardTrailColor() {
-        return sts.caster.CasterMod.CASTER_COLOR;
+        return sts.caster.core.CasterMod.CASTER_COLOR;
     }
 
     // Should return a BitmapFont object that you can use to customize how your
@@ -257,14 +237,14 @@ public class TheCaster extends CustomPlayer {
     // Should return a Color object to be used to color the miniature card images in run history.
     @Override
     public Color getCardRenderColor() {
-        return sts.caster.CasterMod.CASTER_COLOR;
+        return sts.caster.core.CasterMod.CASTER_COLOR;
     }
 
     // Should return a Color object to be used as screen tint effect when your
     // character attacks the heart.
     @Override
     public Color getSlashAttackColor() {
-        return sts.caster.CasterMod.CASTER_COLOR;
+        return sts.caster.core.CasterMod.CASTER_COLOR;
     }
 
     // Should return an AttackEffect array of any size greater than 0. These effects

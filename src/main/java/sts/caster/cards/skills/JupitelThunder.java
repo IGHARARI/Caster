@@ -1,6 +1,6 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.ArrayList;
 
@@ -14,13 +14,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.CasterMod;
-import sts.caster.MagicElement;
 import sts.caster.actions.ApplyElementalEffectChanceAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
+import sts.caster.core.TheCaster;
 
 public class JupitelThunder extends CasterCard {
 
@@ -44,7 +44,7 @@ public class JupitelThunder extends CasterCard {
 
     public JupitelThunder() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseDamage = BASE_DAMAGE;
+        baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
@@ -54,7 +54,7 @@ public class JupitelThunder extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
     	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
     	for (int i = 0; i < magicNumber; i++) {
-    		actions.add(new LightningDamageAction(m, new DamageInfo(p, damage, DamageType.NORMAL), AttackEffect.NONE, true));
+    		actions.add(new LightningDamageAction(m, new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.NONE, true));
     	}
     	actions.add(new ApplyElementalEffectChanceAction(p, m, MagicElement.THUNDER, magicNumber));
     	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
@@ -65,7 +65,7 @@ public class JupitelThunder extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeDamage(UPGRADE_DAMAGE);
+            upgradeSpellDamage(UPGRADE_DAMAGE);
         }
     }
 }

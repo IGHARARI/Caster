@@ -1,6 +1,6 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -11,13 +11,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
 import basemod.helpers.BaseModCardTags;
-import sts.caster.CasterMod;
 import sts.caster.actions.QueueDelayedCardAction;
-import sts.caster.characters.TheCaster;
+import sts.caster.cards.CasterCard;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
-public class Meteor2 extends CustomCard {
+public class Meteor2 extends CasterCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards

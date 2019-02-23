@@ -1,6 +1,6 @@
 package sts.caster.cards.attacks;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -11,9 +11,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.CasterMod;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
+import sts.caster.delayedCards.DelayedCardsArea;
 
 public class MagicResonance extends CasterCard {
 
@@ -39,7 +40,7 @@ public class MagicResonance extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	int delayedCardsAmount = (p instanceof TheCaster) ? ((TheCaster)p).delayedCards.size() : 0;
+    	int delayedCardsAmount = DelayedCardsArea.delayedCards.size();
     	for(int i = 0; i < delayedCardsAmount; i++) {
     		AttackEffect slash;
     		switch (AbstractDungeon.cardRandomRng.random(3)) {

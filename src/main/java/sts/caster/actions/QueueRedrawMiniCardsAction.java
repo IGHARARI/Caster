@@ -3,7 +3,7 @@ package sts.caster.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import sts.caster.delayedCards.DelayedCardEffect;
+import sts.caster.delayedCards.DelayedCardsArea;
 
 public class QueueRedrawMiniCardsAction extends AbstractGameAction {
 	private boolean delayed;
@@ -23,7 +23,7 @@ public class QueueRedrawMiniCardsAction extends AbstractGameAction {
     		if(delayed) {
     			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction(false));
     		} else {
-    			DelayedCardEffect.redrawMiniCards();
+    			DelayedCardsArea.repositionMiniCards();
     		}
     	}
         isDone = true;

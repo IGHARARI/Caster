@@ -1,11 +1,11 @@
 package sts.caster.relics;
 
 import basemod.abstracts.CustomRelic;
-import sts.caster.CasterMod;
+import sts.caster.core.CasterMod;
 import sts.caster.util.TextureLoader;
 
-import static sts.caster.CasterMod.makeRelicOutlinePath;
-import static sts.caster.CasterMod.makeRelicPath;
+import static sts.caster.core.CasterMod.makeRelicOutlinePath;
+import static sts.caster.core.CasterMod.makeRelicPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;

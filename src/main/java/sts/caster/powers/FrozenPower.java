@@ -1,6 +1,6 @@
 package sts.caster.powers;
 
-import static sts.caster.CasterMod.makePowerPath;
+import static sts.caster.core.CasterMod.makePowerPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,8 +13,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import sts.caster.CasterMod;
 import sts.caster.actions.FrozenTriggerAction;
+import sts.caster.core.CasterMod;
 import sts.caster.util.TextureLoader;
 
 //Gain 1 dex for the turn for each card played.
@@ -22,7 +22,7 @@ import sts.caster.util.TextureLoader;
 public class FrozenPower extends AbstractPower {
 	public AbstractCreature source;
 
-	public static final String POWER_ID = CasterMod.makeID("Frozen");
+	public static final String POWER_ID = CasterMod.makeID("Frost");
 	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

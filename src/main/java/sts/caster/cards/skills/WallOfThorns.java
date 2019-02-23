@@ -1,6 +1,6 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.ArrayList;
 
@@ -14,10 +14,10 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ThornsPower;
 
-import sts.caster.CasterMod;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
 public class WallOfThorns extends CasterCard {
 
@@ -43,17 +43,17 @@ public class WallOfThorns extends CasterCard {
     public WallOfThorns() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_THORNS;
-        baseBlock = BASE_BLOCK;
+        baseSpellBlock = spellBlock = BASE_BLOCK;
         baseDelayTurns = delayTurns = BASE_DELAY;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
+    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
     	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    	actions.add(new GainBlockAction(p, p, block));
-    	actions.add(new GainBlockAction(p, p, block));
+    	actions.add(new GainBlockAction(p, p, spellBlock));
+    	actions.add(new GainBlockAction(p, p, spellBlock));
     	actions.add(new ApplyPowerAction(p, p, new ThornsPower(p, magicNumber), magicNumber));
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
     }
@@ -63,7 +63,7 @@ public class WallOfThorns extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeBlock(UPG_BLOCK);
+            upgradeSpellBlock(UPG_BLOCK);
         }
     }
 }

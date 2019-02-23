@@ -1,6 +1,6 @@
 package sts.caster.cards.powers;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,12 +9,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
-import sts.caster.CasterMod;
-import sts.caster.characters.TheCaster;
+import sts.caster.cards.CasterCard;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 import sts.caster.powers.MagicAttunementPower;
 
-public class MagicAttunement extends CustomCard {
+public class MagicAttunement extends CasterCard {
 
     public static final String ID = CasterMod.makeID("MagicAttunement");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);

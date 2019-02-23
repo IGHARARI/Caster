@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import com.megacrit.cardcrawl.vfx.combat.ImpactSparkEffect;
 
-import sts.caster.MagicElement;
+import sts.caster.core.MagicElement;
 
 public class RandomTargetLightningDamageAction extends AbstractGameAction {
 

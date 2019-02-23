@@ -1,6 +1,6 @@
 package sts.caster.powers;
 
-import static sts.caster.CasterMod.makePowerPath;
+import static sts.caster.core.CasterMod.makePowerPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,8 +10,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import sts.caster.CasterMod;
 import sts.caster.actions.QuickCastAction;
+import sts.caster.core.CasterMod;
 import sts.caster.util.TextureLoader;
 
 //Gain 1 dex for the turn for each card played.

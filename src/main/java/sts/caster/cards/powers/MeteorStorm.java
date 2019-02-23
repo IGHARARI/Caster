@@ -1,6 +1,6 @@
 package sts.caster.cards.powers;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,13 +10,13 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
-import sts.caster.CasterMod;
 import sts.caster.cards.skills.Meteor;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
 public class MeteorStorm extends CustomCard {
 
-    public static final String ID = CasterMod.makeID("MagicAttunement");
+    public static final String ID = CasterMod.makeID("MeteorStorm");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("Power.png");
 

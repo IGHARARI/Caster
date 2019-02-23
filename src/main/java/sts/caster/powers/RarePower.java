@@ -11,8 +11,8 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import sts.caster.CasterMod;
 import sts.caster.cards.attacks.DefaultRareAttack;
+import sts.caster.core.CasterMod;
 import sts.caster.util.TextureLoader;
 
 public class RarePower extends AbstractPower {

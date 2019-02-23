@@ -2,10 +2,10 @@ package sts.caster.cards.skills;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.BaseModCardTags;
-import sts.caster.CasterMod;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class CasterDefend extends CustomCard {
 
-    public static final String ID = CasterMod.makeID("DefaultCommonSkill");
+    public static final String ID = CasterMod.makeID("defend");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     public static final String IMG = makeCardPath("Skill.png");

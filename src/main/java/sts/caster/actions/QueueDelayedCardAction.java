@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import sts.caster.characters.TheCaster;
 import sts.caster.delayedCards.DelayedCardEffect;
+import sts.caster.delayedCards.DelayedCardsArea;
 
 public class QueueDelayedCardAction extends AbstractGameAction {
     private AbstractCard card;
@@ -31,10 +30,9 @@ public class QueueDelayedCardAction extends AbstractGameAction {
 
 	@Override
     public void update() {
-    	if (AbstractDungeon.player instanceof TheCaster) {
-    		DelayedCardEffect delayedCard = new DelayedCardEffect(card, turnsDelay, actions);
-    		delayedCard.addToPlayer();
-    	}
+		DelayedCardEffect delayedCard = new DelayedCardEffect(card, turnsDelay, actions);
+		DelayedCardsArea.addCardToArea(delayedCard);
+		DelayedCardsArea.repositionMiniCards();
         isDone = true;
     }
 }

@@ -1,6 +1,6 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -12,10 +12,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.CasterMod;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
 public class Meteor extends CasterCard {
 
@@ -40,14 +40,14 @@ public class Meteor extends CasterCard {
 
     public Meteor() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseDamage = BASE_DAMAGE;
+        baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, new DamageAction(m, new DamageInfo(p, damage, DamageType.NORMAL), AttackEffect.FIRE)));
+        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, new DamageAction(m, new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.FIRE)));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Meteor extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeDamage(UPGRADE_DAMAGE);
+            upgradeSpellDamage(UPGRADE_DAMAGE);
         }
     }
 }

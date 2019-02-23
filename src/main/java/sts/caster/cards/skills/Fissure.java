@@ -1,6 +1,6 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.ArrayList;
 
@@ -8,9 +8,6 @@ import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -19,10 +16,12 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.IronWaveEffect;
 
-import sts.caster.CasterMod;
+import sts.caster.actions.DelayActionOnAllEnemiesAction;
+import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.characters.TheCaster;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
 
 public class Fissure extends CasterCard {
 
@@ -48,23 +47,18 @@ public class Fissure extends CasterCard {
     public Fissure() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
-        baseDamage = BASE_DAMAGE;
+        baseSpellDamage = spellDamage = BASE_DAMAGE;
         magicNumber = baseMagicNumber = STUN_AMNT;
-        this.tags.add(TheCaster.Enums.DELAYED_CARD);
-        this.exhaust = true;
+        tags.add(TheCaster.Enums.DELAYED_CARD);
+        exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
 		actions.add(new VFXAction(new IronWaveEffect(p.hb.cX, p.hb.cY, Settings.WIDTH), 0.8f));
-    	
-		int[] damageMatrix = DamageInfo.createDamageMatrix(damage);
-    	actions.add(new DamageAllEnemiesAction(p, damageMatrix, DamageType.NORMAL, AttackEffect.SMASH));
-    	
-    	for(AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
-    		actions.add(new StunMonsterAction(mon, p));
-    	}
+    	actions.add(new DelayedDamageAllEnemiesAction(p, spellDamage, AttackEffect.SMASH));
+		actions.add(new DelayActionOnAllEnemiesAction(monster -> new StunMonsterAction(monster, p)));
     	
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
     }
@@ -74,7 +68,7 @@ public class Fissure extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeDamage(UPG_DAMAGE);
+            upgradeSpellDamage(UPG_DAMAGE);
         }
     }
 }
