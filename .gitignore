@@ -8,7 +8,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .settings/
-raw card images/
+raw images/
 .git/
 *.xcf
 
