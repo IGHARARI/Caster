@@ -3,23 +3,23 @@ package sts.caster.actions;
 import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
+import sts.caster.cards.CasterCard;
 import sts.caster.interfaces.ActionListMakerInterface;
 
 public class RecurringDelayedCardAction extends AbstractGameAction {
 
-	private AbstractCard card;
+	private CasterCard card;
 	private int delayTurns;
 	private ActionListMakerInterface actionsMaker;
 	
-	public RecurringDelayedCardAction(AbstractCard card, ActionListMakerInterface actionsMaker, int delayTurns) {
+	public RecurringDelayedCardAction(CasterCard card, ActionListMakerInterface actionsMaker, int delayTurns) {
         actionType = ActionType.DAMAGE;
         this.card = card;
         this.actionsMaker = actionsMaker;
-        this.delayTurns = delayTurns;
+        this.delayTurns = card.baseDelayTurns;
         this.duration = Settings.ACTION_DUR_XFAST;
 	}
 

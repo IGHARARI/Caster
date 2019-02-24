@@ -26,7 +26,7 @@ public class DivertFocusAction extends AbstractGameAction {
 			}
 			DelayedCardEffect nextCard = DelayedCardsArea.delayedCards.get(0);
 			for (DelayedCardEffect card : DelayedCardsArea.delayedCards) {
-				if (card.turnsUntilFire <= nextCard.turnsUntilFire) nextCard = card;
+				if (card.turnsUntilFire < nextCard.turnsUntilFire) nextCard = card;
 			}
 			nextCard.turnsUntilFire += modifyAmount;
 			nextCard.passiveAmount = nextCard.turnsUntilFire;

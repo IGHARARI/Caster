@@ -42,6 +42,7 @@ public class MeteorStorm extends CustomCard {
     public void use(final AbstractPlayer p, final AbstractMonster m) {
     	Meteor freeMeteor = new Meteor();
     	freeMeteor.cost = 0;
+    	freeMeteor.isCostModified = true;
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(freeMeteor, magicNumber, true, false));
     }
 

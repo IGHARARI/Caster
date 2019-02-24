@@ -19,6 +19,10 @@
     "NAME": "LAZER",
     "DESCRIPTION": "Deal !D! damage."
   },
+  "caster:GateOfBabylon": {
+    "NAME": "Gate of Babylon",
+    "DESCRIPTION": "Deal !D! damage to a random enemy for every unique_spell in your deck."
+  },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage."
@@ -59,6 +63,10 @@
   "caster:Fissure": {
     "NAME": "Fissure",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Earth. NL Deal !caster:D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
+  },
+  "caster:MagicBarrier": {
+    "NAME": "Magic Barrier",
+    "DESCRIPTION": "Gain !M! Temporary_HP NL Exhaust."
   },
   "caster:Explosion": {
     "NAME": "Explosion",
@@ -107,56 +115,9 @@
     "NAME": "Meteor",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Neutral. NL Deal !caster:D! damage."
   },
-  "caster:Meteor2": {
-    "NAME": "Meteor2",
-    "DESCRIPTION": "Deal !caster:D! damage in 2 turn."
-  },
-  "caster:Meteor3": {
-    "NAME": "Meteor3",
-    "DESCRIPTION": "Deal !caster:D! damage in 3 turn."
-  },
-  "caster:Meteor4": {
-    "NAME": "Meteor4",
-    "DESCRIPTION": "Deal !D! damage in 4 turn."
-  },
-  "caster:Meteor5": {
-    "NAME": "Meteor5",
-    "DESCRIPTION": "Deal !D! damage in 5 turn."
-  },
-  "caster:DefaultCommonPower": {
-    "NAME": "Hold Place",
-    "DESCRIPTION": "Gain !M! Keyword.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Keywords."
-  },
-  "caster:DefaultUncommonAttack": {
-    "NAME": "Big slap",
-    "DESCRIPTION": "Deal !D! Damage."
-  },
-  "caster:DefaultUncommonSkill": {
-    "NAME": "A Better Defend",
-    "DESCRIPTION": "Gain !B! Plated Armor. Affected by Dexterity."
-  },
-  "caster:DefaultUncommonPower": {
-    "NAME": "Weirdness",
-    "DESCRIPTION": "Gain X Keywords.",
-    "UPGRADE_DESCRIPTION": "Gain X +1 Keywords."
-  },
   "caster:DefaultRareAttack": {
     "NAME": "TOUCH",
     "DESCRIPTION": "Deal !D! Damage."
-  },
-  "caster:DefaultRareSkill": {
-    "NAME": "For Each Loop x2",
-    "DESCRIPTION": "Apply !M! vulnerable to all enemies, 2 times.",
-    "UPGRADE_DESCRIPTION": "Apply !M! vulnerable to all enemies, 3 times."
-  },
-  "caster:DefaultRarePower": {
-    "NAME": "In-Progress Form",
-    "DESCRIPTION": "At the start of your turn, play a TOUCH."
-  },
-  "caster:DefaultAttackWithVariable": {
-    "NAME": "Special Strike",
-    "DESCRIPTION": "Deal !D! Damage [R] times. NL (Deal !caster:ENERGY_DAMAGE! damage total.)"
   },
   "caster:OrbSkill": {
     "NAME": "Get Orb",

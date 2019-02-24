@@ -4,7 +4,6 @@ import static sts.caster.core.CasterMod.makePowerPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -49,8 +48,7 @@ public class FrozenPower extends AbstractPower {
 	public int onAttacked(DamageInfo info, int damageAmount) {
 		if (damageAmount > 0 && DamageType.NORMAL.equals(info.type)) {
 			this.flash();
-			AbstractDungeon.actionManager.addToTop(new ReducePowerAction(this.owner, this.owner, POWER_ID, 1));
-			AbstractDungeon.actionManager.addToTop(new FrozenTriggerAction(this.owner, this.amount));
+			AbstractDungeon.actionManager.addToTop(new FrozenTriggerAction(this.owner));
 		}
 		return super.onAttacked(info, damageAmount);
 	}

@@ -2,7 +2,7 @@ package sts.caster.cards.skills;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,36 +12,34 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
-import sts.caster.powers.FrozenPower;
 
-public class FlashFrost extends CasterCard {
+public class MagicBarrier extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("FlashFrost");
+    public static final String ID = CasterMod.makeID("MagicBarrier");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("flashfrost.png");
+    public static final String IMG = makeCardPath("Skill.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.COMMON;
-    private static final CardTarget TARGET = CardTarget.ENEMY;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
+    private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 0;
-    private static final int BASE_FROST = 3;
-    private static final int UPGRADE_FROST = 1;
+    private static final int COST = 2;
+    private static final int BASE_TEMP_HP = 9;
+    private static final int UPG_TEMP_HP = 3;
 
-
-    public FlashFrost() {
+    public MagicBarrier() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = BASE_FROST;
+        magicNumber = baseMagicNumber = BASE_TEMP_HP;
         this.exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new FrozenPower(m, p, magicNumber), magicNumber));
+    	AbstractDungeon.actionManager.addToBottom(new AddTemporaryHPAction(p, p, magicNumber));
     }
 
     @Override
@@ -49,7 +47,7 @@ public class FlashFrost extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeMagicNumber(UPGRADE_FROST);
+            upgradeMagicNumber(UPG_TEMP_HP);
         }
     }
 }

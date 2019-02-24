@@ -36,7 +36,7 @@ public class FrostDriver extends CasterCard {
     private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 7;
     private static final int UPG_DAMAGE = 3;
-    private static final int BASE_BLOCK = 6;
+    private static final int BASE_BLOCK = 5;
     private static final int UPG_BLOCK = 2;
 
 

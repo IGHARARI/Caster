@@ -33,7 +33,7 @@ public class Meteor extends CasterCard {
 
     private static final int COST = 1;
     private static final int DELAY_TURNS = 2;
-    private static final int BASE_DAMAGE = 14;
+    private static final int BASE_DAMAGE = 12;
     private static final int UPGRADE_DAMAGE = 4;
 
 

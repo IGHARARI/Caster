@@ -39,11 +39,11 @@ public class SpellBlock extends DynamicVariable {
     
     @Override
     public Color getDecreasedValueColor() {
-    	return Settings.GREEN_TEXT_COLOR.cpy();
+    	return Settings.RED_TEXT_COLOR.cpy();
     }
     
     @Override
     public Color getIncreasedValueColor() {
-    	return Settings.RED_TEXT_COLOR.cpy();
+    	return Settings.GREEN_TEXT_COLOR.cpy();
     }
 }

@@ -38,12 +38,19 @@ public abstract class CasterCard extends CustomCard {
     }
 
     public void displayUpgrades() {
-
+    	super.displayUpgrades();
         if (upgradedDelayTurns) {
             delayTurns = baseDelayTurns;
             isDelayTurnsModified = true;
         }
-
+        if (upgradedSpellBlock) {
+        	spellBlock = baseSpellBlock;
+        	isSpellBlockModified = true;
+        }
+        if (upgradedSpellDamage) {
+        	spellDamage = baseSpellDamage;
+        	isSpellDamageModified = true;
+        }
     }
 
     @Override

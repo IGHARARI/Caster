@@ -32,6 +32,7 @@ import basemod.interfaces.PostInitializeSubscriber;
 import sts.caster.cards.attacks.BookThrow;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.attacks.DefaultRareAttack;
+import sts.caster.cards.attacks.GateOfBabylon;
 import sts.caster.cards.attacks.LAZER;
 import sts.caster.cards.attacks.MagicResonance;
 import sts.caster.cards.powers.Incantation;
@@ -49,11 +50,8 @@ import sts.caster.cards.skills.FrostDriver;
 import sts.caster.cards.skills.JupitelThunder;
 import sts.caster.cards.skills.LightningBolt;
 import sts.caster.cards.skills.LordOfVermillion;
+import sts.caster.cards.skills.MagicBarrier;
 import sts.caster.cards.skills.Meteor;
-import sts.caster.cards.skills.Meteor2;
-import sts.caster.cards.skills.Meteor3;
-import sts.caster.cards.skills.Meteor4;
-import sts.caster.cards.skills.Meteor5;
 import sts.caster.cards.skills.QuickCast;
 import sts.caster.cards.skills.SoulStrike;
 import sts.caster.cards.skills.StormGust;
@@ -343,19 +341,11 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Accumulation.ID);
         BaseMod.addCard(new AlternatingCurrent());
         UnlockTracker.unlockCard(AlternatingCurrent.ID);
+        BaseMod.addCard(new MagicBarrier());
+        UnlockTracker.unlockCard(MagicBarrier.ID);
+        BaseMod.addCard(new GateOfBabylon());
+        UnlockTracker.unlockCard(GateOfBabylon.ID);
         
-        
-        
-        BaseMod.addCard(new Meteor2());
-        UnlockTracker.unlockCard(Meteor2.ID);
-        BaseMod.addCard(new Meteor3());
-        UnlockTracker.unlockCard(Meteor3.ID);
-        BaseMod.addCard(new Meteor4());
-        UnlockTracker.unlockCard(Meteor4.ID);
-        BaseMod.addCard(new Meteor5());
-        UnlockTracker.unlockCard(Meteor5.ID);
-        
-
         logger.info("Done adding cards!");
     }
 

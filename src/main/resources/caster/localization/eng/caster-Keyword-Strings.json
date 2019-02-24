@@ -44,6 +44,16 @@
     "DESCRIPTION": "The effects of this card will occur at the start of your turn, after an amount of turns equal to the card's #yCast #yTime has passed."
   },
   {
+    "PROPER_NAME": "unique spell",
+    "NAMES": [
+      "unique spell",
+      "unique_spell",
+      "Unique_spell",
+      "Unique_Spell"
+    ],
+    "DESCRIPTION": "Multiple copies of the same spell will only count as one unique spell."
+  },
+  {
     "PROPER_NAME": "Soul Strike",
     "NAMES": [
       "Soul Strike",
