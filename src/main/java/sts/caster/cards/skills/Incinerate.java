@@ -17,7 +17,7 @@ public class Incinerate extends CasterCard {
 
     public static final String ID = CasterMod.makeID("Incinerate");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = makeCardPath("incinerate.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -29,8 +29,8 @@ public class Incinerate extends CasterCard {
 
     private static final int COST = 1;
     private static final int BURN_AMNT = 1;
-    private static final int REGULAR_BURN_MULT = 2;
-    private static final int UPGR_BUTN_MULT = 1;
+    private static final int REGULAR_BURN_MULT = 3;
+    private static final int UPGR_BUTN_MULT = 2;
 
 
     public Incinerate() {

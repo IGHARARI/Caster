@@ -18,7 +18,7 @@ public class DivertFocus extends CasterCard {
 
     public static final String ID = CasterMod.makeID("DivertFocus");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = makeCardPath("divertfocus.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -29,7 +29,7 @@ public class DivertFocus extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_BLOCK = 8;
+    private static final int BASE_BLOCK = 9;
     private static final int UPG_BLOCK = 3;
     private static final int BASE_MODIFY_AMOUNT = 1;
 

@@ -47,13 +47,13 @@ public class BlazedPower extends AbstractPower {
 
 	@Override
 	public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-		AbstractDungeon.actionManager.addToBottom(new LoseHPAction(owner, owner, amount, AttackEffect.FIRE));
+		AbstractDungeon.actionManager.addToBottom(new LoseHPAction(owner, source, amount, AttackEffect.FIRE));
 	}
 	
 	@Override
 	public void atEndOfTurn(boolean isPlayer) {
 		int amountToLose = (int) Math.ceil(((float)amount)/2f);
-		AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, POWER_ID, amountToLose));
+		AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, source, POWER_ID, amountToLose));
 	}
 	
 	@Override

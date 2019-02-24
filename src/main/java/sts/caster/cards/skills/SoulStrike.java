@@ -43,6 +43,7 @@ public class SoulStrike extends CasterCard {
     public SoulStrike() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.isEthereal = true;
+        this.exhaust = true;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns =  BASE_DELAY;
         tags.add(TheCaster.Enums.DELAYED_CARD);

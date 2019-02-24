@@ -47,7 +47,7 @@ public class NaturalChaos extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractGameAction action = new DelayedActionOnAllEnemiesAction(monster -> new ApplyPowerAction(p, monster, new MiredPower(m, p, magicNumber), magicNumber));
+    	AbstractGameAction action = new DelayedActionOnAllEnemiesAction(monster -> new ApplyPowerAction(monster, p, new MiredPower(monster, p, magicNumber), magicNumber));
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, action));
     }
 

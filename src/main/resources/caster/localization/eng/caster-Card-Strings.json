@@ -37,8 +37,7 @@
   },
   "caster:Incinerate": {
     "NAME": "Incinerate",
-    "DESCRIPTION": "Fire. NL Exhaust !M! card from your hand. NL Apply Blazed equal to double its cost.",
-    "UPGRADE_DESCRIPTION": "Fire. NL Exhaust !M! card from your hand. NL Apply Blazed equal to triple its cost."
+    "DESCRIPTION": "Fire. NL Exhaust !M! card from your hand. NL Apply Blazed equal to !caster:M2! times its cost."
   },
   "caster:NaturalChaos": {
     "NAME": "Natural Chaos",
@@ -67,7 +66,7 @@
   },
   "caster:SoulStrike": {
     "NAME": "Soul Strike",
-    "DESCRIPTION": "Ethereal. NL Cast_Time !caster:Delay!: NL Neutral. NL Deal !caster:D! damage."
+    "DESCRIPTION": "Ethereal. NL Cast_Time !caster:Delay!: NL Neutral. NL Deal !caster:D! damage. NL Exhaust."
   },
   "caster:Fissure": {
     "NAME": "Fissure",

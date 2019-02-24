@@ -24,7 +24,7 @@ import sts.caster.util.TextureLoader;
 public class MiredPower extends AbstractPower {
 	public AbstractCreature source;
 
-	public static final String POWER_ID = CasterMod.makeID("Blazed");
+	public static final String POWER_ID = CasterMod.makeID("Mired");
 	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -33,7 +33,7 @@ public class MiredPower extends AbstractPower {
 	private static final Texture tex32 = TextureLoader.getTexture(makePowerPath("placeholder_power32.png"));
 
 	public static final int HEAL_AMOUNT = 2;
-	private boolean wasDamaged;
+	private boolean attackUsed;
 	
 	public MiredPower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
 		name = NAME;
@@ -48,29 +48,35 @@ public class MiredPower extends AbstractPower {
 		canGoNegative = false;
 		type = PowerType.DEBUFF;
 		updateDescription();
-		wasDamaged = false;
+		attackUsed = false;
 		
 	}
 	
 	@Override
 	public int onAttacked(DamageInfo info, int damageAmount) {
-		if (damageAmount > 0) wasDamaged = true;
+		if (damageAmount > 0 && attackUsed) {
+			AbstractDungeon.actionManager.addToBottom(new HealAction(AbstractDungeon.player, owner, HEAL_AMOUNT));
+			AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, POWER_ID, 1));
+		}
 		return super.onAttacked(info, damageAmount);
 	}
 	
     @Override
     public void onUseCard(final AbstractCard card, final UseCardAction action) {
-        if (card.type == CardType.ATTACK && wasDamaged) {
-            this.flash();
-            AbstractDungeon.actionManager.addToBottom(new HealAction(AbstractDungeon.player, owner, HEAL_AMOUNT));
-            AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, POWER_ID, 1));
+        if (card.type == CardType.ATTACK) {
+            attackUsed = true;
         }
-        wasDamaged = false;
     }
-	
+
+    @Override
+    public void onAfterUseCard(AbstractCard card, UseCardAction action) {
+    	attackUsed = false;
+    }
+    
+    
 	@Override
 	public void updateDescription() {
-		description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1];
+		description = DESCRIPTIONS[0];
 	}
 
 }
