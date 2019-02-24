@@ -54,7 +54,6 @@ public class FreezeCardAction extends AbstractGameAction {
                     final AbstractCard c = this.p.hand.getTopCard();
                     FrozenPileManager.moveToFrozenPile(p.hand, c);
                 }
-                CardCrawlGame.dungeon.checkForPactAchievement();
                 return;
             }
             if (!this.isRandom) {
@@ -66,13 +65,11 @@ public class FreezeCardAction extends AbstractGameAction {
             for (int j = 0; j < this.amount; ++j) {
             	FrozenPileManager.moveToFrozenPile(p.hand, p.hand.getRandomCard(AbstractDungeon.cardRandomRng));
             }
-            CardCrawlGame.dungeon.checkForPactAchievement();
         }
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
             for (final AbstractCard c2 : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
                 FrozenPileManager.moveToFrozenPile(p.hand, c2);
             }
-            CardCrawlGame.dungeon.checkForPactAchievement();
             AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
         }
         this.tickDuration();

@@ -1,43 +1,43 @@
 package sts.caster.variables;
 
-import basemod.abstracts.DynamicVariable;
-import sts.caster.cards.CasterCard;
-
 import static sts.caster.core.CasterMod.makeID;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 
-public class SpellBlock extends DynamicVariable {
+import basemod.abstracts.DynamicVariable;
+import sts.caster.cards.CasterCard;
 
+public class SecondMagicNumber extends DynamicVariable {
     @Override
     public String key() {
-        return makeID("B");
+        return makeID("M2");
     }
 
     @Override
     public boolean isModified(AbstractCard card) {
     	if (!(card instanceof CasterCard)) return false;
-        return ((CasterCard) card).isSpellBlockModified;
+        return ((CasterCard) card).isM2Modified;
+
     }
 
     @Override
     public int value(AbstractCard card) {
     	if (!(card instanceof CasterCard)) return 0;
-        return ((CasterCard) card).spellBlock;
+        return ((CasterCard) card).m2;
     }
 
     @Override
     public int baseValue(AbstractCard card) {
     	if (!(card instanceof CasterCard)) return 0;
-        return ((CasterCard) card).baseSpellBlock;
+        return ((CasterCard) card).baseM2;
     }
 
     @Override
     public boolean upgraded(AbstractCard card) {
     	if (!(card instanceof CasterCard)) return false;
-        return ((CasterCard) card).upgradedSpellBlock;
+        return ((CasterCard) card).upgradedM2;
     }
     
     @Override

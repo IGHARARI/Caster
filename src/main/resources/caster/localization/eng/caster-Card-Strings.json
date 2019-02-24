@@ -35,6 +35,15 @@
     "NAME": "Jupitel Thunder",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage !M! times."
   },
+  "caster:Incinerate": {
+    "NAME": "Incinerate",
+    "DESCRIPTION": "Fire. NL Exhaust !M! card from your hand. NL Apply Blazed equal to double its cost.",
+    "UPGRADE_DESCRIPTION": "Fire. NL Exhaust !M! card from your hand. NL Apply Blazed equal to triple its cost."
+  },
+  "caster:NaturalChaos": {
+    "NAME": "Natural Chaos",
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Earth. NL Apply !M! Mired to ALL enemies."
+  },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage to a random enemy. NL Channel a copy of this card."

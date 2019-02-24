@@ -13,11 +13,11 @@
 	},
 	"caster:Blazed": {
 	        "NAME": "Blazed",
-	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP. Decrease Blazed by half at the end of its turn."]
+	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP. Decrease #yBlazed by half at the end of its turn."]
 	},
 	"caster:Mired": {
 	        "NAME": "Mired",
-	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #2 HP, then decreased Mired by half."]
+	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #r1."]
 	},
 	"caster:MagicAttunement": {
 	        "NAME": "Magic Attunement",

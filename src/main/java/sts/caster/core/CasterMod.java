@@ -47,11 +47,13 @@ import sts.caster.cards.skills.Fireball;
 import sts.caster.cards.skills.Fissure;
 import sts.caster.cards.skills.FlashFrost;
 import sts.caster.cards.skills.FrostDriver;
+import sts.caster.cards.skills.Incinerate;
 import sts.caster.cards.skills.JupitelThunder;
 import sts.caster.cards.skills.LightningBolt;
 import sts.caster.cards.skills.LordOfVermillion;
 import sts.caster.cards.skills.MagicBarrier;
 import sts.caster.cards.skills.Meteor;
+import sts.caster.cards.skills.NaturalChaos;
 import sts.caster.cards.skills.QuickCast;
 import sts.caster.cards.skills.SoulStrike;
 import sts.caster.cards.skills.StormGust;
@@ -60,7 +62,7 @@ import sts.caster.potions.PlaceholderPotion;
 import sts.caster.relics.DefaultClickableRelic;
 import sts.caster.relics.PlaceholderRelic;
 import sts.caster.util.TextureLoader;
-import sts.caster.variables.DefaultCustomVariable;
+import sts.caster.variables.SecondMagicNumber;
 import sts.caster.variables.DelayTurns;
 import sts.caster.variables.SpellBlock;
 import sts.caster.variables.SpellDamage;
@@ -283,7 +285,7 @@ public class CasterMod implements
         // Add the Custom Dynamic Variables
         logger.info("Add variabls");
         // Add the Custom Dynamic variabls
-        BaseMod.addDynamicVariable(new DefaultCustomVariable());
+        BaseMod.addDynamicVariable(new SecondMagicNumber());
         BaseMod.addDynamicVariable(new DelayTurns());
         BaseMod.addDynamicVariable(new SpellBlock());
         BaseMod.addDynamicVariable(new SpellDamage());
@@ -345,6 +347,10 @@ public class CasterMod implements
         UnlockTracker.unlockCard(MagicBarrier.ID);
         BaseMod.addCard(new GateOfBabylon());
         UnlockTracker.unlockCard(GateOfBabylon.ID);
+        BaseMod.addCard(new NaturalChaos());
+        UnlockTracker.unlockCard(NaturalChaos.ID);
+        BaseMod.addCard(new Incinerate());
+        UnlockTracker.unlockCard(Incinerate.ID);
         
         logger.info("Done adding cards!");
     }

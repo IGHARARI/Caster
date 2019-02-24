@@ -6,11 +6,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.interfaces.MonsterToActionInterface;
 
-public class DelayActionOnAllEnemiesAction extends AbstractGameAction {
+public class DelayedActionOnAllEnemiesAction extends AbstractGameAction {
 
 	MonsterToActionInterface monToAction;
 	
-	public DelayActionOnAllEnemiesAction(MonsterToActionInterface monToAction) {
+	public DelayedActionOnAllEnemiesAction(MonsterToActionInterface monToAction) {
         actionType = ActionType.SPECIAL;
         this.monToAction = monToAction;
 	}

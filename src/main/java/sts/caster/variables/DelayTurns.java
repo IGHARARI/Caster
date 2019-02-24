@@ -18,22 +18,25 @@ public class DelayTurns extends DynamicVariable {
 
     @Override
     public boolean isModified(AbstractCard card) {
+    	if (!(card instanceof CasterCard)) return false;
         return ((CasterCard) card).isDelayTurnsModified;
-
     }
 
     @Override
     public int value(AbstractCard card) {
+    	if (!(card instanceof CasterCard)) return 0;
         return ((CasterCard) card).delayTurns;
     }
 
     @Override
     public int baseValue(AbstractCard card) {
+    	if (!(card instanceof CasterCard)) return 0;
         return ((CasterCard) card).baseDelayTurns;
     }
 
     @Override
     public boolean upgraded(AbstractCard card) {
+    	if (!(card instanceof CasterCard)) return false;
         return ((CasterCard) card).upgradedDelayTurns;
     }
     

@@ -18,6 +18,11 @@ public abstract class CasterCard extends CustomCard {
     public int baseSpellDamage;    
     public boolean upgradedSpellDamage; 
     public boolean isSpellDamageModified; 
+    
+    public int m2;        
+    public int baseM2;    
+    public boolean upgradedM2; 
+    public boolean isM2Modified; 
 
     public CasterCard(final String id, final String name, final String img, final int cost, final String rawDescription,
                                final CardType type, final CardColor color,
@@ -27,6 +32,7 @@ public abstract class CasterCard extends CustomCard {
         delayTurns = baseDelayTurns = 0;
         spellBlock = baseSpellBlock = 0;
         spellDamage = baseSpellDamage = 0;
+        m2 = baseM2 = 0;
         isCostModified = false;
         isCostModifiedForTurn = false;
         isDamageModified = false;
@@ -35,6 +41,7 @@ public abstract class CasterCard extends CustomCard {
         isDelayTurnsModified = false;
         isSpellDamageModified = false;
         isSpellBlockModified = false;
+        isM2Modified = false;
     }
 
     public void displayUpgrades() {
@@ -51,6 +58,10 @@ public abstract class CasterCard extends CustomCard {
         	spellDamage = baseSpellDamage;
         	isSpellDamageModified = true;
         }
+        if (upgradedM2) {
+        	m2 = baseM2;
+        	isM2Modified = true;
+        }
     }
 
     @Override
@@ -62,6 +73,8 @@ public abstract class CasterCard extends CustomCard {
     	isSpellDamageModified = false;
     	spellBlock = baseSpellBlock; 
     	isSpellBlockModified = false; 
+    	m2 = baseM2; 
+    	isM2Modified = false; 
     }
     
     public void upgradeDelayTurns(int amount) { 
@@ -80,6 +93,12 @@ public abstract class CasterCard extends CustomCard {
     	baseSpellBlock += amount; 
     	spellBlock = baseSpellBlock; 
     	upgradedSpellBlock = true; 
+    }
+    
+    public void upgradeM2(int amount) { 
+    	baseM2 += amount; 
+    	m2 = baseM2; 
+    	upgradedM2 = true; 
     }
     
     public void onStartOfTurnDelayEffect() {}

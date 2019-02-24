@@ -3,7 +3,7 @@
   "name": "The Caster",
   "author_list": ["Korbo"],
   "description": "The summoner.",
-  "version": "${project.version}",
+  "version": "0.0.2",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",
   "dependencies": ["basemod", "stslib"],
