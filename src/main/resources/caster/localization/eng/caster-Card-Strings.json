@@ -21,7 +21,8 @@
   },
   "caster:GateOfBabylon": {
     "NAME": "Gate of Babylon",
-    "DESCRIPTION": "Deal !D! damage to a random enemy for every unique_spell in your deck."
+    "DESCRIPTION": "Deal !D! damage to a random enemy for every unique_spell in your deck.",
+    "EXTENDED_DESCRIPTION": ["Deal !D! damage to a random enemy for every unique_spell in your deck. NL Unique Spells: !M!"]
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
@@ -49,8 +50,10 @@
   },
   "caster:Accumulation": {
     "NAME": "Accumulation",
-    "DESCRIPTION": "Gain !caster:B! block (equal to the sum of the Cast_time for your currently channeled spells).",
-    "UPGRADE_DESCRIPTION": "Gain !caster:B! block (equal to !M! + the sum of the Cast_time for your currently channeled spells)."
+    "DESCRIPTION": "Gain block equal to the sum of the Cast_time for your currently channeled spells.",
+    "UPGRADE_DESCRIPTION": "Gain block equal to !M! + the sum of the Cast_time for your currently channeled spells.",
+    "EXTENDED_DESCRIPTION": ["Gain block equal to the sum of the Cast_time for your currently channeled spells. NL Currently: !caster:B!", 
+						    "Gain block equal to !M! + the sum of the Cast_time for your currently channeled spells. NL Currently: !caster:B!"]
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",

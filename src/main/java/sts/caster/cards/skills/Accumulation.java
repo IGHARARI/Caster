@@ -2,13 +2,13 @@ package sts.caster.cards.skills;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.actions.AccumulationAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
@@ -31,24 +31,44 @@ public class Accumulation extends CasterCard {
 
     private static final int COST = 1;
     private static final int EXTRA_BLOCK = 4;
+	private boolean descriptionChanged = false;
 
 
     public Accumulation() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = 0;
-        spellBlock = baseSpellBlock = 0;
+        baseBlock = block = 0;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new AccumulationAction(magicNumber));
+    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
     }
     
     @Override
+    public void atTurnStart() {
+    	updateDescription();
+    }
+    
+    private void updateDescription() {
+    	if (!descriptionChanged ) {
+    		if (!upgraded) {
+    			rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
+    		} else {
+    			rawDescription = cardStrings.EXTENDED_DESCRIPTION[1];
+    		}
+    		initializeDescription();
+    	}
+    	descriptionChanged = true;
+	}
+    
+    @Override
     public void applyPowers() {
+    	updateDescription();
+    	baseBlock = countAggregateCastTime();
+    	baseBlock += magicNumber;
+    	isMagicNumberModified = true;
     	super.applyPowers();
-    	spellBlock = countAggregateCastTime();
-    	spellBlock += magicNumber;
     }
 
     @Override
@@ -58,12 +78,13 @@ public class Accumulation extends CasterCard {
             upgradeMagicNumber(EXTRA_BLOCK);
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
+            descriptionChanged = false;
         }
     }
     
     public static int countAggregateCastTime() {
     	int count = 0;
-		if (DelayedCardsArea.delayedCards == null || DelayedCardsArea.delayedCards.isEmpty()) {
+		if (DelayedCardsArea.delayedCards != null) {
 			for (DelayedCardEffect card : DelayedCardsArea.delayedCards) {
 				count += card.turnsUntilFire;
 			}

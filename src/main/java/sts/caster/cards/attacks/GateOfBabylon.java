@@ -33,10 +33,12 @@ public class GateOfBabylon extends CasterCard {
     private static final int COST = 2;
     private static final int BASE_DAMAGE = 3;
     private static final int UPGR_DAMAGE = 2;
+    private boolean descriptionChanged = false;
 
     public GateOfBabylon() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDamage = damage = BASE_DAMAGE;
+        baseMagicNumber = magicNumber = 0;
     }
 
     @Override
@@ -55,6 +57,27 @@ public class GateOfBabylon extends CasterCard {
             upgradeDamage(UPGR_DAMAGE);
             initializeDescription();
         }
+    }
+    
+    @Override
+    public void atTurnStart() {
+    	updateDescription();
+    }
+    
+    private void updateDescription() {
+    	if (!descriptionChanged) {
+    		rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
+    		initializeDescription();
+    	}
+    	descriptionChanged = true;
+	}
+
+	@Override
+    public void applyPowers() {
+		updateDescription();
+    	super.applyPowers();
+    	magicNumber = countSpellsInMasterDeck();
+    	isMagicNumberModified = true;
     }
     
     public static int countSpellsInMasterDeck() {
