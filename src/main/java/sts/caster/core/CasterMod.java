@@ -79,21 +79,17 @@ public class CasterMod implements
 	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
     private static String modID;
 
-    //This is for the in-game mod settings panel.
     private static final String MODNAME = "The Caster";
-    private static final String AUTHOR = "Korbo"; // And pretty soon - You!
+    private static final String AUTHOR = "Korbo";
     private static final String DESCRIPTION = "The Caster, controller of elements and destroyer of... conical structures.";
 
-    // =============== INPUT TEXTURE LOCATION =================
-
-    // Colors (RGB)
     // Character Color
     public static final Color CASTER_COLOR = CardHelper.getColor(64.0f, 70.0f, 70.0f);
 
     // Potion Colors in RGB
-    public static final Color PLACEHOLDER_POTION_LIQUID = CardHelper.getColor(209.0f, 53.0f, 18.0f); // Orange-ish Red
-    public static final Color PLACEHOLDER_POTION_HYBRID = CardHelper.getColor(255.0f, 230.0f, 230.0f); // Near White
-    public static final Color PLACEHOLDER_POTION_SPOTS = CardHelper.getColor(100.0f, 25.0f, 10.0f); // Super Dark Red/Brown
+    public static final Color PLACEHOLDER_POTION_LIQUID = CardHelper.getColor(209.0f, 53.0f, 18.0f); 
+    public static final Color PLACEHOLDER_POTION_HYBRID = CardHelper.getColor(255.0f, 230.0f, 230.0f); 
+    public static final Color PLACEHOLDER_POTION_SPOTS = CardHelper.getColor(100.0f, 25.0f, 10.0f);
 
     // Card backgrounds - The actual rectangular card.
     private static final String ATTACK_DEFAULT_GRAY = "caster/images/512/bg_attack_default_gray.png";
@@ -122,8 +118,6 @@ public class CasterMod implements
     public static final String THE_DEFAULT_SKELETON_ATLAS = "caster/images/char/defaultCharacter/skeleton.atlas";
     public static final String THE_DEFAULT_SKELETON_JSON = "caster/images/char/defaultCharacter/skeleton.json";
 
-    // =============== MAKE IMAGE PATHS =================
-
     public static String makeCardPath(String resourcePath) {
         return getModID() + "/images/cards/" + resourcePath;
     }
@@ -148,13 +142,6 @@ public class CasterMod implements
         return getModID() + "/images/events/" + resourcePath;
     }
 
-    // =============== /MAKE IMAGE PATHS/ =================
-
-    // =============== /INPUT TEXTURE LOCATION/ =================
-
-
-    // =============== SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE =================
-
     public CasterMod() {
         logger.info("Subscribe to BaseMod hooks");
 
@@ -174,25 +161,13 @@ public class CasterMod implements
         logger.info("Done creating the color");
     }
 
-    // ====== NO EDIT AREA ======
-    // DON'T TOUCH THIS STUFF. IT IS HERE FOR STANDARDIZATION BETWEEN MODS AND TO ENSURE GOOD CODE PRACTICES.
-    // IF YOU MODIFY THIS I WILL HUNT YOU DOWN AND DOWNVOTE YOUR MOD ON WORKSHOP
-
     public static void setModID(String ID) {
-        if (ID.equals("theDefault")) {
-            throw new RuntimeException("Go to your constructor in your class with SpireInitializer and change your mod ID from \"theDefault\"");
-        } else if (ID.equals("theDefaultDev")) {
-            modID = "theDefault";
-        } else {
-            modID = ID;
-        }
+        modID = ID;
     }
 
     public static String getModID() {
         return modID;
     }
-    // ====== YOU CAN EDIT AGAIN ======
-
 
     @SuppressWarnings("unused")
     public static void initialize() {
@@ -201,11 +176,6 @@ public class CasterMod implements
         logger.info("========================= /Default Mod Initialized. Hello World./ =========================");
     }
 
-    // ============== /SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE/ =================
-
-
-    // =============== LOAD THE CHARACTER =================
-
     @Override
     public void receiveEditCharacters() {
         logger.info("Beginning to edit characters. " + "Add " + TheCaster.Enums.THE_CASTER.toString());
@@ -213,14 +183,8 @@ public class CasterMod implements
         BaseMod.addCharacter(new TheCaster("The Caster", TheCaster.Enums.THE_CASTER),
                 THE_DEFAULT_BUTTON, THE_DEFAULT_PORTRAIT, TheCaster.Enums.THE_CASTER);
 
-//        receiveEditPotions();
         logger.info("Added " + TheCaster.Enums.THE_CASTER.toString());
     }
-
-    // =============== /LOAD THE CHARACTER/ =================
-
-
-    // =============== POST-INITIALIZE =================
 
 
     @Override
@@ -240,27 +204,16 @@ public class CasterMod implements
 
     }
 
-    // =============== / POST-INITIALIZE/ =================
-
-
-    // ================ ADD POTIONS ===================
 
 
     public void receiveEditPotions() {
         logger.info("Beginning to edit potions");
 
-        // Class Specific Potion. If you want your potion to not be class-specific,
-        // just remove the player class at the end (in this case the "TheDefaultEnum.THE_DEFAULT".
-        // Remember, you can press ctrl+P inside parentheses like addPotions)
         BaseMod.addPotion(PlaceholderPotion.class, PLACEHOLDER_POTION_LIQUID, PLACEHOLDER_POTION_HYBRID, PLACEHOLDER_POTION_SPOTS, PlaceholderPotion.POTION_ID, TheCaster.Enums.THE_CASTER);
 
         logger.info("Done editing potions");
     }
 
-    // ================ /ADD POTIONS/ ===================
-
-
-    // ================ ADD RELICS ===================
 
     @Override
     public void receiveEditRelics() {
@@ -273,10 +226,6 @@ public class CasterMod implements
         logger.info("Done adding relics!");
     }
 
-    // ================ /ADD RELICS/ ===================
-
-
-    // ================ ADD CARDS ===================
 
     @Override
     public void receiveEditCards() {
@@ -351,11 +300,6 @@ public class CasterMod implements
         logger.info("Done adding cards!");
     }
 
-    // ================ /ADD CARDS/ ===================
-
-
-    // ================ LOAD THE TEXT ===================
-
     @Override
     public void receiveEditStrings() {
         logger.info("Beginning to edit strings");
@@ -387,20 +331,9 @@ public class CasterMod implements
         logger.info("Done edittting strings");
     }
 
-    // ================ /LOAD THE TEXT/ ===================
-
-    // ================ LOAD THE KEYWORDS ===================
 
     @Override
     public void receiveEditKeywords() {
-        // Keywords on cards are supposed to be Capitalized, while in Keyword-String.json they're lowercase
-        //
-        // Multiword keywords on cards are done With_Underscores
-        //
-        // If you're using multiword keywords, the first element in your NAMES array in your keywords-strings.json has to be the same as the PROPER_NAME.
-        // That is, in Card-Strings.json you would have #yA_Long_Keyword (#y highlights the keyword in yellow).
-        // In Keyword-Strings.json you would have PROPER_NAME as A Long Keyword and the first element in NAMES be a long keyword, and the second element be a_long_keyword
-
         Gson gson = new Gson();
         String json = Gdx.files.internal(getModID() + "/localization/eng/caster-Keyword-Strings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
@@ -412,10 +345,6 @@ public class CasterMod implements
         }
     }
 
-    // ================ /LOAD THE KEYWORDS/ ===================    
-
-    // this adds "ModName:" before the ID of any card/relic/power etc.
-    // in order to avoid conflicts if any other mod uses the same ID.
     public static String makeID(String idText) {
         return getModID() + ":" + idText;
     }
