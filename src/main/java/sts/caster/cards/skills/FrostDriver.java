@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 
 public class FrostDriver extends CasterCard {
@@ -46,6 +47,7 @@ public class FrostDriver extends CasterCard {
         baseSpellBlock = spellBlock = BASE_BLOCK;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         baseDelayTurns = delayTurns = BASE_DELAY;
+        cardElement = MagicElement.ICE;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
@@ -53,7 +55,7 @@ public class FrostDriver extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
     	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
     	DamageAction damageAction = new DamageAction(m, new DamageInfo(p, spellDamage), AttackEffect.BLUNT_HEAVY);
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, damageAction));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, damageAction, m));
     }
 
     @Override

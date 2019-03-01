@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 
 public class Meteor extends CasterCard {
@@ -42,12 +43,13 @@ public class Meteor extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
+        cardElement = MagicElement.NEUTRAL;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, new DamageAction(m, new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.FIRE)));
+        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, new DamageAction(m, new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.FIRE), m));
     }
 
     @Override

@@ -14,6 +14,7 @@ import sts.caster.actions.DelayedActionOnAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.MiredPower;
 
@@ -41,6 +42,7 @@ public class NaturalChaos extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         magicNumber = baseMagicNumber = BASE_MIRE;
+        cardElement = MagicElement.EARTH;
         tags.add(TheCaster.Enums.DELAYED_CARD);
         exhaust = true;
     }
@@ -48,7 +50,7 @@ public class NaturalChaos extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	AbstractGameAction action = new DelayedActionOnAllEnemiesAction(monster -> new ApplyPowerAction(monster, p, new MiredPower(monster, p, magicNumber), magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, action));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, action, m));
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.powers.ThornsPower;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 
 public class WallOfThorns extends CasterCard {
@@ -45,6 +46,7 @@ public class WallOfThorns extends CasterCard {
         magicNumber = baseMagicNumber = BASE_THORNS;
         baseSpellBlock = spellBlock = BASE_BLOCK;
         baseDelayTurns = delayTurns = BASE_DELAY;
+        cardElement = MagicElement.EARTH;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
@@ -55,7 +57,7 @@ public class WallOfThorns extends CasterCard {
     	actions.add(new GainBlockAction(p, p, spellBlock));
     	actions.add(new GainBlockAction(p, p, spellBlock));
     	actions.add(new ApplyPowerAction(p, p, new ThornsPower(p, magicNumber), magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
     }
 
     @Override

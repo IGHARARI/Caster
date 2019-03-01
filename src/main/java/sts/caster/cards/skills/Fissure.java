@@ -21,6 +21,7 @@ import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 
 public class Fissure extends CasterCard {
@@ -49,6 +50,7 @@ public class Fissure extends CasterCard {
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         magicNumber = baseMagicNumber = STUN_AMNT;
+        cardElement = MagicElement.EARTH;
         tags.add(TheCaster.Enums.DELAYED_CARD);
         exhaust = true;
     }
@@ -60,7 +62,7 @@ public class Fissure extends CasterCard {
     	actions.add(new DelayedDamageAllEnemiesAction(p, spellDamage, AttackEffect.SMASH));
 		actions.add(new DelayedActionOnAllEnemiesAction(monster -> new StunMonsterAction(monster, p)));
     	
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
     }
 
     @Override

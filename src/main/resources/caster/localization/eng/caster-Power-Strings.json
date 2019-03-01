@@ -5,19 +5,19 @@
 	},
 	"caster:Shocked": {
 	        "NAME": "Shocked",
-	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b", " block, then reduce Shocked by 1. NL Receives #b20% more damage from Earth attacks."]
+	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b", " block, then reduce Shocked by 1. NL Receives #b50% more damage from #yEarth attacks."]
 	},
 	"caster:Frost": {
 	        "NAME": "Frost",
-	        "DESCRIPTIONS": ["Whenever you receive damage, lose #r", "Whenever this creature takes damage, all enemies lose #r", " HP and Frost is reduced by #b1."]
+	        "DESCRIPTIONS": ["Whenever you receive damage, lose #r", "Whenever this creature takes damage, all enemies lose #r", " HP and Frost is reduced by #b1. NL Receives #b50% more damage from #yElectric attacks."]
 	},
 	"caster:Blazed": {
 	        "NAME": "Blazed",
-	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP. Decrease #yBlazed by half at the end of its turn."]
+	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP. Decrease #yBlazed by half at the end of its turn. NL Receives #b50% more damage from #yIce attacks."]
 	},
 	"caster:Mired": {
 	        "NAME": "Mired",
-	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #r1."]
+	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #r1. NL Receives #b50% more damage from #yFire attacks."]
 	},
 	"caster:MagicAttunement": {
 	        "NAME": "Magic Attunement",

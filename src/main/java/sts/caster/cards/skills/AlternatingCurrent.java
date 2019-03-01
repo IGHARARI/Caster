@@ -56,9 +56,9 @@ public class AlternatingCurrent extends CasterCard {
     		return actionsList;
     	};
     	actions.addAll(actionsMaker.getActionList());
-    	RecurringDelayedCardAction recursion = new RecurringDelayedCardAction(this, actionsMaker, delayTurns);
+    	RecurringDelayedCardAction recursion = new RecurringDelayedCardAction(this, actionsMaker, delayTurns, m);
     	actions.add(recursion);
-    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
+    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
     }
 
     @Override

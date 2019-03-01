@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.FrozenPower;
 
@@ -36,6 +37,7 @@ public class FlashFrost extends CasterCard {
     public FlashFrost() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_FROST;
+        cardElement = MagicElement.ICE;
         this.exhaust = true;
     }
 

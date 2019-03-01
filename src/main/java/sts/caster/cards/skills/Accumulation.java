@@ -64,11 +64,12 @@ public class Accumulation extends CasterCard {
     
     @Override
     public void applyPowers() {
-    	updateDescription();
+    	super.applyPowers();
     	baseBlock = countAggregateCastTime();
     	baseBlock += magicNumber;
-    	isMagicNumberModified = true;
-    	super.applyPowers();
+    	block = baseBlock;
+    	isBlockModified = true;
+    	updateDescription();
     }
 
     @Override

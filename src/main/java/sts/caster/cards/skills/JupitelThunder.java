@@ -47,6 +47,7 @@ public class JupitelThunder extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
+        cardElement = MagicElement.THUNDER;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
@@ -57,7 +58,7 @@ public class JupitelThunder extends CasterCard {
     		actions.add(new LightningDamageAction(m, new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.NONE, true));
     	}
     	actions.add(new ApplyElementalEffectChanceAction(p, m, MagicElement.THUNDER, magicNumber));
-    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
+    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
     }
 
     @Override

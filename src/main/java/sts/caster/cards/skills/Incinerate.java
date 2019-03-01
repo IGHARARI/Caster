@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.IncinerateAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 
 public class Incinerate extends CasterCard {
@@ -37,6 +38,7 @@ public class Incinerate extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BURN_AMNT;
         m2 = baseM2 = REGULAR_BURN_MULT;
+        cardElement = MagicElement.FIRE;
     }
 
     @Override

@@ -52,8 +52,8 @@
     "NAME": "Accumulation",
     "DESCRIPTION": "Gain block equal to the sum of the Cast_time for your currently channeled spells.",
     "UPGRADE_DESCRIPTION": "Gain block equal to !M! + the sum of the Cast_time for your currently channeled spells.",
-    "EXTENDED_DESCRIPTION": ["Gain block equal to the sum of the Cast_time for your currently channeled spells. NL Currently: !caster:B!", 
-						    "Gain block equal to !M! + the sum of the Cast_time for your currently channeled spells. NL Currently: !caster:B!"]
+    "EXTENDED_DESCRIPTION": ["Gain block equal to the sum of the Cast_time for your currently channeled spells. NL Currently: !B!", 
+						    "Gain block equal to !M! + the sum of the Cast_time for your currently channeled spells. NL Currently: !B!"]
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
@@ -94,7 +94,7 @@
   },
   "caster:LordOfVermillion": {
     "NAME": "Lord Of Vermillion",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M!*X times."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M! * X times."
   },
   "caster:MeteorStorm": {
     "NAME": "Meteor Storm",

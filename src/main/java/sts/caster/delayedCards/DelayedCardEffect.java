@@ -1,10 +1,6 @@
 package sts.caster.delayedCards;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,12 +8,16 @@ import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.MathHelper;
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
@@ -29,8 +29,6 @@ import sts.caster.actions.NonSkippableWaitAction;
 import sts.caster.cards.CasterCard;
 
 public class DelayedCardEffect extends AbstractOrb {
-	private static final Logger logger = LogManager.getLogger(DelayedCardEffect.class.getName());
-	
 	public int turnsUntilFire;
 	private ArrayList<AbstractGameAction> delayedActions;
 
@@ -41,22 +39,34 @@ public class DelayedCardEffect extends AbstractOrb {
 
 	private float vfxTimer = 1.0f;
 	
-	public AbstractCard delayedCard = null;
-	public AbstractCard cardMiniCopy = null;
-	public AbstractCard cardPreviewCopy = null;
-	public AbstractCard cardEvokeCopy = null;
+	public CasterCard delayedCard = null;
+	public CasterCard cardMiniCopy = null;
+	public CasterCard cardPreviewCopy = null;
+	public CasterCard cardEvokeCopy = null;
 	public boolean showEvokeCardOnScreen = false;
 	
-	public DelayedCardEffect(AbstractCard card, int delayTurns, ArrayList<AbstractGameAction> delayedActions) {
+	private AbstractCreature target = null;
+	private int energyOnCast;
+	
+	public DelayedCardEffect(CasterCard card, int delayTurns, ArrayList<AbstractGameAction> delayedActions, AbstractCreature target) {
+		this(card, delayTurns, delayedActions, 0, target);
+	}
+	public DelayedCardEffect(CasterCard card, int delayTurns, ArrayList<AbstractGameAction> delayedActions, int energyOnCast, AbstractCreature target) {
         super();
         
 		ID = ORB_ID + card.uuid;
-		name = "ORB: " + card.name;
+		name = card.name;
 		img = ImageMaster.loadImage("orbs/default_orb.png");
 		
-		this.delayedCard = card.makeStatEquivalentCopy();
+		this.delayedCard = card.makeStatIdenticalCopy();
+		if (delayedCard.cost == -1) {
+			delayedCard.rawDescription += " NL Casted for " + energyOnCast + " Energy.";
+			delayedCard.initializeDescription();
+		}
 		this.turnsUntilFire = delayTurns;
 		this.delayedActions = delayedActions;
+		this.target = target;
+		this.energyOnCast = energyOnCast;
 		passiveAmount = basePassiveAmount = delayTurns;
 		
 		this.updateDescription();
@@ -69,117 +79,36 @@ public class DelayedCardEffect extends AbstractOrb {
 		hb = new Hitbox(38.0f * Settings.scale, 65.0f * Settings.scale);
 		hb.move(cX, cY);
 		
-		cardMiniCopy = delayedCard.makeStatEquivalentCopy();
+		cardMiniCopy = delayedCard.makeStatIdenticalCopy();
 		cardMiniCopy.current_x = cX;
 		cardMiniCopy.current_y = cY;
 		cardMiniCopy.hb.move(cX, cY);
 		cardMiniCopy.drawScale /= 5F;
 		
 
-		cardPreviewCopy = delayedCard.makeStatEquivalentCopy();
+		cardPreviewCopy = delayedCard.makeStatIdenticalCopy();
 		cardPreviewCopy.current_x = cX;
 		cardPreviewCopy.current_y = cY;
-		cardEvokeCopy = delayedCard.makeStatEquivalentCopy();
+		cardEvokeCopy = delayedCard.makeStatIdenticalCopy();
 		cardEvokeCopy.current_x = cX;
 		cardEvokeCopy.current_y = cY;
 	}
 	
-	private String getDynamicValue(final String key) {
-//		return Integer.toString(turnsUntilFire);
-		if (key.length() == 1){
-			switch (key.charAt(0)) {
-				case 'B': {
-					if (!delayedCard.isBlockModified) {
-						return Integer.toString(delayedCard.baseBlock);
-					}
-					if (delayedCard.block >= delayedCard.baseBlock) {
-						return "[#7fff00]" + Integer.toString(delayedCard.block) + "[]";
-					}
-					return "[#ff6563]" + Integer.toString(delayedCard.block) + "[]";
-				}
-				case 'D': {
-					if (!delayedCard.isDamageModified) {
-						return Integer.toString(delayedCard.baseDamage);
-					}
-					if (delayedCard.damage >= delayedCard.baseDamage) {
-						return "[#7fff00]" + Integer.toString(delayedCard.damage) + "[]";
-					}
-					return "[#ff6563]" + Integer.toString(delayedCard.damage) + "[]";
-				}
-				case 'M': {
-					if (!delayedCard.isMagicNumberModified) {
-						return Integer.toString(delayedCard.baseMagicNumber);
-					}
-					if (delayedCard.magicNumber >= delayedCard.baseMagicNumber) {
-						return "[#7fff00]" + Integer.toString(delayedCard.magicNumber) + "[]";
-					}
-					return "[#ff6563]" + Integer.toString(delayedCard.magicNumber) + "[]";
-				}
-				default: {
-					DelayedCardEffect.logger.info("KEY: " + key);
-					return Integer.toString(-99);
-				}
-			}
-		}
-		else {
-			Object value = null;
-			try {
-			Field field = delayedCard.getClass().getField("someField");
-
-				value = field.get(delayedCard);
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (NoSuchFieldException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			}
-			return (String) value;
-		}
-	}
-
 	@Override
-	public void updateDescription() {
-		delayedCard.initializeDescription();
-		String rawDescription = "";
-		for (int i=0; i<delayedCard.description.size(); i++){
-			rawDescription += delayedCard.description.get(i).text;
-			description = "";
-			for (String tmp : rawDescription.split(" ")) {
-				tmp += ' ';
-				if (tmp.length() > 0 && tmp.charAt(0) == '*') {
-					tmp = tmp.substring(1);
-					String punctuation = "";
-					if (tmp.length() > 1 && !Character.isLetter(tmp.charAt(tmp.length() - 2))) {
-						punctuation += tmp.charAt(tmp.length() - 2);
-						tmp = tmp.substring(0, tmp.length() - 2);
-						punctuation += ' ';
-					}
-					description += tmp;
-					description += punctuation;
-				}
-				else if (tmp.length() > 0 && tmp.charAt(0) == '!') {
-					String key = "";
-					for (int j=1; j<tmp.length(); j++){
-						if (tmp.charAt(j) == '!'){
-							description += getDynamicValue(key);
-							description += tmp.substring(j+1);
-						}
-						else {
-						key += tmp.charAt(j);
-						}
-					}
-				}
-				else{
-					description += tmp;
-				}
-			}
-		}
-	}
+	public void updateDescription() {}
 
 	@Override
 	public void applyFocus() {}
 
+	@Override
+	public void update() {
+        this.hb.update();
+        if (this.hb.hovered && (delayedCard.target == CardTarget.ENEMY || delayedCard.target == CardTarget.SELF_AND_ENEMY) && target != null && target.isDeadOrEscaped()) {
+            TipHelper.renderGenericTip(this.tX + 96.0f * Settings.scale, this.tY + 64.0f * Settings.scale, this.name, "The original target for this Spell is now dead.");
+        }
+        this.fontScale = MathHelper.scaleLerpSnap(this.fontScale, 0.7f);
+	}
+	
 	@Override
 	public void onStartOfTurn() {
 		turnsUntilFire--;
@@ -228,6 +157,37 @@ public class DelayedCardEffect extends AbstractOrb {
 	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
 			renderCardCopy(sb, cardPreviewCopy, cX, cY);
+			
+	        switch (this.delayedCard.target) {
+	            case ENEMY: {
+	            	if (target != null && !target.isDeadOrEscaped()) {
+	            		target.renderReticle(sb);
+	            	}
+	                break;
+	            }
+	            case ALL_ENEMY: {
+	                AbstractDungeon.getCurrRoom().monsters.renderReticle(sb);
+	                break;
+	            }
+	            case SELF: {
+	                AbstractDungeon.player.renderReticle(sb);
+	                break;
+	            }
+	            case SELF_AND_ENEMY: {
+	            	AbstractDungeon.player.renderReticle(sb);
+	            	if (target != null && !target.isDeadOrEscaped()) {
+	            		target.renderReticle(sb);
+	            	}
+	                break;
+	            }
+	            case ALL: {
+	            	AbstractDungeon.player.renderReticle(sb);
+	                AbstractDungeon.getCurrRoom().monsters.renderReticle(sb);
+	                break;
+	            }
+				default:
+				break;
+	        }
 		}
 		return hb.hovered;
 	}
@@ -250,7 +210,7 @@ public class DelayedCardEffect extends AbstractOrb {
 
 	@Override
 	public AbstractOrb makeCopy() {
-		return new DelayedCardEffect(this.delayedCard, turnsUntilFire, delayedActions);
+		return new DelayedCardEffect(this.delayedCard, turnsUntilFire, delayedActions, energyOnCast, target);
 	}
 
 	@Override

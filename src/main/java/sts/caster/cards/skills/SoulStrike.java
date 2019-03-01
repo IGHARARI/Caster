@@ -54,7 +54,7 @@ public class SoulStrike extends CasterCard {
     	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
     	actions.add(new VFXAction(new FlyingOrbEffect(m.drawX, m.drawY)));
     	actions.add(new DamageAction(m, new DamageInfo(p, spellDamage)));
-    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
+    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
     }
 
     @Override

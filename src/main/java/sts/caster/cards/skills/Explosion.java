@@ -18,6 +18,7 @@ import sts.caster.actions.ModifyCardDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 
 public class Explosion extends CasterCard {
@@ -46,6 +47,7 @@ public class Explosion extends CasterCard {
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage =  BASE_DAMAGE;
         magicNumber = baseMagicNumber = BASE_DOWNGRADE;
+        cardElement = MagicElement.FIRE;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
@@ -57,7 +59,7 @@ public class Explosion extends CasterCard {
     	actions.add(new DamageAction(m, new DamageInfo(p, spellDamage), AttackEffect.FIRE));
     	actions.add(new ModifyCardDamageAction(this, magicNumber));
     	
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
     }
 
     @Override

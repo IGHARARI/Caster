@@ -45,6 +45,7 @@ public class LightningBolt extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
+        cardElement = MagicElement.THUNDER;
         this.tags.add(TheCaster.Enums.DELAYED_CARD);
     }
 
@@ -53,7 +54,7 @@ public class LightningBolt extends CasterCard {
     	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
 		actions.add(new LightningDamageAction(m, new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
     	actions.add(new ApplyElementalEffectChanceAction(p, m, MagicElement.THUNDER, 1));
-        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions));
+        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
     }
 
     @Override
