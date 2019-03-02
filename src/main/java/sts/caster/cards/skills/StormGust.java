@@ -19,6 +19,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 
 public class StormGust extends CasterCard {
 
@@ -52,12 +53,17 @@ public class StormGust extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	
     	AbstractDungeon.actionManager.addToBottom(new FreezeCardAction(p, p, magicNumber, false, false, false));
-    	
-    	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    	actions.add(new DelayedDamageAllEnemiesAction(p, spellDamage, AttackEffect.SMASH));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+    }
+    
+    @Override
+    public ActionListMaker getActionsMaker() {
+    	return (c, t) -> {
+    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+        	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, AttackEffect.SMASH));
+    		return actions;
+    	};
     }
 
     @Override

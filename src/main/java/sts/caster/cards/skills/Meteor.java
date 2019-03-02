@@ -2,6 +2,9 @@ package sts.caster.cards.skills;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
+import java.util.ArrayList;
+
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -17,6 +20,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 
 public class Meteor extends CasterCard {
 
@@ -49,7 +53,16 @@ public class Meteor extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, new DamageAction(m, new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.FIRE), m));
+        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+    }
+    
+    @Override
+    public ActionListMaker getActionsMaker() {
+    	return (c, t) -> {
+    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+    		actions.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.FIRE));
+    		return actions;
+    	};
     }
 
     @Override

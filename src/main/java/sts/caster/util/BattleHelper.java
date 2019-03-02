@@ -2,9 +2,12 @@ package sts.caster.util;
 
 import java.util.ArrayList;
 
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+
+import sts.caster.cards.CasterCard;
 
 public class BattleHelper {
 	public static ArrayList<AbstractMonster> getCurrentBattleMonstersSortedOnX(boolean aliveOnly){
@@ -36,6 +39,16 @@ public class BattleHelper {
 		return orderedMonsters;
 	}
 
-
+	public static int[] createSpellDamageMatrix(int baseDamage, boolean isPureDamage) {
+        final int[] damages = new int[AbstractDungeon.getMonsters().monsters.size()];
+        for (int i = 0; i < damages.length; ++i) {
+            final DamageInfo info = new DamageInfo(AbstractDungeon.player, baseDamage);
+            if (!isPureDamage) {
+                CasterCard.customApplyEnemyPowersToSpellDamage(info, AbstractDungeon.getMonsters().monsters.get(i));
+            }
+            damages[i] = info.output;
+        }
+        return damages;
+	}
 	
 }

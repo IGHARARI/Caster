@@ -12,6 +12,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
+import sts.caster.util.BattleHelper;
+
 public class DelayedDamageAllEnemiesAction extends AbstractGameAction {
 
 	public DelayedDamageAllEnemiesAction(AbstractCreature source, int damage, AttackEffect effect) {
@@ -39,7 +41,7 @@ public class DelayedDamageAllEnemiesAction extends AbstractGameAction {
         }
         this.tickDuration();
         if (this.isDone) {
-        	int[] damageMatrix = DamageInfo.createDamageMatrix(amount, true);
+        	int[] damageMatrix = BattleHelper.createSpellDamageMatrix(amount, true);
         	
             for (final AbstractPower p : AbstractDungeon.player.powers) {
                 p.onDamageAllEnemies(damageMatrix);

@@ -21,6 +21,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 
 public class LordOfVermillion extends CasterCard {
 
@@ -53,16 +54,22 @@ public class LordOfVermillion extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
         if (energyOnUse < EnergyPanel.totalCount) {
             energyOnUse = EnergyPanel.totalCount;
         }
-    	for (int i = 0; i < energyOnUse*magicNumber; i++) {
-    		actions.add(new RandomTargetLightningDamageAction(new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.NONE));
-    	}
-    	
-    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, energyOnUse, m));
+    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, energyOnUse, null));
     	AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
+    }
+    
+    @Override
+    public ActionListMaker getActionsMaker(int spentEnergy) {
+    	return (c, t) -> {
+    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+        	for (int i = 0; i < spentEnergy*c.magicNumber; i++) {
+        		actions.add(new RandomTargetLightningDamageAction(new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE));
+        	}
+    		return actions;
+    	};
     }
 
     @Override

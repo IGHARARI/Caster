@@ -20,6 +20,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 
 public class Fireball extends CasterCard {
 
@@ -53,10 +54,18 @@ public class Fireball extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    	actions.add(new DamageAction(m, new DamageInfo(p, spellDamage), AttackEffect.FIRE));
-    	actions.add(new ModifyCardDamageAction(this, magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
+
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+    }
+    
+    @Override
+    public ActionListMaker getActionsMaker() {
+    	return (c, t) -> {
+    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+    		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.FIRE));
+    		actionsList.add(new ModifyCardDamageAction(this, c.magicNumber));
+    		return actionsList;
+    	};
     }
 
     @Override

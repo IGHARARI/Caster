@@ -2,6 +2,9 @@ package sts.caster.cards.skills;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
+import java.util.ArrayList;
+
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -17,6 +20,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 
 public class FrostDriver extends CasterCard {
 
@@ -54,10 +58,18 @@ public class FrostDriver extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
-    	DamageAction damageAction = new DamageAction(m, new DamageInfo(p, spellDamage), AttackEffect.BLUNT_HEAVY);
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, damageAction, m));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns,  m));
     }
 
+    @Override
+    public ActionListMaker getActionsMaker() {
+    	return (c, t) -> {
+    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+    		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.BLUNT_HEAVY));
+    		return actionsList;
+    	};
+    }
+    
     @Override
     public void upgrade() {
         if (!upgraded) {

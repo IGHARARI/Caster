@@ -44,6 +44,14 @@
     "NAME": "Natural Chaos",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Earth. NL Apply !M! Mired to ALL enemies."
   },
+  "caster:GaiasBlessing": {
+    "NAME": "Gaia's Blessing",
+    "DESCRIPTION": "Gain !M! Regen. NL Cast_Time !caster:Delay!: NL Gain !M! Regen. NL Exhaust."
+  },
+  "caster:Ifrit": {
+    "NAME": "Ifrit",
+    "DESCRIPTION": "At the start of your turn, exhaust a random card in your hand and play it. NL Apply Blazed equal to it's cost to a random enemy."
+  },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage to a random enemy. NL Channel a copy of this card."
@@ -94,11 +102,23 @@
   },
   "caster:LordOfVermillion": {
     "NAME": "Lord Of Vermillion",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M! * X times."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M! [#F7FF00]x[] X times."
   },
   "caster:MeteorStorm": {
     "NAME": "Meteor Storm",
     "DESCRIPTION": "Shuffle !M! zero cost Meteors into your draw pile."
+  },
+  "caster:Grimoire": {
+    "NAME": "Grimoire",
+    "DESCRIPTION": "Gain !M! Focus."
+  },
+  "caster:IcicleLance": {
+    "NAME": "Icicle Lance",
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Ice. NL Remove All block from the enemy, then deal !caster:D! damage twice."
+  },
+  "caster:BloodRitual": {
+    "NAME": "Blood Ritual",
+    "DESCRIPTION": "Lose !M! HP. NL Decrease the Cast_time of all your currently casted Spells by !caster:M2! NL Exhaust."
   },
   "caster:Incantation": {
     "NAME": "Incantation",

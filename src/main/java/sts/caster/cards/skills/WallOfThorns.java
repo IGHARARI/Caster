@@ -19,6 +19,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 
 public class WallOfThorns extends CasterCard {
 
@@ -53,11 +54,19 @@ public class WallOfThorns extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
-    	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    	actions.add(new GainBlockAction(p, p, spellBlock));
-    	actions.add(new GainBlockAction(p, p, spellBlock));
-    	actions.add(new ApplyPowerAction(p, p, new ThornsPower(p, magicNumber), magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+    }
+    
+    @Override
+    public ActionListMaker getActionsMaker() {
+    	return (c, t) -> {
+    		AbstractPlayer p = AbstractDungeon.player;
+    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+        	actions.add(new GainBlockAction(p, p, c.spellBlock));
+        	actions.add(new GainBlockAction(p, p, c.spellBlock));
+        	actions.add(new ApplyPowerAction(p, p, new ThornsPower(p, c.magicNumber), c.magicNumber));
+    		return actions;
+    	};
     }
 
     @Override

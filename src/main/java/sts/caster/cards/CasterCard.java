@@ -1,11 +1,25 @@
 package sts.caster.cards;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.FocusPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
+import com.megacrit.cardcrawl.powers.WeakPower;
 
 import basemod.abstracts.CustomCard;
 import sts.caster.core.MagicElement;
+import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 import sts.caster.powers.BlazedPower;
 import sts.caster.powers.FrozenPower;
 import sts.caster.powers.MiredPower;
@@ -13,7 +27,7 @@ import sts.caster.powers.ShockedPower;
 import sts.caster.util.PowersHelper;
 
 public abstract class CasterCard extends CustomCard {
-
+    private static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
     public int delayTurns;        
     public int baseDelayTurns;    
     public boolean upgradedDelayTurns; 
@@ -55,58 +69,78 @@ public abstract class CasterCard extends CustomCard {
         isM2Modified = false;
         cardElement = MagicElement.NEUTRAL;
     }
+    
+    public ActionListMaker getActionsMaker() {return null;}
+    
+    public ActionListMaker getActionsMaker(int spentEnergy) {return null;}
 
     @Override
     public void applyPowers() {
-    	super.applyPowers();
-    	isSpellDamageModified = false;
-    	spellDamage = baseSpellDamage;
-    	spellDamage += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
-    	if (spellDamage != baseSpellDamage) isSpellDamageModified = true;
-    	
-    	isSpellBlockModified = false;
-    	spellBlock = baseSpellBlock;
-    	spellBlock += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
-    	if (spellBlock != baseSpellBlock) isSpellBlockModified = true;
+    	if (this.hasTag(TheCaster.Enums.DELAYED_CARD)) {
+    		calculateCardDamage(null);
+    	} else {
+    		super.applyPowers();
+    	}
+//    	super.applyPowers();
+//    	isSpellDamageModified = false;
+//    	spellDamage = baseSpellDamage;
+//    	spellDamage += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
+//    	if (spellDamage != baseSpellDamage) isSpellDamageModified = true;
+//    	
+//    	isSpellBlockModified = false;
+//    	spellBlock = baseSpellBlock;
+//    	spellBlock += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
+//    	if (spellBlock != baseSpellBlock) isSpellBlockModified = true;
     }
     
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-    	super.calculateCardDamage(mo);
-    	spellDamage = baseSpellDamage;
-    	spellBlock = baseSpellBlock;
-    	isSpellBlockModified = false;
-    	isSpellDamageModified = false;
-    	if (mo != null) {
-    		float damageCalculation = baseSpellDamage;
-    		damageCalculation += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
-    		if (damageCalculation > 0) {
-    			if (isCreatureVulnerableTo(mo, cardElement)){
-    				damageCalculation *= 1.5f;
-    			}
-    		}
-    		if (damageCalculation < 0.0f) damageCalculation = 0.0f;
-    		isSpellDamageModified = ((int)damageCalculation) != baseSpellDamage;
-    		spellDamage = MathUtils.floor(damageCalculation);
+    	if (this.hasTag(TheCaster.Enums.DELAYED_CARD)) {
+    		resetCardSpellDamage();
+    		resetCardSpellBlock();
+    		applyCardDamageModifers(mo);
+    		applyCardBlockModifiers(mo);
+    	} else {
+    		super.calculateCardDamage(mo);
     	}
-    	
-    	isSpellBlockModified = false;
-    	spellBlock = baseSpellBlock;
-    	spellBlock += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
-    	if (spellBlock != baseSpellBlock) isSpellBlockModified = true;
     }
-    
-//    @Override
-//    public float calculateModifiedCardDamage(AbstractPlayer player, AbstractMonster mo, float tmp) {
-//    	if (mo != null && tmp > 0) {
-//    		if (isCreatureVulnerableTo(mo, cardElement)){
-//    			tmp *= 1.5f;
-//    		}
-//    	}
-//    	return super.calculateModifiedCardDamage(player, mo, tmp);
-//    }
-    
-    private boolean isCreatureVulnerableTo(AbstractMonster mo, MagicElement element) {
+
+	private void resetCardSpellBlock() {
+    	spellDamage = baseSpellDamage;
+    	isSpellDamageModified = false;
+	}
+
+	private void resetCardSpellDamage() {
+		spellBlock = baseSpellBlock;
+		isSpellBlockModified = false;
+	}
+
+	private void applyCardDamageModifers(AbstractMonster mo) {
+    	float damageCalculation = baseSpellDamage;
+    	
+    	damageCalculation = customApplyPlayerPowersToSpellDamage(damageCalculation);
+    	if (mo != null && target != CardTarget.ALL_ENEMY && target != CardTarget.ALL) {
+    		damageCalculation = customApplyEnemyPowersToSpellDamage(damageCalculation, mo);
+
+			if (isCreatureVulnerableTo(mo, cardElement)){
+				damageCalculation *= 1.5f;
+			}
+    		if (damageCalculation < 0.0f) damageCalculation = 0.0f;
+    	}
+    	isSpellDamageModified = ((int)damageCalculation) != baseSpellDamage;
+    	spellDamage = MathUtils.floor(damageCalculation);
+	}
+	
+	private void applyCardBlockModifiers(AbstractMonster mo) {
+		float blockCalculation = baseSpellBlock;
+		
+		blockCalculation = customApplyPlayerPowersToSpellBlock(blockCalculation);
+		if (blockCalculation < 0.0f) blockCalculation = 0.0f;
+		if (blockCalculation != baseSpellBlock) isSpellBlockModified = true;
+		spellBlock = MathUtils.floor(blockCalculation);
+	}
+
+	private boolean isCreatureVulnerableTo(AbstractMonster mo, MagicElement element) {
     	switch (element) {
     		case FIRE:
     			return mo.hasPower(MiredPower.POWER_ID);
@@ -204,5 +238,58 @@ public abstract class CasterCard extends CustomCard {
     	copy.initializeDescription();
     	
 		return copy;
+    }
+    
+    
+    public static void customApplyPlayerPowersToSpellDamage(DamageInfo info) {
+    	info.output = (int) customApplyPlayerPowersToSpellDamage(info.output);
+    }
+    
+    public static void customApplyEnemyPowersToSpellDamage(DamageInfo info, AbstractMonster mo) {
+    	info.output = (int) customApplyEnemyPowersToSpellDamage(info.output, mo);
+    }
+    
+    public static float customApplyPlayerPowersToSpellDamage(float damageToCalculate) {
+        final AbstractPlayer player = AbstractDungeon.player;
+        float tmp = damageToCalculate;
+        for (final AbstractPower p : player.powers) {
+        	if (ineffectivePowers.contains(p.ID)) continue;
+            tmp = p.atDamageGive(tmp, DamageType.NORMAL);
+        }
+        for (final AbstractPower p : player.powers) {
+        	if (ineffectivePowers.contains(p.ID)) continue;
+            tmp = p.atDamageFinalGive(tmp, DamageType.NORMAL);
+        }
+        tmp += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
+        if (tmp < 0.0f) {
+            tmp = 0.0f;
+        }
+        return tmp;
+    }
+    
+    public static float customApplyEnemyPowersToSpellDamage(float damageToCalculate, AbstractMonster mo) {
+    	float tmp = damageToCalculate;
+        if (mo != null) {
+            for (final AbstractPower p : mo.powers) {
+            	if (ineffectivePowers.contains(p.ID)) continue;
+                tmp = p.atDamageReceive(tmp, DamageType.NORMAL);
+            }
+        }
+        if (mo != null) {
+            for (final AbstractPower p : mo.powers) {
+            	if (ineffectivePowers.contains(p.ID)) continue;
+                tmp = p.atDamageFinalReceive(tmp, DamageType.NORMAL);
+            }
+        }
+        if (tmp < 0.0f) {
+            tmp = 0.0f;
+        }
+    	return tmp;
+    }
+    
+    public static float customApplyPlayerPowersToSpellBlock(float blockToCalculate) {
+    	float tmp = blockToCalculate;
+    	tmp += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
+    	return tmp;
     }
 }

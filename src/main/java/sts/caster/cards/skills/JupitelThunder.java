@@ -21,6 +21,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 
 public class JupitelThunder extends CasterCard {
 
@@ -53,12 +54,19 @@ public class JupitelThunder extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    	for (int i = 0; i < magicNumber; i++) {
-    		actions.add(new LightningDamageAction(m, new DamageInfo(p, spellDamage, DamageType.NORMAL), AttackEffect.NONE, true));
-    	}
-    	actions.add(new ApplyElementalEffectChanceAction(p, m, MagicElement.THUNDER, magicNumber));
-    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
+    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+    }
+    
+    @Override
+    public ActionListMaker getActionsMaker() {
+    	return (c, t) -> {
+    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+        	for (int i = 0; i < c.magicNumber; i++) {
+        		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE, true));
+        	}
+        	actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.THUNDER, c.magicNumber));
+    		return actionsList;
+    	};
     }
 
     @Override

@@ -2,6 +2,8 @@ package sts.caster.cards.skills;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
+import java.util.ArrayList;
+
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,6 +18,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 import sts.caster.powers.MiredPower;
 
 public class NaturalChaos extends CasterCard {
@@ -49,8 +52,16 @@ public class NaturalChaos extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractGameAction action = new DelayedActionOnAllEnemiesAction(monster -> new ApplyPowerAction(monster, p, new MiredPower(monster, p, magicNumber), magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, action, m));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+    }
+    
+    @Override
+    public ActionListMaker getActionsMaker() {
+    	return (c, t) -> {
+    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+    		actions.add(new DelayedActionOnAllEnemiesAction(monster -> new ApplyPowerAction(monster, AbstractDungeon.player, new MiredPower(monster, AbstractDungeon.player, c.magicNumber), c.magicNumber)));
+    		return actions;
+    	};
     }
 
     @Override

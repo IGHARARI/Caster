@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -18,6 +17,7 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.MathHelper;
 import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
@@ -26,11 +26,11 @@ import sts.caster.actions.DelayedEffectHideEvokedCard;
 import sts.caster.actions.DelayedEffectRemoveAction;
 import sts.caster.actions.DelayedEffectShowCardToEvoke;
 import sts.caster.actions.NonSkippableWaitAction;
+import sts.caster.actions.QueueEvokeCardAction;
 import sts.caster.cards.CasterCard;
 
 public class DelayedCardEffect extends AbstractOrb {
 	public int turnsUntilFire;
-	private ArrayList<AbstractGameAction> delayedActions;
 
 	public static final String ORB_ID = "DelayedCard:";
 	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.9f;
@@ -45,13 +45,13 @@ public class DelayedCardEffect extends AbstractOrb {
 	public CasterCard cardEvokeCopy = null;
 	public boolean showEvokeCardOnScreen = false;
 	
-	private AbstractCreature target = null;
-	private int energyOnCast;
+	public AbstractMonster target = null;
+	public int energyOnCast;
 	
-	public DelayedCardEffect(CasterCard card, int delayTurns, ArrayList<AbstractGameAction> delayedActions, AbstractCreature target) {
-		this(card, delayTurns, delayedActions, 0, target);
+	public DelayedCardEffect(CasterCard card, int delayTurns, AbstractMonster target) {
+		this(card, delayTurns, 0, target);
 	}
-	public DelayedCardEffect(CasterCard card, int delayTurns, ArrayList<AbstractGameAction> delayedActions, int energyOnCast, AbstractCreature target) {
+	public DelayedCardEffect(CasterCard card, int delayTurns, int energyOnCast, AbstractMonster target) {
         super();
         
 		ID = ORB_ID + card.uuid;
@@ -64,7 +64,6 @@ public class DelayedCardEffect extends AbstractOrb {
 			delayedCard.initializeDescription();
 		}
 		this.turnsUntilFire = delayTurns;
-		this.delayedActions = delayedActions;
 		this.target = target;
 		this.energyOnCast = energyOnCast;
 		passiveAmount = basePassiveAmount = delayTurns;
@@ -113,22 +112,40 @@ public class DelayedCardEffect extends AbstractOrb {
 	public void onStartOfTurn() {
 		turnsUntilFire--;
 		passiveAmount = turnsUntilFire;
-		if (delayedCard instanceof CasterCard) ((CasterCard) delayedCard).onStartOfTurnDelayEffect();
+		delayedCard.onStartOfTurnDelayEffect();
 		if (turnsUntilFire <= 0) {
-			evokeCardEffect();
+//			evokeCardEffect();
+			AbstractDungeon.actionManager.addToBottom(new QueueEvokeCardAction(this));
 		}
 	}
 
 	public void evokeCardEffect(){
-		AbstractDungeon.actionManager.addToBottom(new DelayedEffectShowCardToEvoke(this));
-		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
-		for (AbstractGameAction action : delayedActions) {
-			AbstractDungeon.actionManager.addToBottom(action);
+//		AbstractDungeon.actionManager.addToBottom(new DelayedEffectShowCardToEvoke(this));
+//		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
+//		delayedCard.calculateCardDamage(target);
+//		ArrayList<AbstractGameAction> delayedActions = delayedCard.getActionsMaker().getActionList(delayedCard, target);
+//		for (AbstractGameAction action : delayedActions) {
+//			AbstractDungeon.actionManager.addToBottom(action);
+//		}
+//		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
+//		AbstractDungeon.actionManager.addToBottom(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
+//		AbstractDungeon.actionManager.addToBottom(new DelayedEffectHideEvokedCard(this));
+//       	AbstractDungeon.actionManager.addToBottom(new DelayedEffectRemoveAction(this));
+
+       	
+		AbstractDungeon.actionManager.addToTop(new DelayedEffectRemoveAction(this));
+		AbstractDungeon.actionManager.addToTop(new DelayedEffectHideEvokedCard(this));
+		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
+		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
+		delayedCard.calculateCardDamage(target);
+		ArrayList<AbstractGameAction> delayedActions = delayedCard.getActionsMaker().getActionList(delayedCard, target);
+		for (int i = delayedActions.size() -1; i >= 0; i--) {
+			AbstractGameAction action = delayedActions.get(i);
+			AbstractDungeon.actionManager.addToTop(action);
 		}
-		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
-		AbstractDungeon.actionManager.addToBottom(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
-		AbstractDungeon.actionManager.addToBottom(new DelayedEffectHideEvokedCard(this));
-       	AbstractDungeon.actionManager.addToBottom(new DelayedEffectRemoveAction(this));
+		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
+		AbstractDungeon.actionManager.addToTop(new DelayedEffectShowCardToEvoke(this));
+		
 	}
 	
 	@Override
@@ -156,6 +173,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	
 	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
+			cardPreviewCopy.calculateCardDamage(target);
 			renderCardCopy(sb, cardPreviewCopy, cX, cY);
 			
 	        switch (this.delayedCard.target) {
@@ -210,7 +228,7 @@ public class DelayedCardEffect extends AbstractOrb {
 
 	@Override
 	public AbstractOrb makeCopy() {
-		return new DelayedCardEffect(this.delayedCard, turnsUntilFire, delayedActions, energyOnCast, target);
+		return new DelayedCardEffect(this.delayedCard, turnsUntilFire, energyOnCast, target);
 	}
 
 	@Override

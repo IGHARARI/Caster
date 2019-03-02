@@ -19,6 +19,7 @@ public class DelayedEffectShowCardToEvoke extends AbstractGameAction {
     public void update() {
 		if (delayedCard != null) {
 			if (duration == Settings.ACTION_DUR_FAST) {
+				delayedCard.cardEvokeCopy.calculateCardDamage(delayedCard.target);
 				delayedCard.showEvokeCardOnScreen = true;
 			}
 		}

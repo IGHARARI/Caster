@@ -19,6 +19,7 @@ import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
+import sts.caster.interfaces.ActionListMaker;
 
 public class SoulStrike extends CasterCard {
 
@@ -51,10 +52,17 @@ public class SoulStrike extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    	actions.add(new VFXAction(new FlyingOrbEffect(m.drawX, m.drawY)));
-    	actions.add(new DamageAction(m, new DamageInfo(p, spellDamage)));
-    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, actions, m));
+    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+    }
+    
+    @Override
+    public ActionListMaker getActionsMaker() {
+    	return (c, t) -> {
+    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+        	actions.add(new VFXAction(new FlyingOrbEffect(t.drawX, t.drawY)));
+        	actions.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage)));
+    		return actions;
+    	};
     }
 
     @Override
