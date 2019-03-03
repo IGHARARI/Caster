@@ -11,6 +11,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
@@ -19,6 +24,7 @@ import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 
 import basemod.BaseMod;
 import basemod.ModLabel;
@@ -28,7 +34,9 @@ import basemod.interfaces.EditCharactersSubscriber;
 import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditRelicsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
+import basemod.interfaces.OnCardUseSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
+import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.attacks.BookThrow;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.attacks.GateOfBabylon;
@@ -39,6 +47,7 @@ import sts.caster.cards.powers.Ifrit;
 import sts.caster.cards.powers.Incantation;
 import sts.caster.cards.powers.MagicAttunement;
 import sts.caster.cards.powers.MeteorStorm;
+import sts.caster.cards.skills.AbsoluteZero;
 import sts.caster.cards.skills.Accumulation;
 import sts.caster.cards.skills.AlternatingCurrent;
 import sts.caster.cards.skills.BloodRitual;
@@ -56,6 +65,7 @@ import sts.caster.cards.skills.JupitelThunder;
 import sts.caster.cards.skills.LightningBolt;
 import sts.caster.cards.skills.LordOfVermillion;
 import sts.caster.cards.skills.MagicBarrier;
+import sts.caster.cards.skills.MegaloSpark;
 import sts.caster.cards.skills.Meteor;
 import sts.caster.cards.skills.NaturalChaos;
 import sts.caster.cards.skills.QuickCast;
@@ -79,6 +89,7 @@ public class CasterMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
+        OnCardUseSubscriber,
         PostInitializeSubscriber {
 
 	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
@@ -311,6 +322,10 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Ifrit.ID);
         BaseMod.addCard(new GaiasBlessing());
         UnlockTracker.unlockCard(GaiasBlessing.ID);
+        BaseMod.addCard(new MegaloSpark());
+        UnlockTracker.unlockCard(MegaloSpark.ID);
+        BaseMod.addCard(new AbsoluteZero());
+        UnlockTracker.unlockCard(AbsoluteZero.ID);
         
         logger.info("Done adding cards!");
     }
@@ -363,5 +378,16 @@ public class CasterMod implements
     public static String makeID(String idText) {
         return getModID() + ":" + idText;
     }
+
+    
+    public static final int ELECTRIFY_DAMAGE = 3;
+	@Override
+	public void receiveCardUsed(AbstractCard card) {
+		if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
+			AbstractDungeon.actionManager.addToBottom(new VFXAction(new LightningEffect(AbstractDungeon.player.drawX, AbstractDungeon.player.drawY), 0.1f));
+			AbstractDungeon.actionManager.addToBottom(new SFXAction("ORB_LIGHTNING_EVOKE"));
+			AbstractDungeon.actionManager.addToBottom(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, ELECTRIFY_DAMAGE));
+		}
+	}
 
 }

@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 import sts.caster.cards.CasterCard;
-import sts.caster.core.TheCaster;
+import sts.caster.cards.CasterCardTags;
 
 public class QuickCastAction extends AbstractGameAction {
     
@@ -76,7 +76,7 @@ public class QuickCastAction extends AbstractGameAction {
     	} else if (this.duration == Settings.ACTION_DUR_FAST) {
 			ArrayList<AbstractCard> delayedCards = new ArrayList<AbstractCard>();
 			for (AbstractCard c : p.hand.group) {
-				if (c.hasTag(TheCaster.Enums.DELAYED_CARD)) delayedCards.add(c);
+				if (c.hasTag(CasterCardTags.DELAYED_CARD)) delayedCards.add(c);
 			}
 			if (delayedCards.size() > 0) {
 				AbstractCard card = delayedCards.get(AbstractDungeon.cardRandomRng.random(delayedCards.size()-1));

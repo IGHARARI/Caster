@@ -47,8 +47,6 @@ public class TheCaster extends CustomPlayer {
         public static AbstractCard.CardColor THE_CASTER_COLOR;
         @SpireEnum(name = "CASTER_COLOR")
         public static CardLibrary.LibraryType THE_CASTER_LIBRARY_COLOR;
-        @SpireEnum(name = "DELAYED_CARD")
-        public static AbstractCard.CardTags DELAYED_CARD;
     }
 
     // =============== BASE STATS =================

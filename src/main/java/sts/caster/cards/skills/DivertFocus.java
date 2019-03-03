@@ -36,7 +36,7 @@ public class DivertFocus extends CasterCard {
 
     public DivertFocus() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseBlock = block = BASE_BLOCK;
+        block = baseBlock = BASE_BLOCK;
         magicNumber = baseMagicNumber = BASE_MODIFY_AMOUNT;
     }
 

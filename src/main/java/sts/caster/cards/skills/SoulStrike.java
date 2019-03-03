@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.vfx.combat.FlyingOrbEffect;
 
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
@@ -47,7 +48,7 @@ public class SoulStrike extends CasterCard {
         this.exhaust = true;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns =  BASE_DELAY;
-        tags.add(TheCaster.Enums.DELAYED_CARD);
+        tags.add(CasterCardTags.DELAYED_CARD);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class FreezeCardAction extends AbstractGameAction {
         this.canPickZero = false;
         this.anyNumber = anyNumber;
         this.canPickZero = canPickZero;
-        this.p = (AbstractPlayer)target;
+        this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
         this.setValues(target, source, amount);
         this.duration = Settings.ACTION_DUR_FAST;

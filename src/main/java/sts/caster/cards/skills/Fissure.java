@@ -20,6 +20,7 @@ import sts.caster.actions.DelayedActionOnAllEnemiesAction;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -40,7 +41,7 @@ public class Fissure extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int BASE_DELAY = 3;
+    private static final int BASE_DELAY = 2;
     private static final int BASE_DAMAGE = 12;
     private static final int UPG_DAMAGE = 8;
     private static final int STUN_AMNT = 1;
@@ -52,7 +53,7 @@ public class Fissure extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         magicNumber = baseMagicNumber = STUN_AMNT;
         cardElement = MagicElement.EARTH;
-        tags.add(TheCaster.Enums.DELAYED_CARD);
+        tags.add(CasterCardTags.DELAYED_CARD);
         exhaust = true;
     }
 

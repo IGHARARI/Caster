@@ -101,6 +101,12 @@ public class DelayedCardEffect extends AbstractOrb {
 
 	@Override
 	public void update() {
+        if (hb.hovered && hb.justHovered) {
+        	delayedCard.calculateCardDamage(target);
+        	cardPreviewCopy.calculateCardDamage(target);
+        	cardEvokeCopy.calculateCardDamage(target);
+        	cardMiniCopy.calculateCardDamage(target);
+        }
         this.hb.update();
         if (this.hb.hovered && (delayedCard.target == CardTarget.ENEMY || delayedCard.target == CardTarget.SELF_AND_ENEMY) && target != null && target.isDeadOrEscaped()) {
             TipHelper.renderGenericTip(this.tX + 96.0f * Settings.scale, this.tY + 64.0f * Settings.scale, this.name, "The original target for this Spell is now dead.");
@@ -120,19 +126,6 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	public void evokeCardEffect(){
-//		AbstractDungeon.actionManager.addToBottom(new DelayedEffectShowCardToEvoke(this));
-//		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
-//		delayedCard.calculateCardDamage(target);
-//		ArrayList<AbstractGameAction> delayedActions = delayedCard.getActionsMaker().getActionList(delayedCard, target);
-//		for (AbstractGameAction action : delayedActions) {
-//			AbstractDungeon.actionManager.addToBottom(action);
-//		}
-//		AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
-//		AbstractDungeon.actionManager.addToBottom(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
-//		AbstractDungeon.actionManager.addToBottom(new DelayedEffectHideEvokedCard(this));
-//       	AbstractDungeon.actionManager.addToBottom(new DelayedEffectRemoveAction(this));
-
-       	
 		AbstractDungeon.actionManager.addToTop(new DelayedEffectRemoveAction(this));
 		AbstractDungeon.actionManager.addToTop(new DelayedEffectHideEvokedCard(this));
 		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
@@ -145,7 +138,6 @@ public class DelayedCardEffect extends AbstractOrb {
 		}
 		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
 		AbstractDungeon.actionManager.addToTop(new DelayedEffectShowCardToEvoke(this));
-		
 	}
 	
 	@Override
@@ -173,7 +165,6 @@ public class DelayedCardEffect extends AbstractOrb {
 	
 	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
-			cardPreviewCopy.calculateCardDamage(target);
 			renderCardCopy(sb, cardPreviewCopy, cX, cY);
 			
 	        switch (this.delayedCard.target) {

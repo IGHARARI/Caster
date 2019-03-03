@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.actions.RepeatingRandomDamageAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 
@@ -83,7 +84,7 @@ public class GateOfBabylon extends CasterCard {
     public static int countSpellsInMasterDeck() {
     	HashSet<String> spellIDs = new HashSet<String>();
     	for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-    		if (c.hasTag(TheCaster.Enums.DELAYED_CARD)) spellIDs.add(c.cardID);
+    		if (c.hasTag(CasterCardTags.DELAYED_CARD)) spellIDs.add(c.cardID);
     	}
     	return spellIDs.size();
     }

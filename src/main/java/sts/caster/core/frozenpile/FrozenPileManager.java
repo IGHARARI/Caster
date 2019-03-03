@@ -6,6 +6,8 @@ import com.megacrit.cardcrawl.cards.CardGroup.CardGroupType;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 
+import sts.caster.cards.CasterCard;
+
 public class FrozenPileManager {
 	public static CardGroup frozenPile = new CardGroup(CardGroupType.UNSPECIFIED);
 	public static FrozenPileViewScreen frozenPileViewScreen = new FrozenPileViewScreen();
@@ -13,6 +15,7 @@ public class FrozenPileManager {
 	
 	public static void moveToFrozenPile(CardGroup originalGroup, AbstractCard card) {
         resetCardBeforeMoving(originalGroup, card);
+        if (card instanceof CasterCard) ((CasterCard) card).onFrozen();
         AbstractDungeon.effectList.add(new ExhaustCardEffect(card));
         frozenPile.addToTop(card);
 	}

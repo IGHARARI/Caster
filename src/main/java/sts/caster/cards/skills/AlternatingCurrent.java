@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.DelayedDamageRandomEnemyAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
@@ -43,7 +44,7 @@ public class AlternatingCurrent extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns =  BASE_DELAY;
-        tags.add(TheCaster.Enums.DELAYED_CARD);
+        tags.add(CasterCardTags.DELAYED_CARD);
     }
 
     @Override

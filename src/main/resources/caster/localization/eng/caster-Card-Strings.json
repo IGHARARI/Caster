@@ -28,6 +28,15 @@
     "NAME": "Lightning Bolt",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage."
   },
+  "caster:MegaloSpark": {
+    "NAME": "Megalo Spark",
+    "DESCRIPTION": "Electrify !M! random card in your hand. NL Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage to ALL enemies twice.",
+    "UPGRADE_DESCRIPTION": "Electrify !M! card in your hand. NL Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage to ALL enemies twice."
+  },
+  "caster:AbsoluteZero": {
+    "NAME": "Absolute Zero",
+    "DESCRIPTION": "Whenever this card is Frozen, double its base damage. NL Cast_Time !caster:Delay!: NL Ice. NL Deal !caster:D! damage."
+  },
   "caster:FlashFrost": {
     "NAME": "Flash Frost",
     "DESCRIPTION": "Ice. NL Apply !M! Frost. NL Exhaust."
@@ -38,7 +47,7 @@
   },
   "caster:Incinerate": {
     "NAME": "Incinerate",
-    "DESCRIPTION": "Fire. NL Exhaust !M! card from your hand. NL Apply Blazed equal to !caster:M2! times its cost."
+    "DESCRIPTION": "Fire. NL Exhaust !M! card in your hand. NL Apply Blazed equal to !caster:M2! times its cost."
   },
   "caster:NaturalChaos": {
     "NAME": "Natural Chaos",
@@ -136,7 +145,7 @@
   },
   "caster:DivertFocus": {
     "NAME": "Divert Focus",
-    "DESCRIPTION": "Gain !caster:B! Block. NL Add !M! to the Cast_time of your casted Spells with the current lowest Cast_time."
+    "DESCRIPTION": "Gain !B! Block. NL Add !M! to the Cast_time of your casted Spells with the current lowest Cast_time."
   },
   "caster:BookThrow": {
     "NAME": "Book Throw",

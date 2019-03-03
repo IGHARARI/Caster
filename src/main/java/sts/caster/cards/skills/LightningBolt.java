@@ -18,6 +18,7 @@ import sts.caster.actions.ApplyElementalEffectChanceAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -47,7 +48,7 @@ public class LightningBolt extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         cardElement = MagicElement.THUNDER;
-        this.tags.add(TheCaster.Enums.DELAYED_CARD);
+        this.tags.add(CasterCardTags.DELAYED_CARD);
     }
 
     @Override

@@ -33,6 +33,7 @@ public class IfritAction extends AbstractGameAction {
             }
             AbstractMonster m = AbstractDungeon.getMonsters().getRandomMonster(true);
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new BlazedPower(m, p, energyBurnt), energyBurnt));
+            AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(0.2f));
             
             AbstractMonster m2 = AbstractDungeon.getMonsters().getRandomMonster(true);
             final AbstractCard tmp = randomCard.makeSameInstanceOf();

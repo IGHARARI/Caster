@@ -18,7 +18,6 @@ import com.megacrit.cardcrawl.powers.WeakPower;
 
 import basemod.abstracts.CustomCard;
 import sts.caster.core.MagicElement;
-import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.powers.BlazedPower;
 import sts.caster.powers.FrozenPower;
@@ -76,7 +75,7 @@ public abstract class CasterCard extends CustomCard {
 
     @Override
     public void applyPowers() {
-    	if (this.hasTag(TheCaster.Enums.DELAYED_CARD)) {
+    	if (this.hasTag(CasterCardTags.DELAYED_CARD)) {
     		calculateCardDamage(null);
     	} else {
     		super.applyPowers();
@@ -95,7 +94,7 @@ public abstract class CasterCard extends CustomCard {
     
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-    	if (this.hasTag(TheCaster.Enums.DELAYED_CARD)) {
+    	if (this.hasTag(CasterCardTags.DELAYED_CARD)) {
     		resetCardSpellDamage();
     		resetCardSpellBlock();
     		applyCardDamageModifers(mo);
@@ -292,4 +291,6 @@ public abstract class CasterCard extends CustomCard {
     	tmp += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
     	return tmp;
     }
+    
+    public void onFrozen() {}
 }

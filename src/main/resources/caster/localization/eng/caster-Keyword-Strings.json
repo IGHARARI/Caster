@@ -15,7 +15,7 @@
       "ice",
       "ice:"
     ],
-    "DESCRIPTION": "This card has a chance of applying Frost to enemies."
+    "DESCRIPTION": "This Spell is #yIce elemental, #yBlazed enemies will take extra damage from it."
   },
   {
     "NAMES": [
@@ -24,6 +24,17 @@
       "freeze:"
     ],
     "DESCRIPTION": "Frozen cards are removed from play until end of combat."
+  },
+  {
+    "NAMES": [
+      "Electrify",
+      "electrify",
+      "Electrified",
+      "electrified",
+      "electrify:",
+      "electrified:"
+    ],
+    "DESCRIPTION": "When playing an electrified card, lose #r3 HP."
   },
   {
     "NAMES": [
