@@ -21,14 +21,13 @@
       "YOU ARE MINE!"
     ]
   },
-  "caster:BottledPlaceholderRelic": {
-    "NAME": "Bottled Placeholder",
-    "FLAVOR": "What is this?",
+  "caster:MagicBook": {
+    "NAME": "Magic Book",
+    "FLAVOR": "Like a coloring book but with more glitter and demons.",
     "DESCRIPTIONS": [
-      "Choose a card. Whenever you take play any card, draw the chosen card.",
-      "Whenever you play a card, draw ",
-      ".",
-      "Select a card to bottle for "
+      "Choose a spell. Reduce its Casting Time by 1.",
+      "The #yCasting #yTime of ", " is reduced by 1.",
+      "Select a card to memorize on the ", "."
     ]
   }
 }

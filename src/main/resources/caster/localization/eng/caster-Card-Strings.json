@@ -100,6 +100,18 @@
     "NAME": "Explosion",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Reduce this card's damage by !M! for this combat."
   },
+  "caster:FireWall": {
+    "NAME": "Fire Wall",
+    "DESCRIPTION": "Gain !B! block. NL Lose !M! HP. NL Thaw !caster:M2! card."
+  },
+  "caster:ShivasGrace": {
+    "NAME": "Shiva's Grace",
+    "DESCRIPTION": "Whenever you Freeze a card, gain !M! plated armor."
+  },
+  "caster:MagicWeapon": {
+    "NAME": "Magic Weapon",
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards, discard all non-Spells drawn this way."
+  },
   "caster:StormGust": {
     "NAME": "Storm Gust",
     "DESCRIPTION": "Freeze !M! cards. Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies.",
@@ -113,9 +125,42 @@
     "NAME": "Lord Of Vermillion",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M! [#F7FF00]x[] X times."
   },
+  "caster:Sleet": {
+    "NAME": "Sleet",
+    "DESCRIPTION": "Draw !M! card. NL Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !caster:M2! times.",
+    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !caster:M2! times."
+  },
   "caster:MeteorStorm": {
     "NAME": "Meteor Storm",
     "DESCRIPTION": "Shuffle !M! zero cost Meteors into your draw pile."
+  },
+  "caster:Charge": {
+    "NAME": "Charge",
+    "DESCRIPTION": "Draw !M! cards, then Electrify a random card in your hand."
+  },
+  "caster:Sandstorm": {
+    "NAME": "Sandstorm",
+    "DESCRIPTION": "ALL enemies lose !M! Strength for 1 turn. NL Lose !caster:M2! Focus for 1 turn."
+  },
+  "caster:Enfeeble": {
+    "NAME": "Enfeeble",
+    "DESCRIPTION": "Apply !M! Weak to an enemy.",
+    "UPGRADE_DESCRIPTION": "Apply !M! Weak to an enemy twice."
+  },
+  "caster:Unearth": {
+    "NAME": "Unearth",
+    "DESCRIPTION": "Fetch !M! Spell from your draw pile, then restore HP equal to its energy cost. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Fetch !M! Spell from your draw pile, then restore HP equal to double its energy cost. NL Exhaust."
+  },
+  "caster:GlacialShield": {
+    "NAME": "Glacial Shield",
+    "DESCRIPTION": "Freeze !M! random card in your hand. NL Gain !caster:B! block. Cast_Time !caster:Delay!: NL Gain !caster:B! block.",
+    "UPGRADE_DESCRIPTION": "Freeze !M! card in your hand. NL Gain !caster:B! block. Cast_Time !caster:Delay!: NL Gain !caster:B! block."
+  },
+  "caster:Ramuh": {
+    "NAME": "Ramuh",
+    "DESCRIPTION": "Whenever you Electrify a card, reduce its cost to 0 for the turn.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you Electrify a card, reduce its cost to 0 for the turn."
   },
   "caster:Grimoire": {
     "NAME": "Grimoire",
@@ -123,7 +168,7 @@
   },
   "caster:IcicleLance": {
     "NAME": "Icicle Lance",
-    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Ice. NL Remove All block from the enemy, then deal !caster:D! damage twice."
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Ice. NL Remove all block from the enemy, then deal !caster:D! damage twice."
   },
   "caster:BloodRitual": {
     "NAME": "Blood Ritual",

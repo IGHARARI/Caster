@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import basemod.abstracts.CustomCard;
-import sts.caster.cards.skills.Meteor;
+import sts.caster.cards.spells.Meteor;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 

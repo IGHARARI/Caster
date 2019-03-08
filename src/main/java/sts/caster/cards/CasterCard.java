@@ -1,9 +1,13 @@
 package sts.caster.cards;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.function.Predicate;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -27,6 +31,9 @@ import sts.caster.util.PowersHelper;
 
 public abstract class CasterCard extends CustomCard {
     private static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
+    
+    public static final Predicate<AbstractCard> isCardSpellPredicate = (c)-> c.hasTag(CasterCardTags.SPELL);
+    
     public int delayTurns;        
     public int baseDelayTurns;    
     public boolean upgradedDelayTurns; 
@@ -69,32 +76,65 @@ public abstract class CasterCard extends CustomCard {
         cardElement = MagicElement.NEUTRAL;
     }
     
-    public ActionListMaker getActionsMaker() {return null;}
+    private static final String BASE_BG_PATH = "caster/images/card_backgrounds/";
     
-    public ActionListMaker getActionsMaker(int spentEnergy) {return null;}
+    protected void setCardElement(MagicElement element) {
+    	cardElement = element;
+    	String path = BASE_BG_PATH;
+    	switch (type) {
+		case ATTACK:
+			path += "attack/";
+			break;
+		case POWER:
+			path += "power/";
+			break;
+		case SKILL:
+			path += "skill/";
+			break;
+		default:
+			return;
+    	}
+    	
+    	switch (cardElement) {
+		case EARTH:
+			setBackgroundTexture(path + "earth_bg_s.png", path + "earth_bg_b.png");
+			break;
+		case FIRE:
+			setBackgroundTexture(path + "fire_bg_s.png", path + "fire_bg_b.png");
+			break;
+		case ICE:
+			setBackgroundTexture(path + "ice_bg_s.png", path + "ice_bg_b.png");
+			break;
+		case THUNDER:
+			setBackgroundTexture(path + "lightning_bg_s.png", path + "lightning_bg_b.png");
+			break;
+		case DARK:
+			break;
+		case LIGHT:
+			break;
+		case NEUTRAL:
+			break;
+		default:
+			break;
+    	}
+    }
+    
+    //Return an empty list by default to prevent NPEs on cards accidentally not overriding this.
+    public ActionListMaker getActionsMaker(Integer energySpent) {return (c,t)-> {return new ArrayList<AbstractGameAction>();};}
+    
 
     @Override
     public void applyPowers() {
-    	if (this.hasTag(CasterCardTags.DELAYED_CARD)) {
+    	if (this.hasTag(CasterCardTags.SPELL)) {
     		calculateCardDamage(null);
     	} else {
     		super.applyPowers();
     	}
-//    	super.applyPowers();
-//    	isSpellDamageModified = false;
-//    	spellDamage = baseSpellDamage;
-//    	spellDamage += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
-//    	if (spellDamage != baseSpellDamage) isSpellDamageModified = true;
-//    	
-//    	isSpellBlockModified = false;
-//    	spellBlock = baseSpellBlock;
-//    	spellBlock += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
-//    	if (spellBlock != baseSpellBlock) isSpellBlockModified = true;
     }
     
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-    	if (this.hasTag(CasterCardTags.DELAYED_CARD)) {
+    	if (this.hasTag(CasterCardTags.SPELL)) {
     		resetCardSpellDamage();
     		resetCardSpellBlock();
     		applyCardDamageModifers(mo);
@@ -213,6 +253,36 @@ public abstract class CasterCard extends CustomCard {
     
     public void onStartOfTurnDelayEffect() {}
     
+    @Override
+    public AbstractCard makeCopy() {
+    	AbstractCard copy = super.makeCopy();
+    	if (copy instanceof CasterCard) {
+    		CasterCard ccCopy = (CasterCard) copy;
+    		ccCopy.cardElement = cardElement;
+    		ccCopy.delayTurns = delayTurns;
+    		ccCopy.baseDelayTurns = baseDelayTurns;
+    		ccCopy.upgradedDelayTurns = upgradedDelayTurns;
+    		ccCopy.isDelayTurnsModified = isDelayTurnsModified;
+    		ccCopy.spellBlock = spellBlock;
+    		ccCopy.baseSpellBlock = baseSpellBlock;
+    		ccCopy.upgradedSpellBlock = upgradedSpellBlock;
+    		ccCopy.isSpellBlockModified = isSpellBlockModified;
+    		ccCopy.spellDamage = spellDamage;
+    		ccCopy.baseSpellDamage = baseSpellDamage;
+    		ccCopy.upgradedSpellDamage = upgradedSpellDamage;
+    		ccCopy.isSpellDamageModified = isSpellDamageModified;
+    		ccCopy.m2 = m2;
+    		ccCopy.baseM2 = baseM2;
+    		ccCopy.upgradedM2 = upgradedM2;
+    		ccCopy.isM2Modified = isM2Modified;
+    		
+    		ccCopy.rawDescription = rawDescription;
+    		ccCopy.initializeDescription();
+    		return ccCopy;
+    	}
+		return copy;
+    }
+    
     public CasterCard makeStatIdenticalCopy() {
     	CasterCard copy = (CasterCard) this.makeStatEquivalentCopy();
     	copy.cardElement = cardElement;
@@ -251,13 +321,15 @@ public abstract class CasterCard extends CustomCard {
     public static float customApplyPlayerPowersToSpellDamage(float damageToCalculate) {
         final AbstractPlayer player = AbstractDungeon.player;
         float tmp = damageToCalculate;
-        for (final AbstractPower p : player.powers) {
-        	if (ineffectivePowers.contains(p.ID)) continue;
-            tmp = p.atDamageGive(tmp, DamageType.NORMAL);
-        }
-        for (final AbstractPower p : player.powers) {
-        	if (ineffectivePowers.contains(p.ID)) continue;
-            tmp = p.atDamageFinalGive(tmp, DamageType.NORMAL);
+        if (player != null) {
+        	for (final AbstractPower p : player.powers) {
+        		if (ineffectivePowers.contains(p.ID)) continue;
+        		tmp = p.atDamageGive(tmp, DamageType.NORMAL);
+        	}
+        	for (final AbstractPower p : player.powers) {
+        		if (ineffectivePowers.contains(p.ID)) continue;
+        		tmp = p.atDamageFinalGive(tmp, DamageType.NORMAL);
+        	}
         }
         tmp += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
         if (tmp < 0.0f) {

@@ -9,12 +9,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import basemod.abstracts.CustomCard;
+import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.IfritPower;
 
-public class Ifrit extends CustomCard {
+public class Ifrit extends CasterCard {
 
     public static final String ID = CasterMod.makeID("Ifrit");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -34,6 +35,7 @@ public class Ifrit extends CustomCard {
 
     public Ifrit() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        setCardElement(MagicElement.FIRE);
     }
     
     @Override

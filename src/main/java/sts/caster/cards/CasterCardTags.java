@@ -5,8 +5,8 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public class CasterCardTags {
 
-	@SpireEnum(name = "DELAYED_CARD")
-	public static AbstractCard.CardTags DELAYED_CARD;
+	@SpireEnum(name = "SPELL_CARD")
+	public static AbstractCard.CardTags SPELL;
 	@SpireEnum(name = "ELECTRIFIED")
 	public static AbstractCard.CardTags ELECTRIFIED;
 

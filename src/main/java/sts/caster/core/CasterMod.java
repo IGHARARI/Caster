@@ -15,6 +15,8 @@ import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer.PlayerClass;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -35,6 +37,7 @@ import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditRelicsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.OnCardUseSubscriber;
+import basemod.interfaces.PostCreateStartingDeckSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.attacks.BookThrow;
@@ -42,38 +45,49 @@ import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.attacks.GateOfBabylon;
 import sts.caster.cards.attacks.LAZER;
 import sts.caster.cards.attacks.MagicResonance;
+import sts.caster.cards.attacks.MagicWeapon;
 import sts.caster.cards.powers.Grimoire;
 import sts.caster.cards.powers.Ifrit;
 import sts.caster.cards.powers.Incantation;
 import sts.caster.cards.powers.MagicAttunement;
 import sts.caster.cards.powers.MeteorStorm;
-import sts.caster.cards.skills.AbsoluteZero;
+import sts.caster.cards.powers.Ramuh;
 import sts.caster.cards.skills.Accumulation;
-import sts.caster.cards.skills.AlternatingCurrent;
 import sts.caster.cards.skills.BloodRitual;
 import sts.caster.cards.skills.CasterDefend;
+import sts.caster.cards.skills.Charge;
 import sts.caster.cards.skills.DivertFocus;
-import sts.caster.cards.skills.Explosion;
-import sts.caster.cards.skills.Fireball;
-import sts.caster.cards.skills.Fissure;
+import sts.caster.cards.skills.Enfeeble;
+import sts.caster.cards.skills.FireWall;
 import sts.caster.cards.skills.FlashFrost;
-import sts.caster.cards.skills.FrostDriver;
-import sts.caster.cards.skills.GaiasBlessing;
-import sts.caster.cards.skills.IcicleLance;
 import sts.caster.cards.skills.Incinerate;
-import sts.caster.cards.skills.JupitelThunder;
-import sts.caster.cards.skills.LightningBolt;
-import sts.caster.cards.skills.LordOfVermillion;
 import sts.caster.cards.skills.MagicBarrier;
-import sts.caster.cards.skills.MegaloSpark;
-import sts.caster.cards.skills.Meteor;
-import sts.caster.cards.skills.NaturalChaos;
 import sts.caster.cards.skills.QuickCast;
-import sts.caster.cards.skills.SoulStrike;
-import sts.caster.cards.skills.StormGust;
-import sts.caster.cards.skills.WallOfThorns;
+import sts.caster.cards.skills.Unearth;
+import sts.caster.cards.spells.AbsoluteZero;
+import sts.caster.cards.spells.AlternatingCurrent;
+import sts.caster.cards.spells.Explosion;
+import sts.caster.cards.spells.Fireball;
+import sts.caster.cards.spells.Fissure;
+import sts.caster.cards.spells.FrostDriver;
+import sts.caster.cards.spells.GaiasBlessing;
+import sts.caster.cards.spells.GlacialShield;
+import sts.caster.cards.spells.IcicleLance;
+import sts.caster.cards.spells.JupitelThunder;
+import sts.caster.cards.spells.LightningBolt;
+import sts.caster.cards.spells.LordOfVermillion;
+import sts.caster.cards.spells.MegaloSpark;
+import sts.caster.cards.spells.Meteor;
+import sts.caster.cards.spells.NaturalChaos;
+import sts.caster.cards.spells.Sandstorm;
+import sts.caster.cards.spells.Sleet;
+import sts.caster.cards.spells.SoulStrike;
+import sts.caster.cards.spells.StormGust;
+import sts.caster.cards.spells.WallOfThorns;
+import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.potions.PlaceholderPotion;
 import sts.caster.relics.DefaultClickableRelic;
+import sts.caster.relics.MagicBookRelic;
 import sts.caster.relics.PlaceholderRelic;
 import sts.caster.util.TextureLoader;
 import sts.caster.variables.DelayTurns;
@@ -90,6 +104,7 @@ public class CasterMod implements
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
         OnCardUseSubscriber,
+        PostCreateStartingDeckSubscriber,
         PostInitializeSubscriber {
 
 	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
@@ -238,6 +253,8 @@ public class CasterMod implements
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
         BaseMod.addRelicToCustomPool(new PlaceholderRelic(), TheCaster.Enums.THE_CASTER_COLOR);
         BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), TheCaster.Enums.THE_CASTER_COLOR);
+        BaseMod.addRelicToCustomPool(new MagicBookRelic(), TheCaster.Enums.THE_CASTER_COLOR);
+        BaseMod.registerBottleRelic(MagicBookMemorizedCardField.inMagicBookField, new MagicBookRelic());
 
         logger.info("Done adding relics!");
     }
@@ -326,6 +343,24 @@ public class CasterMod implements
         UnlockTracker.unlockCard(MegaloSpark.ID);
         BaseMod.addCard(new AbsoluteZero());
         UnlockTracker.unlockCard(AbsoluteZero.ID);
+        BaseMod.addCard(new GlacialShield());
+        UnlockTracker.unlockCard(GlacialShield.ID);
+        BaseMod.addCard(new Ramuh());
+        UnlockTracker.unlockCard(Ramuh.ID);
+        BaseMod.addCard(new Charge());
+        UnlockTracker.unlockCard(Charge.ID);
+        BaseMod.addCard(new Sleet());
+        UnlockTracker.unlockCard(Sleet.ID);
+        BaseMod.addCard(new Unearth());
+        UnlockTracker.unlockCard(Unearth.ID);
+        BaseMod.addCard(new Sandstorm());
+        UnlockTracker.unlockCard(Sandstorm.ID);
+        BaseMod.addCard(new Enfeeble());
+        UnlockTracker.unlockCard(Enfeeble.ID);
+        BaseMod.addCard(new FireWall());
+        UnlockTracker.unlockCard(FireWall.ID);
+        BaseMod.addCard(new MagicWeapon());
+        UnlockTracker.unlockCard(MagicWeapon.ID);
         
         logger.info("Done adding cards!");
     }
@@ -384,9 +419,19 @@ public class CasterMod implements
 	@Override
 	public void receiveCardUsed(AbstractCard card) {
 		if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
+			int tagsBeforeRemove = card.tags.size();
+			card.tags.removeIf((tag) -> tag == CasterCardTags.ELECTRIFIED);
+			int amountElectrified = tagsBeforeRemove - card.tags.size();
 			AbstractDungeon.actionManager.addToBottom(new VFXAction(new LightningEffect(AbstractDungeon.player.drawX, AbstractDungeon.player.drawY), 0.1f));
 			AbstractDungeon.actionManager.addToBottom(new SFXAction("ORB_LIGHTNING_EVOKE"));
-			AbstractDungeon.actionManager.addToBottom(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, ELECTRIFY_DAMAGE));
+			AbstractDungeon.actionManager.addToBottom(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, ELECTRIFY_DAMAGE * amountElectrified));
+		}
+	}
+
+	@Override
+	public void receivePostCreateStartingDeck(PlayerClass playerClass, CardGroup deck) {
+		if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(MagicBookRelic.ID)) {
+			((MagicBookRelic)AbstractDungeon.player.getRelic(MagicBookRelic.ID)).onTrigger();
 		}
 	}
 

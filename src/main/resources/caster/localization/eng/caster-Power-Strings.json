@@ -13,17 +13,29 @@
 	},
 	"caster:Blazed": {
 	        "NAME": "Blazed",
-	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP. Decrease #yBlazed by half at the end of its turn. NL Receives #b50% more damage from #yIce attacks."]
+	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP, then decrease #yBlazed by half. NL Receives #b50% more damage from #yIce attacks."]
 	},
 	"caster:Mired": {
 	        "NAME": "Mired",
-	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #r1. NL Receives #b50% more damage from #yFire attacks."]
+	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #b1. NL Receives #b50% more damage from #yFire attacks."]
+	},
+	"caster:GainFocusPower": {
+	        "NAME": "Unfocused",
+	        "DESCRIPTIONS": ["At the end of this turn, gain #b", " Focus."]
 	},
 	"caster:Ifrit": {
 	        "NAME": "Ifrit",
 	        "DESCRIPTIONS": ["At the start of your turn, exhaust ",
 	        " random card from your hand and play it. NL Apply Blazed equal to it's cost to a random enemy." ,
 	        " random cards from your hand and play them. NL For each card exhausted, apply Blazed equal to it's cost to a random enemy."]
+	},
+	"caster:Ramuh": {
+	        "NAME": "Ramuh",
+	        "DESCRIPTIONS": ["Whenever you #yElectrify a card, it costs #g0 for the turn."]
+	},
+	"caster:Shiva": {
+	        "NAME": "Shiva",
+	        "DESCRIPTIONS": ["Whenever you #yFreeze gain #g", " plated armor."]
 	},
 	"caster:MagicAttunement": {
 	        "NAME": "Magic Attunement",

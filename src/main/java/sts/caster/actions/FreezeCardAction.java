@@ -4,7 +4,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -21,23 +20,23 @@ public class FreezeCardAction extends AbstractGameAction {
     private boolean canPickZero;
     public static int numExhausted;
     
-    public FreezeCardAction(final AbstractCreature target, final AbstractCreature source, final int amount, final boolean isRandom) {
-        this(target, source, amount, isRandom, false, false);
+    public FreezeCardAction(final int amount, final boolean isRandom) {
+        this(amount, isRandom, false, false);
     }
     
-    public FreezeCardAction(final AbstractCreature target, final AbstractCreature source, final int amount, final boolean isRandom, final boolean anyNumber, final boolean canPickZero) {
+    public FreezeCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final boolean canPickZero) {
         this.canPickZero = false;
         this.anyNumber = anyNumber;
         this.canPickZero = canPickZero;
         this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
-        this.setValues(target, source, amount);
+        this.amount = amount;
         this.duration = Settings.ACTION_DUR_FAST;
         this.actionType = ActionType.EXHAUST;
     }
     
-    public FreezeCardAction(final AbstractCreature target, final AbstractCreature source, final int amount, final boolean isRandom, final boolean anyNumber) {
-        this(target, source, amount, isRandom, anyNumber, false);
+    public FreezeCardAction(final int amount, final boolean isRandom, final boolean anyNumber) {
+        this(amount, isRandom, anyNumber, false);
     }
     
     @Override
@@ -54,6 +53,7 @@ public class FreezeCardAction extends AbstractGameAction {
                     final AbstractCard c = this.p.hand.getTopCard();
                     FrozenPileManager.moveToFrozenPile(p.hand, c);
                 }
+                this.isDone = true;
                 return;
             }
             if (!this.isRandom) {

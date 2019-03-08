@@ -37,7 +37,7 @@ public class FlashFrost extends CasterCard {
     public FlashFrost() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_FROST;
-        cardElement = MagicElement.ICE;
+        setCardElement(MagicElement.ICE);
         this.exhaust = true;
     }
 

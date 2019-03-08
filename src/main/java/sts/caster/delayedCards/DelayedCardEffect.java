@@ -46,12 +46,12 @@ public class DelayedCardEffect extends AbstractOrb {
 	public boolean showEvokeCardOnScreen = false;
 	
 	public AbstractMonster target = null;
-	public int energyOnCast;
+	public Integer energyOnCast;
 	
 	public DelayedCardEffect(CasterCard card, int delayTurns, AbstractMonster target) {
 		this(card, delayTurns, 0, target);
 	}
-	public DelayedCardEffect(CasterCard card, int delayTurns, int energyOnCast, AbstractMonster target) {
+	public DelayedCardEffect(CasterCard card, int delayTurns, Integer energyOnCast, AbstractMonster target) {
         super();
         
 		ID = ORB_ID + card.uuid;
@@ -131,7 +131,7 @@ public class DelayedCardEffect extends AbstractOrb {
 		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
 		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
 		delayedCard.calculateCardDamage(target);
-		ArrayList<AbstractGameAction> delayedActions = delayedCard.getActionsMaker().getActionList(delayedCard, target);
+		ArrayList<AbstractGameAction> delayedActions = delayedCard.getActionsMaker(energyOnCast).getActionList(delayedCard, target); 
 		for (int i = delayedActions.size() -1; i >= 0; i--) {
 			AbstractGameAction action = delayedActions.get(i);
 			AbstractDungeon.actionManager.addToTop(action);

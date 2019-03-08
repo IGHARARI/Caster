@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import sts.caster.cards.skills.SoulStrike;
+import sts.caster.cards.spells.SoulStrike;
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureLoader;
 

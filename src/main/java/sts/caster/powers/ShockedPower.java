@@ -16,8 +16,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureLoader;
 
-//Gain 1 dex for the turn for each card played.
-
 public class ShockedPower extends AbstractPower {
 	public AbstractCreature source;
 
@@ -48,7 +46,7 @@ public class ShockedPower extends AbstractPower {
 	public void atEndOfTurn(final boolean isPlayer) {
 		if (!owner.isDeadOrEscaped() && owner.currentBlock > 0) {
 			flash();
-			int blockLost = Math.max(1, owner.currentBlock /5);
+			int blockLost = Math.max(1, owner.currentBlock /2);
 			AbstractDungeon.actionManager.addToBottom(new LoseBlockAction(owner, owner, blockLost));
 		}
         if (this.amount == 0) {

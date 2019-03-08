@@ -84,7 +84,7 @@ public class GateOfBabylon extends CasterCard {
     public static int countSpellsInMasterDeck() {
     	HashSet<String> spellIDs = new HashSet<String>();
     	for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-    		if (c.hasTag(CasterCardTags.DELAYED_CARD)) spellIDs.add(c.cardID);
+    		if (c.hasTag(CasterCardTags.SPELL)) spellIDs.add(c.cardID);
     	}
     	return spellIDs.size();
     }

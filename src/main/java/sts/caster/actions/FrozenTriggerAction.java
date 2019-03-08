@@ -23,6 +23,7 @@ public class FrozenTriggerAction extends AbstractGameAction {
 	@Override
     public void update() {
     	if (!isDone) {
+    		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(0.2f));
     		AbstractDungeon.actionManager.addToTop(new ReducePowerAction(target, target, FrozenPower.POWER_ID, 1));
     		this.amount = PowersHelper.getCreaturePowerAmount(FrozenPower.POWER_ID, target);
 			if (target.isPlayer) {

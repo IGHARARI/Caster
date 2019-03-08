@@ -45,15 +45,21 @@ public class BlazedPower extends AbstractPower {
 		updateDescription();
 	}
 
+	private boolean attackedThisTurn = false;
+	
 	@Override
 	public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
 		AbstractDungeon.actionManager.addToBottom(new LoseHPAction(owner, source, amount, AttackEffect.FIRE));
+		attackedThisTurn = true;
 	}
 	
 	@Override
 	public void atEndOfTurn(boolean isPlayer) {
-		int amountToLose = (int) Math.ceil(((float)amount)/2f);
-		AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, source, POWER_ID, amountToLose));
+		if (attackedThisTurn) {
+			int amountToLose = (int) Math.ceil(((float)amount)/2f);
+			AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, source, POWER_ID, amountToLose));
+		}
+		attackedThisTurn = false;
 	}
 	
 	@Override

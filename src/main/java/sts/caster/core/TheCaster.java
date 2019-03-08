@@ -34,8 +34,8 @@ import basemod.animations.SpriterAnimation;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.DivertFocus;
-import sts.caster.cards.skills.Meteor;
-import sts.caster.relics.PlaceholderRelic;
+import sts.caster.cards.spells.Meteor;
+import sts.caster.relics.MagicBookRelic;
 
 public class TheCaster extends CustomPlayer {
     public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
@@ -164,7 +164,7 @@ public class TheCaster extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
 
-        retVal.add(PlaceholderRelic.ID);
+        retVal.add(MagicBookRelic.ID);
 
         return retVal;
     }

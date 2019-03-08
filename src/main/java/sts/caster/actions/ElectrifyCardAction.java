@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 import sts.caster.cards.CasterCardTags;
+import sts.caster.powers.RamuhPower;
 
 public class ElectrifyCardAction extends AbstractGameAction {
     private AbstractPlayer p;
@@ -33,8 +34,9 @@ public class ElectrifyCardAction extends AbstractGameAction {
                 this.amount = this.p.hand.size();
                 for (int i = 0; i < this.p.hand.size(); ++i) {
                     AbstractCard c = this.p.hand.getTopCard();
-                    c.tags.add(CasterCardTags.ELECTRIFIED);
+                    electrifyCard(c);
                 }
+                this.isDone = true;
                 return;
             }
             if (!this.isRandom) { //if it's not random, open select screen
@@ -44,15 +46,23 @@ public class ElectrifyCardAction extends AbstractGameAction {
             }
             for (int i = 0; i < this.amount; i++) { //else select targets randomly
             	AbstractCard c = p.hand.getRandomCard(AbstractDungeon.cardRandomRng);
-            	c.tags.add(CasterCardTags.ELECTRIFIED);
+            	electrifyCard(c);
             }
         }
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
             for (AbstractCard c2 : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
-            	c2.tags.add(CasterCardTags.ELECTRIFIED);
+            	electrifyCard(c2);
             }
             AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
         }
         this.tickDuration();
+    }
+    
+    private void electrifyCard(AbstractCard card) {
+    	card.flash();
+    	card.tags.add(CasterCardTags.ELECTRIFIED);
+    	if (AbstractDungeon.player.hasPower(RamuhPower.POWER_ID)) {
+    		card.modifyCostForTurn(-card.costForTurn);
+    	}
     }
 }
