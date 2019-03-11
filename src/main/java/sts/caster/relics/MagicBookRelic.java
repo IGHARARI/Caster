@@ -14,27 +14,16 @@ import basemod.abstracts.CustomBottleRelic;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.spells.Meteor;
 import sts.caster.core.CasterMod;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
+import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.util.TextureLoader;
 
 public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, CustomSavable<Integer> {
-    // This file will show you how to use 2 things - (Mostly) The Custom Bottle Relic and the Custom Savable - they go hand in hand.
 
-    /*
-     * https://github.com/daviscook477/BaseMod/wiki/Custom-Savable
-     *
-     * Choose a card. Whenever you take play any card, draw the chosen card.
-     */
-
-    // BasemodWiki Says: "When you need to store a value on a card or relic between runs that isn't a relic's counter value
-    // or a card's misc value, you use a custom savable to save and load it between runs."
-
-    private static AbstractCard currentlyMemorizedCard;  // The field value we wish to save in this case is the card that's going to be in our bottle.
-    private boolean cardSelected = true; // A boolean to indicate whether or not we selected a card for bottling.
-    // (It's set to false on Equip)
+    private static AbstractCard currentlyMemorizedCard; 
+    private boolean cardSelected = true; 
     private boolean isStartOfgame = true;
 
 
@@ -78,24 +67,22 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 
 
     @Override
-    public void onEquip() { // 1. When we acquire the relic
-    	cardSelected = false; // 2. Tell the relic that we haven't bottled the card yet
+    public void onEquip() { 
+    	cardSelected = false; 
     	if (!isStartOfgame) {
-	        if (AbstractDungeon.isScreenUp) { // 3. If the map is open - hide it.
+	        if (AbstractDungeon.isScreenUp) { 
 	            AbstractDungeon.dynamicBanner.hide();
 	            AbstractDungeon.overlayMenu.cancelButton.hide();
 	            AbstractDungeon.previousScreen = AbstractDungeon.screen;
 	        }
 	        AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.INCOMPLETE;
-	        // 4. Set the room to INCOMPLETE - don't allow us to use the map, etc.
-	        CardGroup group = CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck); // 5. Get a card group of all currently unbottled cards
+	        CardGroup group = CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck);
 	        for (AbstractCard card : group.group) {
-	        	if (!(card instanceof CasterCard) || !card.hasTag(CasterCardTags.SPELL) || ((CasterCard)card).baseDelayTurns < 1) {
+	        	if (!(card instanceof CasterCard) || !(card.type == CasterCardType.SPELL) || ((CasterCard)card).baseDelayTurns < 1) {
 	        		group.removeCard(card);
 	        	}
 	        }
 	        AbstractDungeon.gridSelectScreen.open(group, 1, DESCRIPTIONS[3] + name + DESCRIPTIONS[4], false, false, false, false);
-	        // 6. Open the grid selection screen with the cards from the CardGroup we specified above. The description reads "Select a card to bottle for" + (relic name) + "."
     	}
     }
 
@@ -117,7 +104,7 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
     }
 
     private void applyMagicBookBuffToCard(AbstractCard cardToMemo) {
-		MagicBookMemorizedCardField.inMagicBookField.set(cardToMemo, true); // Use our custom spire field to set that card to be bottled.
+		MagicBookMemorizedCardField.inMagicBookField.set(cardToMemo, true); 
 		if (cardToMemo instanceof CasterCard) {
 			CasterCard casterCard = ((CasterCard)cardToMemo);
 			casterCard.baseDelayTurns -= 1;
@@ -128,11 +115,11 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 	}
 
 	@Override
-    public void onUnequip() { // 1. On unequip
-        if (currentlyMemorizedCard != null) { // If the bottled card exists (prevents the game from crashing if we removed the bottled card from our deck for example.)
-            AbstractCard cardInDeck = AbstractDungeon.player.masterDeck.getSpecificCard(currentlyMemorizedCard); // 2. Get the card
+    public void onUnequip() { 
+        if (currentlyMemorizedCard != null) { 
+            AbstractCard cardInDeck = AbstractDungeon.player.masterDeck.getSpecificCard(currentlyMemorizedCard); 
             if (cardInDeck != null) {
-                MagicBookMemorizedCardField.inMagicBookField.set(cardInDeck, false); // In our SpireField - set the card to no longer be bottled. (Unbottle it)
+                MagicBookMemorizedCardField.inMagicBookField.set(cardInDeck, false); 
                 if (cardInDeck instanceof CasterCard) {
                 	CasterCard casterCard = ((CasterCard)cardInDeck);
                 	casterCard.baseDelayTurns += 1;
@@ -144,25 +131,22 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 
     @Override
     public void update() {
-        super.update(); //Do all of the original update() method in AbstractRelic
+        super.update(); 
 
         if (!cardSelected && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-            // If the card hasn't been bottled yet and we have cards selected in the gridSelectScreen (from onEquip)
-            cardSelected = true; //Set the cardSelected boolean to be true - we're about to bottle the card.
-            currentlyMemorizedCard = AbstractDungeon.gridSelectScreen.selectedCards.get(0); // The custom Savable "card" is going to equal
-            // The card from the selection screen (it's only 1, so it's at index 0)
+            cardSelected = true; 
+            currentlyMemorizedCard = AbstractDungeon.gridSelectScreen.selectedCards.get(0); 
             applyMagicBookBuffToCard(currentlyMemorizedCard);
             if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.INCOMPLETE) {
                 AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             }
-            AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE; // The room phase can now be set to complete (From INCOMPLETE in onEquip)
-            AbstractDungeon.gridSelectScreen.selectedCards.clear(); // Always clear your grid screen after using it.
-            setDescriptionAfterLoading(); // Set the description to reflect the bottled card (the method is at the bottom of this file)
+            AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE; 
+            AbstractDungeon.gridSelectScreen.selectedCards.clear();
+            setDescriptionAfterLoading(); 
         }
     }
 
 
-    // Change description after relic is already loaded to reflect the bottled card.
     public void setDescriptionAfterLoading() {
         this.description = DESCRIPTIONS[1] + FontHelper.colorString(currentlyMemorizedCard.name, "y") + DESCRIPTIONS[2];
         this.tips.clear();
@@ -170,7 +154,6 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
         this.initializeTips();
     }
 
-    // Standard description
     @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];

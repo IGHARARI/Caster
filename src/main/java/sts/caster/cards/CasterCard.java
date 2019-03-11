@@ -23,6 +23,7 @@ import com.megacrit.cardcrawl.powers.WeakPower;
 import basemod.abstracts.CustomCard;
 import sts.caster.core.MagicElement;
 import sts.caster.interfaces.ActionListMaker;
+import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.BlazedPower;
 import sts.caster.powers.FrozenPower;
 import sts.caster.powers.MiredPower;
@@ -32,7 +33,7 @@ import sts.caster.util.PowersHelper;
 public abstract class CasterCard extends CustomCard {
     private static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
     
-    public static final Predicate<AbstractCard> isCardSpellPredicate = (c)-> c.hasTag(CasterCardTags.SPELL);
+    public static final Predicate<AbstractCard> isCardSpellPredicate = (c)-> c.type == CasterCardType.SPELL;
     
     public int delayTurns;        
     public int baseDelayTurns;    
@@ -125,7 +126,7 @@ public abstract class CasterCard extends CustomCard {
 
     @Override
     public void applyPowers() {
-    	if (this.hasTag(CasterCardTags.SPELL)) {
+    	if (this.type == CasterCardType.SPELL) {
     		calculateCardDamage(null);
     	} else {
     		super.applyPowers();
@@ -134,7 +135,7 @@ public abstract class CasterCard extends CustomCard {
     
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-    	if (this.hasTag(CasterCardTags.SPELL)) {
+    	if (this.type == CasterCardType.SPELL) {
     		resetCardSpellDamage();
     		resetCardSpellBlock();
     		applyCardDamageModifers(mo);
@@ -302,6 +303,10 @@ public abstract class CasterCard extends CustomCard {
     	copy.baseM2 = baseM2;
     	copy.upgradedM2 = upgradedM2;
     	copy.isM2Modified = isM2Modified;
+    	copy.magicNumber = magicNumber;
+    	copy.baseMagicNumber = baseMagicNumber;
+    	copy.upgradedMagicNumber = upgradedMagicNumber;
+    	copy.isMagicNumberModified = isMagicNumberModified;
     	
     	copy.rawDescription = rawDescription;
     	copy.initializeDescription();

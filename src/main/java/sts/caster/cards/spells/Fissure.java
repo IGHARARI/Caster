@@ -20,7 +20,6 @@ import sts.caster.actions.DelayedActionOnAllEnemiesAction;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -54,7 +53,6 @@ public class Fissure extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         magicNumber = baseMagicNumber = STUN_AMNT;
         setCardElement(MagicElement.EARTH);
-        tags.add(CasterCardTags.SPELL);
         exhaust = true;
     }
 

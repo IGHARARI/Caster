@@ -2,48 +2,49 @@ package sts.caster.cards.skills;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.actions.ChooseCardsToElectrifyAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.powers.BlazedPower;
 
-public class Charge extends CasterCard {
+public class DiablosFlame extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("Charge");
+    public static final String ID = CasterMod.makeID("DiablosFlame");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("charge.png");
+    public static final String IMG = makeCardPath("flashfrost.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
     private static final CardRarity RARITY = CardRarity.COMMON;
-    private static final CardTarget TARGET = CardTarget.SELF;
+    private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 0;
-    private static final int DRAW_AMT = 2;
-    private static final int UPGR_DRAW_AMT = 1;
-    private static final int ELECTRIFY_AMT = 1;
+    private static final int COST = 1;
+    private static final int BASE_BLAZED = 4;
+    private static final int UPGRADE_BLAZED = 3;
 
-    public Charge() {
+
+    public DiablosFlame() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = DRAW_AMT;
-        setCardElement(MagicElement.THUNDER);
+        magicNumber = baseMagicNumber = BASE_BLAZED;
+        setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new ChooseCardsToElectrifyAction(ELECTRIFY_AMT, true));
+		for(AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
+    		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mon, p, new BlazedPower(mon, p, magicNumber), magicNumber));
+    	}
     }
 
     @Override
@@ -51,7 +52,7 @@ public class Charge extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeMagicNumber(UPGR_DRAW_AMT);
+            upgradeMagicNumber(UPGRADE_BLAZED);
         }
     }
 }

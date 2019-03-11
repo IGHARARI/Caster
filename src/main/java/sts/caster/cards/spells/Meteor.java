@@ -17,7 +17,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -40,8 +39,8 @@ public class Meteor extends CasterCard {
 
     private static final int COST = 1;
     private static final int DELAY_TURNS = 2;
-    private static final int BASE_DAMAGE = 12;
-    private static final int UPGRADE_DAMAGE = 4;
+    private static final int BASE_DAMAGE = 15;
+    private static final int UPGRADE_DAMAGE = 5;
 
 
 
@@ -50,7 +49,6 @@ public class Meteor extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         cardElement = MagicElement.NEUTRAL;
-        this.tags.add(CasterCardTags.SPELL);
     }
 
     @Override

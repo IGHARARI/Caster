@@ -15,7 +15,6 @@ import com.megacrit.cardcrawl.powers.RegenPower;
 
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -47,7 +46,6 @@ public class GaiasBlessing extends CasterCard {
         baseDelayTurns = delayTurns = BASE_DELAY;
         magicNumber = baseMagicNumber = BASE_REGEN;
         setCardElement(MagicElement.EARTH);
-        tags.add(CasterCardTags.SPELL);
         exhaust = true;
     }
 

@@ -15,9 +15,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.actions.ConditionalDiscardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
+import sts.caster.patches.spellCardType.CasterCardType;
 
 public class MagicWeapon extends CasterCard {
 
@@ -48,7 +48,7 @@ public class MagicWeapon extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
     	ArrayList<AbstractCard> cardsBeforeDraw = new ArrayList<AbstractCard>(AbstractDungeon.player.hand.group);
     	AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, magicNumber));
-    	Predicate<AbstractCard> discardPredicate = (c) ->  (!cardsBeforeDraw.contains(c) && !c.hasTag(CasterCardTags.SPELL));
+    	Predicate<AbstractCard> discardPredicate = (c) ->  (!cardsBeforeDraw.contains(c) && !(c.type == CasterCardType.SPELL));
     	AbstractDungeon.actionManager.addToBottom(new ConditionalDiscardAction(discardPredicate));
     }
 

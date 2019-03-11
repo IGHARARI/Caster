@@ -16,7 +16,6 @@ import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.FreezeCardAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -50,7 +49,6 @@ public class StormGust extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         magicNumber = baseMagicNumber = BASE_CARDS_FROZEN;
         setCardElement(MagicElement.ICE);
-        this.tags.add(CasterCardTags.SPELL);
     }
 
     @Override

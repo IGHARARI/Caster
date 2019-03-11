@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer.PlayerClass;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -25,7 +26,9 @@ import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 
 import basemod.BaseMod;
@@ -57,15 +60,18 @@ import sts.caster.cards.skills.BloodRitual;
 import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.Charge;
 import sts.caster.cards.skills.DivertFocus;
+import sts.caster.cards.skills.Embers;
 import sts.caster.cards.skills.Enfeeble;
 import sts.caster.cards.skills.FireWall;
 import sts.caster.cards.skills.FlashFrost;
 import sts.caster.cards.skills.Incinerate;
 import sts.caster.cards.skills.MagicBarrier;
 import sts.caster.cards.skills.QuickCast;
+import sts.caster.cards.skills.Rectify;
 import sts.caster.cards.skills.Unearth;
 import sts.caster.cards.spells.AbsoluteZero;
 import sts.caster.cards.spells.AlternatingCurrent;
+import sts.caster.cards.spells.Conflagrate;
 import sts.caster.cards.spells.Explosion;
 import sts.caster.cards.spells.Fireball;
 import sts.caster.cards.spells.Fissure;
@@ -83,6 +89,7 @@ import sts.caster.cards.spells.Sandstorm;
 import sts.caster.cards.spells.Sleet;
 import sts.caster.cards.spells.SoulStrike;
 import sts.caster.cards.spells.StormGust;
+import sts.caster.cards.spells.Susanoo;
 import sts.caster.cards.spells.WallOfThorns;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.potions.PlaceholderPotion;
@@ -134,6 +141,8 @@ public class CasterMod implements
     private static final String SKILL_DEFAULT_GRAY_PORTRAIT = "caster/images/1024/bg_skill_default_gray.png";
     private static final String POWER_DEFAULT_GRAY_PORTRAIT = "caster/images/1024/bg_power_default_gray.png";
     private static final String ENERGY_ORB_DEFAULT_GRAY_PORTRAIT = "caster/images/1024/card_default_gray_orb.png";
+
+    public static final String ELECTRIFIED_TAG_IMAGE = "caster/images/512/electrified_blank_tag.png";
 
     // Character assets
     private static final String THE_DEFAULT_BUTTON = "caster/images/charSelect/DefaultCharacterButton.png";
@@ -226,7 +235,7 @@ public class CasterMod implements
 
         // Create the Mod Menu
         ModPanel settingsPanel = new ModPanel();
-        settingsPanel.addUIElement(new ModLabel("DefaultMod doesn't have any settings! An example of those may come later.", 400.0f, 700.0f,
+        settingsPanel.addUIElement(new ModLabel("THis mod doesn't have any settings! Some may come later.", 400.0f, 700.0f,
                 settingsPanel, (me) -> {
         }));
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
@@ -361,6 +370,14 @@ public class CasterMod implements
         UnlockTracker.unlockCard(FireWall.ID);
         BaseMod.addCard(new MagicWeapon());
         UnlockTracker.unlockCard(MagicWeapon.ID);
+        BaseMod.addCard(new Conflagrate());
+        UnlockTracker.unlockCard(Conflagrate.ID);
+        BaseMod.addCard(new Susanoo());
+        UnlockTracker.unlockCard(Susanoo.ID);
+        BaseMod.addCard(new Embers());
+        UnlockTracker.unlockCard(Embers.ID);
+        BaseMod.addCard(new Rectify());
+        UnlockTracker.unlockCard(Rectify.ID);
         
         logger.info("Done adding cards!");
     }
@@ -393,6 +410,10 @@ public class CasterMod implements
         BaseMod.loadCustomStringsFile(CharacterStrings.class,
                 getModID() + "/localization/eng/caster-Character-Strings.json");
 
+        //UI Strings
+        BaseMod.loadCustomStringsFile(UIStrings.class,
+        		getModID() + "/localization/eng/caster-UI-Strings.json");
+
         logger.info("Done edittting strings");
     }
 
@@ -419,6 +440,8 @@ public class CasterMod implements
 	@Override
 	public void receiveCardUsed(AbstractCard card) {
 		if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
+			String electrifiedMessage = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings").TEXT[0];
+			AbstractDungeon.effectList.add(new BlockedWordEffect(AbstractDungeon.player, AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, electrifiedMessage));
 			int tagsBeforeRemove = card.tags.size();
 			card.tags.removeIf((tag) -> tag == CasterCardTags.ELECTRIFIED);
 			int amountElectrified = tagsBeforeRemove - card.tags.size();

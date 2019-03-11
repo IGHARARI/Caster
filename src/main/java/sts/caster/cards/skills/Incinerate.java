@@ -28,7 +28,7 @@ public class Incinerate extends CasterCard {
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
+    private static final int COST = 0;
     private static final int BURN_AMNT = 1;
     private static final int REGULAR_BURN_MULT = 3;
     private static final int UPGR_BUTN_MULT = 2;

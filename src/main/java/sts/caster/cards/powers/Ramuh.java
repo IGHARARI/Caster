@@ -47,6 +47,7 @@ public class Ramuh extends CasterCard {
         if (!upgraded) {
             upgradeName();
             isInnate = true;
+            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }

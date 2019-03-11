@@ -43,13 +43,13 @@ public class GainFocusPower extends AbstractPower {
 		updateDescription();
 	}
 	
-    @Override
-    public void atEndOfTurn(final boolean isPlayer) {
-        this.flash();
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new FocusPower(this.owner, this.amount), this.amount));
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
-    }
-    
+	@Override
+	public void atStartOfTurn() {
+		this.flash();
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new FocusPower(this.owner, this.amount), this.amount));
+		AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+	}
+	
 	@Override
 	public void updateDescription() {
 		description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1];

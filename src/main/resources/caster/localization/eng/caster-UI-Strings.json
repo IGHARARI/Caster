@@ -1,0 +1,21 @@
+{
+	"RectifyAction": {
+		"TEXT": ["Choose an element",
+				 "Fire", "Obtain a Fire Spell",
+				 "Lightning", "Obtain a Lightning Spell",
+				 "Ice", "Obtain an Ice Spell",
+				 "Earth", "Obtain an Earth Spell"]
+	},
+	"ElectrifiedStrings": {
+		"TEXT": ["Electrified", "Electrify"]
+	},
+	"FreezeCardAction": {
+		"TEXT": ["Freeze"]
+	},
+	"FrozenViewScreen": {
+		"TEXT": [
+			"These cards were freezes this combat.",
+			"Return"
+		]
+	}
+}

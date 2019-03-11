@@ -1,5 +1,7 @@
 package sts.caster.actions;
 
+import java.util.ArrayList;
+
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -45,9 +47,10 @@ public class ThawCardAction extends AbstractGameAction {
             }
             if (!anyNumber && FrozenPileManager.frozenPile.size() <= amount) {
                 amount = FrozenPileManager.frozenPile.size();
-                for (int i = 0; i < FrozenPileManager.frozenPile.size(); ++i) {
-                    AbstractCard c = FrozenPileManager.frozenPile.getTopCard();
-                    moveToHand(c);
+                //I copy the list to avoid CME or any visual bugs 
+                ArrayList<AbstractCard> cardsCopy = new ArrayList<AbstractCard>(FrozenPileManager.frozenPile.group);
+                for (AbstractCard card : cardsCopy) {
+                    moveToHand(card);
                 }
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
                 p.hand.refreshHandLayout();

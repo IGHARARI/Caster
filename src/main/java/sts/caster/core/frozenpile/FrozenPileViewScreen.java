@@ -22,8 +22,8 @@ import sts.caster.patches.frozenpile.FrozenPileEnums;
 
 public class FrozenPileViewScreen implements ScrollBarListener
 {
-    private static final UIStrings uiStrings;
-    public static final String[] TEXT;
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FrozenViewScreen");
+    public static final String[] TEXT = uiStrings.TEXT;
     private CardGroup frozenPileCopy;
     public boolean isHovered;
     private static final int CARDS_PER_LINE = 5;
@@ -36,10 +36,10 @@ public class FrozenPileViewScreen implements ScrollBarListener
     private static float padY;
     private float scrollLowerBound;
     private float scrollUpperBound;
-    private static final String DESC;
+    private static final String DESC = TEXT[0];
     private AbstractCard hoveredCard;
     private int prevDeckSize;
-    private static final float SCROLL_BAR_THRESHOLD;
+    private static final float SCROLL_BAR_THRESHOLD = 500.0f * Settings.scale;
     private ScrollBar scrollBar;
     private AbstractCard controllerCard;
     
@@ -217,8 +217,8 @@ public class FrozenPileViewScreen implements ScrollBarListener
             if (mod == 0 && i != 0) {
                 ++lineNum;
             }
-            cards.get(i).target_x = FrozenPileViewScreen.drawStartX + mod * FrozenPileViewScreen.padX;
-            cards.get(i).target_y = FrozenPileViewScreen.drawStartY + this.currentDiffY - lineNum * FrozenPileViewScreen.padY;
+            cards.get(i).target_x = drawStartX + mod * FrozenPileViewScreen.padX;
+            cards.get(i).target_y = drawStartY + this.currentDiffY - lineNum * padY;
             cards.get(i).update();
             cards.get(i).updateHoverLogic();
             if (cards.get(i).hb.hovered) {
@@ -228,13 +228,13 @@ public class FrozenPileViewScreen implements ScrollBarListener
     }
     
     public void reopen() {
-        AbstractDungeon.overlayMenu.cancelButton.show(FrozenPileViewScreen.TEXT[1]);
+        AbstractDungeon.overlayMenu.cancelButton.show(TEXT[1]);
     }
     
     public void open() {
         CardCrawlGame.sound.play("DECK_OPEN");
         AbstractDungeon.overlayMenu.showBlackScreen();
-        AbstractDungeon.overlayMenu.cancelButton.show(FrozenPileViewScreen.TEXT[1]);
+        AbstractDungeon.overlayMenu.cancelButton.show(TEXT[1]);
         this.currentDiffY = 0.0f;
         this.grabStartY = 0.0f;
         this.grabbedScreen = false;
@@ -307,11 +307,5 @@ public class FrozenPileViewScreen implements ScrollBarListener
     private boolean shouldShowScrollBar() {
         return this.scrollUpperBound > FrozenPileViewScreen.SCROLL_BAR_THRESHOLD;
     }
-    
-    static {
-        uiStrings = CardCrawlGame.languagePack.getUIString("ExhaustViewScreen");
-        TEXT = FrozenPileViewScreen.uiStrings.TEXT;
-        DESC = FrozenPileViewScreen.TEXT[0];
-        SCROLL_BAR_THRESHOLD = 500.0f * Settings.scale;
-    }
+
 }

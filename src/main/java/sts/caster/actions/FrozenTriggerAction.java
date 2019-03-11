@@ -26,13 +26,16 @@ public class FrozenTriggerAction extends AbstractGameAction {
     		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(0.2f));
     		AbstractDungeon.actionManager.addToTop(new ReducePowerAction(target, target, FrozenPower.POWER_ID, 1));
     		this.amount = PowersHelper.getCreaturePowerAmount(FrozenPower.POWER_ID, target);
-			if (target.isPlayer) {
-				AbstractDungeon.actionManager.addToTop(new DamageAction(target, new DamageInfo(target, amount, DamageType.THORNS), AttackEffect.BLUNT_LIGHT, true));
-			} else {
-				int[] damageMatrix = DamageInfo.createDamageMatrix(amount, true);
-				AbstractDungeon.actionManager.addToTop(new DamageAllEnemiesAction(target, damageMatrix, DamageType.THORNS, AttackEffect.BLUNT_LIGHT, true));
-			}
-			AbstractDungeon.actionManager.addToTop(new SFXAction("POWER_SHACKLE", 0.5f));
+    		if (amount > 0) {
+    			target.getPower(FrozenPower.POWER_ID).flash();
+    			if (target.isPlayer) {
+    				AbstractDungeon.actionManager.addToTop(new DamageAction(target, new DamageInfo(target, amount, DamageType.THORNS), AttackEffect.BLUNT_LIGHT, true));
+    			} else {
+    				int[] damageMatrix = DamageInfo.createDamageMatrix(amount, true);
+    				AbstractDungeon.actionManager.addToTop(new DamageAllEnemiesAction(target, damageMatrix, DamageType.THORNS, AttackEffect.BLUNT_LIGHT, true));
+    			}
+    			AbstractDungeon.actionManager.addToTop(new SFXAction("POWER_SHACKLE", 0.5f));
+    		}
     	}
         isDone = true;
     }

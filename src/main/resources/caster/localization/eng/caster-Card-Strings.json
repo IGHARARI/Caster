@@ -17,7 +17,7 @@
   },
   "caster:LAZER": {
     "NAME": "LAZER",
-    "DESCRIPTION": "Deal !D! damage."
+    "DESCRIPTION": "Deal !D! damage !M! times."
   },
   "caster:GateOfBabylon": {
     "NAME": "Gate of Babylon",
@@ -27,6 +27,10 @@
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lightning. NL Deal !caster:D! damage."
+  },
+  "caster:Conflagrate": {
+    "NAME": "Conflagrate",
+    "DESCRIPTION": "Cast_Time !caster:Delay!: NL Lose !M! HP and Deal !caster:D! damage to ALL enemies. NL Whenever you freeze this card, reduce the HP loss to 0 for this combat."
   },
   "caster:MegaloSpark": {
     "NAME": "Megalo Spark",
@@ -74,7 +78,7 @@
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
-    "DESCRIPTION": "Gain !caster:B! Block. NL Cast_Time !caster:Delay!: NL Ice. NL Deal !caster:D! damage."
+    "DESCRIPTION": "Gain !caster:B! Block. NL Cast_Time !caster:Delay!: Deal !caster:D! damage, apply !M! Frost."
   },
   "caster:MagicResonance": {
     "NAME": "Magic Resonance",
@@ -91,6 +95,14 @@
   "caster:Fissure": {
     "NAME": "Fissure",
     "DESCRIPTION": "Cast_Time !caster:Delay!: NL Earth. NL Deal !caster:D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
+  },
+  "caster:Susanoo": {
+    "NAME": "Susano'o",
+    "DESCRIPTION": "Electrify all cards in your hand. NL Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+  },
+  "caster:DiablosFlame": {
+    "NAME": "Diablo's Flame",
+    "DESCRIPTION": "Apply !M! Blazed to ALL enemies. "
   },
   "caster:MagicBarrier": {
     "NAME": "Magic Barrier",
@@ -165,6 +177,15 @@
   "caster:Grimoire": {
     "NAME": "Grimoire",
     "DESCRIPTION": "Gain !M! Focus."
+  },
+  "caster:Embers": {
+    "NAME": "Embers",
+    "DESCRIPTION": "Thaw !M! cards. NL Exhaust."
+  },
+  "caster:Rectify": {
+    "NAME": "Rectify",
+    "DESCRIPTION": "Choose an element, get a random Spell of that element. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Choose an element, get a random Spell of that element, it costs 0 for this turn. NL Exhaust."
   },
   "caster:IcicleLance": {
     "NAME": "Icicle Lance",

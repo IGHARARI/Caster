@@ -17,7 +17,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.ModifyCardDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -51,7 +50,6 @@ public class Explosion extends CasterCard {
         baseSpellDamage = spellDamage =  BASE_DAMAGE;
         magicNumber = baseMagicNumber = BASE_DOWNGRADE;
         setCardElement(MagicElement.FIRE);
-        this.tags.add(CasterCardTags.SPELL);
     }
 
     @Override

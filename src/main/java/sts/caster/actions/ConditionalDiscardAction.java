@@ -1,5 +1,6 @@
 package sts.caster.actions;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -18,10 +19,14 @@ public class ConditionalDiscardAction extends AbstractGameAction {
 	@Override
     public void update() {
     	if (!isDone) {
+    		ArrayList<AbstractCard> cardsToDiscard = new ArrayList<AbstractCard>();
     		for (AbstractCard c : AbstractDungeon.player.hand.group) {
     			if (shouldDiscardPredicate.test(c)) {
-    				AbstractDungeon.player.hand.moveToDiscardPile(c);
+    				cardsToDiscard.add(c);
     			}
+    		}
+    		for (AbstractCard c : cardsToDiscard) {
+    			AbstractDungeon.player.hand.moveToDiscardPile(c);
     		}
     	}
         isDone = true;

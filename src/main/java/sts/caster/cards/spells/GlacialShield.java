@@ -15,7 +15,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.FreezeCardAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -50,7 +49,6 @@ public class GlacialShield extends CasterCard {
         baseDelayTurns = delayTurns = BASE_DELAY;
         magicNumber = baseMagicNumber = FREEZE_AMOUNT;
         setCardElement(MagicElement.ICE);
-        this.tags.add(CasterCardTags.SPELL);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,13 +11,12 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import sts.caster.core.frozenpile.FrozenPileManager;
 
 public class FreezeCardAction extends AbstractGameAction {
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("ExhaustAction");
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FreezeCardAction");
     public static final String[] TEXT = FreezeCardAction.uiStrings.TEXT;
     private AbstractPlayer p;
     private boolean isRandom;
     private boolean anyNumber;
     private boolean canPickZero;
-    public static int numExhausted;
     
     public FreezeCardAction(final int amount, final boolean isRandom) {
         this(amount, isRandom, false, false);
@@ -48,7 +46,6 @@ public class FreezeCardAction extends AbstractGameAction {
             }
             if (!this.anyNumber && this.p.hand.size() <= this.amount) {
                 this.amount = this.p.hand.size();
-                ExhaustAction.numExhausted = this.amount;
                 for (int tmp = this.p.hand.size(), i = 0; i < tmp; ++i) {
                     final AbstractCard c = this.p.hand.getTopCard();
                     FrozenPileManager.moveToFrozenPile(p.hand, c);
@@ -57,8 +54,7 @@ public class FreezeCardAction extends AbstractGameAction {
                 return;
             }
             if (!this.isRandom) {
-                ExhaustAction.numExhausted = this.amount;
-                AbstractDungeon.handCardSelectScreen.open(ExhaustAction.TEXT[0], this.amount, this.anyNumber, this.canPickZero);
+                AbstractDungeon.handCardSelectScreen.open(TEXT[0], this.amount, this.anyNumber, this.canPickZero);
                 this.tickDuration();
                 return;
             }

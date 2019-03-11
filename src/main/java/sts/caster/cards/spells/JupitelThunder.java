@@ -18,7 +18,6 @@ import sts.caster.actions.ApplyElementalEffectChanceAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -51,7 +50,6 @@ public class JupitelThunder extends CasterCard {
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
         setCardElement(MagicElement.THUNDER);
-        this.tags.add(CasterCardTags.SPELL);
     }
 
     @Override

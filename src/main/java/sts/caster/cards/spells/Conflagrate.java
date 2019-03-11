@@ -5,15 +5,15 @@ import static sts.caster.core.CasterMod.makeCardPath;
 import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.ThornsPower;
 
+import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -22,51 +22,54 @@ import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
 
-public class WallOfThorns extends CasterCard {
+public class Conflagrate extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("WallOfThorns");
+    public static final String ID = CasterMod.makeID("Conflagrate");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("wallofthorns.png");
+    public static final String IMG = makeCardPath("Skill.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.COMMON;
-    private static final CardTarget TARGET = CardTarget.SELF;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
+    private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 2;
-    private static final int BASE_BLOCK = 5;
-    private static final int UPG_BLOCK = 2;
-    private static final int BASE_THORNS = 3;
+    private static final int BASE_DELAY = 1;
+    private static final int BASE_DAMAGE = 18;
+    private static final int UPG_DAMAGE = 4;
+    private static final int BASE_HP_LOSS = 6;
+    private static final int UPG_HP_LOSS = -2;
 
 
-    public WallOfThorns() {
+    public Conflagrate() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = BASE_THORNS;
-        baseSpellBlock = spellBlock = BASE_BLOCK;
         baseDelayTurns = delayTurns = BASE_DELAY;
-        setCardElement(MagicElement.EARTH);
+        baseSpellDamage = spellDamage =  BASE_DAMAGE;
+        magicNumber = baseMagicNumber = BASE_HP_LOSS;
+        setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
     }
     
     @Override
     public ActionListMaker getActionsMaker(Integer energySpent) {
     	return (c, t) -> {
-    		AbstractPlayer p = AbstractDungeon.player;
-    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	actions.add(new GainBlockAction(p, p, c.spellBlock));
-        	actions.add(new GainBlockAction(p, p, c.spellBlock));
-        	actions.add(new ApplyPowerAction(p, p, new ThornsPower(p, c.magicNumber), c.magicNumber));
-    		return actions;
+    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+    		actionsList.add(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, c.magicNumber));
+    		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, AttackEffect.FIRE));
+    		return actionsList;
     	};
+    }
+    
+    @Override
+    public void onFrozen() {
+    	upgradeMagicNumber(-baseMagicNumber);
     }
 
     @Override
@@ -74,7 +77,8 @@ public class WallOfThorns extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeSpellBlock(UPG_BLOCK);
+            upgradeDamage(UPG_DAMAGE);
+            upgradeMagicNumber(UPG_HP_LOSS);
         }
     }
 }

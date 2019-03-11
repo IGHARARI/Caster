@@ -31,25 +31,29 @@ public class LAZER extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int DAMAGE = 10;
-    private static final int UPGRADE_PLUS_DMG = 3;
+    private static final int DAMAGE = 2;
+    private static final int TIMES_DAMAGE = 4;
+    private static final int UPG_TIMES_DAMAGE = 2;
 
     public LAZER() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseDamage = DAMAGE;
+        baseDamage = damage = DAMAGE;
+        magicNumber = baseMagicNumber = TIMES_DAMAGE;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new VFXAction(new SmallLaserEffect(p.dialogX, p.dialogY, m.drawX, m.drawY), 0.33f));
-        AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AttackEffect.SLASH_HORIZONTAL));
+    	for(int i = 0; i < magicNumber; i++) {
+    		AbstractDungeon.actionManager.addToBottom(new VFXAction(new SmallLaserEffect(p.dialogX, p.dialogY, m.drawX, m.drawY), 0.33f));
+    		AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AttackEffect.SLASH_HORIZONTAL));
+    	}
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeDamage(UPGRADE_PLUS_DMG);
+            upgradeMagicNumber(UPG_TIMES_DAMAGE);
             initializeDescription();
         }
     }

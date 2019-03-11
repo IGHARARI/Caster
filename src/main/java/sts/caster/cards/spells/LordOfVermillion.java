@@ -18,7 +18,6 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.actions.RandomTargetLightningDamageAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -51,7 +50,6 @@ public class LordOfVermillion extends CasterCard {
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
         setCardElement(MagicElement.THUNDER);
-        this.tags.add(CasterCardTags.SPELL);
     }
 
     @Override
