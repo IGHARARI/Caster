@@ -55,6 +55,17 @@
     "DESCRIPTION": "The effects of this card will occur at the start of your turn, after an amount of turns equal to the card's #yCast #yTime has passed."
   },
   {
+    "PROPER_NAME": "Shortened Chant",
+    "NAMES": [
+      "Shortened Chant",
+      "Shortened_Chant",
+      "Shortened_Chant.",
+      "Shortened_chant",
+      "shortened_chant."
+    ],
+    "DESCRIPTION": "Reduce the casting time of your #ySpells for each stack of #yShortened #yChant"
+  },
+  {
     "PROPER_NAME": "unique spell",
     "NAMES": [
       "unique spell",

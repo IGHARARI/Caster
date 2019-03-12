@@ -19,9 +19,21 @@
 	        "NAME": "Mired",
 	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #b1. NL Receives #b50% more damage from #yFire attacks."]
 	},
+	"caster:AshenWall": {
+	        "NAME": "Ashen Wall",
+	        "DESCRIPTIONS": ["HP Loss can be prevented by block."]
+	},
 	"caster:GainFocusPower": {
 	        "NAME": "Unfocused",
 	        "DESCRIPTIONS": ["At the end of this turn, gain #b", " Focus."]
+	},
+	"caster:ShortenedChant": {
+	        "NAME": "Shortened Chant",
+	        "DESCRIPTIONS": ["Your spells have #b", " less #yCasting #yTime."]
+	},
+	"caster:Inferno": {
+	        "NAME": "Inferno",
+	        "DESCRIPTIONS": ["At the end of your turn, apply #b", " #yBlazed to all enemies."]
 	},
 	"caster:Ifrit": {
 	        "NAME": "Ifrit",

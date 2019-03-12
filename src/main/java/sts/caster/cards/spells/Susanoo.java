@@ -45,7 +45,7 @@ public class Susanoo extends CasterCard {
 
     private static final int COST = 2;
     private static final int DELAY_TURNS = 1;
-    private static final int BASE_DAMAGE = 24;
+    private static final int BASE_DAMAGE = 28;
     private static final int UPGRADE_DAMAGE = 8;
 
     public Susanoo() {

@@ -12,6 +12,21 @@
 	"FreezeCardAction": {
 		"TEXT": ["Freeze"]
 	},
+	"SpellsDescription": {
+		"TEXT": ["Spell", "Spell cards are not affected by #yWeak, #yVulnerable, #yStrengh, or #yDex. NL Spell #ydamage and #yblock is instead affected by #yFocus."]
+	},
+	"IceElement": {
+		"TEXT": ["Ice Element", "Deals extra damage to #yBlazed enemies."]
+	},
+	"FireElement": {
+		"TEXT": ["Fire Element", "Deals extra damage to #yMired enemies."]
+	},
+	"LightningElement": {
+		"TEXT": ["Lightning Element", "Deals extra damage to #yFrozen enemies."]
+	},
+	"EarthElement": {
+		"TEXT": ["Earth Element", "Deals extra damage to #yShocked enemies."]
+	},
 	"FrozenViewScreen": {
 		"TEXT": [
 			"These cards were freezes this combat.",

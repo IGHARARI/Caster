@@ -49,30 +49,19 @@ public class TheCaster extends CustomPlayer {
         public static CardLibrary.LibraryType THE_CASTER_LIBRARY_COLOR;
     }
 
-    // =============== BASE STATS =================
-
     public static final int ENERGY_PER_TURN = 3;
-    public static final int MAX_HP = 50;
+    public static final int MAX_HP = 60;
     public static final int STARTING_HP = MAX_HP;
     public static final int STARTING_GOLD = 99;
     public static final int CARD_DRAW = 5;
     public static final int ORB_SLOTS = 0;
     public static final int MAX_MINIONS = 99;
 
-    // =============== /BASE STATS/ =================
-
-
-    // =============== STRINGS =================
-
     private static final String ID = "TheCaster";
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
 
-    // =============== /STRINGS/ =================
-
-
-    // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
             "caster/images/char/defaultCharacter/orb/layer1.png",
@@ -87,18 +76,12 @@ public class TheCaster extends CustomPlayer {
             "caster/images/char/defaultCharacter/orb/layer4d.png",
             "caster/images/char/defaultCharacter/orb/layer5d.png",};
 
-    // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
-
-    // =============== CHARACTER CLASS START =================
 
     public TheCaster(String name, PlayerClass setClass) {
         super(name, setClass, orbTextures,
                 "caster/images/char/defaultCharacter/orb/vfx.png", null,
                 new SpriterAnimation(
                         "caster/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
-
-
-        // =============== TEXTURES, ENERGY, LOADOUT =================  
 
         initializeClass(null, // required call to load textures and setup energy/loadout.
                 // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
@@ -107,11 +90,6 @@ public class TheCaster extends CustomPlayer {
                 THE_DEFAULT_CORPSE, // dead corpse
                 getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
 
-        // =============== /TEXTURES, ENERGY, LOADOUT/ =================
-
-
-        // =============== ANIMATIONS =================  
-
         loadAnimation(
                 THE_DEFAULT_SKELETON_ATLAS,
                 THE_DEFAULT_SKELETON_JSON,
@@ -119,21 +97,13 @@ public class TheCaster extends CustomPlayer {
         AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
         e.setTime(e.getEndTime() * MathUtils.random());
 
-        // =============== /ANIMATIONS/ =================
-
-
-        // =============== TEXT BUBBLE LOCATION =================
 
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
         dialogY = (drawY + 220.0F * Settings.scale); // you can just copy these values
 
-        // =============== /TEXT BUBBLE LOCATION/ =================
 
     }
 
-    // =============== /CHARACTER CLASS END/ =================
-
-    // Starting description and loadout
     @Override
     public CharSelectInfo getLoadout() {
         return new CharSelectInfo(NAMES[0], TEXT[0],
@@ -141,7 +111,6 @@ public class TheCaster extends CustomPlayer {
                 getStartingDeck(), false);
     }
 
-    // Starting Deck
     @Override
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();

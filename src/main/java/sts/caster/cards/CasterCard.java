@@ -3,6 +3,7 @@ package sts.caster.cards;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
 
 import com.badlogic.gdx.math.MathUtils;
@@ -11,7 +12,9 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
@@ -21,6 +24,7 @@ import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import sts.caster.core.MagicElement;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
@@ -28,12 +32,20 @@ import sts.caster.powers.BlazedPower;
 import sts.caster.powers.FrozenPower;
 import sts.caster.powers.MiredPower;
 import sts.caster.powers.ShockedPower;
+import sts.caster.powers.ShortenedChantPower;
 import sts.caster.util.PowersHelper;
 
 public abstract class CasterCard extends CustomCard {
     private static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
     
     public static final Predicate<AbstractCard> isCardSpellPredicate = (c)-> c.type == CasterCardType.SPELL;
+    private static final String BASE_BG_PATH = "caster/images/card_backgrounds/";
+    private static final UIStrings SPELL_DESC = CardCrawlGame.languagePack.getUIString("SpellsDescription");
+    private static final UIStrings FIRE_DESC = CardCrawlGame.languagePack.getUIString("FireElement");
+    private static final UIStrings ICE_DESC = CardCrawlGame.languagePack.getUIString("IceElement");
+    private static final UIStrings LIGHTNING_DESC = CardCrawlGame.languagePack.getUIString("LightningElement");
+    private static final UIStrings EARTH_DESC = CardCrawlGame.languagePack.getUIString("EarthElement");
+    
     
     public int delayTurns;        
     public int baseDelayTurns;    
@@ -77,7 +89,32 @@ public abstract class CasterCard extends CustomCard {
         cardElement = MagicElement.NEUTRAL;
     }
     
-    private static final String BASE_BG_PATH = "caster/images/card_backgrounds/";
+    
+    @Override
+    public List<TooltipInfo> getCustomTooltips() {
+    	List<TooltipInfo> curTips = super.getCustomTooltips();
+    	if (type == CasterCardType.SPELL) {
+    		if (curTips == null) curTips = new ArrayList<TooltipInfo>();
+    		curTips.add(new TooltipInfo(SPELL_DESC.TEXT[0], SPELL_DESC.TEXT[1]));
+    		switch (cardElement) {
+				case EARTH:
+					curTips.add(new TooltipInfo(EARTH_DESC.TEXT[0], EARTH_DESC.TEXT[1]));
+					break;
+				case FIRE:
+					curTips.add(new TooltipInfo(FIRE_DESC.TEXT[0], FIRE_DESC.TEXT[1]));
+					break;
+				case ICE:
+					curTips.add(new TooltipInfo(ICE_DESC.TEXT[0], ICE_DESC.TEXT[1]));
+					break;
+				case THUNDER:
+					curTips.add(new TooltipInfo(LIGHTNING_DESC.TEXT[0], LIGHTNING_DESC.TEXT[1]));
+					break;
+				default:
+					break;
+    		}
+    	}
+    	return curTips;
+    }
     
     protected void setCardElement(MagicElement element) {
     	cardElement = element;
@@ -140,6 +177,11 @@ public abstract class CasterCard extends CustomCard {
     		resetCardSpellBlock();
     		applyCardDamageModifers(mo);
     		applyCardBlockModifiers(mo);
+    		if (AbstractDungeon.player.hasPower(ShortenedChantPower.POWER_ID)) {
+    			int powAmount = PowersHelper.getPlayerPowerAmount(ShortenedChantPower.POWER_ID);
+    			delayTurns = Math.max(0, delayTurns - powAmount);
+    			if (delayTurns != baseDelayTurns) isDelayTurnsModified = true;
+    		}
     	} else {
     		super.calculateCardDamage(mo);
     	}
