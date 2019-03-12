@@ -46,7 +46,6 @@ public class ThawCardAction extends AbstractGameAction {
                 return;
             }
             if (!anyNumber && FrozenPileManager.frozenPile.size() <= amount) {
-                amount = FrozenPileManager.frozenPile.size();
                 //I copy the list to avoid CME or any visual bugs 
                 ArrayList<AbstractCard> cardsCopy = new ArrayList<AbstractCard>(FrozenPileManager.frozenPile.group);
                 for (AbstractCard card : cardsCopy) {
@@ -79,15 +78,16 @@ public class ThawCardAction extends AbstractGameAction {
     }
     
     private void moveToHand(AbstractCard c) {
-    	c.unhover();
-        c.untip();
         c.stopGlowing();
-        FrozenPileManager.frozenPile.removeCard(c);
         if (p.hand.size() < BaseMod.MAX_HAND_SIZE) {
         	p.hand.addToHand(c);
         } else {
         	AbstractDungeon.player.createHandIsFullDialog();
+        	c.untip();
         	p.discardPile.addToRandomSpot(c);
         }
+        FrozenPileManager.frozenPile.removeCard(c);
+        c.unhover();
+        c.fadingOut = false;
     }
 }

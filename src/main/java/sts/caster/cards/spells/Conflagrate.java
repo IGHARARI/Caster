@@ -62,7 +62,7 @@ public class Conflagrate extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, c.magicNumber));
-    		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, AttackEffect.FIRE));
+    		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.FIRE));
     		return actionsList;
     	};
     }

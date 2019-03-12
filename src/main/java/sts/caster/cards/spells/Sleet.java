@@ -64,7 +64,7 @@ public class Sleet extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
         	for (int i = 0; i < c.m2; i++) {
-        		actionsList.add(new DelayedDamageRandomEnemyAction(AbstractDungeon.player, c.spellDamage, AttackEffect.SLASH_VERTICAL));
+        		actionsList.add(new DelayedDamageRandomEnemyAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SLASH_VERTICAL));
         	}
     		return actionsList;
     	};

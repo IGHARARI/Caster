@@ -67,7 +67,7 @@ public class Fissure extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new VFXAction(new IronWaveEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, Settings.WIDTH), 0.8f));
-    		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, AttackEffect.SMASH));
+    		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
     		actionsList.add(new DelayedActionOnAllEnemiesAction(monster -> new StunMonsterAction(monster, AbstractDungeon.player)));
     		return actionsList;
     	};

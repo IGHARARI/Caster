@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.actions.ModifyCardDamageAction;
+import sts.caster.actions.ModifyCardInBattleSpellDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -56,7 +56,7 @@ public class Fireball extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
 
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
-		AbstractDungeon.actionManager.addToBottom(new ModifyCardDamageAction(this, magicNumber));
+		AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(this, magicNumber));
     }
     
     @Override

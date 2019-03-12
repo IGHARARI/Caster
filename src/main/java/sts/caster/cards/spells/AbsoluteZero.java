@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import sts.caster.actions.ModifyCardInBattleSpellDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -38,14 +39,12 @@ public class AbsoluteZero extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 4;
+    private static final int BASE_DAMAGE = 5;
     private static final int UPGR_DAMAGE = 2;
-    private static final int FROZEN_MULTIPLIER = 2;
 
 
     public AbsoluteZero() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = FROZEN_MULTIPLIER;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         baseDelayTurns = delayTurns = BASE_DELAY;
         setCardElement(MagicElement.ICE);
@@ -54,8 +53,8 @@ public class AbsoluteZero extends CasterCard {
     @Override
     public void onFrozen() {
     	flash();
-    	baseSpellDamage *= FROZEN_MULTIPLIER;
-    	isSpellDamageModified = true;
+    	System.out.println("on frozn for " + name + " triggrd, spdmg " + baseSpellDamage);
+    	AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(this, baseSpellDamage));
     }
 
     @Override

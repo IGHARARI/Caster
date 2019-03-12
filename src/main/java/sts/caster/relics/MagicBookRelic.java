@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
@@ -88,6 +89,8 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 
     @Override
     public void onTrigger() {
+//    	isStartOfgame = false;
+//    	onEquip();
     	if (!cardSelected && isStartOfgame) {
     		AbstractCard meteor = null;
     		for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
@@ -105,12 +108,11 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 
     private void applyMagicBookBuffToCard(AbstractCard cardToMemo) {
 		MagicBookMemorizedCardField.inMagicBookField.set(cardToMemo, true); 
-		if (cardToMemo instanceof CasterCard) {
-			CasterCard casterCard = ((CasterCard)cardToMemo);
-			casterCard.baseDelayTurns -= 1;
-			casterCard.delayTurns -= 1;
-			casterCard.applyPowers();
-		}
+//		if (cardToMemo instanceof CasterCard) {
+//			CasterCard casterCard = ((CasterCard)cardToMemo);
+//			casterCard.baseDelayTurns -= 1;
+//			casterCard.delayTurns = casterCard.baseDelayTurns;
+//		}
 		setDescriptionAfterLoading();
 	}
 
@@ -120,15 +122,26 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
             AbstractCard cardInDeck = AbstractDungeon.player.masterDeck.getSpecificCard(currentlyMemorizedCard); 
             if (cardInDeck != null) {
                 MagicBookMemorizedCardField.inMagicBookField.set(cardInDeck, false); 
-                if (cardInDeck instanceof CasterCard) {
-                	CasterCard casterCard = ((CasterCard)cardInDeck);
-                	casterCard.baseDelayTurns += 1;
-                	casterCard.applyPowers();
-                }
+//                if (cardInDeck instanceof CasterCard) {
+//                	CasterCard casterCard = ((CasterCard)cardInDeck);
+//                	casterCard.baseDelayTurns += 1;
+//                	casterCard.delayTurns = casterCard.baseDelayTurns;
+//                }
             }
         }
     }
 
+	@Override
+	public void atBattleStart() {
+        for (final AbstractCard abstractCard : GetAllInBattleInstances.get(currentlyMemorizedCard.uuid)) {
+    		if (abstractCard instanceof CasterCard) {
+				CasterCard casterCard = ((CasterCard)abstractCard);
+				casterCard.baseDelayTurns -= 1;
+				casterCard.delayTurns = casterCard.baseDelayTurns;
+    		}
+        }
+	}
+	
     @Override
     public void update() {
         super.update(); 

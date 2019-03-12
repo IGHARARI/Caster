@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.cards.CardGroup.CardGroupType;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 
+import sts.caster.actions.CardOnFrozenTriggerAction;
 import sts.caster.cards.CasterCard;
 
 public class FrozenPileManager {
@@ -15,9 +16,9 @@ public class FrozenPileManager {
 	
 	public static void moveToFrozenPile(CardGroup originalGroup, AbstractCard card) {
         resetCardBeforeMoving(originalGroup, card);
-        if (card instanceof CasterCard) ((CasterCard) card).onFrozen();
         AbstractDungeon.effectList.add(new ExhaustCardEffect(card));
         frozenPile.addToTop(card);
+        if (card instanceof CasterCard) AbstractDungeon.actionManager.addToBottom(new CardOnFrozenTriggerAction((CasterCard) card));
 	}
 	
     private static void resetCardBeforeMoving(CardGroup originalGroup, AbstractCard c) {

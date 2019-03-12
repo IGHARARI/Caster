@@ -61,7 +61,7 @@ public class StormGust extends CasterCard {
     public ActionListMaker getActionsMaker(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, AttackEffect.SMASH));
+        	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
     		return actions;
     	};
     }
