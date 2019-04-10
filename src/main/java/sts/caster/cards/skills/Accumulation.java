@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
-import sts.caster.delayedCards.DelayedCardEffect;
 import sts.caster.delayedCards.DelayedCardsArea;
 
 public class Accumulation extends CasterCard {
@@ -30,13 +29,13 @@ public class Accumulation extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int EXTRA_BLOCK = 4;
-	private boolean descriptionChanged = false;
+    private static final int BLOCK_PER_SPELL = 3;
+    private static final int UPG_BLOCK_PER_SPELL = 2;
 
 
     public Accumulation() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = 0;
+        magicNumber = baseMagicNumber = BLOCK_PER_SPELL;
         baseBlock = block = 0;
     }
 
@@ -46,50 +45,23 @@ public class Accumulation extends CasterCard {
     }
     
     @Override
-    public void atTurnStart() {
-    	updateDescription();
-    }
-    
-    private void updateDescription() {
-    	if (!descriptionChanged ) {
-    		if (!upgraded) {
-    			rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
-    		} else {
-    			rawDescription = cardStrings.EXTENDED_DESCRIPTION[1];
-    		}
-    		initializeDescription();
-    	}
-    	descriptionChanged = true;
-	}
-    
-    @Override
     public void applyPowers() {
-    	super.applyPowers();
-    	baseBlock = countAggregateCastTime();
-    	baseBlock += magicNumber;
+    	baseBlock = countCardsInCastArea() * magicNumber;
     	block = baseBlock;
     	isBlockModified = true;
-    	updateDescription();
+    	super.applyPowers();
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(EXTRA_BLOCK);
-            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            upgradeMagicNumber(UPG_BLOCK_PER_SPELL);
             initializeDescription();
-            descriptionChanged = false;
         }
     }
     
-    public static int countAggregateCastTime() {
-    	int count = 0;
-		if (DelayedCardsArea.delayedCards != null) {
-			for (DelayedCardEffect card : DelayedCardsArea.delayedCards) {
-				count += card.turnsUntilFire;
-			}
-		}
-		return count;
+    public static int countCardsInCastArea() {
+		return (DelayedCardsArea.delayedCards != null) ? DelayedCardsArea.delayedCards.size() : 0;
     }
 }

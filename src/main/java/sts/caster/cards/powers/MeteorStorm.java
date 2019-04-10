@@ -29,8 +29,8 @@ public class MeteorStorm extends CustomCard {
     private static final CardType TYPE = CardType.POWER;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 3;
-    private static final int METEOR_AMOUNT = 3;
+    private static final int COST = 2;
+    private static final int METEOR_AMOUNT = 2;
     private static final int UPGR_METEOR_AMOUNT = 1;
 
     public MeteorStorm() {
@@ -42,6 +42,7 @@ public class MeteorStorm extends CustomCard {
     public void use(final AbstractPlayer p, final AbstractMonster m) {
     	Meteor freeMeteor = new Meteor();
     	freeMeteor.cost = 0;
+    	freeMeteor.costForTurn = 0;
     	freeMeteor.isCostModified = true;
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(freeMeteor, magicNumber, true, false));
     }

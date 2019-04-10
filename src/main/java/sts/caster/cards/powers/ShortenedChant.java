@@ -32,7 +32,7 @@ public class ShortenedChant extends CasterCard {
 
     private static final int COST = 2;
     private static final int UPG_COST = 1;
-    private static final int BASE_FOCUS_LOSS = 4;
+    private static final int BASE_FOCUS_LOSS = 3;
     private static final int UPG_FOCUS_LOSS = -1;
     
     

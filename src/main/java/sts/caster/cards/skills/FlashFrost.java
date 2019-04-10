@@ -50,7 +50,9 @@ public class FlashFrost extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
+            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
+            isInnate = true;
             upgradeMagicNumber(UPGRADE_FROST);
         }
     }

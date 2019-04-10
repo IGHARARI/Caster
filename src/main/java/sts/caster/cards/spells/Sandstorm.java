@@ -23,6 +23,7 @@ import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.GainFocusPower;
+import sts.caster.powers.MiredPower;
 
 public class Sandstorm extends CasterCard {
 
@@ -41,7 +42,7 @@ public class Sandstorm extends CasterCard {
     private static final int COST = 1;
     private static final int BASE_FOCUS_LOSS = 1;
     private static final int BASE_STR_LOSS = 3;
-    private static final int UPGRADE_STR_LOSS = 1;
+    private static final int UPGRADE_STR_LOSS = 2;
 
 
     public Sandstorm() {
@@ -63,6 +64,7 @@ public class Sandstorm extends CasterCard {
 		AbstractDungeon.actionManager.addToBottom(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .16f));
         for (final AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new StrengthPower(mo, -magicNumber), -magicNumber, true, AttackEffect.NONE));
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new MiredPower(mo, p, 1), 1, true, AttackEffect.NONE));
         }
         for (final AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
         	if (!mo.hasPower(ArtifactPower.POWER_ID)) {

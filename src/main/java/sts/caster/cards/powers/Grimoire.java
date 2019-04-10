@@ -24,14 +24,14 @@ public class Grimoire extends CustomCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.RARE;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CardType.POWER;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int FOCUS_AMOUNT = 2;
-    private static final int UPGR_FOCUS_AMOUNT = 1;
+    private static final int UPG_COST = 0;
+    private static final int FOCUS_AMOUNT = 1;
 
     public Grimoire() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -47,7 +47,7 @@ public class Grimoire extends CustomCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPGR_FOCUS_AMOUNT);
+            upgradeBaseCost(UPG_COST);
             initializeDescription();
         }
     }

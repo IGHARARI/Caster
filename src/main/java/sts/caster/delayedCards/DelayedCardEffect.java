@@ -33,7 +33,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	public int turnsUntilFire;
 
 	public static final String ORB_ID = "DelayedCard:";
-	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.9f;
+	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.66f;
 	private static final float GLITTER_MIN_INTERVAL = 0.77f;
 	private static final float GLITTER_MAX_INTERVAL = 1.22f;
 

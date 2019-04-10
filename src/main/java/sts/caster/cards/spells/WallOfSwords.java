@@ -38,11 +38,15 @@ public class WallOfSwords extends CasterCard {
     private static final int COST = 2;
     private static final int UPG_COST = 1;
     private static final int BASE_DELAY = 1;
+    private static final int BASE_MAX_THORNS = 8;
+    private static final int UPG_MAX_THORNS = 3;
+    
 
 
     public WallOfSwords() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
+        baseMagicNumber = magicNumber = BASE_MAX_THORNS;
         exhaust = true;
     }
 
@@ -58,8 +62,9 @@ public class WallOfSwords extends CasterCard {
     		AbstractPlayer p = AbstractDungeon.player;
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		if (p.currentBlock > 0) {
-    			actionsList.add(new LoseBlockAction(p, p, p.currentBlock));
-    			actionsList.add(new ApplyPowerAction(p, p, new ThornsPower(p, p.currentBlock), p.currentBlock));
+    			int blockToLose = Math.min(magicNumber, p.currentBlock);
+    			actionsList.add(new LoseBlockAction(p, p, blockToLose));
+    			actionsList.add(new ApplyPowerAction(p, p, new ThornsPower(p, blockToLose), blockToLose));
     		}
     		return actionsList;
     	};
@@ -70,6 +75,7 @@ public class WallOfSwords extends CasterCard {
         if (!upgraded) {
             upgradeName();
             upgradeBaseCost(UPG_COST);
+            upgradeMagicNumber(UPG_MAX_THORNS);
             initializeDescription();
         }
     }

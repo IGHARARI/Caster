@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.actions.ChooseCardsToElectrifyAction;
+import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -43,7 +43,7 @@ public class Charge extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new ChooseCardsToElectrifyAction(ELECTRIFY_AMT, true));
+		AbstractDungeon.actionManager.addToBottom(new ElectrifyCardsAction(ELECTRIFY_AMT, true));
     }
 
     @Override

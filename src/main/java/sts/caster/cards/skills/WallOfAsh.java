@@ -30,7 +30,7 @@ public class WallOfAsh extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BLOCK_AMT = 6;
+    private static final int BLOCK_AMT = 7;
     private static final int UPG_BLOCK_AMT = 3;
     
     public WallOfAsh() {

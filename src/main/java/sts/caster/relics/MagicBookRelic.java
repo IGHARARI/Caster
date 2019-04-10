@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.CardGroup.CardGroupType;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
@@ -39,6 +40,10 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
         tips.add(new PowerTip(name, description));
     }
 
+    public String getMemorizedCardName() {
+    	return currentlyMemorizedCard != null ? currentlyMemorizedCard.name : "...";
+    }
+    
     @Override
     public Predicate<AbstractCard> isOnCard() {
         return MagicBookMemorizedCardField.inMagicBookField::get;
@@ -63,12 +68,14 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
             if (currentlyMemorizedCard != null) {
                 applyMagicBookBuffToCard(currentlyMemorizedCard);
             }
+            isStartOfgame = false;
         }
     }
 
 
     @Override
     public void onEquip() { 
+    	System.out.println("on equip for magic book is start? " + isStartOfgame);
     	cardSelected = false; 
     	if (!isStartOfgame) {
 	        if (AbstractDungeon.isScreenUp) { 
@@ -77,13 +84,15 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 	            AbstractDungeon.previousScreen = AbstractDungeon.screen;
 	        }
 	        AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.INCOMPLETE;
-	        CardGroup group = CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck);
-	        for (AbstractCard card : group.group) {
-	        	if (!(card instanceof CasterCard) || !(card.type == CasterCardType.SPELL) || ((CasterCard)card).baseDelayTurns < 1) {
-	        		group.removeCard(card);
+	        CardGroup nonBottledCards = CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck);
+	        CardGroup nonBottledSpells = new CardGroup(CardGroupType.UNSPECIFIED);
+	        for (AbstractCard card : nonBottledCards.group) {
+	        	if (card.type == CasterCardType.SPELL && (card instanceof CasterCard) && ((CasterCard)card).baseDelayTurns > 0) {
+	        		System.out.println("magbook: found spell - " + card.name);
+	        		nonBottledSpells.addToBottom(card);
 	        	}
 	        }
-	        AbstractDungeon.gridSelectScreen.open(group, 1, DESCRIPTIONS[3] + name + DESCRIPTIONS[4], false, false, false, false);
+	        AbstractDungeon.gridSelectScreen.open(nonBottledSpells, 1, DESCRIPTIONS[3] + name + DESCRIPTIONS[4], false, false, false, false);
     	}
     }
 

@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.actions.DelayedActionOnAllEnemiesAction;
-import sts.caster.actions.ChooseCardsToElectrifyAction;
+import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -55,7 +55,7 @@ public class MegaloSpark extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new ChooseCardsToElectrifyAction(magicNumber, !this.upgraded));
+    	AbstractDungeon.actionManager.addToBottom(new ElectrifyCardsAction(magicNumber, !this.upgraded));
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
     }
 
@@ -65,13 +65,13 @@ public class MegaloSpark extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new DelayedActionOnAllEnemiesAction(monster -> {
-	    			c.calculateCardDamage(monster);
-	    			return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
+	    			float tmp = customApplyEnemyPowersToSpellDamage(c.spellDamage, c.cardElement, monster);
+	    			return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, (int) tmp, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
     			}
     		));
     		actionsList.add(new DelayedActionOnAllEnemiesAction(monster -> {
-    				c.calculateCardDamage(monster);
-    				return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
+    				float tmp = customApplyEnemyPowersToSpellDamage(c.spellDamage, c.cardElement, monster);
+    				return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, (int) tmp, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
     			}
     		));
     		return actionsList;

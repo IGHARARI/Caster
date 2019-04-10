@@ -5,7 +5,7 @@
 	},
 	"caster:Shocked": {
 	        "NAME": "Shocked",
-	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b", " block, then reduce Shocked by 1. NL Receives #b50% more damage from #yEarth attacks."]
+	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b50% of its block, then reduce Shocked by #b1. NL Receives #b50% more damage from #yEarth attacks."]
 	},
 	"caster:Frost": {
 	        "NAME": "Frost",
@@ -19,9 +19,17 @@
 	        "NAME": "Mired",
 	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #b1. NL Receives #b50% more damage from #yFire attacks."]
 	},
+	"caster:StaticField": {
+	        "NAME": "Static Field",
+	        "DESCRIPTIONS": ["Gain #b", " block whenever you #yElectrify a card."]
+	},
 	"caster:AshenWall": {
 	        "NAME": "Ashen Wall",
 	        "DESCRIPTIONS": ["HP Loss can be prevented by block."]
+	},
+	"caster:Illusion": {
+	        "NAME": "Illusion",
+	        "DESCRIPTIONS": ["The enemy will Block on its turn"]
 	},
 	"caster:GainFocusPower": {
 	        "NAME": "Unfocused",
@@ -34,6 +42,10 @@
 	"caster:Inferno": {
 	        "NAME": "Inferno",
 	        "DESCRIPTIONS": ["At the end of your turn, apply #b", " #yBlazed to all enemies."]
+	},
+	"caster:WallOfMirrors": {
+	        "NAME": "Wall Of Mirrors",
+	        "DESCRIPTIONS": ["Damage from this creature will be reflected onto itself. Reflecting #b", " damage this turn."]
 	},
 	"caster:Ifrit": {
 	        "NAME": "Ifrit",

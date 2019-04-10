@@ -35,7 +35,7 @@ public class SpellCardTypeAbstractCardPatches {
             renderHelperMethod.setAccessible(true);
             final Field renderColorField = SuperclassFinder.getSuperclassField(card.getClass(), "renderColor");
             renderColorField.setAccessible(true);
-            final Color renderColor = (Color)renderColorField.get(card);
+            final Color renderColor = ((Color)renderColorField.get(card)).cpy();
             renderHelperMethod.invoke(card, sb, renderColor, texture, xPos, yPos);
         }
         catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | NoSuchMethodException | InvocationTargetException | SecurityException ex2) {
@@ -98,7 +98,7 @@ public class SpellCardTypeAbstractCardPatches {
             if (texture == null) {
                 return (SpireReturn<?>)SpireReturn.Continue();
             }
-            renderHelper(card, __sb, Color.WHITE, texture, __xpos, __ypos);
+            renderHelper(card, __sb, Color.WHITE.cpy(), texture, __xpos, __ypos);
             return (SpireReturn<?>)SpireReturn.Return((Object)null);
 		}
 	}

@@ -23,6 +23,10 @@ public class IfritAction extends AbstractGameAction {
     public void update() {
 		if (duration == Settings.ACTION_DUR_MED) {
 			AbstractPlayer p = AbstractDungeon.player;
+			if (p.hand.size() == 0) {
+				isDone = true;
+				return;
+			}
             AbstractCard randomCard = p.hand.getRandomCard(AbstractDungeon.cardRandomRng);
             p.hand.moveToExhaustPile(randomCard);
             int energyBurnt = 0;

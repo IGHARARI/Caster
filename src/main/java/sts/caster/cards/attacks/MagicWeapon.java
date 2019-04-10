@@ -5,8 +5,11 @@ import static sts.caster.core.CasterMod.makeCardPath;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -46,6 +49,7 @@ public class MagicWeapon extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+    	AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, damage), AttackEffect.SLASH_DIAGONAL));
     	ArrayList<AbstractCard> cardsBeforeDraw = new ArrayList<AbstractCard>(AbstractDungeon.player.hand.group);
     	AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, magicNumber));
     	Predicate<AbstractCard> discardPredicate = (c) ->  (!cardsBeforeDraw.contains(c) && !(c.type == CasterCardType.SPELL));

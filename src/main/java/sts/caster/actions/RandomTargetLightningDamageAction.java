@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import com.megacrit.cardcrawl.vfx.combat.ImpactSparkEffect;
 
+import sts.caster.cards.CasterCard;
 import sts.caster.core.MagicElement;
 
 public class RandomTargetLightningDamageAction extends AbstractGameAction {
@@ -54,6 +55,7 @@ public class RandomTargetLightningDamageAction extends AbstractGameAction {
         if (this.isDone) {
             this.target.tint.color = Color.YELLOW.cpy();
             this.target.tint.changeColor(Color.WHITE.cpy());
+            CasterCard.customApplyEnemyPowersToSpellDamage(info, MagicElement.THUNDER, target);
             this.target.damage(this.info);
             AbstractDungeon.actionManager.addToBottom(new ApplyElementalEffectChanceAction(AbstractDungeon.player, target, MagicElement.THUNDER, 1));
             if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {

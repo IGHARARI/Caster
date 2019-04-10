@@ -6,11 +6,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 import sts.caster.cards.CasterCardTags;
 import sts.caster.powers.RamuhPower;
+import sts.caster.powers.StaticFieldPower;
 
-public class ElectrifyCardAction extends AbstractGameAction {
+public class ElectrifySpecificCardAction extends AbstractGameAction {
     AbstractCard card;
     
-    public ElectrifyCardAction(AbstractCard card) {
+    public ElectrifySpecificCardAction(AbstractCard card) {
         this.card = card;
     }
     
@@ -20,6 +21,9 @@ public class ElectrifyCardAction extends AbstractGameAction {
     	card.tags.add(CasterCardTags.ELECTRIFIED);
     	if (AbstractDungeon.player.hasPower(RamuhPower.POWER_ID)) {
     		card.modifyCostForTurn(-card.costForTurn);
+    	}
+    	if (AbstractDungeon.player.hasPower(StaticFieldPower.POWER_ID)) {
+    		AbstractDungeon.player.getPower(StaticFieldPower.POWER_ID).onSpecificTrigger();
     	}
     	this.isDone = true;
     }

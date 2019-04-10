@@ -1,26 +1,67 @@
 package sts.caster.actions;
 
+import java.util.function.Predicate;
+
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 import sts.caster.cards.CasterCard;
+import sts.caster.core.frozenpile.FrozenPileManager;
 
 public class ModifyCardInBattleSpellDamageAction extends AbstractGameAction {
 
-	CasterCard card;
+	Predicate<AbstractCard> pred;
 	
 	public ModifyCardInBattleSpellDamageAction(CasterCard card, int modifyAmount) {
         actionType = ActionType.CARD_MANIPULATION;
-        this.card = card;
+        this.pred = c -> c.uuid.equals(card.uuid);
         this.amount = modifyAmount;
+	}
+
+	public ModifyCardInBattleSpellDamageAction(Predicate<AbstractCard> pred, int modifyAmount) {
+		actionType = ActionType.CARD_MANIPULATION;
+		this.pred = pred;
+		this.amount = modifyAmount;
 	}
 
 	@Override
     public void update() {
-        for (final AbstractCard abstractCard : GetAllInBattleInstances.get(card.uuid)) {
-        	increaseSpellDamage(abstractCard);
+        if (pred.test(AbstractDungeon.player.cardInUse)) {
+        	increaseSpellDamage(AbstractDungeon.player.cardInUse);
         }
+        for (final AbstractCard c : AbstractDungeon.player.drawPile.group) {
+            if (pred.test(c)) {
+                increaseSpellDamage(c);
+            }
+        }
+        for (final AbstractCard c : AbstractDungeon.player.discardPile.group) {
+        	if (pred.test(c)) {
+                increaseSpellDamage(c);
+            }
+        }
+        for (final AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
+        	if (pred.test(c)) {
+                increaseSpellDamage(c);
+            }
+        }
+        for (final AbstractCard c : AbstractDungeon.player.limbo.group) {
+        	if (pred.test(c)) {
+                increaseSpellDamage(c);
+            }
+        }
+        for (final AbstractCard c : AbstractDungeon.player.hand.group) {
+        	if (pred.test(c)) {
+                increaseSpellDamage(c);
+            }
+        }
+        for (final AbstractCard c : FrozenPileManager.frozenPile.group) {
+        	if (pred.test(c)) {
+        		increaseSpellDamage(c);
+        	}
+        }
+        
+        
         this.isDone = true;
     }
 
@@ -28,5 +69,6 @@ public class ModifyCardInBattleSpellDamageAction extends AbstractGameAction {
     	if (!(c instanceof CasterCard)) return;
     	CasterCard castrcard = (CasterCard) c;
     	castrcard.baseSpellDamage = Math.max(0, castrcard.baseSpellDamage + amount);
+    	castrcard.applyPowers();
 	}
 }

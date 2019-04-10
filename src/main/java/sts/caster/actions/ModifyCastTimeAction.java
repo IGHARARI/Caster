@@ -21,7 +21,7 @@ public class ModifyCastTimeAction extends AbstractGameAction {
     public void update() {
     	if (!isDone) {
     		if (card.delayTurns > 0) {
-    			card.delayTurns = Math.max(0, card.delayTurns + modifyAmount);
+    			card.delayTurnsModificationForTurn += modifyAmount;
     			card.isDelayTurnsModified = true;
     			card.flash();
     			card.initializeDescription();

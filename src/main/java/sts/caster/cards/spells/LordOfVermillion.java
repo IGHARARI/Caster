@@ -39,7 +39,7 @@ public class LordOfVermillion extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = -1;
-    private static final int DELAY_TURNS = 4;
+    private static final int DELAY_TURNS = 3;
     private static final int BASE_DAMAGE = 5;
     private static final int HIT_TIMES = 5;
     private static final int UPGR_HIT_TIMES = 2;
@@ -58,7 +58,9 @@ public class LordOfVermillion extends CasterCard {
             energyOnUse = EnergyPanel.totalCount;
         }
     	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, energyOnUse, null));
-    	AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
+    	if (!freeToPlayOnce) {
+    		AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
+    	}
     }
     
     @Override

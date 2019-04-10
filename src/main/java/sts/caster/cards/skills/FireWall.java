@@ -57,7 +57,7 @@ public class FireWall extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeSpellBlock(UPG_BLOCK);
+            upgradeBlock(UPG_BLOCK);
         }
     }
 }

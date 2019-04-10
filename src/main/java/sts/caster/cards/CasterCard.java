@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
@@ -47,6 +48,7 @@ public abstract class CasterCard extends CustomCard {
 	private static final UIStrings EARTH_DESC = CardCrawlGame.languagePack.getUIString("EarthElement");
 	
 	
+	public int delayTurnsModificationForTurn;
 	public int delayTurns;		
 	public int baseDelayTurns;	
 	public boolean upgradedDelayTurns; 
@@ -73,6 +75,7 @@ public abstract class CasterCard extends CustomCard {
 							   final CardRarity rarity, final CardTarget target) {
 		super(id, name, img, cost, rawDescription, type, color, rarity, target);
 
+		delayTurnsModificationForTurn = 0;
 		delayTurns = baseDelayTurns = 0;
 		spellBlock = baseSpellBlock = 0;
 		spellDamage = baseSpellDamage = 0;
@@ -177,11 +180,9 @@ public abstract class CasterCard extends CustomCard {
 			resetCardSpellBlock();
 			applyCardDamageModifers(mo);
 			applyCardBlockModifiers(mo);
-			if (AbstractDungeon.player.hasPower(ShortenedChantPower.POWER_ID)) {
-				int powAmount = PowersHelper.getPlayerPowerAmount(ShortenedChantPower.POWER_ID);
-				delayTurns = Math.max(0, delayTurns - powAmount);
-				if (delayTurns != baseDelayTurns) isDelayTurnsModified = true;
-			}
+			int totalDelayModification = delayTurnsModificationForTurn - PowersHelper.getPlayerPowerAmount(ShortenedChantPower.POWER_ID);
+			delayTurns = Math.max(0, baseDelayTurns + totalDelayModification);
+			if (delayTurns != baseDelayTurns) isDelayTurnsModified = true;
 		} else {
 			super.calculateCardDamage(mo);
 		}
@@ -219,7 +220,7 @@ public abstract class CasterCard extends CustomCard {
 		spellBlock = MathUtils.floor(blockCalculation);
 	}
 
-	private static boolean isCreatureVulnerableTo(AbstractMonster mo, MagicElement element) {
+	private static boolean isCreatureVulnerableTo(AbstractCreature mo, MagicElement element) {
 		switch (element) {
 			case FIRE:
 				return mo.hasPower(MiredPower.POWER_ID);
@@ -257,6 +258,7 @@ public abstract class CasterCard extends CustomCard {
 	@Override
 	public void resetAttributes() {
 		super.resetAttributes();
+		delayTurnsModificationForTurn = 0;
 		delayTurns = baseDelayTurns;
 		isDelayTurnsModified = false;
 		spellDamage = baseSpellDamage; 
@@ -293,36 +295,6 @@ public abstract class CasterCard extends CustomCard {
 	
 	public void onStartOfTurnDelayEffect() {}
 	
-//	@Override
-//	public AbstractCard makeCopy() {
-//		AbstractCard copy = super.makeCopy();
-//		if (copy instanceof CasterCard) {
-//			CasterCard ccCopy = (CasterCard) copy;
-//			ccCopy.cardElement = cardElement;
-//			ccCopy.delayTurns = delayTurns;
-//			ccCopy.baseDelayTurns = baseDelayTurns;
-//			ccCopy.upgradedDelayTurns = upgradedDelayTurns;
-//			ccCopy.isDelayTurnsModified = isDelayTurnsModified;
-//			ccCopy.spellBlock = spellBlock;
-//			ccCopy.baseSpellBlock = baseSpellBlock;
-//			ccCopy.upgradedSpellBlock = upgradedSpellBlock;
-//			ccCopy.isSpellBlockModified = isSpellBlockModified;
-//			ccCopy.spellDamage = spellDamage;
-//			ccCopy.baseSpellDamage = baseSpellDamage;
-//			ccCopy.upgradedSpellDamage = upgradedSpellDamage;
-//			ccCopy.isSpellDamageModified = isSpellDamageModified;
-//			ccCopy.m2 = m2;
-//			ccCopy.baseM2 = baseM2;
-//			ccCopy.upgradedM2 = upgradedM2;
-//			ccCopy.isM2Modified = isM2Modified;
-//			
-//			ccCopy.rawDescription = rawDescription;
-//			ccCopy.initializeDescription();
-//			return ccCopy;
-//		}
-//		return copy;
-//	}
-	
 	@Override
 	public AbstractCard makeStatEquivalentCopy() {
 		CasterCard card = (CasterCard) super.makeStatEquivalentCopy();
@@ -338,6 +310,7 @@ public abstract class CasterCard extends CustomCard {
 	public CasterCard makeStatIdenticalCopy() {
 		CasterCard copy = (CasterCard) this.makeStatEquivalentCopy();
 		copy.cardElement = cardElement;
+		copy.delayTurnsModificationForTurn = delayTurnsModificationForTurn;
 		copy.delayTurns = delayTurns;
 		copy.baseDelayTurns = baseDelayTurns;
 		copy.upgradedDelayTurns = upgradedDelayTurns;
@@ -370,8 +343,8 @@ public abstract class CasterCard extends CustomCard {
 		info.output = (int) customApplyPlayerPowersToSpellDamage(info.output);
 	}
 	
-	public static void customApplyEnemyPowersToSpellDamage(DamageInfo info, MagicElement elem, AbstractMonster mo) {
-		info.output = (int) customApplyEnemyPowersToSpellDamage(info.output, elem, mo);
+	public static void customApplyEnemyPowersToSpellDamage(DamageInfo info, MagicElement elem, AbstractCreature target) {
+		info.output = (int) customApplyEnemyPowersToSpellDamage(info.output, elem, target);
 	}
 	
 	public static float customApplyPlayerPowersToSpellDamage(float damageToCalculate) {
@@ -394,7 +367,7 @@ public abstract class CasterCard extends CustomCard {
 		return tmp;
 	}
 	
-	public static float customApplyEnemyPowersToSpellDamage(float damageToCalculate, MagicElement elem, AbstractMonster mo) {
+	public static float customApplyEnemyPowersToSpellDamage(float damageToCalculate, MagicElement elem, AbstractCreature mo) {
 		float tmp = damageToCalculate;
 		if (mo != null) {
 			for (final AbstractPower p : mo.powers) {

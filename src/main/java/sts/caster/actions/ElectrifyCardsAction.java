@@ -8,14 +8,14 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
-public class ChooseCardsToElectrifyAction extends AbstractGameAction {
+public class ElectrifyCardsAction extends AbstractGameAction {
     private AbstractPlayer p;
     private boolean isRandom = false;
     private int amount;
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings");
     public static final String[] TEXT = uiStrings.TEXT;
     
-    public ChooseCardsToElectrifyAction(int amount, boolean isRandom) {
+    public ElectrifyCardsAction(int amount, boolean isRandom) {
         this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
         this.duration = Settings.ACTION_DUR_FAST;
@@ -52,6 +52,7 @@ public class ChooseCardsToElectrifyAction extends AbstractGameAction {
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
             for (AbstractCard c2 : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
             	electrifyCard(c2);
+            	p.hand.addToBottom(c2);
             }
             AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
         }
@@ -59,6 +60,6 @@ public class ChooseCardsToElectrifyAction extends AbstractGameAction {
     }
     
     private void electrifyCard(AbstractCard card) {
-    	AbstractDungeon.actionManager.addToBottom(new ElectrifyCardAction(card));
+    	AbstractDungeon.actionManager.addToBottom(new ElectrifySpecificCardAction(card));
     }
 }

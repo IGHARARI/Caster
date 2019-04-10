@@ -1,29 +1,56 @@
 [
   {
     "NAMES": [
-      "keyword",
-      "keywords",
-      "Keyword",
-      "Keywords",
-      "Keyword:"
-    ],
-    "DESCRIPTION": "Whenever you play a card, gain 1 dexterity this turn only."
-  },
-  {
-    "NAMES": [
-      "Ice",
-      "ice",
-      "ice:"
-    ],
-    "DESCRIPTION": "This Spell is #yIce elemental, #yBlazed enemies will take extra damage from it."
-  },
-  {
-    "NAMES": [
       "Freeze",
+      "Frozen",
       "freeze",
+      "frozen",
       "freeze:"
     ],
     "DESCRIPTION": "Frozen cards are removed from play until end of combat."
+  },
+  {
+    "NAMES": [
+      "Thaw",
+      "thaw"
+    ],
+    "DESCRIPTION": "Put a card from your Frozen pile into your hand."
+  },
+  {
+    "NAMES": [
+      "Shocker",
+      "shocker",
+      "shocker."
+    ],
+    "DESCRIPTION": "Each hit of this card has a #b50% chance of applying #yShocked."
+  },
+  {
+    "NAMES": [
+      "Frost",
+      "frost"
+    ],
+    "DESCRIPTION": "#yFrosted creatures receive more damage from #yElectric attacks. When taking damage, they cause all enemies to lose HP, and #yFrost decreases."
+  },
+  {
+    "NAMES": [
+      "Blazed",
+      "blazed"
+    ],
+    "DESCRIPTION": "#yBlazed creatures receive more damage from #yIce attacks. When attacking, they lose HP, and #yBlazed decreases by half."
+  },
+  {
+    "NAMES": [
+      "Mired",
+      "mired"
+    ],
+    "DESCRIPTION": "#yMired creatures receive more damage from #yFire attacks. When receiving attack damage, you heal #g2 HP, then decrease Mired by #b1"
+  },
+  {
+    "NAMES": [
+      "Shocked",
+      "shocked"
+    ],
+    "DESCRIPTION": "#yShocked creatures receive more damage from #yEarth attacks. At the end of their turn, they lose #b50% of their block and #yShocked decreases."
   },
   {
     "NAMES": [
@@ -34,15 +61,7 @@
       "electrify:",
       "electrified:"
     ],
-    "DESCRIPTION": "When playing an electrified card, lose #r3 HP."
-  },
-  {
-    "NAMES": [
-      "Lightning",
-      "lightning",
-      "lightning:"
-    ],
-    "DESCRIPTION": "This card has a chance of applying Shocked to enemies."
+    "DESCRIPTION": "When playing an electrified card, lose #r2 HP per Electrified stack, then it loses Electrified."
   },
   {
     "PROPER_NAME": "Cast Time",
@@ -59,14 +78,15 @@
     "NAMES": [
       "Shortened Chant",
       "Shortened_Chant",
+      "shortened_chant",
       "Shortened_Chant.",
       "Shortened_chant",
       "shortened_chant."
     ],
-    "DESCRIPTION": "Reduce the casting time of your #ySpells for each stack of #yShortened #yChant"
+    "DESCRIPTION": "Reduce the casting time of your #ySpell Cards for each stack of #yShortened #yChant"
   },
   {
-    "PROPER_NAME": "unique spell",
+    "PROPER_NAME": "Unique spell",
     "NAMES": [
       "unique spell",
       "unique_spell",
@@ -84,16 +104,5 @@
       "Soul_Strike"
     ],
     "DESCRIPTION": "#ySoul #yStrike is a #b0 cost Ethereal Spell."
-  },
-  {
-    "PROPER_NAME": "Multiword Keyword",
-    "NAMES": [
-      "Multiword Keyword",
-      "multiword_keyword",
-      "multiword_keywords",
-      "multikey",
-      "multikeyword"
-    ],
-    "DESCRIPTION": "Make sure the first element in the NAMES is the same as your PROPER_NAME. The rest is to match keywords like the single word keyword."
   }
 ]

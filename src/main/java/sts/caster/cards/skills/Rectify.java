@@ -31,6 +31,7 @@ public class Rectify extends CasterCard {
     
     public Rectify() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        exhaust = true;
     }
 
     @Override

@@ -12,8 +12,14 @@
 	"FreezeCardAction": {
 		"TEXT": ["Freeze"]
 	},
+	"RememoSpell": {
+		"TEXT": ["Rememorize", "Forget ", " and memorize new Spell? (free Action)"]
+	},
+	"ElementalizeAction": {
+		"TEXT": ["Elementalize"]
+	},
 	"SpellsDescription": {
-		"TEXT": ["Spell", "Spell cards are not affected by #yWeak, #yVulnerable, #yStrengh, or #yDex. NL Spell #ydamage and #yblock is instead affected by #yFocus."]
+		"TEXT": ["Spell", "Spell cards are not affected by #yWeak, #yVulnerable, #yStrength, or #yDex. NL Spell #ydamage and #yblock is instead affected by #yFocus."]
 	},
 	"IceElement": {
 		"TEXT": ["Ice Element", "Deals extra damage to #yBlazed enemies."]

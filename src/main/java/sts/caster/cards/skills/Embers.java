@@ -2,6 +2,7 @@ package sts.caster.cards.skills;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -30,6 +31,7 @@ public class Embers extends CasterCard {
 
     private static final int COST = 0;
     private static final int THAW_AMOUNT = 2;
+    private static final int DRAW_AMOUNT = 1;
     private static final int UPG_THAW_AMOUNT = 1;
     
 
@@ -37,11 +39,14 @@ public class Embers extends CasterCard {
     public Embers() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = THAW_AMOUNT;
+        m2 = baseM2 = DRAW_AMOUNT;
+        exhaust = true;
         setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+    	AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, m2));
     	AbstractDungeon.actionManager.addToBottom(new ThawCardAction(magicNumber, false));
     }
     

@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 
-import sts.caster.actions.ElectrifyCardAction;
+import sts.caster.actions.ElectrifySpecificCardAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -45,7 +45,7 @@ public class Susanoo extends CasterCard {
 
     private static final int COST = 2;
     private static final int DELAY_TURNS = 1;
-    private static final int BASE_DAMAGE = 28;
+    private static final int BASE_DAMAGE = 32;
     private static final int UPGRADE_DAMAGE = 8;
 
     public Susanoo() {
@@ -59,7 +59,7 @@ public class Susanoo extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
     	for (AbstractCard card : AbstractDungeon.player.hand.group) {
     		if (card == this) continue;
-    		AbstractDungeon.actionManager.addToBottom(new ElectrifyCardAction(card));
+    		AbstractDungeon.actionManager.addToBottom(new ElectrifySpecificCardAction(card));
     	}
         AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
     }

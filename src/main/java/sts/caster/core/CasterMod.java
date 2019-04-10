@@ -43,12 +43,18 @@ import basemod.interfaces.OnCardUseSubscriber;
 import basemod.interfaces.PostCreateStartingDeckSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import sts.caster.cards.CasterCardTags;
+import sts.caster.cards.attacks.Barbroot;
 import sts.caster.cards.attacks.BookThrow;
+import sts.caster.cards.attacks.BurnItDown;
 import sts.caster.cards.attacks.CasterStrike;
+import sts.caster.cards.attacks.Demi;
+import sts.caster.cards.attacks.Discharge;
+import sts.caster.cards.attacks.FrigidBeam;
 import sts.caster.cards.attacks.GateOfBabylon;
 import sts.caster.cards.attacks.LAZER;
 import sts.caster.cards.attacks.MagicResonance;
 import sts.caster.cards.attacks.MagicWeapon;
+import sts.caster.cards.powers.Focusyn;
 import sts.caster.cards.powers.Grimoire;
 import sts.caster.cards.powers.Ifrit;
 import sts.caster.cards.powers.Incantation;
@@ -56,25 +62,36 @@ import sts.caster.cards.powers.Inferno;
 import sts.caster.cards.powers.MagicAttunement;
 import sts.caster.cards.powers.MeteorStorm;
 import sts.caster.cards.powers.Ramuh;
+import sts.caster.cards.powers.ShivasGrace;
 import sts.caster.cards.powers.ShortenedChant;
+import sts.caster.cards.powers.StaticField;
 import sts.caster.cards.skills.Accumulation;
+import sts.caster.cards.skills.AshesToAshes;
 import sts.caster.cards.skills.BloodRitual;
 import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.Charge;
+import sts.caster.cards.skills.Cryogenesis;
+import sts.caster.cards.skills.DiablosFlame;
 import sts.caster.cards.skills.DivertFocus;
+import sts.caster.cards.skills.Elementalize;
 import sts.caster.cards.skills.Embers;
 import sts.caster.cards.skills.Enfeeble;
 import sts.caster.cards.skills.FireWall;
 import sts.caster.cards.skills.FlashFrost;
+import sts.caster.cards.skills.Illusion;
 import sts.caster.cards.skills.Incinerate;
 import sts.caster.cards.skills.MagicBarrier;
 import sts.caster.cards.skills.QuickCast;
 import sts.caster.cards.skills.Rectify;
+import sts.caster.cards.skills.Sultry;
+import sts.caster.cards.skills.Surge;
 import sts.caster.cards.skills.Unearth;
 import sts.caster.cards.skills.WallOfAsh;
+import sts.caster.cards.skills.WallOfMirrors;
 import sts.caster.cards.spells.AbsoluteZero;
 import sts.caster.cards.spells.AlternatingCurrent;
 import sts.caster.cards.spells.Conflagrate;
+import sts.caster.cards.spells.Eruption;
 import sts.caster.cards.spells.Explosion;
 import sts.caster.cards.spells.Fireball;
 import sts.caster.cards.spells.Fissure;
@@ -88,6 +105,7 @@ import sts.caster.cards.spells.LordOfVermillion;
 import sts.caster.cards.spells.MegaloSpark;
 import sts.caster.cards.spells.Meteor;
 import sts.caster.cards.spells.NaturalChaos;
+import sts.caster.cards.spells.PyroclasticTide;
 import sts.caster.cards.spells.Sandstorm;
 import sts.caster.cards.spells.Sleet;
 import sts.caster.cards.spells.SoulStrike;
@@ -322,8 +340,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Explosion.ID);
         BaseMod.addCard(new DivertFocus());
         UnlockTracker.unlockCard(DivertFocus.ID);
-        BaseMod.addCard(new Fireball());
-        UnlockTracker.unlockCard(Fireball.ID);
+        BaseMod.addCard(new Eruption());
+        UnlockTracker.unlockCard(Eruption.ID);
         BaseMod.addCard(new LordOfVermillion());
         UnlockTracker.unlockCard(LordOfVermillion.ID);
         BaseMod.addCard(new MeteorStorm());
@@ -390,6 +408,42 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Inferno.ID);
         BaseMod.addCard(new ShortenedChant());
         UnlockTracker.unlockCard(ShortenedChant.ID);
+        BaseMod.addCard(new ShivasGrace());
+        UnlockTracker.unlockCard(ShivasGrace.ID);
+        BaseMod.addCard(new Focusyn());
+        UnlockTracker.unlockCard(Focusyn.ID);
+        BaseMod.addCard(new BurnItDown());
+        UnlockTracker.unlockCard(BurnItDown.ID);
+        BaseMod.addCard(new Barbroot());
+        UnlockTracker.unlockCard(Barbroot.ID);
+        BaseMod.addCard(new WallOfMirrors());
+        UnlockTracker.unlockCard(WallOfMirrors.ID);
+        BaseMod.addCard(new Elementalize());
+        UnlockTracker.unlockCard(Elementalize.ID);
+        BaseMod.addCard(new Sultry());
+        UnlockTracker.unlockCard(Sultry.ID);
+        BaseMod.addCard(new Cryogenesis());
+        UnlockTracker.unlockCard(Cryogenesis.ID);
+        BaseMod.addCard(new StaticField());
+        UnlockTracker.unlockCard(StaticField.ID);
+        BaseMod.addCard(new Discharge());
+        UnlockTracker.unlockCard(Discharge.ID);
+        BaseMod.addCard(new Surge());
+        UnlockTracker.unlockCard(Surge.ID);
+        BaseMod.addCard(new AshesToAshes());
+        UnlockTracker.unlockCard(AshesToAshes.ID);
+        BaseMod.addCard(new DiablosFlame());
+        UnlockTracker.unlockCard(DiablosFlame.ID);
+        BaseMod.addCard(new Fireball());
+        UnlockTracker.unlockCard(Fireball.ID);
+        BaseMod.addCard(new Demi());
+        UnlockTracker.unlockCard(Demi.ID);
+        BaseMod.addCard(new PyroclasticTide());
+        UnlockTracker.unlockCard(PyroclasticTide.ID);
+        BaseMod.addCard(new FrigidBeam());
+        UnlockTracker.unlockCard(FrigidBeam.ID);
+        BaseMod.addCard(new Illusion());
+        UnlockTracker.unlockCard(Illusion.ID);
         
         logger.info("Done adding cards!");
     }
@@ -438,7 +492,7 @@ public class CasterMod implements
 
         if (keywords != null) {
             for (Keyword keyword : keywords) {
-                BaseMod.addKeyword(keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+                BaseMod.addKeyword(getModID(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
             }
         }
     }
@@ -448,7 +502,7 @@ public class CasterMod implements
     }
 
     
-    public static final int ELECTRIFY_DAMAGE = 3;
+    public static final int ELECTRIFY_DAMAGE = 2;
 	@Override
 	public void receiveCardUsed(AbstractCard card) {
 		if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
