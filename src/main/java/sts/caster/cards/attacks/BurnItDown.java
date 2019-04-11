@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.skills.WallOfAsh;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 
 public class BurnItDown extends CasterCard {
@@ -40,6 +41,7 @@ public class BurnItDown extends CasterCard {
         baseDamage = DAMAGE;
         isMultiDamage = true;
         this.exhaust = true;
+        setCardElement(MagicElement.FIRE);
     }
 
     @Override

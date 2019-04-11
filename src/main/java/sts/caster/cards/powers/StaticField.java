@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.StaticFieldPower;
 
@@ -37,6 +38,7 @@ public class StaticField extends CasterCard {
     public StaticField() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_BLOCK_PER_ELEC;
+        setCardElement(MagicElement.THUNDER);
     }
     
     @Override

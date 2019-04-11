@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import sts.caster.actions.QueueDelayedCardAction;
@@ -41,7 +42,7 @@ public class LordOfVermillion extends CasterCard {
     private static final int COST = -1;
     private static final int DELAY_TURNS = 3;
     private static final int BASE_DAMAGE = 5;
-    private static final int HIT_TIMES = 5;
+    private static final int HIT_TIMES = 4;
     private static final int UPGR_HIT_TIMES = 2;
 
     public LordOfVermillion() {
@@ -66,8 +67,10 @@ public class LordOfVermillion extends CasterCard {
     @Override
     public ActionListMaker getActionsMaker(Integer spentEnergy) {
     	return (c, t) -> {
+    		int energyMultiplier = spentEnergy;
+    		if (AbstractDungeon.player.hasRelic(ChemicalX.ID)) energyMultiplier += 2;
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	for (int i = 0; i < spentEnergy*c.magicNumber; i++) {
+        	for (int i = 0; i < energyMultiplier*c.magicNumber; i++) {
         		actions.add(new RandomTargetLightningDamageAction(new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE));
         	}
     		return actions;

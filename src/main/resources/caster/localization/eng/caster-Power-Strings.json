@@ -31,9 +31,25 @@
 	        "NAME": "Illusion",
 	        "DESCRIPTIONS": ["The enemy will Block on its turn"]
 	},
+	"caster:EchoingVoice": {
+	        "NAME": "Echoing Voice",
+	        "DESCRIPTIONS": ["Your next ", "#ySpell will be played twice this turn.", "#b", " #ySpells will be played twice this turn."]
+	},
+	"caster:ManaOverflow": {
+	        "NAME": "Mana Overflow",
+	        "DESCRIPTIONS": ["Whenever you play an elemental #ySpell add #b", " #ySoul #yStrike to your hand."]
+	},
 	"caster:GainFocusPower": {
 	        "NAME": "Unfocused",
 	        "DESCRIPTIONS": ["At the end of this turn, gain #b", " Focus."]
+	},
+	"caster:Izanagi": {
+	        "NAME": "Izanagi's Obdurance",
+	        "DESCRIPTIONS": ["Whenever you gain block, gain #b", " #yTemporary #yHP ."]
+	},
+	"caster:Amaterasu": {
+	        "NAME": "Amaterasu",
+	        "DESCRIPTIONS": ["Whenever you play a Fire Spell, increase its damage by #b", "%."]
 	},
 	"caster:ShortenedChant": {
 	        "NAME": "Shortened Chant",

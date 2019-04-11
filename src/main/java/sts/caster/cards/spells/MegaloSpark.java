@@ -42,7 +42,7 @@ public class MegaloSpark extends CasterCard {
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 6;
-    private static final int UPG_DAMAGE = 2;
+    private static final int UPG_DAMAGE = 1;
     private static final int ELEC_AMT = 1;
 
     public MegaloSpark() {
@@ -64,16 +64,13 @@ public class MegaloSpark extends CasterCard {
     public ActionListMaker getActionsMaker(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new DelayedActionOnAllEnemiesAction(monster -> {
-	    			float tmp = customApplyEnemyPowersToSpellDamage(c.spellDamage, c.cardElement, monster);
-	    			return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, (int) tmp, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
-    			}
-    		));
-    		actionsList.add(new DelayedActionOnAllEnemiesAction(monster -> {
-    				float tmp = customApplyEnemyPowersToSpellDamage(c.spellDamage, c.cardElement, monster);
-    				return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, (int) tmp, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
-    			}
-    		));
+    		for (int i = 0 ; i < 2; i++) {
+    			actionsList.add(new DelayedActionOnAllEnemiesAction(monster -> {
+	    				float tmp = customApplyEnemyPowersToSpellDamage(c.spellDamage, c.cardElement, monster);
+	    				return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, (int) tmp, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
+	    			}
+				));
+    		}
     		return actionsList;
     	};
     }

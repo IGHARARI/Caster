@@ -1,12 +1,4 @@
 {
-  "caster:DefaultCommonAttack": {
-    "NAME": "Strike",
-    "DESCRIPTION": "Deal !D! Damage. NL [#0000ff]This[] [#ff0000]Is[] [#ffff00]How[] [#88888]color[] [#ff00ff]works.[]"
-  },
-  "caster:DefaultCommonSkill": {
-    "NAME": "Defend",
-    "DESCRIPTION": "Gain !B! Block."
-  },
   "caster:strike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! Damage."
@@ -26,6 +18,10 @@
   "caster:WallOfMirrors": {
     "NAME": "Wall Of Mirrors",
     "DESCRIPTION": "Prevent and reflect all damage dealt by target enemy this turn. NL Exhaust."
+  },
+  "caster:WallOfRocks": {
+    "NAME": "Wall Of Rocks",
+    "DESCRIPTION": "Gain !B! block. NL Apply !M! weakness to ALL atacking enemies."
   },
   "caster:GateOfBabylon": {
     "NAME": "Gate of Babylon",
@@ -185,6 +181,11 @@
     "NAME": "Meteor Storm",
     "DESCRIPTION": "Shuffle !M! zero cost Meteors into your draw pile."
   },
+  "caster:ManaOverflow": {
+    "NAME": "Mana Overflow",
+    "DESCRIPTION": "Whenever you play an elemental Spell add a caster:Soul_Strike to your hand.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you play an elemental Spell add a caster:Soul_Strike to your hand."
+  },
   "caster:Charge": {
     "NAME": "Charge",
     "DESCRIPTION": "Draw !M! cards, then caster:Electrify a random card in your hand."
@@ -274,9 +275,23 @@
     "NAME": "Blood Ritual",
     "DESCRIPTION": "Lose !M! HP. NL Decrease the caster:Cast_Time of all your currently casted Spells by !caster:M2! NL Exhaust."
   },
+  "caster:IzanagisObdurance": {
+    "NAME": "Izanagi's Obdurance",
+    "DESCRIPTION": "Whenever you gain block, gain !M! Temporary_HP."
+  },
   "caster:ShortenedChant": {
     "NAME": "Shortened Chant",
     "DESCRIPTION": "Lose !M! Focus. NL Gain 1 caster:Shortened_Chant ."
+  },
+  "caster:EchoingVoice": {
+    "NAME": "Echoing Voice",
+    "DESCRIPTION": "This turn, your next Spell is played twice.",
+    "UPGRADE_DESCRIPTION": "This turn, your next !M! Spells are played twice."
+  },
+  "caster:SunGoddessAmaterasu": {
+    "NAME": "Sun Goddess Amaterasu",
+    "DESCRIPTION": "Whenever you play a Fire Spell, increase its damage by !M! % this combat.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you play a Fire Spell, increase its damage by !M! % this combat."
   },
   "caster:Incantation": {
     "NAME": "Incantation",

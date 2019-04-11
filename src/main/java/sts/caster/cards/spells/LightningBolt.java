@@ -60,7 +60,7 @@ public class LightningBolt extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
-    		actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.THUNDER, 1));
+    		actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.THUNDER, 1, 1, 1));
     		return actionsList;
     	};
     }

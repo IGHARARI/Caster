@@ -41,8 +41,8 @@ public class JupitelThunder extends CasterCard {
     private static final int COST = 1;
     private static final int DELAY_TURNS = 2;
     private static final int BASE_DAMAGE = 4;
-    private static final int UPGRADE_DAMAGE = 2;
     private static final int HIT_TIMES = 4;
+    private static final int UPGRADE_HIT_TIMES = 1;
 
     public JupitelThunder() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -64,7 +64,7 @@ public class JupitelThunder extends CasterCard {
         	for (int i = 0; i < c.magicNumber; i++) {
         		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE, true));
         	}
-        	actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.THUNDER, c.magicNumber));
+        	actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.THUNDER, c.magicNumber, 1, 1));
     		return actionsList;
     	};
     }
@@ -73,8 +73,8 @@ public class JupitelThunder extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
+            upgradeMagicNumber(UPGRADE_HIT_TIMES);
             initializeDescription();
-            upgradeSpellDamage(UPGRADE_DAMAGE);
         }
     }
 }

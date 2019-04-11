@@ -22,7 +22,7 @@
       "shocker",
       "shocker."
     ],
-    "DESCRIPTION": "Each hit of this card has a #b50% chance of applying #yShocked."
+    "DESCRIPTION": "Each hit will apply #b1 #yShocked."
   },
   {
     "NAMES": [

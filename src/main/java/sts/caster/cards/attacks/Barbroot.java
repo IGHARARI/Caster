@@ -39,7 +39,7 @@ public class Barbroot extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         damage = baseDamage = DAMAGE;
         magicNumber = baseMagicNumber = HP_LOSS;
-        cardElement = MagicElement.EARTH;
+        setCardElement(MagicElement.EARTH);
     }
 
     @Override
