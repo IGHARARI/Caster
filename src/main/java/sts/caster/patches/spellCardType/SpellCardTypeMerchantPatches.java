@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.shop.ShopScreen;
 
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import sts.caster.core.TheCaster;
 
 public class SpellCardTypeMerchantPatches {
 	
@@ -28,25 +29,27 @@ public class SpellCardTypeMerchantPatches {
 		@SpireInsertPatch(locator=Locator.class)
 		public static void Insert(Merchant __instance, float x, float y, int newShopScreen) 
 				throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-			Field __cardsListField = __instance.getClass().getDeclaredField("cards1");
-			__cardsListField.setAccessible(true);
-			Object uncheckedList = __cardsListField.get(__instance);
-			if (uncheckedList instanceof ArrayList<?>) {
-				@SuppressWarnings("unchecked")
-				ArrayList<AbstractCard> __cardsList = (ArrayList<AbstractCard>) uncheckedList;
-				if (__cardsList != null) {
-					__cardsList.clear();
-					AbstractCard c;
-					for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.ATTACK, true).makeCopy(); c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.ATTACK, true).makeCopy()) {}
-					__cardsList.add(c);
-					for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CasterCardType.SPELL, true).makeCopy(); c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CasterCardType.SPELL, true).makeCopy()) {}
-					__cardsList.add(c);
-					for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CasterCardType.SPELL, true).makeCopy(); Objects.equals(c.cardID, __cardsList.get(__cardsList.size() - 1).cardID) || c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CasterCardType.SPELL, true).makeCopy()) {}
-					__cardsList.add(c);
-					for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.SKILL, true).makeCopy(); c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.SKILL, true).makeCopy()) {}
-					__cardsList.add(c);
-					for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.POWER, true).makeCopy(); c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.POWER, true).makeCopy()) {}
-					__cardsList.add(c);
+			if (AbstractDungeon.player.chosenClass == TheCaster.Enums.THE_CASTER) {
+				Field __cardsListField = __instance.getClass().getDeclaredField("cards1");
+				__cardsListField.setAccessible(true);
+				Object uncheckedList = __cardsListField.get(__instance);
+				if (uncheckedList instanceof ArrayList<?>) {
+					@SuppressWarnings("unchecked")
+					ArrayList<AbstractCard> __cardsList = (ArrayList<AbstractCard>) uncheckedList;
+					if (__cardsList != null) {
+						__cardsList.clear();
+						AbstractCard c;
+						for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.ATTACK, true).makeCopy(); c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.ATTACK, true).makeCopy()) {}
+						__cardsList.add(c);
+						for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CasterCardType.SPELL, true).makeCopy(); c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CasterCardType.SPELL, true).makeCopy()) {}
+						__cardsList.add(c);
+						for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CasterCardType.SPELL, true).makeCopy(); Objects.equals(c.cardID, __cardsList.get(__cardsList.size() - 1).cardID) || c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CasterCardType.SPELL, true).makeCopy()) {}
+						__cardsList.add(c);
+						for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.SKILL, true).makeCopy(); c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.SKILL, true).makeCopy()) {}
+						__cardsList.add(c);
+						for (c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.POWER, true).makeCopy(); c.color == CardColor.COLORLESS; c = AbstractDungeon.getCardFromPool(AbstractDungeon.rollRarity(), CardType.POWER, true).makeCopy()) {}
+						__cardsList.add(c);
+					}
 				}
 			}
 		}

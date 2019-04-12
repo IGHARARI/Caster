@@ -13,7 +13,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.powers.FrozenPower;
+import sts.caster.powers.FrostPower;
 
 public class FlashFrost extends CasterCard {
 
@@ -43,7 +43,7 @@ public class FlashFrost extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new FrozenPower(m, p, magicNumber), magicNumber));
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new FrostPower(m, p, magicNumber), magicNumber));
     }
 
     @Override

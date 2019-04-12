@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.Texture;
 
 import basemod.abstracts.CustomRelic;
 import sts.caster.core.CasterMod;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 
 public class PlaceholderRelic extends CustomRelic {
 
     public static final String ID = CasterMod.makeID("PlaceholderRelic");
 
-    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic.png"));
+    private static final Texture IMG = TextureHelper.getTexture(makeRelicPath("placeholder_relic.png"));
+    private static final Texture OUTLINE = TextureHelper.getTexture(makeRelicOutlinePath("placeholder_relic.png"));
 
     public PlaceholderRelic() {
         super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.MAGICAL);

@@ -20,7 +20,7 @@ import sts.caster.cards.spells.Meteor;
 import sts.caster.core.CasterMod;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.patches.spellCardType.CasterCardType;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 
 public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, CustomSavable<Integer> {
 
@@ -31,8 +31,8 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 
     // ID, images, text.
     public static final String ID = CasterMod.makeID("MagicBook");
-    private static final Texture IMG = TextureLoader.getTexture(CasterMod.makeRelicPath("BottledPlaceholder.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(CasterMod.makeRelicOutlinePath("BottledPlaceholder.png"));
+    private static final Texture IMG = TextureHelper.getTexture(CasterMod.makeRelicPath("BottledPlaceholder.png"));
+    private static final Texture OUTLINE = TextureHelper.getTexture(CasterMod.makeRelicOutlinePath("BottledPlaceholder.png"));
 
     public MagicBookRelic() {
         super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.CLINK);

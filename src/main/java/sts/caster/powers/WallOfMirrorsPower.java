@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 import sts.caster.core.CasterMod;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 
 //Gain 1 dex for the turn for each card played.
 
@@ -28,8 +28,8 @@ public class WallOfMirrorsPower extends TwoAmountPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureLoader.getTexture(makePowerPath("placeholder_power84.png"));
-	private static final Texture tex32 = TextureLoader.getTexture(makePowerPath("placeholder_power32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("placeholder_power84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("placeholder_power32.png"));
 
 	public WallOfMirrorsPower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
 		name = NAME;

@@ -1,11 +1,15 @@
 {
+  "caster:vfx": {
+    "NAME": "Vfx Test",
+    "DESCRIPTION": "This skill should not appear in game, it's for testing!"
+  },
   "caster:strike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! Damage."
   },
   "caster:defend": {
     "NAME": "Defend",
-    "DESCRIPTION": "Gain !B! Block."
+    "DESCRIPTION": "Gain !B! Block. NL If you played a Spell this turn, gain !M! extra block."
   },
   "caster:LAZER": {
     "NAME": "LAZER",
@@ -23,10 +27,19 @@
     "NAME": "Wall Of Rocks",
     "DESCRIPTION": "Gain !B! block. NL Apply !M! weakness to ALL atacking enemies."
   },
+  "caster:DiamondDust": {
+    "NAME": "Diamond Dust",
+    "DESCRIPTION": "Apply !M! caster:Frost. NL caster:Cast_Time !caster:Delay!: NL Gain block equal to your block when you played this.",
+    "EXTENDED_DESCRIPTION": ["Apply !M! caster:Frost. NL caster:Cast_Time !caster:Delay!: NL Gain block equal to your block when you played this: !caster:M2! ."]
+  },
   "caster:GateOfBabylon": {
     "NAME": "Gate of Babylon",
     "DESCRIPTION": "Deal !D! damage to a random enemy for every caster:unique_spell in your deck.",
     "EXTENDED_DESCRIPTION": ["Deal !D! damage to a random enemy for every caster:unique_spell in your deck. NL Unique Spells: !M!"]
+  },
+  "caster:Thundra": {
+    "NAME": "Thundra",
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! caster:Frost and deal !caster:D! damage to ALL enemies. NL Play a copy of this card. NL Exhaust."
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
@@ -168,6 +181,10 @@
     "NAME": "Eruption",
     "DESCRIPTION": "Increase this card's damage by !M! this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
+  "caster:SpontaneousCombustion": {
+    "NAME": "Spontaneous Combustion",
+    "DESCRIPTION": "Deal !caster:D! damage. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage three times to the enemy with the lowest HP."
+  },
   "caster:LordOfVermillion": {
     "NAME": "Lord Of Vermillion",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M! [#F7FF00]x[] X times. NL caster:Shocker."
@@ -192,7 +209,7 @@
   },
   "caster:Sandstorm": {
     "NAME": "Sandstorm",
-    "DESCRIPTION": "ALL enemies lose !M! Strength for 1 turn and gain 1 caster:Mired. NL Lose !caster:M2! Focus for 1 turn."
+    "DESCRIPTION": "ALL enemies lose !M! Strength for 1 turn and gain 1 caster:Mired. NL Lose !caster:M2! Focus until the end of next turn."
   },
   "caster:WallOfSwords": {
     "NAME": "Wall Of Swords",
@@ -305,11 +322,11 @@
   },
   "caster:WallOfThorns": {
     "NAME": "Wall Of Thorns",
-    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block twice and !M! Thorns."
+    "DESCRIPTION": "Gain !caster:B! Block twice. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block and !M! Thorns."
   },
   "caster:DivertFocus": {
     "NAME": "Divert Focus",
-    "DESCRIPTION": "Gain !B! Block. NL Add !M! to the caster:Cast_Time of your casted Spells with the current lowest caster:Cast_Time."
+    "DESCRIPTION": "Gain !B! Block. NL Lose !M! Focus until the end of next turn."
   },
   "caster:BookThrow": {
     "NAME": "Book Throw",

@@ -4,6 +4,7 @@ import static sts.caster.core.CasterMod.makePowerPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -14,7 +15,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FocusPower;
 
 import sts.caster.core.CasterMod;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 
 //Gain 1 dex for the turn for each card played.
 
@@ -26,12 +27,17 @@ public class GainFocusPower extends AbstractPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureLoader.getTexture(makePowerPath("placeholder_power84.png"));
-	private static final Texture tex32 = TextureLoader.getTexture(makePowerPath("placeholder_power32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("placeholder_power84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("placeholder_power32.png"));
 
-	public GainFocusPower(final AbstractCreature owner, final int amount) {
+	private static int procThisTurn=1;
+	private static int procNextTurn=2;
+	boolean isNextTurn;
+	
+	public GainFocusPower(final AbstractCreature owner, final int amount, Boolean isNextTurn) {
 		name = NAME;
-		ID = POWER_ID;
+		ID = POWER_ID + (isNextTurn ? procNextTurn : procThisTurn);
+		this.isNextTurn = isNextTurn;
 		this.owner = owner;
 		this.amount = amount;
 		this.region128 = new TextureAtlas.AtlasRegion(tex84, 0, 0, 84, 84);
@@ -39,20 +45,35 @@ public class GainFocusPower extends AbstractPower {
 
 		isTurnBased = false;
 		canGoNegative = false;
-		type = PowerType.DEBUFF;
+		type = PowerType.BUFF;
 		updateDescription();
 	}
 	
 	@Override
-	public void atStartOfTurn() {
-		this.flash();
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new FocusPower(this.owner, this.amount), this.amount));
-		AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+	public void atStartOfTurnPostDraw() {
+		if (isNextTurn) {
+			this.flash();
+			AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
+			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(owner, owner, new GainFocusPower(owner, amount, false), amount, true, AttackEffect.NONE));
+		}
+	}
+	
+	@Override
+	public void atEndOfTurn(boolean isPlayer) {
+		if (!isNextTurn) {
+			this.flash();
+			AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
+			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new FocusPower(this.owner, this.amount), this.amount));
+		}
 	}
 	
 	@Override
 	public void updateDescription() {
-		description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1];
+		if (isNextTurn) {
+			description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[2];
+		} else {
+			description = DESCRIPTIONS[1] + amount + DESCRIPTIONS[2];
+		}
 	}
 
 }

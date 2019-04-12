@@ -54,6 +54,7 @@ public class WallOfThorns extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
+    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
     }
     
@@ -62,7 +63,6 @@ public class WallOfThorns extends CasterCard {
     	return (c, t) -> {
     		AbstractPlayer p = AbstractDungeon.player;
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	actions.add(new GainBlockAction(p, p, c.spellBlock));
         	actions.add(new GainBlockAction(p, p, c.spellBlock));
         	actions.add(new ApplyPowerAction(p, p, new ThornsPower(p, c.magicNumber), c.magicNumber));
     		return actions;

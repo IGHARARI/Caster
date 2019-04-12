@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 import sts.caster.core.MagicElement;
-import sts.caster.powers.FrozenPower;
+import sts.caster.powers.FrostPower;
 import sts.caster.powers.ShockedPower;
 
 public class ApplyElementalEffectChanceAction extends AbstractGameAction {
@@ -46,7 +46,7 @@ public class ApplyElementalEffectChanceAction extends AbstractGameAction {
     		AbstractPower powerToApply = null;
     		switch (element) {
     			case ICE:
-    				powerToApply = new FrozenPower(target, source, stacksPerChance);
+    				powerToApply = new FrostPower(target, source, stacksPerChance);
     				break;
     			case THUNDER:
     				powerToApply = new ShockedPower(target, source, stacksPerChance);

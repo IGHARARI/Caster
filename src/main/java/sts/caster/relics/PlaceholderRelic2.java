@@ -2,7 +2,7 @@ package sts.caster.relics;
 
 import basemod.abstracts.CustomRelic;
 import sts.caster.core.CasterMod;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 
 import static sts.caster.core.CasterMod.makeRelicOutlinePath;
 import static sts.caster.core.CasterMod.makeRelicPath;
@@ -23,8 +23,8 @@ public class PlaceholderRelic2 extends CustomRelic {
     // ID, images, text.
     public static final String ID = CasterMod.makeID("PlaceholderRelic2");
 
-    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png"));
+    private static final Texture IMG = TextureHelper.getTexture(makeRelicPath("placeholder_relic2.png"));
+    private static final Texture OUTLINE = TextureHelper.getTexture(makeRelicOutlinePath("placeholder_relic2.png"));
 
     public PlaceholderRelic2() {
         super(ID, IMG, OUTLINE, RelicTier.COMMON, LandingSound.FLAT);

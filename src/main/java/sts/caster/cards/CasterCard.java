@@ -30,7 +30,7 @@ import sts.caster.core.MagicElement;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.BlazedPower;
-import sts.caster.powers.FrozenPower;
+import sts.caster.powers.FrostPower;
 import sts.caster.powers.MiredPower;
 import sts.caster.powers.ShockedPower;
 import sts.caster.powers.ShortenedChantPower;
@@ -227,7 +227,7 @@ public abstract class CasterCard extends CustomCard {
 			case ICE:
 				return mo.hasPower(BlazedPower.POWER_ID);
 			case THUNDER:
-				return mo.hasPower(FrozenPower.POWER_ID);
+				return mo.hasPower(FrostPower.POWER_ID);
 			case EARTH:
 				return mo.hasPower(ShockedPower.POWER_ID);
 			default:

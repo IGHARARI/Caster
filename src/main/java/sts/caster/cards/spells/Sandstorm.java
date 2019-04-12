@@ -56,7 +56,7 @@ public class Sandstorm extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
 		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FocusPower(p, -m2), -m2));
 		if (!p.hasPower(ArtifactPower.POWER_ID)) {
-			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new GainFocusPower(p, m2), m2, true, AttackEffect.NONE));
+			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new GainFocusPower(p, m2, true), m2, true, AttackEffect.NONE));
 		}
 		
 		AbstractDungeon.actionManager.addToBottom(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .40f));

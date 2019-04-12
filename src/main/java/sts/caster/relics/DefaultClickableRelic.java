@@ -2,7 +2,7 @@ package sts.caster.relics;
 
 import basemod.abstracts.CustomRelic;
 import sts.caster.core.CasterMod;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 
 import static sts.caster.core.CasterMod.makeRelicOutlinePath;
 import static sts.caster.core.CasterMod.makeRelicPath;
@@ -29,8 +29,8 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
     // ID, images, text.
     public static final String ID = CasterMod.makeID("DefaultClickableRelic");
 
-    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("default_clickable_relic.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("default_clickable_relic.png"));
+    private static final Texture IMG = TextureHelper.getTexture(makeRelicPath("default_clickable_relic.png"));
+    private static final Texture OUTLINE = TextureHelper.getTexture(makeRelicOutlinePath("default_clickable_relic.png"));
 
     private boolean usedThisTurn = false; // You can also have a relic be only usable once per combat. Check out Hubris for more examples, including other StSlib things.
 

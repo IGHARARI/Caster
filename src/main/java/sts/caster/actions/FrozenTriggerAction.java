@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import sts.caster.powers.FrozenPower;
+import sts.caster.powers.FrostPower;
 import sts.caster.util.PowersHelper;
 
 public class FrozenTriggerAction extends AbstractGameAction {
@@ -24,10 +24,10 @@ public class FrozenTriggerAction extends AbstractGameAction {
     public void update() {
     	if (!isDone) {
     		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(0.2f));
-    		AbstractDungeon.actionManager.addToTop(new ReducePowerAction(target, target, FrozenPower.POWER_ID, 1));
-    		this.amount = PowersHelper.getCreaturePowerAmount(FrozenPower.POWER_ID, target);
+    		AbstractDungeon.actionManager.addToTop(new ReducePowerAction(target, target, FrostPower.POWER_ID, 1));
+    		this.amount = PowersHelper.getCreaturePowerAmount(FrostPower.POWER_ID, target);
     		if (amount > 0) {
-    			target.getPower(FrozenPower.POWER_ID).flash();
+    			target.getPower(FrostPower.POWER_ID).flash();
     			if (target.isPlayer) {
     				AbstractDungeon.actionManager.addToTop(new DamageAction(target, new DamageInfo(target, amount, DamageType.THORNS), AttackEffect.BLUNT_LIGHT, true));
     			} else {

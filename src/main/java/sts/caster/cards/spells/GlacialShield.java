@@ -36,8 +36,8 @@ public class GlacialShield extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 1;
-    private static final int BASE_BLOCK = 6;
+    private static final int BASE_DELAY = 2;
+    private static final int BASE_BLOCK = 8;
     private static final int UPG_BLOCK = 2;
     private static final int FREEZE_AMOUNT = 1;
     
@@ -62,7 +62,7 @@ public class GlacialShield extends CasterCard {
     public ActionListMaker getActionsMaker(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, spellBlock));
+    		actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, c.spellBlock));
     		return actionsList;
     	};
     }

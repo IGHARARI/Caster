@@ -41,7 +41,7 @@
 	},
 	"caster:GainFocusPower": {
 	        "NAME": "Unfocused",
-	        "DESCRIPTIONS": ["At the end of this turn, gain #b", " Focus."]
+	        "DESCRIPTIONS": ["At the end of next turn, gain #b", "At the end of this turn, gain #b", " Focus."]
 	},
 	"caster:Izanagi": {
 	        "NAME": "Izanagi's Obdurance",

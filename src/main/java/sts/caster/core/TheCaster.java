@@ -50,7 +50,7 @@ public class TheCaster extends CustomPlayer {
     }
 
     public static final int ENERGY_PER_TURN = 3;
-    public static final int MAX_HP = 60;
+    public static final int MAX_HP = 64;
     public static final int STARTING_HP = MAX_HP;
     public static final int STARTING_GOLD = 99;
     public static final int CARD_DRAW = 5;
@@ -121,6 +121,7 @@ public class TheCaster extends CustomPlayer {
         retVal.add(CasterStrike.ID);
         retVal.add(CasterStrike.ID);
         retVal.add(CasterStrike.ID);
+        retVal.add(CasterDefend.ID);
         retVal.add(CasterDefend.ID);
         retVal.add(CasterDefend.ID);
         retVal.add(CasterDefend.ID);

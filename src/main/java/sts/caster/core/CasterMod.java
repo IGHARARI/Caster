@@ -90,12 +90,14 @@ import sts.caster.cards.skills.Rectify;
 import sts.caster.cards.skills.Sultry;
 import sts.caster.cards.skills.Surge;
 import sts.caster.cards.skills.Unearth;
+import sts.caster.cards.skills.VfxTestSkill;
 import sts.caster.cards.skills.WallOfAsh;
 import sts.caster.cards.skills.WallOfMirrors;
 import sts.caster.cards.skills.WallOfRocks;
 import sts.caster.cards.spells.AbsoluteZero;
 import sts.caster.cards.spells.AlternatingCurrent;
 import sts.caster.cards.spells.Conflagrate;
+import sts.caster.cards.spells.DiamondDust;
 import sts.caster.cards.spells.Eruption;
 import sts.caster.cards.spells.Explosion;
 import sts.caster.cards.spells.Fireball;
@@ -114,8 +116,10 @@ import sts.caster.cards.spells.PyroclasticTide;
 import sts.caster.cards.spells.Sandstorm;
 import sts.caster.cards.spells.Sleet;
 import sts.caster.cards.spells.SoulStrike;
+import sts.caster.cards.spells.SpontaneousCombustion;
 import sts.caster.cards.spells.StormGust;
 import sts.caster.cards.spells.Susanoo;
+import sts.caster.cards.spells.Thundra;
 import sts.caster.cards.spells.WallOfSwords;
 import sts.caster.cards.spells.WallOfThorns;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
@@ -123,7 +127,7 @@ import sts.caster.potions.PlaceholderPotion;
 import sts.caster.relics.DefaultClickableRelic;
 import sts.caster.relics.MagicBookRelic;
 import sts.caster.relics.PlaceholderRelic;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 import sts.caster.variables.DelayTurns;
 import sts.caster.variables.SecondMagicNumber;
 import sts.caster.variables.SpellBlock;
@@ -258,7 +262,7 @@ public class CasterMod implements
     public void receivePostInitialize() {
         logger.info("Loading badge image and mod options");
         // Load the Mod Badge
-        Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
+        Texture badgeTexture = TextureHelper.getTexture(BADGE_IMAGE);
 
         // Create the Mod Menu
         ModPanel settingsPanel = new ModPanel();
@@ -459,7 +463,22 @@ public class CasterMod implements
         UnlockTracker.unlockCard(EchoingVoice.ID);
         BaseMod.addCard(new ManaOverflow());
         UnlockTracker.unlockCard(ManaOverflow.ID);
+        BaseMod.addCard(new DiamondDust());
+        UnlockTracker.unlockCard(DiamondDust.ID);
+        BaseMod.addCard(new Thundra());
+        UnlockTracker.unlockCard(Thundra.ID);
+        BaseMod.addCard(new SpontaneousCombustion());
+        UnlockTracker.unlockCard(SpontaneousCombustion.ID);
+
         
+        
+        
+        /** REMOVE REMOVE REMOVE */
+        // REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE 
+		        BaseMod.addCard(new VfxTestSkill());
+		        UnlockTracker.unlockCard(VfxTestSkill.ID);
+        // REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE 
+        /** REMOVE REMOVE REMOVE */
         logger.info("Done adding cards!");
     }
 

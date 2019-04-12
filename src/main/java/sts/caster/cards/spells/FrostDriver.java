@@ -23,7 +23,7 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
-import sts.caster.powers.FrozenPower;
+import sts.caster.powers.FrostPower;
 
 public class FrostDriver extends CasterCard {
 
@@ -44,7 +44,7 @@ public class FrostDriver extends CasterCard {
     private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 4;
     private static final int UPG_DAMAGE = 2;
-    private static final int BASE_BLOCK = 5;
+    private static final int BASE_BLOCK = 6;
     private static final int UPG_BLOCK = 2;
 
 
@@ -68,7 +68,7 @@ public class FrostDriver extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.BLUNT_HEAVY));
-    		actionsList.add(new ApplyPowerAction(t, AbstractDungeon.player, new FrozenPower(t, AbstractDungeon.player, c.magicNumber), c.magicNumber));
+    		actionsList.add(new ApplyPowerAction(t, AbstractDungeon.player, new FrostPower(t, AbstractDungeon.player, c.magicNumber), c.magicNumber));
     		return actionsList;
     	};
     }

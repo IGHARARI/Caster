@@ -1,17 +1,19 @@
 package sts.caster.cards.skills;
 
-import basemod.abstracts.CustomCard;
-import basemod.helpers.BaseModCardTags;
-import sts.caster.core.CasterMod;
-import sts.caster.core.TheCaster;
-
 import static sts.caster.core.CasterMod.makeCardPath;
 
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+
+import basemod.abstracts.CustomCard;
+import basemod.helpers.BaseModCardTags;
+import sts.caster.core.CasterMod;
+import sts.caster.core.TheCaster;
+import sts.caster.patches.spellCardType.CasterCardType;
 
 public class CasterDefend extends CustomCard {
 
@@ -30,18 +32,23 @@ public class CasterDefend extends CustomCard {
 
     private static final int COST = 1;
     private static final int BLOCK = 5;
+    private static final int EXTRA_BLOCK = 2;
     private static final int UPGRADE_PLUS_BLOCK = 3;
 
     public CasterDefend() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseBlock = BLOCK;
+        baseMagicNumber = magicNumber = EXTRA_BLOCK;
         this.tags.add(BaseModCardTags.BASIC_DEFEND);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(
-                new com.megacrit.cardcrawl.actions.common.GainBlockAction(p, p, block));
+    	int blockGain = block;
+    	if(AbstractDungeon.actionManager.cardsPlayedThisTurn.stream().anyMatch(c -> c.type == CasterCardType.SPELL)) {
+    		blockGain += magicNumber;
+    	}
+        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, blockGain));
     }
 
     @Override

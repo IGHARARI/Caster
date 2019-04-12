@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 
 import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 
 public class RenderElectrifiedTagPatch {
 	
@@ -37,7 +37,7 @@ public class RenderElectrifiedTagPatch {
 	                	float drawX = __card.current_x - 256.0F;
 	                	float drawY = __card.current_y - 256.0F;
 	                	long elecAmount = __card.tags.stream().filter((tag) -> tag == CasterCardTags.ELECTRIFIED).count();
-	                	Texture elecTab = TextureLoader.getTexture(CasterMod.ELECTRIFIED_TAG_IMAGE);
+	                	Texture elecTab = TextureHelper.getTexture(CasterMod.ELECTRIFIED_TAG_IMAGE);
 	                			
         				Method renderHelperMethod = AbstractCard.class.getDeclaredMethod("renderHelper", SpriteBatch.class, Color.class, Texture.class, float.class, float.class);
 	                	renderHelperMethod.setAccessible(true);

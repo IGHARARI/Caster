@@ -19,7 +19,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.cards.spells.SoulStrike;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
-import sts.caster.util.TextureLoader;
+import sts.caster.util.TextureHelper;
 
 //Gain 1 dex for the turn for each card played.
 
@@ -37,8 +37,8 @@ public class ManaOverflowPower extends AbstractPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureLoader.getTexture(makePowerPath("placeholder_power84.png"));
-	private static final Texture tex32 = TextureLoader.getTexture(makePowerPath("placeholder_power32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("placeholder_power84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("placeholder_power32.png"));
 
 	public ManaOverflowPower(final AbstractCreature owner, final int amount) {
 		name = NAME;

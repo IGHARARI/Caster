@@ -14,9 +14,9 @@ import java.util.HashMap;
 // You honestly don't need to bother with this unless you want to know how we're loading the textures.
 
 
-public class TextureLoader {
+public class TextureHelper {
     private static HashMap<String, Texture> textures = new HashMap<String, Texture>();
-    public static final Logger logger = LogManager.getLogger(TextureLoader.class.getName());
+    public static final Logger logger = LogManager.getLogger(TextureHelper.class.getName());
 
     /**
      * @param textureString - String path to the texture you want to load relative to resources,

@@ -14,8 +14,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.actions.ModifyCardInBattleSpellDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
+import sts.caster.actions.SpontaneousCombustionAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -23,46 +23,49 @@ import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
 
-public class Explosion extends CasterCard {
+public class SpontaneousCombustion extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("Explosion");
+    public static final String ID = CasterMod.makeID("SpontaneousCombustion");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("explosion.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.RARE;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 33;
-    private static final int BASE_DOWNGRADE = 9;
-    private static final int UPG_DOWNGRADE = -4;
+    private static final int BASE_DELAY = 3;
+    private static final int BASE_DAMAGE = 10;
+    private static final int UPG_DMG = 3;
 
 
-    public Explosion() {
+    public SpontaneousCombustion() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage =  BASE_DAMAGE;
-        magicNumber = baseMagicNumber = BASE_DOWNGRADE;
         setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+    	AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(m, spellDamage), AttackEffect.FIRE));
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
-		AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(this, -magicNumber));
+    }
+    
+    @Override
+    public float getTitleFontSize() {
+    	return 19;
     }
     
     @Override
     public ActionListMaker getActionsMaker(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.FIRE));
+    		if (c instanceof SpontaneousCombustion) actionsList.add(new SpontaneousCombustionAction((SpontaneousCombustion) c));
     		return actionsList;
     	};
     }
@@ -71,8 +74,8 @@ public class Explosion extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
+            upgradeSpellDamage(UPG_DMG);
             initializeDescription();
-            upgradeMagicNumber(UPG_DOWNGRADE);
         }
     }
 }
