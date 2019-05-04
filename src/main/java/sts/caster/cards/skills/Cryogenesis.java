@@ -28,7 +28,7 @@ public class Cryogenesis extends CasterCard {
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
+    private static final int COST = 0;
     private static final int DRAW_AMOUNT = 1;
     private static final int UPG_DRAW_AMOUNT = 1;
     
@@ -38,6 +38,7 @@ public class Cryogenesis extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = DRAW_AMOUNT;
         setCardElement(MagicElement.ICE);
+        exhaust = true;
     }
 
     @Override

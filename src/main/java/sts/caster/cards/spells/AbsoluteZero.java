@@ -53,11 +53,10 @@ public class AbsoluteZero extends CasterCard {
     @Override
     public void onFrozen() {
     	flash();
-    	System.out.println("on frozn for " + name + " triggrd, spdmg " + baseSpellDamage);
     	AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(this, baseSpellDamage));
     }
 
-    @Override
+	@Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
     }

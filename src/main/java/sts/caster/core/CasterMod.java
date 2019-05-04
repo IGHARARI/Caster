@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.MoveCardsAction;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -16,6 +17,7 @@ import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer.PlayerClass;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -40,7 +42,10 @@ import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditRelicsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.OnCardUseSubscriber;
+import basemod.interfaces.OnPlayerDamagedSubscriber;
+import basemod.interfaces.OnPlayerLoseBlockSubscriber;
 import basemod.interfaces.PostCreateStartingDeckSubscriber;
+import basemod.interfaces.PostEnergyRechargeSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.attacks.Barbroot;
@@ -90,21 +95,23 @@ import sts.caster.cards.skills.Rectify;
 import sts.caster.cards.skills.Sultry;
 import sts.caster.cards.skills.Surge;
 import sts.caster.cards.skills.Unearth;
-import sts.caster.cards.skills.VfxTestSkill;
 import sts.caster.cards.skills.WallOfAsh;
 import sts.caster.cards.skills.WallOfMirrors;
 import sts.caster.cards.skills.WallOfRocks;
+import sts.caster.cards.special.Ashes;
 import sts.caster.cards.spells.AbsoluteZero;
 import sts.caster.cards.spells.AlternatingCurrent;
 import sts.caster.cards.spells.Conflagrate;
 import sts.caster.cards.spells.DiamondDust;
 import sts.caster.cards.spells.Eruption;
 import sts.caster.cards.spells.Explosion;
+import sts.caster.cards.spells.Fira;
 import sts.caster.cards.spells.Fireball;
 import sts.caster.cards.spells.Fissure;
 import sts.caster.cards.spells.FrostDriver;
 import sts.caster.cards.spells.GaiasBlessing;
 import sts.caster.cards.spells.GlacialShield;
+import sts.caster.cards.spells.Heavy;
 import sts.caster.cards.spells.IcicleLance;
 import sts.caster.cards.spells.JupitelThunder;
 import sts.caster.cards.spells.LightningBolt;
@@ -112,14 +119,17 @@ import sts.caster.cards.spells.LordOfVermillion;
 import sts.caster.cards.spells.MegaloSpark;
 import sts.caster.cards.spells.Meteor;
 import sts.caster.cards.spells.NaturalChaos;
+import sts.caster.cards.spells.PhoenixFlare;
 import sts.caster.cards.spells.PyroclasticTide;
 import sts.caster.cards.spells.Sandstorm;
 import sts.caster.cards.spells.Sleet;
+import sts.caster.cards.spells.Slick;
 import sts.caster.cards.spells.SoulStrike;
 import sts.caster.cards.spells.SpontaneousCombustion;
 import sts.caster.cards.spells.StormGust;
 import sts.caster.cards.spells.Susanoo;
-import sts.caster.cards.spells.Thundra;
+import sts.caster.cards.spells.Thundara;
+import sts.caster.cards.spells.Tundra;
 import sts.caster.cards.spells.WallOfSwords;
 import sts.caster.cards.spells.WallOfThorns;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
@@ -142,7 +152,9 @@ public class CasterMod implements
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
         OnCardUseSubscriber,
+        PostEnergyRechargeSubscriber,
         PostCreateStartingDeckSubscriber,
+        OnPlayerDamagedSubscriber,
         PostInitializeSubscriber {
 
 	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
@@ -152,6 +164,8 @@ public class CasterMod implements
     private static final String AUTHOR = "Korbo";
     private static final String DESCRIPTION = "The Caster, controller of elements and destroyer of... conical structures.";
 
+    public static int blockLostLastRound = 0;
+    
     // Character Color
     public static final Color CASTER_COLOR = CardHelper.getColor(64.0f, 70.0f, 70.0f);
 
@@ -465,18 +479,30 @@ public class CasterMod implements
         UnlockTracker.unlockCard(ManaOverflow.ID);
         BaseMod.addCard(new DiamondDust());
         UnlockTracker.unlockCard(DiamondDust.ID);
-        BaseMod.addCard(new Thundra());
-        UnlockTracker.unlockCard(Thundra.ID);
+        BaseMod.addCard(new Tundra());
+        UnlockTracker.unlockCard(Tundra.ID);
         BaseMod.addCard(new SpontaneousCombustion());
         UnlockTracker.unlockCard(SpontaneousCombustion.ID);
+        BaseMod.addCard(new Ashes());
+        UnlockTracker.unlockCard(Ashes.ID);
+        BaseMod.addCard(new PhoenixFlare());
+        UnlockTracker.unlockCard(PhoenixFlare.ID);
+        BaseMod.addCard(new Fira());
+        UnlockTracker.unlockCard(Fira.ID);
+        BaseMod.addCard(new Thundara());
+        UnlockTracker.unlockCard(Thundara.ID);
+        BaseMod.addCard(new Heavy());
+        UnlockTracker.unlockCard(Heavy.ID);
+        BaseMod.addCard(new Slick());
+        UnlockTracker.unlockCard(Slick.ID);
 
         
         
         
         /** REMOVE REMOVE REMOVE */
         // REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE 
-		        BaseMod.addCard(new VfxTestSkill());
-		        UnlockTracker.unlockCard(VfxTestSkill.ID);
+//		        BaseMod.addCard(new VfxTestSkill());
+//		        UnlockTracker.unlockCard(VfxTestSkill.ID);
         // REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE 
         /** REMOVE REMOVE REMOVE */
         logger.info("Done adding cards!");
@@ -558,4 +584,21 @@ public class CasterMod implements
 		}
 	}
 
+	@Override
+	public void receivePostEnergyRecharge() {
+		System.out.println("energy recharge with block lost: " + blockLostLastRound);
+		blockLostLastRound = 0;
+		for (AbstractCard card : AbstractDungeon.player.exhaustPile.group) {
+			if (card instanceof PhoenixFlare) {
+				AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(AbstractDungeon.player.hand, AbstractDungeon.player.exhaustPile, xcard -> xcard == card));
+			}
+		}
+	}
+
+	@Override
+	public int receiveOnPlayerDamaged(int blockLost, DamageInfo info) {
+		blockLostLastRound += blockLost;
+		System.out.println("player lost block: " + blockLost + "  | total lost round: " + blockLostLastRound);
+		return blockLost;
+	}
 }

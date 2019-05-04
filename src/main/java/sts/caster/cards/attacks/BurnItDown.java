@@ -34,7 +34,7 @@ public class BurnItDown extends CasterCard {
 
     private static final int COST = 1;
     private static final int DAMAGE = 9;
-    private static final int UPGRADE_PLUS_DMG = 3;
+    private static final int UPGRADE_PLUS_DMG = 2;
 
     public BurnItDown() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);

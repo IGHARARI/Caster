@@ -54,6 +54,7 @@ public class Sultry extends CasterCard {
             upgradeName();
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             exhaust = false;
+            initializeDescription();
         }
     }
 }

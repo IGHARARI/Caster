@@ -108,13 +108,11 @@ public class DelayedCardEffectsPatch {
 		}
 		
 		private static class Locator extends SpireInsertLocator {
-
 			@Override
 			public int[] Locate(CtBehavior ctMethod) throws CannotCompileException, PatchingException {
 				Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "applyStartOfTurnPostDrawPowers");
 				return LineFinder.findInOrder(ctMethod, new ArrayList<Matcher>(), finalMatcher);
 			}
-			
 		}
 	}
 }

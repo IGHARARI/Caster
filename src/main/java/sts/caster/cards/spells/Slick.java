@@ -5,17 +5,16 @@ import static sts.caster.core.CasterMod.makeCardPath;
 import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.BlurPower;
 
 import sts.caster.actions.QueueDelayedCardAction;
-import sts.caster.actions.SpontaneousCombustionAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -23,49 +22,45 @@ import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
 
-public class SpontaneousCombustion extends CasterCard {
+public class Slick extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("SpontaneousCombustion");
+    public static final String ID = CasterMod.makeID("Slick");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("explosion.png");
+    public static final String IMG = makeCardPath("Skill.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.UNCOMMON;
-    private static final CardTarget TARGET = CardTarget.ENEMY;
+    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
-    private static final int BASE_DELAY = 3;
-    private static final int BASE_DAMAGE = 8;
-    private static final int UPG_DMG = 2;
+    private static final int COST = 0;
+    private static final int BASE_DELAY = 1;
+    private static final int BASE_BLUR = 1;
+    private static final int BASE_BLOCK = 5;
 
-
-    public SpontaneousCombustion() {
+    public Slick() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        baseSpellBlock = spellBlock = BASE_BLOCK;
         baseDelayTurns = delayTurns = BASE_DELAY;
-        baseSpellDamage = spellDamage =  BASE_DAMAGE;
-        setCardElement(MagicElement.FIRE);
+        magicNumber = baseMagicNumber = BASE_BLUR;
+        setCardElement(MagicElement.ICE);
+        upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(m, spellDamage), AttackEffect.FIRE));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
-    }
-    
-    @Override
-    public float getTitleFontSize() {
-    	return 17;
+    	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new BlurPower(p, magicNumber), magicNumber));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
     }
     
     @Override
     public ActionListMaker getActionsMaker(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		if (c instanceof SpontaneousCombustion) actionsList.add(new SpontaneousCombustionAction((SpontaneousCombustion) c));
+    		actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, c.spellBlock));
     		return actionsList;
     	};
     }
@@ -73,9 +68,9 @@ public class SpontaneousCombustion extends CasterCard {
     @Override
     public void upgrade() {
         if (!upgraded) {
-            upgradeName();
-            upgradeSpellDamage(UPG_DMG);
-            initializeDescription();
+            ++this.timesUpgraded;
+            this.upgraded = true;
+            this.initializeTitle();
         }
     }
 }

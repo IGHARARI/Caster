@@ -3,6 +3,10 @@
     "NAME": "Vfx Test",
     "DESCRIPTION": "This skill should not appear in game, it's for testing!"
   },
+  "caster:Ashes": {
+    "NAME": "Ashes",
+    "DESCRIPTION": "Exhausts when drawn, add a random card into your hand."
+  },
   "caster:strike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! Damage."
@@ -14,6 +18,10 @@
   "caster:LAZER": {
     "NAME": "LAZER",
     "DESCRIPTION": "Deal !D! damage !M! times."
+  },
+  "caster:PhoenixFlare": {
+    "NAME": "Phoenix Flare",
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL At the start of your turn, if this card is in your exhaust pile, put it in your hand. NL Exhaust."
   },
   "caster:Barbroot": {
     "NAME": "Barbroot",
@@ -37,13 +45,17 @@
     "DESCRIPTION": "Deal !D! damage to a random enemy for every caster:unique_spell in your deck.",
     "EXTENDED_DESCRIPTION": ["Deal !D! damage to a random enemy for every caster:unique_spell in your deck. NL Unique Spells: !M!"]
   },
-  "caster:Thundra": {
-    "NAME": "Thundra",
+  "caster:Tundra": {
+    "NAME": "Tundra",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! caster:Frost and deal !caster:D! damage to ALL enemies. NL Play a copy of this card. NL Exhaust."
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL caster:Shocker."
+  },
+  "caster:Thundara": {
+    "NAME": "Thundara",
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
   },
   "caster:Conflagrate": {
     "NAME": "Conflagrate",
@@ -56,7 +68,7 @@
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
-    "DESCRIPTION": "Whenever this card is Frozen, double its base damage. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Whenever this card is Frozen, double its base damage this fight. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
   "caster:StaticField": {
     "NAME": "Static Field",
@@ -86,7 +98,7 @@
   },
   "caster:Incinerate": {
     "NAME": "Incinerate",
-    "DESCRIPTION": "Exhaust !M! card in your hand. NL Apply caster:Blazed equal to !caster:M2! times its cost."
+    "DESCRIPTION": "caster:Burn !M! card in your hand. NL Apply caster:Blazed equal to !caster:M2! times its cost."
   },
   "caster:PyroclasticTide": {
     "NAME": "Pyroclastic Tide",
@@ -102,7 +114,7 @@
   },
   "caster:Ifrit": {
     "NAME": "Ifrit",
-    "DESCRIPTION": "At the start of your turn, exhaust a random card in your hand and play it. NL Apply caster:Blazed equal to it's cost to a random enemy."
+    "DESCRIPTION": "At the start of your turn, caster:Burn a random card in your hand and play it. NL Apply caster:Blazed equal to it's cost to a random enemy."
   },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",
@@ -170,7 +182,7 @@
   },
   "caster:Illusion": {
     "NAME": "Illusion",
-    "DESCRIPTION": "Change the enemy intent to Block this round."
+    "DESCRIPTION": "Change the enemy intent to Block this round. NL Exhaustive !stslib:ex!"
   },
   "caster:StormGust": {
     "NAME": "Storm Gust",
@@ -180,6 +192,10 @@
   "caster:Eruption": {
     "NAME": "Eruption",
     "DESCRIPTION": "Increase this card's damage by !M! this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+  },
+  "caster:Fira": {
+    "NAME": "Fira",
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Deals !M! additional damage for every turn you've been in battle."
   },
   "caster:SpontaneousCombustion": {
     "NAME": "Spontaneous Combustion",
@@ -211,6 +227,14 @@
     "NAME": "Sandstorm",
     "DESCRIPTION": "ALL enemies lose !M! Strength for 1 turn and gain 1 caster:Mired. NL Lose !caster:M2! Focus until the end of next turn."
   },
+  "caster:Heavy": {
+    "NAME": "Heavy",
+    "DESCRIPTION": "Gain !caster:B! block. NL caster:Cast_Time !caster:Delay!: NL Deal damage equal to the block you lost last round to ALL enemies."
+  },
+  "caster:Slick": {
+    "NAME": "Slick",
+    "DESCRIPTION": "Gain !M! Blur and draw a card. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! block."
+  },
   "caster:WallOfSwords": {
     "NAME": "Wall Of Swords",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Lose up to !M! block, gain that much Thorns. NL Exhaust."
@@ -221,7 +245,7 @@
   },
   "caster:Demi": {
     "NAME": "Demi",
-    "DESCRIPTION": "Remove ALL block from the enemy. NL It loses !M! % of it's current HP. NL Exhaust."
+    "DESCRIPTION": "Remove ALL block from the enemy. NL It loses !M! % of its current HP. NL Exhaust."
   },
   "caster:Elementalize": {
     "NAME": "Elementalize",
@@ -285,8 +309,8 @@
   },
   "caster:Cryogenesis": {
     "NAME": "Cryogenesis",
-    "DESCRIPTION": "caster:Freeze ALL cards in your hand. NL Draw !M! card for each card caster:Frozen this way.",
-    "UPGRADE_DESCRIPTION": "caster:Freeze ALL cards in your hand. NL Draw !M! cards for each card caster:Frozen this way."
+    "DESCRIPTION": "caster:Freeze ALL cards in your hand. NL Draw !M! card for each card caster:Frozen this way. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "caster:Freeze ALL cards in your hand. NL Draw !M! cards for each card caster:Frozen this way. NL Exhaust."
   },
   "caster:BloodRitual": {
     "NAME": "Blood Ritual",

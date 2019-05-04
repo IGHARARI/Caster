@@ -26,7 +26,7 @@
     "FLAVOR": "Like a coloring book but with more glitter and demons.",
     "DESCRIPTIONS": [
       "Choose a spell. Reduce its Casting Time by 1.",
-      "The #yCasting #yTime of ", " is reduced by 1.",
+      "The #yCasting #yTime of ", " is reduced by 1. You can change the memorized Spell at a Rest site.",
       "Select a card to memorize on the ", "."
     ]
   }

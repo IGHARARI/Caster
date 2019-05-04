@@ -28,7 +28,6 @@ public class IfritAction extends AbstractGameAction {
 				return;
 			}
             AbstractCard randomCard = p.hand.getRandomCard(AbstractDungeon.cardRandomRng);
-            p.hand.moveToExhaustPile(randomCard);
             int energyBurnt = 0;
             if (randomCard.cost == -1) {
             	energyBurnt += EnergyPanel.totalCount;
@@ -50,6 +49,7 @@ public class IfritAction extends AbstractGameAction {
             tmp.calculateCardDamage(m2);
             tmp.purgeOnUse = true;
             AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(tmp, m2));
+            AbstractDungeon.actionManager.addToBottom(new BurnAction(randomCard, p.hand));
             
 		}
         tickDuration();

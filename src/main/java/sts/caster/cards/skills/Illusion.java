@@ -2,6 +2,7 @@ package sts.caster.cards.skills;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
+import com.evacipated.cardcrawl.mod.stslib.variables.ExhaustiveVariable;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -27,12 +28,12 @@ public class Illusion extends CasterCard {
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 2;
-    private static final int UPGR_COST = 1;
+    private static final int COST = 1;
 
 
     public Illusion() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        ExhaustiveVariable.setBaseValue(this, 2);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class Illusion extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBaseCost(UPGR_COST);
+            ExhaustiveVariable.upgrade(this, 1);
             initializeDescription();
         }
     }

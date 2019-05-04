@@ -15,7 +15,7 @@ public class ModifyCardInBattleSpellDamageAction extends AbstractGameAction {
 	
 	public ModifyCardInBattleSpellDamageAction(CasterCard card, int modifyAmount) {
         actionType = ActionType.CARD_MANIPULATION;
-        this.pred = c -> c.uuid.equals(card.uuid);
+        this.pred = (c) -> (c != null && card.uuid.equals(c.uuid));
         this.amount = modifyAmount;
 	}
 

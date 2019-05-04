@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
-import com.megacrit.cardcrawl.localization.TutorialStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.AbstractPanel;
 import com.megacrit.cardcrawl.vfx.ExhaustPileParticle;
@@ -21,9 +20,9 @@ import com.megacrit.cardcrawl.vfx.ExhaustPileParticle;
 import sts.caster.patches.frozenpile.FrozenPileEnums;
 
 public class FrozenCardsPanel extends AbstractPanel {
-    private static final TutorialStrings tutorialStrings;
-    public static final String[] MSG;
-    public static final String[] LABEL;
+//    private static final TutorialStrings tutorialStrings;
+    public static final String MSG = "Click to view cards Frozen this combat.";
+    public static final String LABEL = "Frozen Cards";
     public static float fontScale;
     public static final float FONT_POP_SCALE = 2.0f;
     private static final float COUNT_CIRCLE_W;
@@ -99,15 +98,12 @@ public class FrozenCardsPanel extends AbstractPanel {
             FontHelper.renderFontCentered(sb, FontHelper.deckCountFont, msg, this.current_x, this.current_y + 2.0f * Settings.scale, Color.LIGHT_GRAY.cpy());
             this.hb.render(sb);
             if (this.hb.hovered && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.isScreenUp) {
-                TipHelper.renderGenericTip(1550.0f * Settings.scale, 450.0f * Settings.scale, FrozenCardsPanel.LABEL[0] + " (" + InputActionSet.exhaustPile.getKeyString() + ")", FrozenCardsPanel.MSG[0]);
+                TipHelper.renderGenericTip(1550.0f * Settings.scale, 450.0f * Settings.scale, LABEL + " (" + InputActionSet.exhaustPile.getKeyString() + ")", MSG);
             }
         }
     }
     
     static {
-        tutorialStrings = CardCrawlGame.languagePack.getTutorialString("Exhaust Tip");
-        MSG = FrozenCardsPanel.tutorialStrings.TEXT;
-        LABEL = FrozenCardsPanel.tutorialStrings.LABEL;
         FrozenCardsPanel.fontScale = 1.0f;
         COUNT_CIRCLE_W = 128.0f * Settings.scale;
         FrozenCardsPanel.totalCount = 0;

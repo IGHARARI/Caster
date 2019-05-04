@@ -25,7 +25,7 @@ public class DiablosFlame extends CasterCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
     private static final CardRarity RARITY = CardRarity.COMMON;
-    private static final CardTarget TARGET = CardTarget.ENEMY;
+    private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 

@@ -39,8 +39,8 @@ public class IcicleLance extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 7;
-    private static final int UPG_DAMAGE = 3;
+    private static final int BASE_DAMAGE = 6;
+    private static final int UPG_DAMAGE = 2;
 
 
     public IcicleLance() {
