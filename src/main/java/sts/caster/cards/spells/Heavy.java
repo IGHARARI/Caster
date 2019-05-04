@@ -47,7 +47,7 @@ public class Heavy extends CasterCard {
         setCardElement(MagicElement.EARTH);
         upgrade();
     }
-
+    
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));

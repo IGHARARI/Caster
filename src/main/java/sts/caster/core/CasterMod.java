@@ -1,6 +1,7 @@
 package sts.caster.core;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +10,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.MoveCardsAction;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -17,7 +17,6 @@ import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer.PlayerClass;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -29,6 +28,7 @@ import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
@@ -42,10 +42,8 @@ import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditRelicsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.OnCardUseSubscriber;
-import basemod.interfaces.OnPlayerDamagedSubscriber;
-import basemod.interfaces.OnPlayerLoseBlockSubscriber;
+import basemod.interfaces.OnStartBattleSubscriber;
 import basemod.interfaces.PostCreateStartingDeckSubscriber;
-import basemod.interfaces.PostEnergyRechargeSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.attacks.Barbroot;
@@ -152,9 +150,8 @@ public class CasterMod implements
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
         OnCardUseSubscriber,
-        PostEnergyRechargeSubscriber,
         PostCreateStartingDeckSubscriber,
-        OnPlayerDamagedSubscriber,
+        OnStartBattleSubscriber,
         PostInitializeSubscriber {
 
 	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
@@ -164,7 +161,7 @@ public class CasterMod implements
     private static final String AUTHOR = "Korbo";
     private static final String DESCRIPTION = "The Caster, controller of elements and destroyer of... conical structures.";
 
-    public static int blockLostLastRound = 0;
+    public static HashMap<Integer, Integer> blockLostPerTurn = new HashMap<Integer, Integer>();
     
     // Character Color
     public static final Color CASTER_COLOR = CardHelper.getColor(64.0f, 70.0f, 70.0f);
@@ -585,20 +582,7 @@ public class CasterMod implements
 	}
 
 	@Override
-	public void receivePostEnergyRecharge() {
-		System.out.println("energy recharge with block lost: " + blockLostLastRound);
-		blockLostLastRound = 0;
-		for (AbstractCard card : AbstractDungeon.player.exhaustPile.group) {
-			if (card instanceof PhoenixFlare) {
-				AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(AbstractDungeon.player.hand, AbstractDungeon.player.exhaustPile, xcard -> xcard == card));
-			}
-		}
-	}
-
-	@Override
-	public int receiveOnPlayerDamaged(int blockLost, DamageInfo info) {
-		blockLostLastRound += blockLost;
-		System.out.println("player lost block: " + blockLost + "  | total lost round: " + blockLostLastRound);
-		return blockLost;
+	public void receiveOnBattleStart(AbstractRoom p0) {
+		blockLostPerTurn.clear();
 	}
 }
