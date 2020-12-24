@@ -37,8 +37,8 @@ public class DelayedDamageAllEnemiesAction extends AbstractGameAction {
             }
             for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
             	if (!mon.isDeadOrEscaped() && mon.currentHealth > 0) {
-            		mon.damageFlash = true;
-            		mon.damageFlashFrames = 4;
+//            		mon.damageFlash = true;
+//            		mon.damageFlashFrames = 4;
             		AbstractDungeon.effectList.add(new FlashAtkImgEffect(mon.hb.cX, mon.hb.cY, this.attackEffect, false));
             	}
             }

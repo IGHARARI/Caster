@@ -37,7 +37,7 @@ import sts.caster.powers.ShortenedChantPower;
 import sts.caster.util.PowersHelper;
 
 public abstract class CasterCard extends CustomCard {
-	private static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
+	private final static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
 	
 	public static final Predicate<AbstractCard> isCardSpellPredicate = (c)-> c.type == CasterCardType.SPELL;
 	private static final String BASE_BG_PATH = "caster/images/card_backgrounds/";

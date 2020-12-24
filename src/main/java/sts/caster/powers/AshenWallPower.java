@@ -24,8 +24,8 @@ public class AshenWallPower extends AbstractPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("placeholder_power84.png"));
-	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("placeholder_power32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("ashen84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("ashen32.png"));
 
 	public AshenWallPower(final AbstractCreature owner) {
 		name = NAME;

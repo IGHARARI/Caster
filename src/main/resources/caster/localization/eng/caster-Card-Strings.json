@@ -33,7 +33,7 @@
   },
   "caster:WallOfRocks": {
     "NAME": "Wall Of Rocks",
-    "DESCRIPTION": "Gain !B! block. NL Apply !M! weakness to ALL atacking enemies."
+    "DESCRIPTION": "Gain !B! block. NL Apply !M! weakness to ALL attacking enemies."
   },
   "caster:DiamondDust": {
     "NAME": "Diamond Dust",
@@ -114,7 +114,7 @@
   },
   "caster:Ifrit": {
     "NAME": "Ifrit",
-    "DESCRIPTION": "At the start of your turn, caster:Burn a random card in your hand and play it. NL Apply caster:Blazed equal to it's cost to a random enemy."
+    "DESCRIPTION": "At the start of your turn, caster:Burn a random card in your hand and play it. NL Apply caster:Blazed equal to its cost to a random enemy."
   },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",

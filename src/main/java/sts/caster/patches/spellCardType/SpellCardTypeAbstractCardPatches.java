@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.LineFinder;
 import com.evacipated.cardcrawl.modthespire.lib.Matcher;
@@ -26,12 +27,12 @@ import basemod.helpers.SuperclassFinder;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import sts.caster.cards.CasterCard;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class SpellCardTypeAbstractCardPatches {
-	
-    private static void renderHelper(final AbstractCard card, final SpriteBatch sb, final Color color, final Texture texture, final float xPos, final float yPos) {
+    private static void renderHelper(final AbstractCard card, final SpriteBatch sb, final Color color, final AtlasRegion texture, final float xPos, final float yPos) {
         try {
-            final Method renderHelperMethod = SuperclassFinder.getSuperClassMethod(card.getClass(), "renderHelper", SpriteBatch.class, Color.class, Texture.class, Float.TYPE, Float.TYPE);
+            final Method renderHelperMethod = SuperclassFinder.getSuperClassMethod(card.getClass(), "renderHelper", SpriteBatch.class, Color.class, AtlasRegion.class, Float.TYPE, Float.TYPE);
             renderHelperMethod.setAccessible(true);
             final Field renderColorField = SuperclassFinder.getSuperclassField(card.getClass(), "renderColor");
             renderColorField.setAccessible(true);
@@ -49,6 +50,17 @@ public class SpellCardTypeAbstractCardPatches {
 
 		public static SpireReturn<Texture> Prefix(AbstractCard __card) {
 			if (__card.type == CasterCardType.SPELL) {
+				return SpireReturn.Return(ImageMaster.CARD_SKILL_BG_SILHOUETTE.getTexture());
+			}
+			return SpireReturn.Continue();
+		}
+	}
+
+	@SpirePatch(clz=AbstractCard.class, method="getCardBgAtlas", paramtypez = {})
+	public static class getCardBgAtlasPatch {
+
+		public static SpireReturn<TextureAtlas.AtlasRegion> Prefix(AbstractCard __card) {
+			if (__card.type == CasterCardType.SPELL) {
 				return SpireReturn.Return(ImageMaster.CARD_SKILL_BG_SILHOUETTE);
 			}
 			return SpireReturn.Continue();
@@ -58,9 +70,14 @@ public class SpellCardTypeAbstractCardPatches {
 	
 	@SpirePatch(clz=AbstractCard.class, method="renderCardBg", paramtypez = {SpriteBatch.class, float.class, float.class})
 	public static class renderCardBackgroundPatch {
-		
+
 		public static SpireReturn<?> Prefix(AbstractCard __card, SpriteBatch __sb, float __xpos, float __ypos) {
-            if (!(__card instanceof CustomCard) || __card.color == AbstractCard.CardColor.RED || __card.color == AbstractCard.CardColor.GREEN || __card.color == AbstractCard.CardColor.BLUE || __card.color == AbstractCard.CardColor.COLORLESS || __card.color == AbstractCard.CardColor.CURSE) {
+            if (!(__card instanceof CustomCard) ||
+					__card.color == AbstractCard.CardColor.RED ||
+					__card.color == AbstractCard.CardColor.GREEN ||
+					__card.color == AbstractCard.CardColor.BLUE ||
+					__card.color == AbstractCard.CardColor.COLORLESS ||
+					__card.color == AbstractCard.CardColor.CURSE) {
                 return (SpireReturn<?>)SpireReturn.Continue();
             }
             final CustomCard card = (CustomCard)__card;
@@ -92,14 +109,15 @@ public class SpellCardTypeAbstractCardPatches {
             	}
                 texture = casterCard.getBackgroundSmallTexture();
             }
-            if (card.textureBackgroundSmallImg != null && !card.textureBackgroundSmallImg.isEmpty()) {
+			if (card.textureBackgroundSmallImg != null && !card.textureBackgroundSmallImg.isEmpty()) {
                 texture = card.getBackgroundSmallTexture();
             }
             if (texture == null) {
                 return (SpireReturn<?>)SpireReturn.Continue();
             }
-            renderHelper(card, __sb, Color.WHITE.cpy(), texture, __xpos, __ypos);
-            return (SpireReturn<?>)SpireReturn.Return((Object)null);
+			AtlasRegion region = new AtlasRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
+			renderHelper(card, __sb, Color.WHITE.cpy(), region, __xpos, __ypos);
+			return (SpireReturn<?>)SpireReturn.Return((Object)null);
 		}
 	}
 	
@@ -185,19 +203,19 @@ public class SpellCardTypeAbstractCardPatches {
                 tOffset[0] = AbstractCard.typeOffsetSkill;
                 switch (__card.rarity) {
                     case COMMON: {
-                        tmpImg[0] = ImageMaster.CARD_FRAME_SKILL_COMMON_L;
+                        tmpImg[0] = ImageMaster.CARD_FRAME_SKILL_COMMON_L.getTexture();
                         break;
                     }
                     case UNCOMMON: {
-                        tmpImg[0] = ImageMaster.CARD_FRAME_SKILL_UNCOMMON_L;
+                        tmpImg[0] = ImageMaster.CARD_FRAME_SKILL_UNCOMMON_L.getTexture();
                         break;
                     }
                     case RARE: {
-                        tmpImg[0] = ImageMaster.CARD_FRAME_SKILL_RARE_L;
+                        tmpImg[0] = ImageMaster.CARD_FRAME_SKILL_RARE_L.getTexture();
                         break;
                     }
                     default: {
-                        tmpImg[0] = ImageMaster.CARD_FRAME_SKILL_COMMON_L;
+                        tmpImg[0] = ImageMaster.CARD_FRAME_SKILL_COMMON_L.getTexture();
                     }
                 }
 			}

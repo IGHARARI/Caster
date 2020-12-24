@@ -20,7 +20,7 @@ public class ElectrifySpecificCardAction extends AbstractGameAction {
        	card.flash();
     	card.tags.add(CasterCardTags.ELECTRIFIED);
     	if (AbstractDungeon.player.hasPower(RamuhPower.POWER_ID)) {
-    		card.modifyCostForTurn(-card.costForTurn);
+    		card.setCostForTurn(0);
     	}
     	if (AbstractDungeon.player.hasPower(StaticFieldPower.POWER_ID)) {
     		AbstractDungeon.player.getPower(StaticFieldPower.POWER_ID).onSpecificTrigger();

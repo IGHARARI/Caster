@@ -23,8 +23,8 @@ public class InfernoPower extends AbstractPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("placeholder_power84.png"));
-	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("placeholder_power32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("inferno84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("inferno32.png"));
 
 	public InfernoPower(final AbstractCreature owner, final int amount) {
 		name = NAME;

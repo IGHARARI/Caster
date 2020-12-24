@@ -29,8 +29,8 @@ public class MiredPower extends AbstractPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("placeholder_power84.png"));
-	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("placeholder_power32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("mired84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("mired32.png"));
 
 	public static final int HEAL_AMOUNT = 2;
 	private boolean attackUsed;

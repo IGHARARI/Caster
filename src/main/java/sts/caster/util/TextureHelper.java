@@ -43,7 +43,7 @@ public class TextureHelper {
      * @throws GdxRuntimeException
      */
     private static void loadTexture(final String textureString) throws GdxRuntimeException {
-        logger.info("The Summoner | Loading Texture: " + textureString);
+        logger.info("The Caster | Loading Texture: " + textureString);
         Texture texture = new Texture(textureString);
         texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
         textures.put(textureString, texture);

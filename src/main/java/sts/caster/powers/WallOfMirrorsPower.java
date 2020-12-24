@@ -28,8 +28,8 @@ public class WallOfMirrorsPower extends TwoAmountPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("placeholder_power84.png"));
-	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("placeholder_power32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("mirrors84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("mirrors32.png"));
 
 	public WallOfMirrorsPower(final AbstractCreature owner, final AbstractCreature source, final int amount) {
 		name = NAME;

@@ -29,8 +29,8 @@ public class AmaterasuPower extends AbstractPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("placeholder_power84.png"));
-	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("placeholder_power32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("amaterasu84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("amaterasu32.png"));
 
 	public AmaterasuPower(final AbstractCreature owner, final int amount) {
 		name = NAME;

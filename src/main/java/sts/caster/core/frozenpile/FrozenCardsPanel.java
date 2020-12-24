@@ -92,10 +92,10 @@ public class FrozenCardsPanel extends AbstractPanel {
         if (!Settings.hideLowerElements && !FrozenPileManager.frozenPile.isEmpty()) {
             this.hb.move(this.current_x, this.current_y);
             final String msg = Integer.toString(FrozenPileManager.frozenPile.size());
-            this.gl.setText(FontHelper.deckCountFont, msg);
+            this.gl.setText(FontHelper.turnNumFont, msg);
             sb.setColor(Color.BLUE.cpy());
             sb.draw(ImageMaster.DECK_COUNT_CIRCLE, this.current_x - COUNT_CIRCLE_W / 2.0f, this.current_y - COUNT_CIRCLE_W / 2.0f, COUNT_CIRCLE_W, COUNT_CIRCLE_W);
-            FontHelper.renderFontCentered(sb, FontHelper.deckCountFont, msg, this.current_x, this.current_y + 2.0f * Settings.scale, Color.LIGHT_GRAY.cpy());
+            FontHelper.renderFontCentered(sb, FontHelper.turnNumFont, msg, this.current_x, this.current_y + 2.0f * Settings.scale, Color.LIGHT_GRAY.cpy());
             this.hb.render(sb);
             if (this.hb.hovered && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.isScreenUp) {
                 TipHelper.renderGenericTip(1550.0f * Settings.scale, 450.0f * Settings.scale, LABEL + " (" + InputActionSet.exhaustPile.getKeyString() + ")", MSG);

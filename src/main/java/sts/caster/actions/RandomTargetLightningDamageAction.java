@@ -43,8 +43,8 @@ public class RandomTargetLightningDamageAction extends AbstractGameAction {
                 this.isDone = true;
                 return;
             }
-            this.target.damageFlash = true;
-            this.target.damageFlashFrames = 5;
+//            this.target.damageFlash = true;
+//            this.target.damageFlashFrames = 5;
             AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, this.attackEffect, this.muteSfx));
             CardCrawlGame.sound.play("ORB_LIGHTNING_EVOKE", 0.15f);
             for (int i = 0; i < 20; ++i) {
