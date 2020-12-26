@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -34,12 +35,12 @@ public class RenderElectrifiedTagPatch {
 
 	            if (AbstractDungeon.player != null) {
 	                if (__card.hasTag(CasterCardTags.ELECTRIFIED)) {
-	                	float drawX = __card.current_x - 256.0F;
-	                	float drawY = __card.current_y - 256.0F;
+	                	float drawX = __card.current_x;
+	                	float drawY = __card.current_y;
 	                	long elecAmount = __card.tags.stream().filter((tag) -> tag == CasterCardTags.ELECTRIFIED).count();
-	                	Texture elecTab = TextureHelper.getTexture(CasterMod.ELECTRIFIED_TAG_IMAGE);
-	                			
-        				Method renderHelperMethod = AbstractCard.class.getDeclaredMethod("renderHelper", SpriteBatch.class, Color.class, Texture.class, float.class, float.class);
+	                	Texture elecTabTexture = TextureHelper.getTexture(CasterMod.ELECTRIFIED_TAG_IMAGE);
+						AtlasRegion elecTab = new AtlasRegion(elecTabTexture, 0, 0, elecTabTexture.getWidth(), elecTabTexture.getHeight());
+        				Method renderHelperMethod = AbstractCard.class.getDeclaredMethod("renderHelper", SpriteBatch.class, Color.class, AtlasRegion.class, float.class, float.class);
 	                	renderHelperMethod.setAccessible(true);
 	                	renderHelperMethod.invoke(__card, __sb, baseColor, elecTab, drawX, drawY);
 	                    BitmapFont font = FontHelper.menuBannerFont;
@@ -52,8 +53,6 @@ public class RenderElectrifiedTagPatch {
 	                    FontHelper.menuBannerFont.getData().setScale(1.0F);
 	                }
 	            }
-	        	
-	        	
 	        }
 		}
 	}

@@ -3,6 +3,8 @@ package sts.caster.core;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,17 +48,7 @@ import basemod.interfaces.OnStartBattleSubscriber;
 import basemod.interfaces.PostCreateStartingDeckSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import sts.caster.cards.CasterCardTags;
-import sts.caster.cards.attacks.Barbroot;
-import sts.caster.cards.attacks.BookThrow;
-import sts.caster.cards.attacks.BurnItDown;
-import sts.caster.cards.attacks.CasterStrike;
-import sts.caster.cards.attacks.Demi;
-import sts.caster.cards.attacks.Discharge;
-import sts.caster.cards.attacks.FrigidBeam;
-import sts.caster.cards.attacks.GateOfBabylon;
-import sts.caster.cards.attacks.LAZER;
-import sts.caster.cards.attacks.MagicResonance;
-import sts.caster.cards.attacks.MagicWeapon;
+import sts.caster.cards.attacks.*;
 import sts.caster.cards.powers.Focusyn;
 import sts.caster.cards.powers.Grimoire;
 import sts.caster.cards.powers.Ifrit;
@@ -488,16 +480,9 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Heavy.ID);
         BaseMod.addCard(new Slick());
         UnlockTracker.unlockCard(Slick.ID);
-
+        BaseMod.addCard(new FlashSpeed());
+        UnlockTracker.unlockCard(FlashSpeed.ID);
         
-        
-        
-        /** REMOVE REMOVE REMOVE */
-        // REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE 
-//		        BaseMod.addCard(new VfxTestSkill());
-//		        UnlockTracker.unlockCard(VfxTestSkill.ID);
-        // REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE REMOVE 
-        /** REMOVE REMOVE REMOVE */
         logger.info("Done adding cards!");
     }
 
@@ -566,7 +551,8 @@ public class CasterMod implements
 			int amountElectrified = tagsBeforeRemove - card.tags.size();
 			AbstractDungeon.actionManager.addToBottom(new VFXAction(new LightningEffect(AbstractDungeon.player.drawX, AbstractDungeon.player.drawY), 0.1f));
 			AbstractDungeon.actionManager.addToBottom(new SFXAction("ORB_LIGHTNING_EVOKE"));
-			AbstractDungeon.actionManager.addToBottom(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, ELECTRIFY_DAMAGE * amountElectrified));
+			DamageInfo damage = new DamageInfo(AbstractDungeon.player, ELECTRIFY_DAMAGE * amountElectrified, DamageInfo.DamageType.NORMAL);
+			AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, damage));
 		}
 	}
 

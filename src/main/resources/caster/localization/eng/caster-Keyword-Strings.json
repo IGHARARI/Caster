@@ -68,7 +68,7 @@
       "electrify:",
       "electrified:"
     ],
-    "DESCRIPTION": "When playing an electrified card, lose #r2 HP per Electrified stack, then it loses Electrified."
+    "DESCRIPTION": "When playing an electrified card, receive #r2 damage per stack, then it loses Electrified."
   },
   {
     "PROPER_NAME": "Cast Time",

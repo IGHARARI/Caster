@@ -31,7 +31,7 @@ public class StaticField extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_BLOCK_PER_ELEC = 3;
+    private static final int BASE_BLOCK_PER_ELEC = 2;
     private static final int UPG_BLOCK_PER_ELEC = 2;
     
     

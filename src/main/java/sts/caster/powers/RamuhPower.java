@@ -14,7 +14,6 @@ import sts.caster.actions.IfritAction;
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
 
-//Gain 1 dex for the turn for each card played.
 
 public class RamuhPower extends AbstractPower {
 	public AbstractCreature source;
@@ -39,13 +38,6 @@ public class RamuhPower extends AbstractPower {
 		canGoNegative = false;
 		type = PowerType.BUFF;
 		updateDescription();
-	}
-	
-	@Override
-	public void atStartOfTurnPostDraw() {
-		for (int i = 0; i < amount; i++) {
-			AbstractDungeon.actionManager.addToBottom(new IfritAction());
-		}
 	}
 	
 	@Override

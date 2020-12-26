@@ -83,6 +83,10 @@
     "DESCRIPTION": "caster:Electrify !caster:M2! random card in your hand, gain [E].",
     "UPGRADE_DESCRIPTION": "caster:Electrify !caster:M2! random cards in your hand, gain [E] [E]."
   },
+  "caster:FlashSpeed": {
+    "NAME": "Flash Speed",
+    "DESCRIPTION": "Deal !D! damage !M! times. NL Gain !B! Block. NL caster:Electrify !caster:M2! random card in your hand."
+  },
   "caster:FlashFrost": {
     "NAME": "Flash Frost",
     "DESCRIPTION": "Apply !M! caster:Frost. NL Exhaust.",
