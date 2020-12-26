@@ -9,6 +9,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sts.caster.actions.ThawCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -33,7 +35,6 @@ public class Embers extends CasterCard {
     private static final int THAW_AMOUNT = 2;
     private static final int DRAW_AMOUNT = 1;
     private static final int UPG_THAW_AMOUNT = 1;
-    
 
 
     public Embers() {

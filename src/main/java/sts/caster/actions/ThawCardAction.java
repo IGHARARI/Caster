@@ -11,6 +11,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
 import basemod.BaseMod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import sts.caster.core.CasterMod;
 import sts.caster.core.frozenpile.FrozenPileManager;
 
 public class ThawCardAction extends AbstractGameAction {
@@ -19,13 +22,12 @@ public class ThawCardAction extends AbstractGameAction {
     private AbstractPlayer p;
     private boolean isRandom;
     private boolean anyNumber;
-    public static int numExhausted;
-    
+
     public ThawCardAction(final int amount, final boolean isRandom) {
-        this(amount, isRandom, false, false);
+        this(amount, isRandom, false);
     }
     
-    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final boolean canPickZero) {
+    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber) {
         this.anyNumber = anyNumber;
         this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
@@ -33,11 +35,7 @@ public class ThawCardAction extends AbstractGameAction {
         this.duration = Settings.ACTION_DUR_FAST;
         this.actionType = ActionType.EXHAUST;
     }
-    
-    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber) {
-        this(amount, isRandom, anyNumber, false);
-    }
-    
+
     @Override
     public void update() {
         if (duration == Settings.ACTION_DUR_FAST) {
@@ -57,7 +55,8 @@ public class ThawCardAction extends AbstractGameAction {
                 return;
             }
             if (!isRandom) {
-                AbstractDungeon.gridSelectScreen.open(FrozenPileManager.frozenPile, amount, anyNumber, "Thaw cards"); 
+                AbstractDungeon.gridSelectScreen.open(FrozenPileManager.frozenPile, amount, anyNumber, "Thaw cards");
+                AbstractDungeon.gridSelectScreen.forClarity = false;
                 tickDuration();
                 return;
             }

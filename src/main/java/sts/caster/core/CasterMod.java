@@ -302,8 +302,6 @@ public class CasterMod implements
         logger.info("Adding relics");
 
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
-        BaseMod.addRelicToCustomPool(new PlaceholderRelic(), TheCaster.Enums.THE_CASTER_COLOR);
-        BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), TheCaster.Enums.THE_CASTER_COLOR);
         BaseMod.addRelicToCustomPool(new MagicBookRelic(), TheCaster.Enums.THE_CASTER_COLOR);
         BaseMod.registerBottleRelic(MagicBookMemorizedCardField.inMagicBookField, new MagicBookRelic());
 
@@ -315,8 +313,6 @@ public class CasterMod implements
     public void receiveEditCards() {
         logger.info("Adding variables");
         // Add the Custom Dynamic Variables
-        logger.info("Add variabls");
-        // Add the Custom Dynamic variabls
         BaseMod.addDynamicVariable(new SecondMagicNumber());
         BaseMod.addDynamicVariable(new DelayTurns());
         BaseMod.addDynamicVariable(new SpellBlock());

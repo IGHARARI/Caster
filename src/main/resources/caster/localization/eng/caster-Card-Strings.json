@@ -9,11 +9,11 @@
   },
   "caster:strike": {
     "NAME": "Strike",
-    "DESCRIPTION": "Deal !D! Damage."
+    "DESCRIPTION": "Deal !D! damage."
   },
   "caster:defend": {
     "NAME": "Defend",
-    "DESCRIPTION": "Gain !B! Block. NL If you played a Spell this turn, gain !M! extra block."
+    "DESCRIPTION": "Gain !B! Block. NL If you played a Spell this turn, gain !M! extra Block."
   },
   "caster:LAZER": {
     "NAME": "LAZER",
@@ -33,12 +33,12 @@
   },
   "caster:WallOfRocks": {
     "NAME": "Wall Of Rocks",
-    "DESCRIPTION": "Gain !B! block. NL Apply !M! weakness to ALL attacking enemies."
+    "DESCRIPTION": "Gain !B! Block. NL Apply !M! weakness to ALL attacking enemies."
   },
   "caster:DiamondDust": {
     "NAME": "Diamond Dust",
-    "DESCRIPTION": "Apply !M! caster:Frost. NL caster:Cast_Time !caster:Delay!: NL Gain block equal to your block when you played this.",
-    "EXTENDED_DESCRIPTION": ["Apply !M! caster:Frost. NL caster:Cast_Time !caster:Delay!: NL Gain block equal to your block when you played this: !caster:M2! ."]
+    "DESCRIPTION": "Apply !M! caster:Frost. NL caster:Cast_Time !caster:Delay!: NL Gain Block equal to your Block when you played this.",
+    "EXTENDED_DESCRIPTION": ["Apply !M! caster:Frost. NL caster:Cast_Time !caster:Delay!: NL Gain Block equal to your Block when you played this: !caster:M2! ."]
   },
   "caster:GateOfBabylon": {
     "NAME": "Gate of Babylon",
@@ -72,7 +72,7 @@
   },
   "caster:StaticField": {
     "NAME": "Static Field",
-    "DESCRIPTION": "Whenever you caster:Electrify a card gain !M! block."
+    "DESCRIPTION": "Whenever you caster:Electrify a card gain !M! Block."
   },
   "caster:Discharge": {
     "NAME": "Discharge",
@@ -122,7 +122,7 @@
   },
   "caster:Accumulation": {
     "NAME": "Accumulation",
-    "DESCRIPTION": "Gain !B! block. NL Gain !M! additional block for each Spell currently being casted."
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! additional Block for each Spell currently being casted."
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
@@ -162,7 +162,7 @@
   },
   "caster:FireWall": {
     "NAME": "Fire Wall",
-    "DESCRIPTION": "Gain !B! block. NL Lose !M! HP. NL caster:Thaw !caster:M2! card."
+    "DESCRIPTION": "Gain !B! Block. NL Lose !M! HP. NL caster:Thaw !caster:M2! card."
   },
   "caster:Fireball": {
     "NAME": "Fireball",
@@ -229,23 +229,23 @@
   },
   "caster:Heavy": {
     "NAME": "Heavy",
-    "DESCRIPTION": "Gain !caster:B! block. NL caster:Cast_Time !caster:Delay!: NL Deal damage equal to the block you lost last round to ALL enemies."
+    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage equal to the Block you lost last round to ALL enemies."
   },
   "caster:Slick": {
     "NAME": "Slick",
-    "DESCRIPTION": "Gain !M! Blur and draw a card. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! block."
+    "DESCRIPTION": "Gain !M! Blur and draw a card. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block."
   },
   "caster:WallOfSwords": {
     "NAME": "Wall Of Swords",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Lose up to !M! block, gain that much Thorns. NL Exhaust."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Lose up to !M! Block, gain that much Thorns. NL Exhaust."
   },
   "caster:WallOfAsh": {
     "NAME": "Wall Of Ash",
-    "DESCRIPTION": "Gain !B! block, your block is also able to prevent HP Loss until next turn."
+    "DESCRIPTION": "Gain !B! Block, your Block is also able to prevent HP Loss until next turn."
   },
   "caster:Demi": {
     "NAME": "Demi",
-    "DESCRIPTION": "Remove ALL block from the enemy. NL It loses !M! % of its current HP. NL Exhaust."
+    "DESCRIPTION": "Remove ALL Block from the enemy. NL It loses !M! % of its current HP. NL Exhaust."
   },
   "caster:Elementalize": {
     "NAME": "Elementalize",
@@ -253,8 +253,8 @@
   },
   "caster:Enfeeble": {
     "NAME": "Enfeeble",
-    "DESCRIPTION": "Apply !M! Weak to an enemy.",
-    "UPGRADE_DESCRIPTION": "Apply !M! Weak to an enemy twice."
+    "DESCRIPTION": "Apply !M! Weak.",
+    "UPGRADE_DESCRIPTION": "Apply !M! Weak twice."
   },
   "caster:Unearth": {
     "NAME": "Unearth",
@@ -263,8 +263,8 @@
   },
   "caster:GlacialShield": {
     "NAME": "Glacial Shield",
-    "DESCRIPTION": "caster:Freeze !M! random card in your hand. NL Gain !caster:B! block. caster:Cast_Time !caster:Delay!: NL Gain !caster:B! block.",
-    "UPGRADE_DESCRIPTION": "caster:Freeze !M! card in your hand. NL Gain !caster:B! block. caster:Cast_Time !caster:Delay!: NL Gain !caster:B! block."
+    "DESCRIPTION": "caster:Freeze !M! random card in your hand. NL Gain !caster:B! Block. caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block.",
+    "UPGRADE_DESCRIPTION": "caster:Freeze !M! card in your hand. NL Gain !caster:B! Block. caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block."
   },
   "caster:Ramuh": {
     "NAME": "Ramuh",
@@ -305,7 +305,7 @@
   },
   "caster:IcicleLance": {
     "NAME": "Icicle Lance",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Remove all block from the enemy, then deal !caster:D! damage twice."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Remove all Block from the enemy, then deal !caster:D! damage twice."
   },
   "caster:Cryogenesis": {
     "NAME": "Cryogenesis",
@@ -318,7 +318,7 @@
   },
   "caster:IzanagisObdurance": {
     "NAME": "Izanagi's Obdurance",
-    "DESCRIPTION": "Whenever you gain block, gain !M! Temporary_HP."
+    "DESCRIPTION": "Whenever you gain Block, gain !M! Temporary_HP."
   },
   "caster:ShortenedChant": {
     "NAME": "Shortened Chant",

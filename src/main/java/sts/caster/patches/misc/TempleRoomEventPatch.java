@@ -9,6 +9,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.map.MapGenerator;
 import com.megacrit.cardcrawl.map.MapRoomNode;
@@ -16,6 +17,7 @@ import com.megacrit.cardcrawl.random.Random;
 
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import sts.caster.core.TheCaster;
 import sts.caster.rooms.TempleEventRoom;
 
 public class TempleRoomEventPatch {
@@ -24,9 +26,11 @@ public class TempleRoomEventPatch {
 	public static class AddTempleEventRoomPatch {
 		@SpireInsertPatch(locator=Locator.class, localvars={"map"} )
 		public static void Insert(int height, int width, int pathDensity, Random rng, ArrayList<ArrayList<MapRoomNode>> map) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-			for (MapRoomNode roomNode : map.get(7)) {
-				TempleEventRoom ev = new TempleEventRoom(); 
-				roomNode.setRoom(ev);
+			if (AbstractDungeon.actNum ==1 && AbstractDungeon.player instanceof TheCaster){
+				for (MapRoomNode roomNode : map.get(7)) {
+					TempleEventRoom ev = new TempleEventRoom();
+					roomNode.setRoom(ev);
+				}
 			}
 		}
 
