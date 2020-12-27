@@ -38,6 +38,7 @@ public class BloodRitual extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = HP_LOSS;
         m2 = baseM2 = REDUCE_AMOUNT;
+        exhaust = true;
     }
 
     @Override

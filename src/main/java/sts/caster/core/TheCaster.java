@@ -8,7 +8,11 @@ import static sts.caster.core.CasterMod.THE_DEFAULT_SKELETON_JSON;
 import static sts.caster.core.TheCaster.Enums.THE_CASTER_COLOR;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.common.MoveCardsAction;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,6 +39,7 @@ import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.DivertFocus;
 import sts.caster.cards.spells.Meteor;
+import sts.caster.cards.spells.PhoenixFlare;
 import sts.caster.relics.MagicBookRelic;
 
 public class TheCaster extends CustomPlayer {
@@ -240,5 +245,16 @@ public class TheCaster extends CustomPlayer {
     @Override
     public String getVampireText() {
         return TEXT[2];
+    }
+
+    @Override
+    public void applyStartOfTurnCards() {
+        List<AbstractCard> phoenixes = AbstractDungeon.player.exhaustPile.group.stream().filter(c -> c.cardID == PhoenixFlare.ID).collect(Collectors.toList());;
+        if (phoenixes.size() > 0) {
+            for (AbstractCard c : phoenixes) {
+                AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(AbstractDungeon.player.hand, AbstractDungeon.player.exhaustPile, (c2) -> c2 == c) );
+            }
+        }
+        super.applyStartOfTurnCards();
     }
 }

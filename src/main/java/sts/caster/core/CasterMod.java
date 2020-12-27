@@ -247,7 +247,7 @@ public class CasterMod implements
     public static void initialize() {
         logger.info("========================= Initializing Default Mod. Hi. =========================");
         CasterMod defaultmod = new CasterMod();
-        logger.info("========================= /Default Mod Initialized. Hello World./ =========================");
+        logger.info("========================= /Caster Mod Initialized./ =========================");
     }
 
     @Override
@@ -518,7 +518,7 @@ public class CasterMod implements
         BaseMod.loadCustomStringsFile(UIStrings.class,
         		getModID() + "/localization/eng/caster-UI-Strings.json");
 
-        logger.info("Done edittting strings");
+        logger.info("Done editing strings");
     }
 
 

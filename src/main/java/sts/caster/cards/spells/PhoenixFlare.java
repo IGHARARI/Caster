@@ -5,6 +5,7 @@ import static sts.caster.core.CasterMod.makeCardPath;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.MoveCardsAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -18,6 +19,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -71,6 +74,9 @@ public class PhoenixFlare extends CasterCard {
     		return actionsList;
     	};
     }
+
+    public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
+
 
     @Override
     public void upgrade() {

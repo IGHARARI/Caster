@@ -49,8 +49,11 @@ public class BlazedPower extends AbstractPower {
 	
 	@Override
 	public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-		AbstractDungeon.actionManager.addToBottom(new LoseHPAction(owner, null, amount, AttackEffect.FIRE));
-		attackedThisTurn = true;
+		if (info.owner == owner && info.type != DamageInfo.DamageType.THORNS && info.type != DamageInfo.DamageType.HP_LOSS) {
+			this.flash();
+			AbstractDungeon.actionManager.addToBottom(new LoseHPAction(owner, null, amount, AttackEffect.FIRE));
+			attackedThisTurn = true;
+		}
 	}
 	
 	@Override
