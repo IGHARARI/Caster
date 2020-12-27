@@ -58,7 +58,6 @@ public class WallOfMirrorsPower extends TwoAmountPower {
 	
 	@Override
 	public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-		System.out.println("on attack for mirrors");
 		if (info.owner == owner) {
 			AbstractDungeon.actionManager.addToBottom(new DamageAction(owner, new DamageInfo(source, (int) amount2), AttackEffect.SHIELD));
 		}

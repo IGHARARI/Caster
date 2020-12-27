@@ -5,19 +5,19 @@
 	},
 	"caster:Shocked": {
 	        "NAME": "Shocked",
-	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b50% of its block, then reduce Shocked by #b1. NL Receives #b50% more damage from #yEarth attacks."]
+	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b50% of its block, then reduce Shocked by #b1. NL Receives #b50% more damage from #yEarth cards."]
 	},
 	"caster:Frost": {
 	        "NAME": "Frost",
-	        "DESCRIPTIONS": ["Whenever you receive damage, lose #r", "Whenever this creature takes damage, all enemies lose #r", " HP and Frost is reduced by #b1. NL Receives #b50% more damage from #yElectric attacks."]
+	        "DESCRIPTIONS": ["Whenever you receive damage, lose #r", "Whenever this creature takes damage, all enemies lose #r", " HP and Frost is reduced by #b1. NL Receives #b50% more damage from #yElectric cards."]
 	},
 	"caster:Blazed": {
 	        "NAME": "Blazed",
-	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP, then decrease #yBlazed by half. NL Receives #b50% more damage from #yIce attacks."]
+	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP, then decrease #yBlazed by half. NL Receives #b50% more damage from #yIce cards."]
 	},
 	"caster:Mired": {
 	        "NAME": "Mired",
-	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #b1. NL Receives #b50% more damage from #yFire attacks."]
+	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #b1. NL Receives #b50% more damage from #yFire cards."]
 	},
 	"caster:StaticField": {
 	        "NAME": "Static Field",

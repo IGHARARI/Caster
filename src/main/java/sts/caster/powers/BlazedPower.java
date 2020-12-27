@@ -49,7 +49,7 @@ public class BlazedPower extends AbstractPower {
 	
 	@Override
 	public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-		AbstractDungeon.actionManager.addToBottom(new LoseHPAction(owner, source, amount, AttackEffect.FIRE));
+		AbstractDungeon.actionManager.addToBottom(new LoseHPAction(owner, null, amount, AttackEffect.FIRE));
 		attackedThisTurn = true;
 	}
 	

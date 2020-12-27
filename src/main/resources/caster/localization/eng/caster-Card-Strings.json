@@ -110,7 +110,7 @@
   },
   "caster:NaturalChaos": {
     "NAME": "Natural Chaos",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: Apply !M! caster:Mired to ALL enemies."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: Apply !M! caster:Mired to ALL enemies. NL Exhaust."
   },
   "caster:GaiasBlessing": {
     "NAME": "Gaia's Blessing",

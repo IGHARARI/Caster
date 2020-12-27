@@ -76,7 +76,7 @@ public class QuickCastAction extends AbstractGameAction {
     	} else if (this.duration == Settings.ACTION_DUR_FAST) {
 			ArrayList<AbstractCard> delayedCards = new ArrayList<AbstractCard>();
 			for (AbstractCard c : p.hand.group) {
-				if (c.type == CasterCardType.SPELL) delayedCards.add(c);
+				if (c.type == CasterCardType.SPELL && hasDelay(c)) delayedCards.add(c);
 			}
 			if (delayedCards.size() > 0) {
 				AbstractCard card = delayedCards.get(AbstractDungeon.cardRandomRng.random(delayedCards.size()-1));

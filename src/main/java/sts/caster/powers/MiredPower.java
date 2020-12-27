@@ -4,20 +4,27 @@ import static sts.caster.core.CasterMod.makePowerPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+import sts.caster.actions.ConditionalAction;
 import sts.caster.core.CasterMod;
+import sts.caster.util.PowersHelper;
 import sts.caster.util.TextureHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //Gain 1 dex for the turn for each card played.
 
@@ -54,9 +61,15 @@ public class MiredPower extends AbstractPower {
 	
 	@Override
 	public int onAttacked(DamageInfo info, int damageAmount) {
-		if (damageAmount > 0 && attackUsed) {
-			AbstractDungeon.actionManager.addToBottom(new HealAction(AbstractDungeon.player, owner, HEAL_AMOUNT));
-			AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, POWER_ID, 1));
+		if (attackUsed && info.owner != null && damageAmount > 0 && info.type != DamageType.HP_LOSS && info.type != DamageType.THORNS) {
+			List<AbstractGameAction> procActions = new ArrayList<>();
+			procActions.add(new HealAction(AbstractDungeon.player, owner, HEAL_AMOUNT));
+			procActions.add(new ReducePowerAction(owner, owner, POWER_ID, 1));
+			ConditionalAction miredProcAction = new ConditionalAction(
+				() -> PowersHelper.getCreaturePowerAmount(POWER_ID, owner) > 0,
+				procActions
+			);
+			addToBot(miredProcAction);
 		}
 		return super.onAttacked(info, damageAmount);
 	}

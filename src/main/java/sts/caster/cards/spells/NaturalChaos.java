@@ -37,9 +37,10 @@ public class NaturalChaos extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
+    private static final int UPG_COST = 0;
     private static final int BASE_DELAY = 1;
     private static final int BASE_MIRE = 2;
-    private static final int UPGR_MIRE = 1;
+    private static final int UPG_MIRE = 1;
 
 
     public NaturalChaos() {
@@ -69,7 +70,8 @@ public class NaturalChaos extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeSpellDamage(UPGR_MIRE);
+            upgradeBaseCost(UPG_COST);
+            upgradeMagicNumber(UPG_MIRE);
         }
     }
 }
