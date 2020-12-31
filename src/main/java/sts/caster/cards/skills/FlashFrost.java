@@ -43,7 +43,7 @@ public class FlashFrost extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new FrostPower(m, p, magicNumber), magicNumber));
+		addToBot(new ApplyPowerAction(m, p, new FrostPower(m, p, magicNumber), magicNumber));
     }
 
     @Override

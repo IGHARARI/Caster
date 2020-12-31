@@ -41,7 +41,7 @@ public class SunGoddessAmaterasu extends CasterCard {
     
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new AmaterasuPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new AmaterasuPower(p, magicNumber), magicNumber));
     }
     
     @Override

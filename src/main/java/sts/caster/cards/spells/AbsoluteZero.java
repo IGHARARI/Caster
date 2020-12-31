@@ -7,13 +7,18 @@ import java.util.ArrayList;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.utility.ConditionalDrawAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.tempCards.Miracle;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import sts.caster.actions.FreezeCardAction;
 import sts.caster.actions.ModifyCardInBattleSpellDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -39,8 +44,8 @@ public class AbsoluteZero extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 5;
-    private static final int UPGR_DAMAGE = 2;
+    private static final int BASE_DAMAGE = 6;
+    private static final int UPGR_DAMAGE = 3;
 
 
     public AbsoluteZero() {
@@ -49,20 +54,24 @@ public class AbsoluteZero extends CasterCard {
         baseDelayTurns = delayTurns = BASE_DELAY;
         setCardElement(MagicElement.ICE);
     }
+
+    public void triggerWhenDrawn() {
+        this.addToTop(new FreezeCardAction(1, false, true, true));
+    }
     
     @Override
     public void onFrozen() {
     	flash();
-    	AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(this, baseSpellDamage));
+    	addToBot(new ModifyCardInBattleSpellDamageAction(this, baseSpellDamage));
     }
 
 	@Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
 
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.SLASH_HEAVY));

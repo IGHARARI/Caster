@@ -19,7 +19,7 @@ public class BloodRitualAction extends AbstractGameAction {
     public void update() {
 		if (duration == Settings.ACTION_DUR_FAST) {
 			for(DelayedCardEffect card : DelayedCardsArea.delayedCards) {
-				AbstractDungeon.actionManager.addToBottom(new DelayedCardOnStartOfTurnTriggerAction(card));
+				addToBot(new DelayedCardOnStartOfTurnTriggerAction(card));
 			}
 		}
         tickDuration();

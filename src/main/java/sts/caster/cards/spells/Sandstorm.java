@@ -54,21 +54,21 @@ public class Sandstorm extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FocusPower(p, -m2), -m2));
+		addToBot(new ApplyPowerAction(p, p, new FocusPower(p, -m2), -m2));
 		if (!p.hasPower(ArtifactPower.POWER_ID)) {
-			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new GainFocusPower(p, m2, true), m2, true, AttackEffect.NONE));
+			addToBot(new ApplyPowerAction(p, p, new GainFocusPower(p, m2, true), m2, true, AttackEffect.NONE));
 		}
 		
-		AbstractDungeon.actionManager.addToBottom(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .40f));
-		AbstractDungeon.actionManager.addToBottom(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .27f));
-		AbstractDungeon.actionManager.addToBottom(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .16f));
+		addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .40f));
+		addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .27f));
+		addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .16f));
         for (final AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new StrengthPower(mo, -magicNumber), -magicNumber, true, AttackEffect.NONE));
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new MiredPower(mo, p, 1), 1, true, AttackEffect.NONE));
+            addToBot(new ApplyPowerAction(mo, p, new StrengthPower(mo, -magicNumber), -magicNumber, true, AttackEffect.NONE));
+            addToBot(new ApplyPowerAction(mo, p, new MiredPower(mo, p, 1), 1, true, AttackEffect.NONE));
         }
         for (final AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
         	if (!mo.hasPower(ArtifactPower.POWER_ID)) {
-        		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new GainStrengthPower(mo, magicNumber), magicNumber, true, AttackEffect.NONE));
+        		addToBot(new ApplyPowerAction(mo, p, new GainStrengthPower(mo, magicNumber), magicNumber, true, AttackEffect.NONE));
         	}
         }
     }

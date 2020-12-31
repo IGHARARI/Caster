@@ -44,7 +44,7 @@ public class ShivaPower extends AbstractPower {
 	
 	@Override
 	public void onSpecificTrigger() {
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(owner, owner, new PlatedArmorPower(owner, amount), amount));
+		addToBot(new ApplyPowerAction(owner, owner, new PlatedArmorPower(owner, amount), amount));
 	}
 	
 	@Override

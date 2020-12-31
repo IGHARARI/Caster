@@ -43,7 +43,7 @@ public class AshenWallPower extends AbstractPower {
 
 	@Override
 	public void atStartOfTurnPostDraw() {
-		AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, POWER_ID));
+		addToBot(new RemoveSpecificPowerAction(owner, owner, POWER_ID));
 	}
 	
 	@Override

@@ -43,8 +43,8 @@ public class BloodRitual extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new LoseHPAction(p, p, magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new BloodRitualAction(m2));
+    	addToBot(new LoseHPAction(p, p, magicNumber));
+		addToBot(new BloodRitualAction(m2));
     }
 
     @Override

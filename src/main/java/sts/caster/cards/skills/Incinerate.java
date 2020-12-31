@@ -43,7 +43,7 @@ public class Incinerate extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new IncinerateAction(m, magicNumber, m2));
+		addToBot(new IncinerateAction(m, magicNumber, m2));
     }
 
     @Override

@@ -13,7 +13,7 @@
         <ModTheSpire.version>3.8.0</ModTheSpire.version>
         <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
         <!--Also change the path at the very bottom of the file.-->
-        <Steam.path>Z:/SteamLibrary/steamapps/</Steam.path>
+        <Steam.path>C:/Program Files (x86)/Steam/steamapps</Steam.path>
     </properties>
 
     <dependencies>

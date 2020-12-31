@@ -37,7 +37,7 @@ public class Heavy extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_BLOCK = 6;
+    private static final int BASE_BLOCK = 8;
 
 
     public Heavy() {
@@ -50,12 +50,12 @@ public class Heavy extends CasterCard {
     
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, spellBlock));
-        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+    	addToBot(new GainBlockAction(p, p, spellBlock));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
 			actionsList.add(new DamageAllEnemiesForBlockLostAction());

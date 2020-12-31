@@ -55,13 +55,13 @@ public class MegaloSpark extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new ElectrifyCardsAction(magicNumber, !this.upgraded));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+    	addToBot(new ElectrifyCardsAction(magicNumber, !this.upgraded));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
 
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		for (int i = 0 ; i < 2; i++) {

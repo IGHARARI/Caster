@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.spells.SoulStrike;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.MagicAttunementPower;
@@ -34,11 +35,12 @@ public class MagicAttunement extends CasterCard {
 
     public MagicAttunement() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        cardsToPreview = new SoulStrike();
     }
     
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new MagicAttunementPower(p, p, 1), 1));
+        addToBot(new ApplyPowerAction(p, p, new MagicAttunementPower(p, p, 1), 1));
     }
 
     @Override

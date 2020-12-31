@@ -44,7 +44,7 @@ public class IncinerateAction extends AbstractGameAction {
                 this.amount = this.p.hand.size();
                 for (int i = 0; i < p.hand.size(); i++) {
                     final AbstractCard c = p.hand.getTopCard();
-                    AbstractDungeon.actionManager.addToBottom(new BurnAction(c, p.hand));
+                    addToBot(new BurnAction(c, p.hand));
                     if (c.cost == -1) {
                     	energyBurnt += EnergyPanel.totalCount;
                     } else if (c.cost >= 0) {
@@ -52,7 +52,7 @@ public class IncinerateAction extends AbstractGameAction {
                     }
                 }
                 if (energyBurnt > 0) {
-                	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(target, p, new BlazedPower(target, p, energyBurnt*burnMultiplier), energyBurnt*burnMultiplier));
+                	addToBot(new ApplyPowerAction(target, p, new BlazedPower(target, p, energyBurnt*burnMultiplier), energyBurnt*burnMultiplier));
                 }
                 return;
             }
@@ -62,7 +62,7 @@ public class IncinerateAction extends AbstractGameAction {
         }
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
             for (final AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
-            	AbstractDungeon.actionManager.addToBottom(new BurnAction(c, AbstractDungeon.handCardSelectScreen.selectedCards));
+            	addToBot(new BurnAction(c, AbstractDungeon.handCardSelectScreen.selectedCards));
                 if (c.cost == -1) {
                 	energyBurnt += EnergyPanel.totalCount;
                 } else if (c.cost >= 0) {
@@ -70,7 +70,7 @@ public class IncinerateAction extends AbstractGameAction {
                 }
             }
             if (energyBurnt > 0) {
-            	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(target, p, new BlazedPower(target, p, energyBurnt*burnMultiplier), energyBurnt*burnMultiplier));
+            	addToBot(new ApplyPowerAction(target, p, new BlazedPower(target, p, energyBurnt*burnMultiplier), energyBurnt*burnMultiplier));
             }
             AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
         }

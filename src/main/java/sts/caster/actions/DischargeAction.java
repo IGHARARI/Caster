@@ -31,8 +31,8 @@ public class DischargeAction extends AbstractGameAction {
 			}
 		}
 		if (elecStacks > 0) {
-			AbstractDungeon.actionManager.addToBottom(new SFXAction("ORB_LIGHTNING_EVOKE"));
-			AbstractDungeon.actionManager.addToBottom(new SwordBoomerangAction(AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng), new DamageInfo(AbstractDungeon.player, amount), elecStacks));
+			addToBot(new SFXAction("ORB_LIGHTNING_EVOKE"));
+			addToBot(new SwordBoomerangAction(AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng), new DamageInfo(AbstractDungeon.player, amount), elecStacks));
 		}
 		isDone = true;
     }

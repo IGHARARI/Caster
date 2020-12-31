@@ -39,7 +39,7 @@ public class Ramuh extends CasterCard {
     
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RamuhPower(p, 1), 1));
+        addToBot(new ApplyPowerAction(p, p, new RamuhPower(p, 1), 1));
     }
 
     @Override

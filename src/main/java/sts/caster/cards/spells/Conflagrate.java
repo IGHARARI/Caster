@@ -38,9 +38,9 @@ public class Conflagrate extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 18;
+    private static final int BASE_DAMAGE = 19;
     private static final int UPG_DAMAGE = 4;
-    private static final int BASE_HP_LOSS = 6;
+    private static final int BASE_HP_LOSS = 5;
     private static final int UPG_HP_LOSS = -2;
 
 
@@ -54,11 +54,11 @@ public class Conflagrate extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, c.magicNumber));

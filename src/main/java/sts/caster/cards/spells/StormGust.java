@@ -53,12 +53,12 @@ public class StormGust extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new FreezeCardAction(magicNumber, false, false, false));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+    	addToBot(new FreezeCardAction(magicNumber, false, false, false));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
         	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));

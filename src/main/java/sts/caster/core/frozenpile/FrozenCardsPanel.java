@@ -93,7 +93,7 @@ public class FrozenCardsPanel extends AbstractPanel {
             this.hb.move(this.current_x, this.current_y);
             final String msg = Integer.toString(FrozenPileManager.frozenPile.size());
             this.gl.setText(FontHelper.turnNumFont, msg);
-            sb.setColor(Color.BLUE.cpy());
+            sb.setColor(Color.CYAN.cpy());
             sb.draw(ImageMaster.DECK_COUNT_CIRCLE, this.current_x - COUNT_CIRCLE_W / 2.0f, this.current_y - COUNT_CIRCLE_W / 2.0f, COUNT_CIRCLE_W, COUNT_CIRCLE_W);
             FontHelper.renderFontCentered(sb, FontHelper.turnNumFont, msg, this.current_x, this.current_y + 2.0f * Settings.scale, Color.LIGHT_GRAY.cpy());
             this.hb.render(sb);

@@ -55,7 +55,7 @@ public class AmaterasuPower extends AbstractPower {
 				modAmount = (modAmount * (float)amount)/100f;
 				//Make it so it always increases at least 1
 				modAmount = Math.max(1, modAmount);
-				AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(casterCard, (int)modAmount));
+				addToBot(new ModifyCardInBattleSpellDamageAction(casterCard, (int)modAmount));
 			}
 		}
 	}

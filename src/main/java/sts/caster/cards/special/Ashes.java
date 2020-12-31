@@ -43,10 +43,10 @@ public class Ashes extends CasterCard {
 
     @Override
     public void triggerWhenDrawn() {
-    	AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
+    	addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
     	AbstractCard randomCard = AbstractDungeon.returnTrulyRandomCardInCombat();
     	if (upgraded) randomCard.upgrade();
-    	AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(randomCard));
+    	addToBot(new MakeTempCardInHandAction(randomCard));
     }
     
     @Override

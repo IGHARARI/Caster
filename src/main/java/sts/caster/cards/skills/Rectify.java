@@ -36,7 +36,7 @@ public class Rectify extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new RectifyAction(upgraded));
+    	addToBot(new RectifyAction(upgraded));
     }
     
     @Override

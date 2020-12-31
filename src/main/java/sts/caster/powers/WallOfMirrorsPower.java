@@ -59,7 +59,7 @@ public class WallOfMirrorsPower extends TwoAmountPower {
 	@Override
 	public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
 		if (info.owner == owner && info.type != DamageType.THORNS && info.type != DamageType.HP_LOSS) {
-			AbstractDungeon.actionManager.addToBottom(new DamageAction(owner, new DamageInfo(owner, amount2, DamageType.THORNS), AttackEffect.SHIELD));
+			addToBot(new DamageAction(owner, new DamageInfo(owner, amount2, DamageType.THORNS), AttackEffect.SHIELD));
 		}
 		super.onAttack(info, damageAmount, target);
 	}
@@ -67,7 +67,7 @@ public class WallOfMirrorsPower extends TwoAmountPower {
 	@Override
 	public void atEndOfRound() {
 		amount2 = 0;
-		AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, this, 1));
+		addToBot(new ReducePowerAction(owner, owner, this, 1));
 	}
 	
 	@Override

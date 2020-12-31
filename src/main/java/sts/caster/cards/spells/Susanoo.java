@@ -59,13 +59,13 @@ public class Susanoo extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
     	for (AbstractCard card : AbstractDungeon.player.hand.group) {
     		if (card == this) continue;
-    		AbstractDungeon.actionManager.addToBottom(new ElectrifySpecificCardAction(card));
+    		addToBot(new ElectrifySpecificCardAction(card));
     	}
-        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		for(int i = 0; i < 10; i++) {

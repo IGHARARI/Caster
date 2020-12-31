@@ -43,8 +43,8 @@ public class PlaceholderPotion extends AbstractPotion {
         target = AbstractDungeon.player;
         // If you are in combat, gain strength and the "lose strength at the end of your turn" power, equal to the potency of this potion.
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(target, AbstractDungeon.player, new StrengthPower(target, potency), potency));
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(target, AbstractDungeon.player, new LoseStrengthPower(target, potency), potency));
+            addToBot(new ApplyPowerAction(target, AbstractDungeon.player, new StrengthPower(target, potency), potency));
+            addToBot(new ApplyPowerAction(target, AbstractDungeon.player, new LoseStrengthPower(target, potency), potency));
         }
     }
     

@@ -36,9 +36,9 @@ public class AlternatingCurrent extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 2;
-    private static final int BASE_DAMAGE = 5;
-    private static final int UPGRADE_DAMAGE = 3;
+    private static final int BASE_DELAY = 1;
+    private static final int BASE_DAMAGE = 4;
+    private static final int UPGRADE_DAMAGE = 2;
 
 
     public AlternatingCurrent() {
@@ -50,11 +50,11 @@ public class AlternatingCurrent extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+    	addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
     		actions.add(new DelayedDamageRandomEnemyAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.NONE));

@@ -51,13 +51,13 @@ public class GaiasBlessing extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RegenPower(p, magicNumber), magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+    	addToBot(new ApplyPowerAction(p, p, new RegenPower(p, magicNumber), magicNumber));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
 
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		AbstractPlayer p = AbstractDungeon.player;
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();

@@ -5,7 +5,7 @@
 	},
 	"caster:Shocked": {
 	        "NAME": "Shocked",
-	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b50% of its block, then reduce Shocked by #b1. NL Receives #b50% more damage from #yEarth cards."]
+	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b50% of its Block, then reduce Shocked by #b1. NL Receives #b50% more damage from #yEarth cards."]
 	},
 	"caster:Frost": {
 	        "NAME": "Frost",
@@ -21,11 +21,11 @@
 	},
 	"caster:StaticField": {
 	        "NAME": "Static Field",
-	        "DESCRIPTIONS": ["Gain #b", " block whenever you #yElectrify a card."]
+	        "DESCRIPTIONS": ["Gain #b", " Block whenever you #yElectrify a card."]
 	},
 	"caster:AshenWall": {
 	        "NAME": "Ashen Wall",
-	        "DESCRIPTIONS": ["HP Loss can be prevented by block."]
+	        "DESCRIPTIONS": ["HP Loss can be prevented by Block."]
 	},
 	"caster:Illusion": {
 	        "NAME": "Illusion",
@@ -45,7 +45,7 @@
 	},
 	"caster:Izanagi": {
 	        "NAME": "Izanagi's Obdurance",
-	        "DESCRIPTIONS": ["Whenever you gain block, gain #b", " #yTemporary #yHP ."]
+	        "DESCRIPTIONS": ["Whenever you gain Block, gain #b", " #yTemporary #yHP ."]
 	},
 	"caster:Amaterasu": {
 	        "NAME": "Amaterasu",
@@ -85,8 +85,16 @@
 	        "NAME": "Incantation",
 	        "DESCRIPTIONS": ["At the start of your turn, reduce the #yCast #yTime of ", "a card in your hand by #g1.", " cards in your hand by #g1."]
 	},
+	"caster:SpellDamage": {
+		"NAME": "SpellDamage",
+		"DESCRIPTIONS": ["This should be invisible. Spell Damage calculation helper."]
+	},
+	"caster:CongealPower": {
+	        "NAME": "Congeal",
+	        "DESCRIPTIONS": ["Whenever you play a Spell gain #g" , " Block."]
+	},
 	"caster:RarePower": {
-	        "NAME": "Placeholder Power",
-	        "DESCRIPTIONS": ["At the start of your turn, TOUCH ", " enemy." , " enemies."]
+		"NAME": "Placeholder Power",
+		"DESCRIPTIONS": ["At the start of your turn, TOUCH ", " enemy." , " enemies."]
 	}
 }

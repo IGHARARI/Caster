@@ -53,8 +53,8 @@ public class GainFocusPower extends AbstractPower {
 	public void atStartOfTurnPostDraw() {
 		if (isNextTurn) {
 			this.flash();
-			AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
-			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(owner, owner, new GainFocusPower(owner, amount, false), amount, true, AttackEffect.NONE));
+			addToBot(new RemoveSpecificPowerAction(owner, owner, ID));
+			addToBot(new ApplyPowerAction(owner, owner, new GainFocusPower(owner, amount, false), amount, true, AttackEffect.NONE));
 		}
 	}
 	
@@ -62,8 +62,8 @@ public class GainFocusPower extends AbstractPower {
 	public void atEndOfTurn(boolean isPlayer) {
 		if (!isNextTurn) {
 			this.flash();
-			AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
-			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new FocusPower(this.owner, this.amount), this.amount));
+			addToBot(new RemoveSpecificPowerAction(owner, owner, ID));
+			addToBot(new ApplyPowerAction(this.owner, this.owner, new FocusPower(this.owner, this.amount), this.amount));
 		}
 	}
 	

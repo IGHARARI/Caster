@@ -10,6 +10,10 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 
 import sts.caster.core.frozenpile.FrozenPileManager;
 
+import java.util.function.BooleanSupplier;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public class FreezeCardAction extends AbstractGameAction {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FreezeCardAction");
     public static final String[] TEXT = FreezeCardAction.uiStrings.TEXT;
@@ -17,7 +21,7 @@ public class FreezeCardAction extends AbstractGameAction {
     private boolean isRandom;
     private boolean anyNumber;
     private boolean canPickZero;
-    
+
     public FreezeCardAction(final int amount, final boolean isRandom) {
         this(amount, isRandom, false, false);
     }

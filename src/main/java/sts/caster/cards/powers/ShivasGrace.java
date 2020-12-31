@@ -42,7 +42,7 @@ public class ShivasGrace extends CasterCard {
     
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ShivaPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new ShivaPower(p, magicNumber), magicNumber));
     }
 
     @Override

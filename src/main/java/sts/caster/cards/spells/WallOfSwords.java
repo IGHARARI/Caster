@@ -52,12 +52,12 @@ public class WallOfSwords extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
 
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		AbstractPlayer p = AbstractDungeon.player;
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();

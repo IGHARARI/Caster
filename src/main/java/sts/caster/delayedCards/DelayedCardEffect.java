@@ -13,10 +13,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.Hitbox;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
-import com.megacrit.cardcrawl.helpers.MathHelper;
-import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
@@ -56,8 +53,7 @@ public class DelayedCardEffect extends AbstractOrb {
         
 		ID = ORB_ID + card.uuid;
 		name = card.name;
-		img = ImageMaster.loadImage("orbs/default_orb.png");
-		
+
 		this.delayedCard = card.makeStatIdenticalCopy();
 		if (delayedCard.cost == -1) {
 			delayedCard.rawDescription += " NL Casted for " + energyOnCast + " Energy.";
@@ -92,7 +88,12 @@ public class DelayedCardEffect extends AbstractOrb {
 		cardEvokeCopy.current_x = cX;
 		cardEvokeCopy.current_y = cY;
 	}
-	
+
+	public void increaseDelay(int amount) {
+		turnsUntilFire += amount;
+		passiveAmount = turnsUntilFire;
+	}
+
 	@Override
 	public void updateDescription() {}
 
@@ -131,7 +132,7 @@ public class DelayedCardEffect extends AbstractOrb {
 		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
 		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
 		delayedCard.calculateCardDamage(target);
-		ArrayList<AbstractGameAction> delayedActions = delayedCard.getActionsMaker(energyOnCast).getActionList(delayedCard, target); 
+		ArrayList<AbstractGameAction> delayedActions = delayedCard.buildActionsSupplier(energyOnCast).getActionList(delayedCard, target);
 		for (int i = delayedActions.size() -1; i >= 0; i--) {
 			AbstractGameAction action = delayedActions.get(i);
 			AbstractDungeon.actionManager.addToTop(action);
@@ -150,19 +151,33 @@ public class DelayedCardEffect extends AbstractOrb {
 		}
 	}
 
-	// Render the orb.
+	// Render the card.
 	@Override
 	public void render(SpriteBatch sb) {
 		cardMiniCopy.current_x = cX;
 		cardMiniCopy.current_y = cY;
 		cardMiniCopy.render(sb);
-		renderText(sb);
+		// renderText(sb);
+		// Reimplement render text so other patches on orbs don't break the spells
+		// Looking at you replay the spire.
+		renderSpellDelay(sb);
 		hb.render(sb);
 		if (showEvokeCardOnScreen) {
 			renderCardCopy(sb, cardEvokeCopy, Settings.WIDTH/2f, Settings.HEIGHT/2f);
 		}
 	}
-	
+
+	private void renderSpellDelay(SpriteBatch sb) {
+		FontHelper.renderFontCentered(sb,
+				FontHelper.cardEnergyFont_L,
+				Integer.toString(this.passiveAmount),
+				this.cX + NUM_X_OFFSET,
+				this.cY + this.bobEffect.y / 2.0F + NUM_Y_OFFSET,
+				this.c,
+				this.fontScale
+		);
+	}
+
 	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
 			renderCardCopy(sb, cardPreviewCopy, cX, cY);

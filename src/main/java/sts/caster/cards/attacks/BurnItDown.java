@@ -33,23 +33,24 @@ public class BurnItDown extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int DAMAGE = 9;
-    private static final int UPGRADE_PLUS_DMG = 2;
+    private static final int DAMAGE = 10;
+    private static final int UPGRADE_PLUS_DMG = 3;
 
     public BurnItDown() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDamage = DAMAGE;
         isMultiDamage = true;
         this.exhaust = true;
+        cardsToPreview = new WallOfAsh();
         setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, multiDamage, DamageType.NORMAL, AttackEffect.FIRE));
+		addToBot(new DamageAllEnemiesAction(p, multiDamage, DamageType.NORMAL, AttackEffect.FIRE));
 		AbstractCard wallCard = new WallOfAsh();
 		if (upgraded) wallCard.upgrade();
-		AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDiscardAction(wallCard, 1));
+		addToBot(new MakeTempCardInDiscardAction(wallCard, 1));
 		
     }
 
@@ -59,6 +60,9 @@ public class BurnItDown extends CasterCard {
             upgradeName();
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             upgradeDamage(UPGRADE_PLUS_DMG);
+            AbstractCard preview = new WallOfAsh();
+            preview.upgrade();
+            cardsToPreview = preview;
             initializeDescription();
         }
     }

@@ -56,7 +56,7 @@ public class IllusionPower extends AbstractPower {
     public void onInitialApplication()
     {
         // Dumb action to delay grabbing monster's intent until after it's actually set-- Thanks kio :D
-        AbstractDungeon.actionManager.addToBottom(new AbstractGameAction()
+        addToBot(new AbstractGameAction()
         {
             @Override
             public void update()

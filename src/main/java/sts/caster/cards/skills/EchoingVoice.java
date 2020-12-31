@@ -39,7 +39,7 @@ public class EchoingVoice extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new EchoingVoicePower(p, magicNumber), magicNumber));
+    	addToBot(new ApplyPowerAction(p, p, new EchoingVoicePower(p, magicNumber), magicNumber));
     }
 
     @Override

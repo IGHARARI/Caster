@@ -19,11 +19,6 @@ public class BarbrootAction extends AbstractGameAction {
 
 	@Override
     public void update() {
-		int actualDamage = Math.min(damageInfo.output - target.currentBlock, target.currentHealth);
-		int healAmount  = Math.max(actualDamage, 0) / 3;
-		if (healAmount > 0) {
-			AbstractDungeon.actionManager.addToTop(new HealAction(AbstractDungeon.player, AbstractDungeon.player, healAmount));
-		}
 		AbstractDungeon.actionManager.addToTop(new DamageAction(target, damageInfo, AttackEffect.BLUNT_HEAVY));
 		
 		isDone = true;

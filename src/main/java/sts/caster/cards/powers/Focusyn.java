@@ -45,7 +45,7 @@ public class Focusyn extends CustomCard {
             energyOnUse = EnergyPanel.totalCount;
         }
         if (energyOnUse > 0) {
-        	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FocusPower(p, energyOnUse), energyOnUse));
+        	addToBot(new ApplyPowerAction(p, p, new FocusPower(p, energyOnUse), energyOnUse));
         }
     	if (!freeToPlayOnce) {
     		AbstractDungeon.player.energy.use(EnergyPanel.totalCount);

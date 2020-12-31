@@ -21,7 +21,7 @@ public class QueueRedrawMiniCardsAction extends AbstractGameAction {
     public void update() {
     	if (!isDone) {
     		if(delayed) {
-    			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction(false));
+    			addToBot(new QueueRedrawMiniCardsAction(false));
     		} else {
     			DelayedCardsArea.repositionMiniCards();
     		}

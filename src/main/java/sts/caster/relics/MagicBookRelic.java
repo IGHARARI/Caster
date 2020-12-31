@@ -31,8 +31,8 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 
     // ID, images, text.
     public static final String ID = CasterMod.makeID("MagicBook");
-    private static final Texture IMG = TextureHelper.getTexture(CasterMod.makeRelicPath("BottledPlaceholder.png"));
-    private static final Texture OUTLINE = TextureHelper.getTexture(CasterMod.makeRelicOutlinePath("BottledPlaceholder.png"));
+    private static final Texture IMG = TextureHelper.getTexture(CasterMod.makeRelicPath("magicbook.png"));
+    private static final Texture OUTLINE = TextureHelper.getTexture(CasterMod.makeRelicOutlinePath("magicbook_border.png"));
 
     public MagicBookRelic() {
         super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.CLINK);

@@ -5,7 +5,9 @@
       "Frozen",
       "freeze",
       "frozen",
-      "freeze:"
+      "freeze:",
+      "freezing",
+      "Freezing"
     ],
     "DESCRIPTION": "Frozen cards are removed from play until end of combat."
   },
@@ -101,15 +103,5 @@
       "Unique_Spell"
     ],
     "DESCRIPTION": "Multiple copies of the same spell will only count as one unique spell."
-  },
-  {
-    "PROPER_NAME": "Soul Strike",
-    "NAMES": [
-      "Soul Strike",
-      "soul_strike",
-      "Soul_strike",
-      "Soul_Strike"
-    ],
-    "DESCRIPTION": "#ySoul #yStrike is a #b0 cost Ethereal Spell."
   }
 ]

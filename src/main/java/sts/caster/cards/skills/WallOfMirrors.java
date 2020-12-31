@@ -39,7 +39,7 @@ public class WallOfMirrors extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new WallOfMirrorsPower(m, p, 1), 1));
+    	addToBot(new ApplyPowerAction(m, p, new WallOfMirrorsPower(m, p, 1), 1));
     }
 
     @Override

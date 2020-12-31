@@ -56,7 +56,7 @@ public class ApplyElementalEffectChanceAction extends AbstractGameAction {
     		}
     		if (powerToApply != null) {
     			for (int i = 0 ; i < debuffCounter; i++) {
-    				AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(target, source, powerToApply, stacksPerChance));
+    				addToBot(new ApplyPowerAction(target, source, powerToApply, stacksPerChance));
     			}
     		}
     	}

@@ -30,7 +30,7 @@ public class DivertFocusAction extends AbstractGameAction {
 			}
 			nextCard.turnsUntilFire += modifyAmount;
 			nextCard.passiveAmount = nextCard.turnsUntilFire;
-			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
+			addToBot(new QueueRedrawMiniCardsAction());
     	}
     	isDone = true;
     }

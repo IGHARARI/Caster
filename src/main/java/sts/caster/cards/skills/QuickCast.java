@@ -38,7 +38,7 @@ public class QuickCast extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new QuickCastAction(magicNumber, upgraded));
+		addToBot(new QuickCastAction(magicNumber, upgraded));
     }
 
     @Override

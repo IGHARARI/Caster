@@ -40,7 +40,7 @@ public class Eruption extends CasterCard {
     private static final int COST = 2;
     private static final int BASE_DELAY = 2;
     private static final int BASE_DAMAGE = 21;
-    private static final int BASE_UPGRADE = 4;
+    private static final int BASE_UPGRADE = 5;
     private static final int UPG_UPGRADE = 4;
 
 
@@ -55,12 +55,12 @@ public class Eruption extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
-		AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(this, magicNumber));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+		addToBot(new ModifyCardInBattleSpellDamageAction(this, magicNumber));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.FIRE));

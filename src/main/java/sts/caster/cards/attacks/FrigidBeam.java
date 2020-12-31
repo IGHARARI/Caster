@@ -45,9 +45,9 @@ public class FrigidBeam extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new FreezeCardAction(magicNumber, false));
-    	AbstractDungeon.actionManager.addToBottom(new VFXAction(p, new FrozenLaserEffect(p.hb.cX, p.hb.cY, m.hb.cX, m.hb.cY), 0.30f));
-		AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(m, damage)));
+    	addToBot(new FreezeCardAction(magicNumber, false));
+    	addToBot(new VFXAction(p, new FrozenLaserEffect(p.hb.cX, p.hb.cY, m.hb.cX, m.hb.cY), 0.30f));
+		addToBot(new DamageAction(m, new DamageInfo(m, damage)));
     }
 
     @Override

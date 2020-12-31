@@ -37,7 +37,7 @@ public class Discharge extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new DischargeAction(baseDamage));
+    	addToBot(new DischargeAction(baseDamage));
     }
 
     @Override

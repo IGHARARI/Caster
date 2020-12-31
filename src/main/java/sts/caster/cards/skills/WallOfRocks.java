@@ -45,11 +45,11 @@ public class WallOfRocks extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
+    	addToBot(new GainBlockAction(p, p, block));
     	for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
     		if (mon.isDeadOrEscaped()) continue;
     		if ((mon.intent == Intent.ATTACK || mon.intent == Intent.ATTACK_BUFF || mon.intent == Intent.ATTACK_DEBUFF || mon.intent == Intent.ATTACK_DEFEND)) {
-    			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mon, p, new WeakPower(mon, magicNumber, false), magicNumber));
+    			addToBot(new ApplyPowerAction(mon, p, new WeakPower(mon, magicNumber, false), magicNumber));
     		}
     	}
     }

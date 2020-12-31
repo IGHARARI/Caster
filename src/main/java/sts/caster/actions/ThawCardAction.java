@@ -36,6 +36,15 @@ public class ThawCardAction extends AbstractGameAction {
         this.actionType = ActionType.EXHAUST;
     }
 
+    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final boolean canPickZero) {
+        this.anyNumber = anyNumber;
+        this.p = AbstractDungeon.player;
+        this.isRandom = isRandom;
+        this.amount = amount;
+        this.duration = Settings.ACTION_DUR_FAST;
+        this.actionType = ActionType.EXHAUST;
+    }
+
     @Override
     public void update() {
         if (duration == Settings.ACTION_DUR_FAST) {

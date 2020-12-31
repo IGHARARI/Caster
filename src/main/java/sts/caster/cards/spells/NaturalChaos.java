@@ -36,7 +36,7 @@ public class NaturalChaos extends CasterCard {
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
+    private static final int COST = 0;
     private static final int UPG_COST = 0;
     private static final int BASE_DELAY = 1;
     private static final int BASE_MIRE = 2;
@@ -53,11 +53,11 @@ public class NaturalChaos extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
     		actions.add(new DelayedActionOnAllEnemiesAction(monster -> new ApplyPowerAction(monster, AbstractDungeon.player, new MiredPower(monster, AbstractDungeon.player, c.magicNumber), c.magicNumber)));
@@ -70,7 +70,7 @@ public class NaturalChaos extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeBaseCost(UPG_COST);
+//            upgradeBaseCost(UPG_COST);
             upgradeMagicNumber(UPG_MIRE);
         }
     }

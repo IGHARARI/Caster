@@ -39,7 +39,7 @@ public class AshesToAshes extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new HealAction(p, p, p.exhaustPile.size()));
+    	addToBot(new HealAction(p, p, p.exhaustPile.size()));
     }
     
     @Override

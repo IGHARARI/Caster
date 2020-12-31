@@ -47,12 +47,12 @@ public class ShockedPower extends AbstractPower {
 		if (!owner.isDeadOrEscaped() && owner.currentBlock > 0) {
 			flash();
 			int blockLost = Math.max(1, owner.currentBlock /2);
-			AbstractDungeon.actionManager.addToBottom(new LoseBlockAction(owner, owner, blockLost));
+			addToBot(new LoseBlockAction(owner, owner, blockLost));
 		}
         if (this.amount == 0) {
-            AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+            addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
         } else {
-            AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(this.owner, this.owner, POWER_ID, 1));
+            addToBot(new ReducePowerAction(this.owner, this.owner, POWER_ID, 1));
         }
 	}
 

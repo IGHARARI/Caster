@@ -43,7 +43,7 @@ public class StaticField extends CasterCard {
     
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StaticFieldPower(p, p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new StaticFieldPower(p, p, magicNumber), magicNumber));
     }
 
     @Override

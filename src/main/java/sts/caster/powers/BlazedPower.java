@@ -51,7 +51,7 @@ public class BlazedPower extends AbstractPower {
 	public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
 		if (info.owner == owner && info.type != DamageInfo.DamageType.THORNS && info.type != DamageInfo.DamageType.HP_LOSS) {
 			this.flash();
-			AbstractDungeon.actionManager.addToBottom(new LoseHPAction(owner, null, amount, AttackEffect.FIRE));
+			addToBot(new LoseHPAction(owner, null, amount, AttackEffect.FIRE));
 			attackedThisTurn = true;
 		}
 	}
@@ -60,7 +60,7 @@ public class BlazedPower extends AbstractPower {
 	public void atEndOfTurn(boolean isPlayer) {
 		if (attackedThisTurn) {
 			int amountToLose = (int) Math.ceil(((float)amount)/2f);
-			AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, source, POWER_ID, amountToLose));
+			addToBot(new ReducePowerAction(owner, source, POWER_ID, amountToLose));
 		}
 		attackedThisTurn = false;
 	}

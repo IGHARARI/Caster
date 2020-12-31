@@ -3,9 +3,12 @@ package sts.caster.cards.spells;
 import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -14,6 +17,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import sts.caster.actions.ArbitraryCardAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -39,8 +43,8 @@ public class Thundara extends CasterCard {
 
     private static final int COST = 0;
     private static final int DELAY_TURNS = 1;
-    private static final int BASE_DAMAGE = 1;
-    private static final int TOTAL_HITS = 8;
+    private static final int BASE_DAMAGE = 3;
+    private static final int TOTAL_HITS = 3;
 
     public Thundara() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -53,11 +57,19 @@ public class Thundara extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+        List<AbstractCard> inHandSpells = p.hand.group.stream()
+                .filter((c) -> c != this && c.type == CasterCardType.SPELL && c.costForTurn > 0)
+                .collect(Collectors.toList());
+        AbstractCard card = inHandSpells.get(AbstractDungeon.cardRandomRng.random(inHandSpells.size()-1));
+        addToBot(new ArbitraryCardAction(card, (c) -> {
+            c.flash();
+            c.setCostForTurn(-99);
+        }));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		for (int i = 0; i < magicNumber; i++) {

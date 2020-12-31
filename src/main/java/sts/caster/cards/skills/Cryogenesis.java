@@ -43,7 +43,7 @@ public class Cryogenesis extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new CryogenesisAction(magicNumber));
+    	addToBot(new CryogenesisAction(magicNumber));
     }
     
     @Override

@@ -47,7 +47,7 @@ public class GateOfBabylon extends CasterCard {
     	int attacks = countSpellsInMasterDeck();
     	if (attacks > 0) {
     		AbstractMonster randomTarget = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-    		AbstractDungeon.actionManager.addToBottom(new RepeatingRandomDamageAction(randomTarget, new DamageInfo(p,damage), attacks));
+    		addToBot(new RepeatingRandomDamageAction(randomTarget, new DamageInfo(p,damage), attacks));
     	}
     }
 

@@ -35,8 +35,8 @@ public class IfritAction extends AbstractGameAction {
             	energyBurnt += randomCard.cost;
             }
             AbstractMonster m = AbstractDungeon.getMonsters().getRandomMonster(true);
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new BlazedPower(m, p, energyBurnt), energyBurnt));
-            AbstractDungeon.actionManager.addToBottom(new NonSkippableWaitAction(0.2f));
+            addToBot(new ApplyPowerAction(m, p, new BlazedPower(m, p, energyBurnt), energyBurnt));
+            addToBot(new NonSkippableWaitAction(0.2f));
             
             AbstractMonster m2 = AbstractDungeon.getMonsters().getRandomMonster(true);
             final AbstractCard tmp = randomCard.makeSameInstanceOf();
@@ -49,7 +49,7 @@ public class IfritAction extends AbstractGameAction {
             tmp.calculateCardDamage(m2);
             tmp.purgeOnUse = true;
             AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(tmp, m2));
-            AbstractDungeon.actionManager.addToBottom(new BurnAction(randomCard, p.hand));
+            addToBot(new BurnAction(randomCard, p.hand));
             
 		}
         tickDuration();

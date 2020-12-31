@@ -60,6 +60,6 @@ public class ElectrifyCardsAction extends AbstractGameAction {
     }
     
     private void electrifyCard(AbstractCard card) {
-    	AbstractDungeon.actionManager.addToBottom(new ElectrifySpecificCardAction(card));
+    	addToBot(new ElectrifySpecificCardAction(card));
     }
 }

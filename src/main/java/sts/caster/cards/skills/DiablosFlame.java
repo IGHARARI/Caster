@@ -43,7 +43,7 @@ public class DiablosFlame extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 		for(AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
-    		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mon, p, new BlazedPower(mon, p, magicNumber), magicNumber));
+    		addToBot(new ApplyPowerAction(mon, p, new BlazedPower(mon, p, magicNumber), magicNumber));
     	}
     }
 

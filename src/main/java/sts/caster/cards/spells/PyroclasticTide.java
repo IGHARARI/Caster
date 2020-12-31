@@ -42,7 +42,7 @@ public class PyroclasticTide extends CasterCard {
     private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 7;
     private static final int DMG_UPGRADE = 3;
-    private static final int BASE_DMG_BOOST = 1;
+    private static final int BASE_DMG_BOOST = 2;
     private static final int UPG_DMG_BOOST = 1;
 
     private Predicate<AbstractCard> isCardFireSpell = card -> {
@@ -59,12 +59,12 @@ public class PyroclasticTide extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(isCardFireSpell, magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+    	addToBot(new ModifyCardInBattleSpellDamageAction(isCardFireSpell, magicNumber));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.FIRE));

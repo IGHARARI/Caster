@@ -53,7 +53,7 @@ public class MagicResonance extends CasterCard {
     			default:
     				slash = AttackEffect.SLASH_DIAGONAL;
     		}
-    		AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), slash));
+    		addToBot(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), slash));
     	}
     }
 

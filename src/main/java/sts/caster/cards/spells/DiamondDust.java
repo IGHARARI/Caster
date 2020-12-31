@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import sts.caster.actions.ArbitraryCardAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -57,12 +58,16 @@ public class DiamondDust extends CasterCard {
     	if (m2 != 0) isM2Modified = true;
     	rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
     	initializeDescription();
-    	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new FrostPower(m, p, magicNumber), magicNumber));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, null));
+    	addToBot(new ApplyPowerAction(m, p, new FrostPower(m, p, magicNumber), magicNumber));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+		addToBot(new ArbitraryCardAction(this, (c) -> {
+            c.rawDescription = cardStrings.DESCRIPTION;
+            c.initializeDescription();
+        }));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, c.m2));

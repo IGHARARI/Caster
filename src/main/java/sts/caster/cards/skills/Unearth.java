@@ -37,7 +37,7 @@ public class Unearth extends CasterCard {
 	private static final int FETCH_AMT = 1;
 	private static final int HEAL_MULT = 1;
 
-	private static final Consumer<List<AbstractCard>> fetchConsumer(int multiplier) {
+	private static final Consumer<List<AbstractCard>> buildFetchConsumer(int multiplier) {
 		return (cardsRetrieved) -> {
 			int energySum = 0;
 			for (AbstractCard c : cardsRetrieved) {
@@ -57,7 +57,7 @@ public class Unearth extends CasterCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new FetchAction(p.drawPile, isCardSpellPredicate, magicNumber, fetchConsumer(m2)));
+		addToBot(new FetchAction(p.drawPile, isCardSpellPredicate, magicNumber, buildFetchConsumer(m2)));
 	}
 
 	@Override

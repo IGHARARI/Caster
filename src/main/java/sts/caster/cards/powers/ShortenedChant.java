@@ -43,8 +43,8 @@ public class ShortenedChant extends CasterCard {
     
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ShortenedChantPower(p, 1), 1));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FocusPower(p, -magicNumber), -magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new ShortenedChantPower(p, 1), 1));
+        addToBot(new ApplyPowerAction(p, p, new FocusPower(p, -magicNumber), -magicNumber));
     }
 
     @Override

@@ -38,7 +38,7 @@ public class Elementalize extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new ElementalizeAction());
+		addToBot(new ElementalizeAction());
     }
 
     @Override

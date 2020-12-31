@@ -46,12 +46,12 @@ public class DivertFocus extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FocusPower(p, -magicNumber), -magicNumber));
+    	addToBot(new GainBlockAction(p, p, block));
+		addToBot(new ApplyPowerAction(p, p, new FocusPower(p, -magicNumber), -magicNumber));
 		if (!p.hasPower(ArtifactPower.POWER_ID)) {
-			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new GainFocusPower(p, magicNumber, true), magicNumber, true, AttackEffect.NONE));
+			addToBot(new ApplyPowerAction(p, p, new GainFocusPower(p, magicNumber, true), magicNumber, true, AttackEffect.NONE));
 		}
-//    	AbstractDungeon.actionManager.addToBottom(new DivertFocusAction(magicNumber));
+//    	addToBot(new DivertFocusAction(magicNumber));
     }
 
     @Override

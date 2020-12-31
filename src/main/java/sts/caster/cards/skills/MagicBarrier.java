@@ -39,7 +39,7 @@ public class MagicBarrier extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new AddTemporaryHPAction(p, p, magicNumber));
+    	addToBot(new AddTemporaryHPAction(p, p, magicNumber));
     }
 
     @Override

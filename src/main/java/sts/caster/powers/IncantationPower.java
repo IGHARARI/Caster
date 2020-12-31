@@ -47,7 +47,7 @@ public class IncantationPower extends AbstractPower {
 	@Override
 	public void atStartOfTurnPostDraw() {
 		for (int i = 0; i < amount; i++) {
-			AbstractDungeon.actionManager.addToBottom(new QuickCastAction(1, false));
+			addToBot(new QuickCastAction(1, false));
 		}
 	}
 	

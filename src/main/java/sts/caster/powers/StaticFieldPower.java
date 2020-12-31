@@ -45,7 +45,7 @@ public class StaticFieldPower extends AbstractPower {
 	@Override
 	public void onSpecificTrigger() {
 		flash();
-		AbstractDungeon.actionManager.addToBottom(new GainBlockAction(owner, owner, amount, true));
+		addToBot(new GainBlockAction(owner, owner, amount, true));
 	}
 	
 	@Override

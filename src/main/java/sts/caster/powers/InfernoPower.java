@@ -45,7 +45,7 @@ public class InfernoPower extends AbstractPower {
 		if (isPlayer) {
 			for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
 				if (mon.isDeadOrEscaped()) continue;
-				AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mon, owner, new BlazedPower(mon, owner, amount), amount));
+				addToBot(new ApplyPowerAction(mon, owner, new BlazedPower(mon, owner, amount), amount));
 			}
 		}
 	}

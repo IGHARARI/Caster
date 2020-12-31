@@ -28,9 +28,9 @@ public class Accumulation extends CasterCard {
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
+    private static final int COST = 0;
     private static final int BLOCK_PER_SPELL = 3;
-    private static final int UPG_BLOCK_PER_SPELL = 2;
+    private static final int UPG_BLOCK_PER_SPELL = 1;
 
 
     public Accumulation() {
@@ -41,7 +41,7 @@ public class Accumulation extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
+    	addToBot(new GainBlockAction(p, p, block));
     }
     
     @Override

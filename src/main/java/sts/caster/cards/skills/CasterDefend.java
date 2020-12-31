@@ -48,7 +48,7 @@ public class CasterDefend extends CustomCard {
     	if(AbstractDungeon.actionManager.cardsPlayedThisTurn.stream().anyMatch(c -> c.type == CasterCardType.SPELL)) {
     		blockGain += magicNumber;
     	}
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, blockGain));
+        addToBot(new GainBlockAction(p, p, blockGain));
     }
 
     @Override

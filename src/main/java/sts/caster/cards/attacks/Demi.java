@@ -34,13 +34,14 @@ public class Demi extends CasterCard {
     public Demi() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseMagicNumber = magicNumber = DAMAGE_PERCENT;
+        exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	int hpDamage = (m.currentHealth * magicNumber) / 100;
-    	AbstractDungeon.actionManager.addToBottom(new RemoveAllBlockAction(m, p));
-    	AbstractDungeon.actionManager.addToBottom(new LoseHPAction(m, p, hpDamage));
+    	addToBot(new RemoveAllBlockAction(m, p));
+    	addToBot(new LoseHPAction(m, p, hpDamage));
     }
 
     @Override

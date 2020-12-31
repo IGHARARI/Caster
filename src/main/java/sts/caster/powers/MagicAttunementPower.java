@@ -48,7 +48,7 @@ public class MagicAttunementPower extends AbstractPower {
 	@Override
 	public void atStartOfTurnPostDraw() {
 		for (int i = 0; i < amount; i++) {
-			AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new SoulStrike()));
+			addToBot(new MakeTempCardInHandAction(new SoulStrike()));
 		}
 	}
 	

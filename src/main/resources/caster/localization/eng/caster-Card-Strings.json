@@ -24,8 +24,9 @@
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL At the start of your turn, if this card is in your exhaust pile, put it in your hand. NL Exhaust."
   },
   "caster:Barbroot": {
-    "NAME": "Barbroot",
-    "DESCRIPTION": "Lose !M! HP, deal !D! damage. NL Heal HP equal to 33% of unblocked damage dealt."
+    "NAME": "Giga Drain",
+    "DESCRIPTION": "Deal !D! damage. NL caster:Cast_Time !caster:Delay!: NL Heal HP equal to 25% of unblocked damage dealt.",
+    "EXTENDED_DESCRIPTION": ["Heal !M! HP."]
   },
   "caster:WallOfMirrors": {
     "NAME": "Wall Of Mirrors",
@@ -33,7 +34,7 @@
   },
   "caster:WallOfRocks": {
     "NAME": "Wall Of Rocks",
-    "DESCRIPTION": "Gain !B! Block. NL Apply !M! weakness to ALL attacking enemies."
+    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak to ALL attacking enemies."
   },
   "caster:DiamondDust": {
     "NAME": "Diamond Dust",
@@ -55,7 +56,7 @@
   },
   "caster:Thundara": {
     "NAME": "Thundara",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
+    "DESCRIPTION": "Reduce the cost of a random Spell in your hand to 0 this turn. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
   },
   "caster:Conflagrate": {
     "NAME": "Conflagrate",
@@ -68,7 +69,7 @@
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
-    "DESCRIPTION": "Whenever this card is Frozen, double its base damage this fight. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "When you draw this card, you may Freeze 1 card. NL Whenever Freezing this card, double its base damage this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
   "caster:StaticField": {
     "NAME": "Static Field",
@@ -80,8 +81,22 @@
   },
   "caster:Surge": {
     "NAME": "Surge",
-    "DESCRIPTION": "caster:Electrify !caster:M2! random card in your hand, gain [E].",
-    "UPGRADE_DESCRIPTION": "caster:Electrify !caster:M2! random cards in your hand, gain [E] [E]."
+    "DESCRIPTION": "caster:Electrify !caster:M2! random card in your hand. NL Gain [E].",
+    "UPGRADE_DESCRIPTION": "caster:Electrify !caster:M2! random cards in your hand. NL Gain [E] [E]."
+  },
+  "caster:Congeal": {
+    "NAME": "Congeal",
+    "DESCRIPTION": "Apply !M! Frost to ALL enemies. NL Whenever you play a Spell this turn, gain !caster:M2! Block."
+  },
+  "caster:Permafrost": {
+    "NAME": "Permafrost",
+    "DESCRIPTION": "Add 1 caster:Cast_Time to all Spells you are currently casting. NL Gain !B! Block: equal to twice the sum of their caster:Cast_Time. NL Next turn, gain half that amount.",
+    "UPGRADE_DESCRIPTION": "Retain. NL Add 1 caster:Cast_Time to all Spells you are currently casting. NL Gain !B! Block: equal to twice the sum of their caster:Cast_Time. NL Next turn, gain half that amount."
+  },
+  "caster:FreezeInHell": {
+    "NAME": "Freeze In Hell",
+    "DESCRIPTION": "Play and Exhaust all the cards in your Frozen Pile. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Retain. Play and Exhaust all the cards in your Frozen Pile. NL Exhaust."
   },
   "caster:FlashSpeed": {
     "NAME": "Flash Speed",
@@ -126,7 +141,7 @@
   },
   "caster:Accumulation": {
     "NAME": "Accumulation",
-    "DESCRIPTION": "Gain !B! Block. NL Gain !M! additional Block for each Spell currently being casted."
+    "DESCRIPTION": "Gain !M! Block for each Spell currently being casted. NL Currently: gain !B! Block."
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
@@ -134,11 +149,11 @@
   },
   "caster:MagicResonance": {
     "NAME": "Magic Resonance",
-    "DESCRIPTION": "Deal !D! damage for each spell you are currently casting."
+    "DESCRIPTION": "Deal !D! damage for each Spell you are currently casting."
   },
   "caster:MagicAttunement": {
     "NAME": "Magic Attunement",
-    "DESCRIPTION": "At the start of your turn, add a caster:Soul_Strike to your hand."
+    "DESCRIPTION": "At the start of your turn, add a *Soul *Strike to your hand."
   },
   "caster:SoulStrike": {
     "NAME": "Soul Strike",
@@ -146,7 +161,7 @@
   },
   "caster:Fissure": {
     "NAME": "Fissure",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL Enemies. NL Apply !M! Stun to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "Apply !M! Stun to ALL enemies. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL Enemies. NL Exhaust."
   },
   "caster:Susanoo": {
     "NAME": "Susano'o",
@@ -199,7 +214,7 @@
   },
   "caster:Fira": {
     "NAME": "Fira",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Deals !M! additional damage for every turn you've been in battle."
+    "DESCRIPTION": "Deals !M! additional damage for every turn you've been in combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
   "caster:SpontaneousCombustion": {
     "NAME": "Spontaneous Combustion",
@@ -220,8 +235,8 @@
   },
   "caster:ManaOverflow": {
     "NAME": "Mana Overflow",
-    "DESCRIPTION": "Whenever you play an elemental Spell add a caster:Soul_Strike to your hand.",
-    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you play an elemental Spell add a caster:Soul_Strike to your hand."
+    "DESCRIPTION": "Whenever you play an elemental Spell add a *Soul *Strike to your hand.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you play an elemental Spell add a *Soul *Strike to your hand."
   },
   "caster:Charge": {
     "NAME": "Charge",
@@ -233,7 +248,7 @@
   },
   "caster:Heavy": {
     "NAME": "Heavy",
-    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage equal to the Block you lost last round to ALL enemies."
+    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage to ALL enemies equal to the damage you blocked last round ."
   },
   "caster:Slick": {
     "NAME": "Slick",
@@ -290,17 +305,17 @@
   },
   "caster:Embers": {
     "NAME": "Embers",
-    "DESCRIPTION": "Draw !caster:M2! card. NL caster:Thaw !M! cards. NL Exhaust."
+    "DESCRIPTION": "Gain [E] for each enemy that intends to attack. NL caster:Thaw up to !M! cards."
   },
   "caster:Sultry": {
     "NAME": "Sultry",
-    "DESCRIPTION": "Gain [E]. NL caster:Thaw !M! card. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Gain [E]. NL caster:Thaw !M! card."
+    "DESCRIPTION": "Unplayable. NL When you draw this card draw !caster:M2! card and caster:Thaw !M! card.",
+    "UPGRADE_DESCRIPTION": "caster:Thaw up to !M! cards. NL When you draw this card draw !caster:M2! card."
   },
   "caster:BurnItDown": {
     "NAME": "Burn It Down",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Add a Wall of Ash into your discard pile. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage to ALL enemies. NL Add an Upgraded Wall of Ash into your discard pile. NL Exhaust."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Add a *Wall *of *Ash into your discard pile. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to ALL enemies. NL Add a *Wall *of *Ash+ into your discard pile. NL Exhaust."
   },
   "caster:Rectify": {
     "NAME": "Rectify",

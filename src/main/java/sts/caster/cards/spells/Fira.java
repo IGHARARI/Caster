@@ -39,8 +39,8 @@ public class Fira extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 10;
-    private static final int PER_TURN_DAMAGE = 2;
+    private static final int BASE_DAMAGE = 11;
+    private static final int PER_TURN_DAMAGE = 3;
 
 
     public Fira() {
@@ -61,11 +61,11 @@ public class Fira extends CasterCard {
     
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.FIRE));

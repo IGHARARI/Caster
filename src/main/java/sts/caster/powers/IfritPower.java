@@ -45,7 +45,7 @@ public class IfritPower extends AbstractPower {
 	@Override
 	public void atStartOfTurnPostDraw() {
 		for (int i = 0; i < amount; i++) {
-			AbstractDungeon.actionManager.addToBottom(new IfritAction());
+			addToBot(new IfritAction());
 		}
 	}
 	

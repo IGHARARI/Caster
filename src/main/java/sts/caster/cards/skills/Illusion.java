@@ -38,7 +38,7 @@ public class Illusion extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new IllusionAction(m, p));
+		addToBot(new IllusionAction(m, p));
     }
 
     @Override

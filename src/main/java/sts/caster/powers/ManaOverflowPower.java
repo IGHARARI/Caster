@@ -57,7 +57,7 @@ public class ManaOverflowPower extends AbstractPower {
 	@Override
 	public void onPlayCard(AbstractCard card, AbstractMonster m) {
 		if (isElementalSpellCard.test(card)) {
-			AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new SoulStrike(), amount));
+			addToBot(new MakeTempCardInHandAction(new SoulStrike(), amount));
 		}
 	}
 	

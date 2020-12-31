@@ -45,7 +45,7 @@ public class IzanagiPower extends AbstractPower {
 	public void onGainedBlock(float blockAmount) {
 		if (blockAmount > 0) {
 			flash();
-			AbstractDungeon.actionManager.addToBottom(new AddTemporaryHPAction(owner, owner, amount));
+			addToBot(new AddTemporaryHPAction(owner, owner, amount));
 		}
 	}
 	

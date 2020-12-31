@@ -45,8 +45,8 @@ public class Surge extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new ElectrifyCardsAction(m2, true));
-    	AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(magicNumber));
+    	addToBot(new ElectrifyCardsAction(m2, true));
+    	addToBot(new GainEnergyAction(magicNumber));
     }
     
     @Override

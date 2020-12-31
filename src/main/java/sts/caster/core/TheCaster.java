@@ -3,8 +3,8 @@ package sts.caster.core;
 import static sts.caster.core.CasterMod.THE_DEFAULT_CORPSE;
 import static sts.caster.core.CasterMod.THE_DEFAULT_SHOULDER_1;
 import static sts.caster.core.CasterMod.THE_DEFAULT_SHOULDER_2;
-import static sts.caster.core.CasterMod.THE_DEFAULT_SKELETON_ATLAS;
-import static sts.caster.core.CasterMod.THE_DEFAULT_SKELETON_JSON;
+import static sts.caster.core.CasterMod.THE_CASTER_SPRITE_ATLAS;
+import static sts.caster.core.CasterMod.THE_CASTER_SPRITE_JSON;
 import static sts.caster.core.TheCaster.Enums.THE_CASTER_COLOR;
 
 import java.util.ArrayList;
@@ -34,7 +34,6 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
 import basemod.abstracts.CustomPlayer;
-import basemod.animations.SpriterAnimation;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.DivertFocus;
@@ -60,7 +59,6 @@ public class TheCaster extends CustomPlayer {
     public static final int STARTING_GOLD = 99;
     public static final int CARD_DRAW = 5;
     public static final int ORB_SLOTS = 0;
-    public static final int MAX_MINIONS = 99;
 
     private static final String ID = "TheCaster";
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
@@ -83,25 +81,19 @@ public class TheCaster extends CustomPlayer {
 
 
     public TheCaster(String name, PlayerClass setClass) {
-        super(name, setClass, orbTextures,
-                "caster/images/char/defaultCharacter/orb/vfx.png", null,
-                new SpriterAnimation(
-                        "caster/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
+        super(name, setClass, orbTextures,"caster/images/char/defaultCharacter/orb/vfx.png", null, null,null);
 
         initializeClass(null, // required call to load textures and setup energy/loadout.
                 // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
                 THE_DEFAULT_SHOULDER_1, // campfire pose
                 THE_DEFAULT_SHOULDER_2, // another campfire pose
                 THE_DEFAULT_CORPSE, // dead corpse
-                getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
+                getLoadout(), -20.0F, 0.0F, 220.0F, 350.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
 
-        loadAnimation(
-                THE_DEFAULT_SKELETON_ATLAS,
-                THE_DEFAULT_SKELETON_JSON,
-                1.0f);
-        AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
+        loadAnimation(THE_CASTER_SPRITE_ATLAS, THE_CASTER_SPRITE_JSON, 1.8f);
+        AnimationState.TrackEntry e = state.setAnimation(0, "animtion0", true);
         e.setTime(e.getEndTime() * MathUtils.random());
-
+        e.setTimeScale(1.0F);
 
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
         dialogY = (drawY + 220.0F * Settings.scale); // you can just copy these values

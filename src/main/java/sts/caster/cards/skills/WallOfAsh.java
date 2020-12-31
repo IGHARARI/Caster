@@ -40,8 +40,8 @@ public class WallOfAsh extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new AshenWallPower(p)));
+    	addToBot(new GainBlockAction(p, p, block));
+    	addToBot(new ApplyPowerAction(p, p, new AshenWallPower(p)));
     }
     
     @Override

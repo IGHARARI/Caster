@@ -42,7 +42,7 @@ public class IzanagisObdurance extends CasterCard {
     
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new IzanagiPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new IzanagiPower(p, magicNumber), magicNumber));
     }
 
     @Override

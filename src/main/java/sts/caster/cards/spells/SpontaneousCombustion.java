@@ -52,8 +52,8 @@ public class SpontaneousCombustion extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(m, spellDamage), AttackEffect.FIRE));
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(this, delayTurns, m));
+    	addToBot(new DamageAction(m, new DamageInfo(m, spellDamage), AttackEffect.FIRE));
+		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
     
     @Override
@@ -62,7 +62,7 @@ public class SpontaneousCombustion extends CasterCard {
     }
     
     @Override
-    public ActionListMaker getActionsMaker(Integer energySpent) {
+    public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		if (c instanceof SpontaneousCombustion) actionsList.add(new SpontaneousCombustionAction((SpontaneousCombustion) c));

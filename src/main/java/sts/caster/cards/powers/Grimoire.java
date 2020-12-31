@@ -40,7 +40,7 @@ public class Grimoire extends CustomCard {
     
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FocusPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new FocusPower(p, magicNumber), magicNumber));
     }
 
     @Override

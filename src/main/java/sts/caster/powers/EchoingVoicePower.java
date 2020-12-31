@@ -69,7 +69,7 @@ public class EchoingVoicePower extends AbstractPower {
             AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(tmp, m, card.energyOnUse));
             --this.amount;
             if (this.amount == 0) {
-                AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
+                addToBot(new RemoveSpecificPowerAction(owner, owner, ID));
             }
         }
     }
@@ -77,7 +77,7 @@ public class EchoingVoicePower extends AbstractPower {
     @Override
     public void atEndOfTurn(final boolean isPlayer) {
         if (isPlayer) {
-            AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
+            addToBot(new RemoveSpecificPowerAction(owner, owner, ID));
         }
     }
 	

@@ -16,8 +16,8 @@ public class CryogenesisAction extends AbstractGameAction {
 	@Override
     public void update() {
     	int cardsInHand = AbstractDungeon.player.hand.size();
-    	AbstractDungeon.actionManager.addToBottom(new FreezeCardAction(cardsInHand, true));
-    	AbstractDungeon.actionManager.addToBottom(new DrawCardAction(AbstractDungeon.player, drawPerFrozen*cardsInHand));
+    	addToBot(new FreezeCardAction(cardsInHand, true));
+    	addToBot(new DrawCardAction(AbstractDungeon.player, drawPerFrozen*cardsInHand));
     	
 		isDone = true;
     }
