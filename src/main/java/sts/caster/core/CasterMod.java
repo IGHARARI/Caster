@@ -8,11 +8,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
+import com.evacipated.cardcrawl.mod.stslib.relics.OnAfterUseCardRelic;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -21,18 +23,21 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sts.caster.cards.CasterCard;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.attacks.*;
 import sts.caster.cards.powers.*;
 import sts.caster.cards.skills.*;
 import sts.caster.cards.special.Ashes;
 import sts.caster.cards.spells.*;
+import sts.caster.core.frozenpile.FrozenPileManager;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.relics.MagicBookRelic;
 import sts.caster.util.TextureHelper;
@@ -280,8 +285,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(AlternatingCurrent.ID);
         BaseMod.addCard(new NaturalChaos());
         UnlockTracker.unlockCard(NaturalChaos.ID);
-        BaseMod.addCard(new Incinerate());
-        UnlockTracker.unlockCard(Incinerate.ID);
         BaseMod.addCard(new BloodRitual());
         UnlockTracker.unlockCard(BloodRitual.ID);
         BaseMod.addCard(new Grimoire());
@@ -334,6 +337,10 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Permafrost.ID);
         BaseMod.addCard(new Congeal());
         UnlockTracker.unlockCard(Congeal.ID);
+        BaseMod.addCard(new Inferno());
+        UnlockTracker.unlockCard(Inferno.ID);
+        BaseMod.addCard(new Superconduct());
+        UnlockTracker.unlockCard(Superconduct.ID);
 
 
         // RARE CARDS
@@ -363,14 +370,16 @@ public class CasterMod implements
         UnlockTracker.unlockCard(StormGust.ID);
         BaseMod.addCard(new GateOfBabylon());
         UnlockTracker.unlockCard(GateOfBabylon.ID);
-        BaseMod.addCard(new Inferno());
-        UnlockTracker.unlockCard(Inferno.ID);
         BaseMod.addCard(new ShortenedChant());
         UnlockTracker.unlockCard(ShortenedChant.ID);
         BaseMod.addCard(new Focusyn());
         UnlockTracker.unlockCard(Focusyn.ID);
         BaseMod.addCard(new Demi());
         UnlockTracker.unlockCard(Demi.ID);
+        BaseMod.addCard(new Cool());
+        UnlockTracker.unlockCard(Cool.ID);
+        BaseMod.addCard(new IceWall());
+        UnlockTracker.unlockCard(IceWall.ID);
 
         // UNOBTAINABLE
         BaseMod.addCard(new Ashes());
@@ -392,6 +401,8 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(Elementalize.ID);
 //        BaseMod.addCard(new AshesToAshes());
 //        UnlockTracker.unlockCard(AshesToAshes.ID);
+//        BaseMod.addCard(new Incinerate());
+//        UnlockTracker.unlockCard(Incinerate.ID);
 
         logger.info("Done adding cards!");
     }
@@ -475,6 +486,21 @@ public class CasterMod implements
 
 	@Override
 	public void receiveOnBattleStart(AbstractRoom p0) {
-		blockLostPerTurn.clear();
+        FrozenPileManager.resetFrozenCount();
+	    blockLostPerTurn.clear();
 	}
+
+	public static boolean causesReaction(MagicElement current, MagicElement newOne) {
+        MagicElement reactiveElements = elementalReactions.get(current);
+        System.out.println("Comparing reactiveness of " + current.toString() + " and " + newOne.toString());
+        System.out.println("Returning null: " + reactiveElements != null + " && equals: " + reactiveElements.equals(newOne));
+        return reactiveElements != null && reactiveElements.equals(newOne);
+    }
+    public static HashMap<MagicElement, MagicElement> elementalReactions = new HashMap<>();
+    static {
+        elementalReactions.put(MagicElement.FIRE, MagicElement.ICE);
+        elementalReactions.put(MagicElement.ICE, MagicElement.THUNDER);
+        elementalReactions.put(MagicElement.THUNDER, MagicElement.EARTH);
+        elementalReactions.put(MagicElement.EARTH, MagicElement.FIRE);
+    }
 }

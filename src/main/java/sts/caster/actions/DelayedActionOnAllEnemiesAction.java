@@ -21,7 +21,9 @@ public class DelayedActionOnAllEnemiesAction extends AbstractGameAction {
             for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
             	if (!mon.isDeadOrEscaped() && mon.currentHealth > 0) {
             		AbstractGameAction action = monToAction.getAction(mon);
-            		AbstractDungeon.actionManager.addToTop(action);
+            		if (action != null) {
+	            		AbstractDungeon.actionManager.addToTop(action);
+					}
             	}
             }
     	}

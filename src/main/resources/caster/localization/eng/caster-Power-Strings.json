@@ -93,6 +93,18 @@
 	        "NAME": "Congeal",
 	        "DESCRIPTIONS": ["Whenever you play a Spell gain #g" , " Block."]
 	},
+	"caster:FreezeInHellPower": {
+		"NAME": "Freeze In Hell",
+		"DESCRIPTIONS": ["Whenever you play a card apply #g" , " Frost to all enemies."]
+	},
+	"caster:ElementalStatusPower": {
+		"NAME": "Elemental Affliction",
+		"DESCRIPTIONS": ["This monster is afflicted by the " , " element."]
+	},
+	"caster:ManaImbalancePower": {
+		"NAME": "Mana Imbalance",
+		"DESCRIPTIONS": ["target takes #g50% more damage from Spells."]
+	},
 	"caster:RarePower": {
 		"NAME": "Placeholder Power",
 		"DESCRIPTIONS": ["At the start of your turn, TOUCH ", " enemy." , " enemies."]

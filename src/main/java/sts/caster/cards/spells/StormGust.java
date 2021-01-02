@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import sts.caster.actions.DelayedActionOnAllEnemiesAction;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.FreezeCardAction;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -20,7 +22,9 @@ import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
+import sts.caster.powers.FrostPower;
 
 public class StormGust extends CasterCard {
 
@@ -38,7 +42,9 @@ public class StormGust extends CasterCard {
 
     private static final int COST = 2;
     private static final int BASE_DELAY = 2;
-    private static final int BASE_DAMAGE = 30;
+    private static final int BASE_DAMAGE = 34;
+    private static final int BASE_FROST = 5;
+    private static final int UPG_FROST = 2;
     private static final int BASE_CARDS_FROZEN = 2;
     private static final int UPG_CARDS_FROZEN = -1;
 
@@ -48,6 +54,7 @@ public class StormGust extends CasterCard {
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         magicNumber = baseMagicNumber = BASE_CARDS_FROZEN;
+        m2 = baseM2 = BASE_FROST;
         setCardElement(MagicElement.ICE);
     }
 
@@ -62,7 +69,11 @@ public class StormGust extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
         	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
-    		return actions;
+            MonsterToActionInterface frostApply = (mon) -> {
+                return new ApplyPowerAction(mon, AbstractDungeon.player, new FrostPower(mon, AbstractDungeon.player, c.m2), c.m2);
+            };
+            actions.add(new DelayedActionOnAllEnemiesAction(frostApply));
+            return actions;
     	};
     }
 
@@ -71,8 +82,9 @@ public class StormGust extends CasterCard {
         if (!upgraded) {
             upgradeName();
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-            initializeDescription();
+            upgradeM2(UPG_FROST);
             upgradeMagicNumber(UPG_CARDS_FROZEN);
+            initializeDescription();
         }
     }
 }

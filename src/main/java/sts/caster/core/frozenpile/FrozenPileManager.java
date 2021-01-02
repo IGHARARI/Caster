@@ -14,14 +14,24 @@ public class FrozenPileManager {
 	public static CardGroup frozenPile = new CardGroup(CardGroupType.UNSPECIFIED);
 	public static FrozenPileViewScreen frozenPileViewScreen = new FrozenPileViewScreen();
 	public static FrozenCardsPanel frozenPanel = new FrozenCardsPanel();
-	
+	public static Integer frozenCardCountForCombat = 0;
+
 	public static void moveToFrozenPile(CardGroup originalGroup, AbstractCard card) {
         resetCardBeforeMoving(originalGroup, card);
         AbstractDungeon.effectList.add(new ExhaustCardEffect(card));
         frozenPile.addToTop(card);
         applyOnFrozenTriggers(card);
+        frozenCardCountForCombat++;
 	}
-	
+
+	public static void resetFrozenCount() {
+        frozenCardCountForCombat = 0;
+    }
+
+    public static Integer getFrozenCount() {
+        return frozenCardCountForCombat;
+    }
+
     private static void applyOnFrozenTriggers(AbstractCard card) {
     	if (AbstractDungeon.player.hasPower(ShivaPower.POWER_ID)) AbstractDungeon.player.getPower(ShivaPower.POWER_ID).onSpecificTrigger();
     	if (card instanceof CasterCard) AbstractDungeon.actionManager.addToBottom(new CardOnFrozenTriggerAction((CasterCard) card));

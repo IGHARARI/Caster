@@ -29,11 +29,7 @@ import basemod.helpers.TooltipInfo;
 import sts.caster.core.MagicElement;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
-import sts.caster.powers.BlazedPower;
-import sts.caster.powers.FrostPower;
-import sts.caster.powers.MiredPower;
-import sts.caster.powers.ShockedPower;
-import sts.caster.powers.ShortenedChantPower;
+import sts.caster.powers.*;
 import sts.caster.util.PowersHelper;
 
 public abstract class CasterCard extends CustomCard {
@@ -48,8 +44,10 @@ public abstract class CasterCard extends CustomCard {
 	private static final UIStrings EARTH_DESC = CardCrawlGame.languagePack.getUIString("EarthElement");
 	
 	
+	public boolean freezeOnUse;
+
 	public int delayTurnsModificationForTurn;
-	public int delayTurns;		
+	public int delayTurns;
 	public int baseDelayTurns;	
 	public boolean upgradedDelayTurns; 
 	public boolean isDelayTurnsModified; 
@@ -221,18 +219,19 @@ public abstract class CasterCard extends CustomCard {
 	}
 
 	private static boolean isCreatureVulnerableTo(AbstractCreature mo, MagicElement element) {
-		switch (element) {
-			case FIRE:
-				return mo.hasPower(MiredPower.POWER_ID);
-			case ICE:
-				return mo.hasPower(BlazedPower.POWER_ID);
-			case THUNDER:
-				return mo.hasPower(FrostPower.POWER_ID);
-			case EARTH:
-				return mo.hasPower(ShockedPower.POWER_ID);
-			default:
-				return false;
-		}
+		return mo.hasPower(ManaImbalancePower.POWER_ID);
+//		switch (element) {
+//			case FIRE:
+//				return mo.hasPower(MiredPower.POWER_ID);
+//			case ICE:
+//				return mo.hasPower(BlazedPower.POWER_ID);
+//			case THUNDER:
+//				return mo.hasPower(FrostPower.POWER_ID);
+//			case EARTH:
+//				return mo.hasPower(ShockedPower.POWER_ID);
+//			default:
+//				return false;
+//		}
 	}
 
 	public void displayUpgrades() {
@@ -336,11 +335,6 @@ public abstract class CasterCard extends CustomCard {
 		copy.initializeDescription();
 		
 		return copy;
-	}
-	
-	
-	public static void customApplyPlayerPowersToSpellDamage(DamageInfo info) {
-		info.output = (int) customApplyPlayerPowersToSpellDamage(info.output);
 	}
 	
 	public static void customApplyEnemyPowersToSpellDamage(DamageInfo info, MagicElement elem, AbstractCreature target) {

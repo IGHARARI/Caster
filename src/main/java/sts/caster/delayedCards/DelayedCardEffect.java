@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -19,12 +20,14 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 
-import sts.caster.actions.DelayedEffectHideEvokedCard;
-import sts.caster.actions.DelayedEffectRemoveAction;
-import sts.caster.actions.DelayedEffectShowCardToEvoke;
-import sts.caster.actions.NonSkippableWaitAction;
-import sts.caster.actions.QueueEvokeCardAction;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import sts.caster.actions.*;
 import sts.caster.cards.CasterCard;
+import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
+import sts.caster.powers.ElementalStatusPower;
+import sts.caster.powers.ManaImbalancePower;
 
 public class DelayedCardEffect extends AbstractOrb {
 	public int turnsUntilFire;
@@ -44,6 +47,8 @@ public class DelayedCardEffect extends AbstractOrb {
 	
 	public AbstractMonster target = null;
 	public Integer energyOnCast;
+
+	private Boolean isPowersApplied = false;
 	
 	public DelayedCardEffect(CasterCard card, int delayTurns, AbstractMonster target) {
 		this(card, delayTurns, 0, target);
@@ -127,10 +132,49 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	public void evokeCardEffect(){
+		// If card targets All, check all monster for elemental reaction and update elemental ststus
+		if (delayedCard.target.equals(CardTarget.ALL) || delayedCard.target.equals(CardTarget.ALL_ENEMY)) {
+			AbstractDungeon.actionManager.addToTop(new DelayedActionOnAllEnemiesAction((mon) -> {
+				ElementalStatusPower status = getMonsterElementalStatus(mon);
+				if (status == null) {
+					System.out.println("Current status: unull");
+					return new ApplyPowerAction(target, AbstractDungeon.player, new ElementalStatusPower(target, delayedCard.cardElement));
+				} else {
+					System.out.println("Current status: " + status.element.toString());
+					status.element = delayedCard.cardElement;
+					status.updateDescription();
+					System.out.println("changed status: " + status.element.toString());
+					return null;
+				}
+			}));
+			AbstractDungeon.actionManager.addToTop(new DelayedActionOnAllEnemiesAction((mon) -> {
+				if (shouldCardCauseReaction(delayedCard, mon)) {
+					return new ApplyPowerAction(mon, AbstractDungeon.player, new ManaImbalancePower(mon, 1), 1);
+				}
+				return null;
+			}));
+		}
+		// Otherwise only check target for elemental reaction and update status
+		if (delayedCard.target.equals(CardTarget.ENEMY) || delayedCard.target.equals(CardTarget.SELF_AND_ENEMY)) {
+			if (shouldCardCauseReaction(delayedCard, target)) {
+				AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(target, AbstractDungeon.player, new ManaImbalancePower(target, 1), 1));
+			}
+			ElementalStatusPower status = getMonsterElementalStatus(target);
+			if (status == null) {
+				System.out.println("Current status: unull");
+				AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(target, AbstractDungeon.player, new ElementalStatusPower(target, delayedCard.cardElement)));
+			} else {
+				System.out.println("Current status: " + status.element.toString());
+				status.element = delayedCard.cardElement;
+				status.updateDescription();
+				System.out.println("changed status: " + status.element.toString());
+			}
+		}
 		AbstractDungeon.actionManager.addToTop(new DelayedEffectRemoveAction(this));
 		AbstractDungeon.actionManager.addToTop(new DelayedEffectHideEvokedCard(this));
 		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
 		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
+		applyPowersToAllCardCopies();
 		delayedCard.calculateCardDamage(target);
 		ArrayList<AbstractGameAction> delayedActions = delayedCard.buildActionsSupplier(energyOnCast).getActionList(delayedCard, target);
 		for (int i = delayedActions.size() -1; i >= 0; i--) {
@@ -140,7 +184,19 @@ public class DelayedCardEffect extends AbstractOrb {
 		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
 		AbstractDungeon.actionManager.addToTop(new DelayedEffectShowCardToEvoke(this));
 	}
-	
+
+	private ElementalStatusPower getMonsterElementalStatus(AbstractMonster mon) {
+		if (mon.hasPower(ElementalStatusPower.POWER_ID)) {
+			return (ElementalStatusPower) mon.getPower(ElementalStatusPower.POWER_ID);
+		}
+		return null;
+	}
+
+	private boolean shouldCardCauseReaction(CasterCard card, AbstractMonster mon) {
+		ElementalStatusPower status = getMonsterElementalStatus(mon);
+		return status != null && CasterMod.causesReaction(status.element, card.cardElement);
+	}
+
 	@Override
 	public void updateAnimation() {
 		super.updateAnimation();
@@ -178,8 +234,14 @@ public class DelayedCardEffect extends AbstractOrb {
 		);
 	}
 
+	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
 	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
+			if (!isPowersApplied) {
+				logger.info("ApplyingPowers on spell");
+				isPowersApplied = true;
+				applyPowersToAllCardCopies();
+			}
 			renderCardCopy(sb, cardPreviewCopy, cX, cY);
 			
 	        switch (this.delayedCard.target) {
@@ -212,10 +274,26 @@ public class DelayedCardEffect extends AbstractOrb {
 				default:
 				break;
 	        }
+		} else {
+			if (isPowersApplied) {
+				logger.info("Turning ispowersapplied to false");
+				isPowersApplied = false;
+			}
 		}
 		return hb.hovered;
 	}
-	
+
+	private void applyPowersToAllCardCopies() {
+		delayedCard.applyPowers();
+		delayedCard.calculateCardDamage(target);
+		cardPreviewCopy.applyPowers();
+		cardPreviewCopy.calculateCardDamage(target);
+		cardMiniCopy.applyPowers();
+		cardMiniCopy.calculateCardDamage(target);
+		cardEvokeCopy.applyPowers();
+		cardEvokeCopy.calculateCardDamage(target);
+	}
+
 	private void renderCardCopy(SpriteBatch sb, AbstractCard card, float targetX, float targetY) {
 		card.current_x = targetX;
 		card.current_y = targetY;

@@ -58,7 +58,11 @@ public class LordOfVermillion extends CasterCard {
         if (energyOnUse < EnergyPanel.totalCount) {
             energyOnUse = EnergyPanel.totalCount;
         }
-    	addToBot(new QueueDelayedCardAction(this, delayTurns, energyOnUse, null));
+        int effect = energyOnUse;
+        if (p.hasRelic(ChemicalX.ID)) {
+            effect += 2;
+        }
+    	addToBot(new QueueDelayedCardAction(this, delayTurns, effect, null));
     	if (!freeToPlayOnce) {
     		AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
     	}

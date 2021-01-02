@@ -58,7 +58,7 @@ public class AlternatingCurrent extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
     		actions.add(new DelayedDamageRandomEnemyAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.NONE));
-        	actions.add(new QueueDelayedCardAction(c, c.baseDelayTurns, t));
+        	actions.add(new QueueDelayedCardAction(c, BASE_DELAY, t));
     		return actions;
     	};
     }

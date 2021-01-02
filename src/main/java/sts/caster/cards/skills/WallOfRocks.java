@@ -34,7 +34,7 @@ public class WallOfRocks extends CasterCard {
     private static final int COST = 1;
     private static final int BLOCK_AMT = 7;
     private static final int UPG_BLOCK_AMT = 3;
-    private static final int WEAK_AMT = 2;
+    private static final int WEAK_AMT = 3;
     
     public WallOfRocks() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);

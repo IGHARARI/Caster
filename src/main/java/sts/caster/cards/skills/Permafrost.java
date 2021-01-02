@@ -40,6 +40,7 @@ public class Permafrost extends CasterCard {
 
     public Permafrost() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        baseBlock = block = 0;
         setCardElement(MagicElement.ICE);
     }
 

@@ -17,7 +17,6 @@ public class DamageAllEnemiesForBlockLostAction extends AbstractGameAction {
 
 	@Override
     public void update() {
-		System.out.println("Block list on damage all for block is: " + CasterMod.blockLostPerTurn.get(GameActionManager.turn));
 		Integer blockLost = CasterMod.blockLostPerTurn.get(GameActionManager.turn -1);
 		if (blockLost != null && blockLost != 0) {
 			AbstractDungeon.actionManager.addToTop(

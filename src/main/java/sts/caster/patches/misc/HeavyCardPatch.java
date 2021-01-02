@@ -21,7 +21,6 @@ public class HeavyCardPatch
 	public static class BlockCountPatch{
 		@SpireInsertPatch(localvars = { "damageAmount" }, locator = LocatorPre.class)
 		public static void InsertPre(final AbstractPlayer __instance, final DamageInfo info, @ByRef final int[] damageAmount) {
-			System.out.println("Enter on block loss patch");
 			if (info.type != DamageType.HP_LOSS || __instance.hasPower(AshenWallPower.POWER_ID)) {
 				int blockLost = Math.min(__instance.currentBlock, damageAmount[0]);
 				
@@ -31,7 +30,6 @@ public class HeavyCardPatch
 				} else {
 					CasterMod.blockLostPerTurn.put(GameActionManager.turn, blockLost);
 				}
-				System.out.println("Increment lost block for " + blockLost + " total " + CasterMod.blockLostPerTurn.get(GameActionManager.turn));
 			}
 		}
 		

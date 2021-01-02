@@ -69,7 +69,7 @@
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
-    "DESCRIPTION": "When you draw this card, you may Freeze 1 card. NL Whenever Freezing this card, double its base damage this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "When you draw this card, you may caster:Freeze 1 card. NL Whenever Freezing this card, double its base damage this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
   "caster:StaticField": {
     "NAME": "Static Field",
@@ -95,8 +95,7 @@
   },
   "caster:FreezeInHell": {
     "NAME": "Freeze In Hell",
-    "DESCRIPTION": "Play and Exhaust all the cards in your Frozen Pile. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Retain. Play and Exhaust all the cards in your Frozen Pile. NL Exhaust."
+    "DESCRIPTION": "Whenever you play a card, Apply !M! caster:Frost to ALL enemies."
   },
   "caster:FlashSpeed": {
     "NAME": "Flash Speed",
@@ -205,8 +204,8 @@
   },
   "caster:StormGust": {
     "NAME": "Storm Gust",
-    "DESCRIPTION": "caster:Freeze !M! cards. caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies.",
-    "UPGRADE_DESCRIPTION": "caster:Freeze !M! card. caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies."
+    "DESCRIPTION": "caster:Freeze !M! cards. caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. NL Apply !caster:M2! caster:Frost to ALL enemies.",
+    "UPGRADE_DESCRIPTION": "caster:Freeze !M! card. caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. NL Apply !caster:M2! caster:Frost to ALL enemies."
   },
   "caster:Eruption": {
     "NAME": "Eruption",
@@ -374,6 +373,27 @@
   "caster:BookThrow": {
     "NAME": "Book Throw",
     "DESCRIPTION": "Deal !D! damage. NL Enemy loses !M! Strength for the rest of this turn."
+  },
+  "caster:Cool": {
+    "NAME": "Cool",
+    "DESCRIPTION": "caster:Freeze 1 card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage for each card Frozen this combat, currently: !caster:D! damage. NL Play *Frostbite "
+  },
+  "caster:Frostbite": {
+    "NAME": "Frostbite",
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Play *Fimbulvetr "
+  },
+  "caster:Fimbulvetr": {
+    "NAME": "Fimbulvetr",
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NLDeal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Apply !M! Weak to ALL enemies."
+  },
+  "caster:Superconduct": {
+    "NAME": "Superconduct",
+    "DESCRIPTION": "caster:Electrify !caster:M2! random cards in your hand. NL caster:Cast_Time !caster:Delay! - X: NL Deal !caster:D! damage !M! times."
+  },
+  "caster:IceWall": {
+    "NAME": "Ice Wall",
+    "DESCRIPTION": "Gain !M! Blur. NL Gain !B! Block. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Gain !M! Blur. NL Gain !B! Block. NL caster:Freeze this card."
   },
   "caster:Meteor": {
     "NAME": "Meteor",
