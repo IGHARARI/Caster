@@ -5,19 +5,19 @@
 	},
 	"caster:Shocked": {
 	        "NAME": "Shocked",
-	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b50% of its Block, then reduce Shocked by #b1. NL Receives #b50% more damage from #yEarth cards."]
+	        "DESCRIPTIONS": ["At the end of this creature's turn, it will lose #b50% of its Block, then reduce #yShocked by #b1."]
 	},
 	"caster:Frost": {
 	        "NAME": "Frost",
-	        "DESCRIPTIONS": ["Whenever you receive damage, lose #r", "Whenever this creature takes damage, all enemies lose #r", " HP and Frost is reduced by #b1. NL Receives #b50% more damage from #yElectric cards."]
+	        "DESCRIPTIONS": ["Whenever you receive damage, lose #r", "Whenever target takes damage, all enemies lose #r", " HP and #yFrost is reduced by #b1."]
 	},
 	"caster:Blazed": {
 	        "NAME": "Blazed",
-	        "DESCRIPTIONS": ["Every time this creatures attacks, it will lose #r", " HP, then decrease #yBlazed by half. NL Receives #b50% more damage from #yIce cards."]
+	        "DESCRIPTIONS": ["Whenever this creatures attacks, it will lose #r", " HP, then decrease #yBlazed by half."]
 	},
 	"caster:Mired": {
 	        "NAME": "Mired",
-	        "DESCRIPTIONS": ["When this creature receives attack damage, heal #g2 HP, then decreased Mired by #b1. NL Receives #b50% more damage from #yFire cards."]
+	        "DESCRIPTIONS": ["When target receives Attack damage heal #g2 HP, then decrease #yMired by #b1."]
 	},
 	"caster:StaticField": {
 	        "NAME": "Static Field",
@@ -99,11 +99,17 @@
 	},
 	"caster:ElementalStatusPower": {
 		"NAME": "Elemental Affliction",
-		"DESCRIPTIONS": ["This monster is afflicted by the " , " element."]
+		"DESCRIPTIONS": [
+			"Target is afflicted by #rFire and will gain #g2 #yManastruck (extra damage from spells) if afflicted with #bIce.",
+			"Target is afflicted by #bIce and will gain #g2 #yManastruck (extra damage from spells) if afflicted with #yLightning.",
+			"Target is afflicted by #yLightning and will gain #g2 #yManastruck (extra damage from spells) if afflicted with #gEarth.",
+			"Target is afflicted by #gEarth and will gain #g2 #yManastruck (extra damage from spells) if afflicted with #rFire.",
+			"Target is afflicted by Neutral element."
+		]
 	},
 	"caster:ManaImbalancePower": {
-		"NAME": "Mana Imbalance",
-		"DESCRIPTIONS": ["target takes #g50% more damage from Spells."]
+		"NAME": "Manastruck",
+		"DESCRIPTIONS": ["Target takes #g50% more damage from Spells."]
 	},
 	"caster:RarePower": {
 		"NAME": "Placeholder Power",

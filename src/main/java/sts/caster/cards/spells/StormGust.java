@@ -42,8 +42,8 @@ public class StormGust extends CasterCard {
 
     private static final int COST = 2;
     private static final int BASE_DELAY = 2;
-    private static final int BASE_DAMAGE = 34;
-    private static final int BASE_FROST = 5;
+    private static final int BASE_DAMAGE = 32;
+    private static final int BASE_FROST = 3;
     private static final int UPG_FROST = 2;
     private static final int BASE_CARDS_FROZEN = 2;
     private static final int UPG_CARDS_FROZEN = -1;

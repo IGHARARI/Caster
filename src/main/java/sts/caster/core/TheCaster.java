@@ -36,6 +36,7 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import basemod.abstracts.CustomPlayer;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.skills.CasterDefend;
+import sts.caster.cards.skills.Channeling;
 import sts.caster.cards.skills.DivertFocus;
 import sts.caster.cards.spells.Meteor;
 import sts.caster.cards.spells.PhoenixFlare;
@@ -112,18 +113,19 @@ public class TheCaster extends CustomPlayer {
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
 
+        retVal.add(CasterStrike.ID);
+        retVal.add(CasterStrike.ID);
+        retVal.add(CasterStrike.ID);
+        retVal.add(CasterStrike.ID);
+        retVal.add(CasterDefend.ID);
+        retVal.add(CasterDefend.ID);
+        retVal.add(CasterDefend.ID);
+        retVal.add(CasterDefend.ID);
+
         retVal.add(Meteor.ID);
         retVal.add(DivertFocus.ID);
-        retVal.add(CasterStrike.ID);
-        retVal.add(CasterStrike.ID);
-        retVal.add(CasterStrike.ID);
-        retVal.add(CasterStrike.ID);
-        retVal.add(CasterDefend.ID);
-        retVal.add(CasterDefend.ID);
-        retVal.add(CasterDefend.ID);
-        retVal.add(CasterDefend.ID);
-        retVal.add(CasterDefend.ID);
-        
+        retVal.add(Channeling.ID);
+
         return retVal;
     }
 

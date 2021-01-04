@@ -4,6 +4,8 @@ import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.HashSet;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.AttackDamageRandomEnemyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -22,7 +24,7 @@ public class GateOfBabylon extends CasterCard {
 
     public static final String ID = CasterMod.makeID("GateOfBabylon");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("lazer.png");
+    public static final String IMG = makeCardPath("babylon.png");
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
@@ -45,10 +47,9 @@ public class GateOfBabylon extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	int attacks = countSpellsInMasterDeck();
-    	if (attacks > 0) {
-    		AbstractMonster randomTarget = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-    		addToBot(new RepeatingRandomDamageAction(randomTarget, new DamageInfo(p,damage), attacks));
-    	}
+        for(int i = 0; i < attacks; ++i) {
+            this.addToBot(new AttackDamageRandomEnemyAction(this, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        }
     }
 
     @Override

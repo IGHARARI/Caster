@@ -43,7 +43,6 @@ public class Enfeeble extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	for (int i = 0; i < m2; i++) {
-    		System.out.println("######### i is " + i + " and m2 is " + m2);
     		addToBot(new ApplyPowerAction(m, p, new WeakPower(m, magicNumber, false), magicNumber));
     	}
     }

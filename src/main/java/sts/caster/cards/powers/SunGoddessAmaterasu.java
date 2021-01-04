@@ -19,7 +19,7 @@ public class SunGoddessAmaterasu extends CasterCard {
 
     public static final String ID = CasterMod.makeID("SunGoddessAmaterasu");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("Power.png");
+    public static final String IMG = makeCardPath("amaterasu.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

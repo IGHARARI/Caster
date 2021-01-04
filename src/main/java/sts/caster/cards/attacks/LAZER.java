@@ -44,8 +44,10 @@ public class LAZER extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	for(int i = 0; i < magicNumber; i++) {
-    		addToBot(new VFXAction(new SmallLaserEffect(p.dialogX, p.dialogY, m.drawX, m.drawY), 0.33f));
-    		addToBot(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AttackEffect.SLASH_HORIZONTAL));
+            SmallLaserEffect lazer = new SmallLaserEffect(p.dialogX, p.dialogY, m.drawX, m.drawY);
+            lazer.duration = 0.5f;
+    		addToBot(new VFXAction(lazer, 0.1f));
+    		addToBot(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AttackEffect.SLASH_HORIZONTAL, true));
     	}
     }
 

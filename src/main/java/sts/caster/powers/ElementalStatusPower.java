@@ -20,8 +20,6 @@ import java.util.HashSet;
 
 import static sts.caster.core.CasterMod.makePowerPath;
 
-//Gain 1 dex for the turn for each card played.
-
 public class ElementalStatusPower extends AbstractPower {
 	public AbstractCreature source;
 
@@ -30,8 +28,8 @@ public class ElementalStatusPower extends AbstractPower {
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("frost84.png"));
-	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("frost32.png"));
+	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("elewheel84.png"));
+	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("elewheel32.png"));
 
 	public MagicElement element;
 
@@ -47,12 +45,26 @@ public class ElementalStatusPower extends AbstractPower {
 
 		isTurnBased = false;
 		canGoNegative = false;
-		type = PowerType.DEBUFF;
+		type = PowerType.BUFF;
 		updateDescription();
 	}
 
 	@Override
 	public void updateDescription() {
-		description = DESCRIPTIONS[0] + element.toString() + DESCRIPTIONS[1];
+		description = getElementDescription(element);
+	}
+
+	private String getElementDescription(MagicElement element) {
+		switch (element) {
+			case FIRE:
+				return DESCRIPTIONS[0];
+			case ICE:
+				return DESCRIPTIONS[1];
+			case THUNDER:
+				return DESCRIPTIONS[2];
+			case EARTH:
+				return DESCRIPTIONS[3];
+		}
+		return DESCRIPTIONS[4];
 	}
 }

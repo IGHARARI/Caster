@@ -80,7 +80,7 @@ public class Permafrost extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            retain = true;
+            this.selfRetain = true;
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }

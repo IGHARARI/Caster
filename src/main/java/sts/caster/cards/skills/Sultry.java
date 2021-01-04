@@ -30,7 +30,8 @@ public class Sultry extends CasterCard {
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 0;
+    private static final int COST = -2;
+    private static final int UPG_COST = 0;
     private static final int THAW_AMOUNT = 1;
     private static final int THAW_UPGRADE = 1;
     private static final int DRAW_AMOUNT = 1;
@@ -64,6 +65,7 @@ public class Sultry extends CasterCard {
             upgradeName();
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             upgradeMagicNumber(THAW_UPGRADE);
+            upgradeBaseCost(UPG_COST);
             initializeDescription();
         }
     }

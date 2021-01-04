@@ -13,7 +13,11 @@
   },
   "caster:defend": {
     "NAME": "Defend",
-    "DESCRIPTION": "Gain !B! Block. NL If you played a Spell this turn, gain !M! extra Block."
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "caster:Channeling": {
+    "NAME": "Channeling",
+    "DESCRIPTION": "Gain !B! Block. NL If you've played a Spell this turn: Gain !M! Block."
   },
   "caster:LAZER": {
     "NAME": "LAZER",
@@ -86,7 +90,7 @@
   },
   "caster:Congeal": {
     "NAME": "Congeal",
-    "DESCRIPTION": "Apply !M! Frost to ALL enemies. NL Whenever you play a Spell this turn, gain !caster:M2! Block."
+    "DESCRIPTION": "Apply !M! caster:Frost to ALL enemies. NL Whenever you play a Spell this turn, gain !caster:M2! Block."
   },
   "caster:Permafrost": {
     "NAME": "Permafrost",
@@ -188,7 +192,7 @@
   },
   "caster:ShivasGrace": {
     "NAME": "Shiva's Grace",
-    "DESCRIPTION": "Whenever you caster:Freeze a card, gain !M! plated armor."
+    "DESCRIPTION": "Whenever you caster:Freeze a card, gain !M! *Plated *Armor."
   },
   "caster:FrigidBeam": {
     "NAME": "Frigid Beam",
@@ -251,7 +255,7 @@
   },
   "caster:Slick": {
     "NAME": "Slick",
-    "DESCRIPTION": "Gain !M! Blur and draw a card. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block."
+    "DESCRIPTION": "Gain !M! Blur. NL Draw 2 cards. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block."
   },
   "caster:WallOfSwords": {
     "NAME": "Wall Of Swords",
@@ -294,7 +298,7 @@
     "DESCRIPTION": "Gain !M! Focus."
   },
   "caster:Focusyn": {
-    "NAME": "Focusyn",
+    "NAME": "Immersion",
     "DESCRIPTION": "Gain X Focus.",
     "UPGRADE_DESCRIPTION": "Gain X Focus. NL Refund !stslib:refund!."
   },
@@ -384,7 +388,7 @@
   },
   "caster:Fimbulvetr": {
     "NAME": "Fimbulvetr",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NLDeal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Apply !M! Weak to ALL enemies."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Apply !M! Weak to ALL enemies."
   },
   "caster:Superconduct": {
     "NAME": "Superconduct",

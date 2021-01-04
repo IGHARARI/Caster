@@ -32,7 +32,7 @@ public class Fira extends CasterCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardRarity RARITY = CardRarity.SPECIAL;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;

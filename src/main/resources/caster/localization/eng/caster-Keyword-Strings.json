@@ -38,28 +38,28 @@
       "Frost",
       "frost"
     ],
-    "DESCRIPTION": "#yFrosted creatures receive more damage from #yElectric attacks. When taking damage, they cause all enemies to lose HP, and #yFrost decreases."
+    "DESCRIPTION": "When a #yFrosted target takes damage all enemies lose HP equal to #yFrost, and #yFrost decreases."
   },
   {
     "NAMES": [
       "Blazed",
       "blazed"
     ],
-    "DESCRIPTION": "#yBlazed creatures receive more damage from #yIce attacks. When attacking, they lose HP, and #yBlazed decreases by half."
+    "DESCRIPTION": "When a #yBlazed creatures attacks they lose HP, and #yBlazed decreases by half."
   },
   {
     "NAMES": [
       "Mired",
       "mired"
     ],
-    "DESCRIPTION": "#yMired creatures receive more damage from #yFire attacks. When receiving attack damage, you heal #g2 HP, then decrease Mired by #b1"
+    "DESCRIPTION": "When a #yMired creatures receives Attack damage heal #g2 HP, then decrease #yMired by #b1"
   },
   {
     "NAMES": [
       "Shocked",
       "shocked"
     ],
-    "DESCRIPTION": "#yShocked creatures receive more damage from #yEarth attacks. At the end of their turn, they lose #b50% of their block and #yShocked decreases."
+    "DESCRIPTION": "#yShocked creatures lose #b50% of their block at the end of their turn, then #yShocked decreases by #b1."
   },
   {
     "NAMES": [

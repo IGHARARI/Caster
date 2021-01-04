@@ -75,8 +75,7 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 
     @Override
     public void onEquip() { 
-    	System.out.println("on equip for magic book is start? " + isStartOfgame);
-    	cardSelected = false; 
+    	cardSelected = false;
     	if (!isStartOfgame) {
 	        if (AbstractDungeon.isScreenUp) { 
 	            AbstractDungeon.dynamicBanner.hide();
@@ -88,7 +87,6 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
 	        CardGroup nonBottledSpells = new CardGroup(CardGroupType.UNSPECIFIED);
 	        for (AbstractCard card : nonBottledCards.group) {
 	        	if (card.type == CasterCardType.SPELL && (card instanceof CasterCard) && ((CasterCard)card).baseDelayTurns > 0) {
-	        		System.out.println("magbook: found spell - " + card.name);
 	        		nonBottledSpells.addToBottom(card);
 	        	}
 	        }
@@ -106,7 +104,6 @@ public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, Cu
     			if (c instanceof Meteor) meteor = c;
     		}
     		currentlyMemorizedCard = meteor;
-    		System.out.println("is meteor null? " + (meteor == null));
     		if (currentlyMemorizedCard != null) {
     			cardSelected = true;
     			isStartOfgame = false;

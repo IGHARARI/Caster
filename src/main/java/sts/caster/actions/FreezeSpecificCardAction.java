@@ -36,21 +36,15 @@ public class FreezeSpecificCardAction extends AbstractGameAction {
             if (originalGroup == null) {
                 if (p.hand.contains(card)){
                     originalGroup = p.hand;
-                    System.out.println("In hand");
                 } else if (p.discardPile.contains(card)){
                     originalGroup = p.discardPile;
-                    System.out.println("In discardPile");
                 } else if (p.exhaustPile.contains(card)){
                     originalGroup = p.exhaustPile;
-                    System.out.println("In exhaustPile");
                 } else if (p.drawPile.contains(card)){
                     originalGroup = p.drawPile;
-                    System.out.println("In drawPile");
                 } else if (p.limbo.contains(card)){
                     originalGroup = p.limbo;
-                    System.out.println("In limbo");
                 } else  {
-                    System.out.println("Card nowhere :(");
                     // Something has gone awry :(
                     this.tickDuration();
                     return;

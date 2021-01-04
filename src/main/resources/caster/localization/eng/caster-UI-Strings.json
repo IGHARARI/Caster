@@ -19,19 +19,19 @@
 		"TEXT": ["Elementalize"]
 	},
 	"SpellsDescription": {
-		"TEXT": ["Spell", "Spell cards are not affected by #yWeak, #yVulnerable, #yStrength, or #yDex. NL Spell #ydamage and #yblock is instead affected by #yFocus."]
+		"TEXT": ["Spell", "Spells are not affected by #yWeak, #yVulnerable, #yStrength, or #yDex. NL Spell #ydamage and #yblock is instead affected by #yFocus."]
 	},
 	"IceElement": {
-		"TEXT": ["Ice Element", "Deals extra damage to #yBlazed enemies."]
+		"TEXT": ["Ice Element", "Enemies targeted by this #ySpell will gain #bIce #yElemental #yAffliction."]
 	},
 	"FireElement": {
-		"TEXT": ["Fire Element", "Deals extra damage to #yMired enemies."]
+		"TEXT": ["Fire Element", "Enemies targeted by this #ySpell will gain #rFire #yElemental #yAffliction."]
 	},
 	"LightningElement": {
-		"TEXT": ["Lightning Element", "Deals extra damage to #yFrozen enemies."]
+		"TEXT": ["Lightning Element", "Enemies targeted by this #ySpell will gain #yLightning #yElemental #yAffliction."]
 	},
 	"EarthElement": {
-		"TEXT": ["Earth Element", "Deals extra damage to #yShocked enemies."]
+		"TEXT": ["Earth Element", "Enemies targeted by this #ySpell will gain #gEarth #yElemental #yAffliction."]
 	},
 	"FrozenViewScreen": {
 		"TEXT": [

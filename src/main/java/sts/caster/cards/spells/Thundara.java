@@ -36,7 +36,7 @@ public class Thundara extends CasterCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardRarity RARITY = CardRarity.SPECIAL;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
@@ -60,11 +60,13 @@ public class Thundara extends CasterCard {
         List<AbstractCard> inHandSpells = p.hand.group.stream()
                 .filter((c) -> c != this && c.type == CasterCardType.SPELL && c.costForTurn > 0)
                 .collect(Collectors.toList());
-        AbstractCard card = inHandSpells.get(AbstractDungeon.cardRandomRng.random(inHandSpells.size()-1));
-        addToBot(new ArbitraryCardAction(card, (c) -> {
-            c.flash();
-            c.setCostForTurn(-99);
-        }));
+        if (inHandSpells.size() > 0) {
+            AbstractCard card = inHandSpells.get(AbstractDungeon.cardRandomRng.random(inHandSpells.size()-1));
+            addToBot(new ArbitraryCardAction(card, (c) -> {
+                c.flash();
+                c.setCostForTurn(-99);
+            }));
+        }
         addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
     

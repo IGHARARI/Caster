@@ -32,7 +32,7 @@ public class Slick extends CasterCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardRarity RARITY = CardRarity.SPECIAL;
     private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
@@ -54,7 +54,7 @@ public class Slick extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	addToBot(new ApplyPowerAction(p, p, new BlurPower(p, magicNumber), magicNumber));
-        addToBot(new DrawCardAction(p, 1));
+        addToBot(new DrawCardAction(p, 2));
 		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
     

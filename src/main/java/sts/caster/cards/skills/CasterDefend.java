@@ -44,11 +44,11 @@ public class CasterDefend extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	int blockGain = block;
-    	if(AbstractDungeon.actionManager.cardsPlayedThisTurn.stream().anyMatch(c -> c.type == CasterCardType.SPELL)) {
-    		blockGain += magicNumber;
-    	}
-        addToBot(new GainBlockAction(p, p, blockGain));
+//    	int blockGain = block;
+//    	if(AbstractDungeon.actionManager.cardsPlayedThisTurn.stream().anyMatch(c -> c.type == CasterCardType.SPELL)) {
+//    		blockGain += magicNumber;
+//    	}
+        addToBot(new GainBlockAction(p, p, block));
     }
 
     @Override

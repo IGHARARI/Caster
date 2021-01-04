@@ -215,6 +215,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Meteor.ID);
         BaseMod.addCard(new DivertFocus());
         UnlockTracker.unlockCard(DivertFocus.ID);
+        BaseMod.addCard(new Channeling());
+        UnlockTracker.unlockCard(Channeling.ID);
 
         // EVENT SPECIALS
         BaseMod.addCard(new Fira());
@@ -492,8 +494,6 @@ public class CasterMod implements
 
 	public static boolean causesReaction(MagicElement current, MagicElement newOne) {
         MagicElement reactiveElements = elementalReactions.get(current);
-        System.out.println("Comparing reactiveness of " + current.toString() + " and " + newOne.toString());
-        System.out.println("Returning null: " + reactiveElements != null + " && equals: " + reactiveElements.equals(newOne));
         return reactiveElements != null && reactiveElements.equals(newOne);
     }
     public static HashMap<MagicElement, MagicElement> elementalReactions = new HashMap<>();
