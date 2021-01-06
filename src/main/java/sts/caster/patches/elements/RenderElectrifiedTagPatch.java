@@ -47,7 +47,7 @@ public class RenderElectrifiedTagPatch {
 	                    font.getData().setScale(1.0F);
 	                    String elecMessage = uiStrings.TEXT[0] + " x"+elecAmount;
 	                    GlyphLayout gl = new GlyphLayout(font, elecMessage);
-	                    float scale = Math.min((116.0F*__card.drawScale)/gl.width, (21.0F*__card.drawScale)/gl.height);
+	                    float scale = Math.min((116.0F*__card.drawScale)/gl.width, (21.0F*__card.drawScale)/gl.height) * Settings.scale;
 	                    FontHelper.menuBannerFont.getData().setScale(scale);
 	                    FontHelper.renderRotatedText(__sb, FontHelper.menuBannerFont, elecMessage, __card.current_x, __card.current_y, 0.0F, 443.0F * Settings.scale * __card.drawScale / 2.0F, __card.angle, true, fontColor);
 	                    FontHelper.menuBannerFont.getData().setScale(1.0F);

@@ -27,7 +27,7 @@ public class SpontaneousCombustion extends CasterCard {
 
     public static final String ID = CasterMod.makeID("SpontaneousCombustion");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("explosion.png");
+    public static final String IMG = makeCardPath("spontaneouscomb.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -41,12 +41,14 @@ public class SpontaneousCombustion extends CasterCard {
     private static final int BASE_DELAY = 3;
     private static final int BASE_DAMAGE = 8;
     private static final int UPG_DMG = 2;
+    private static final int HIT_TIMES = 3;
 
 
     public SpontaneousCombustion() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage =  BASE_DAMAGE;
+        baseMagicNumber = magicNumber = HIT_TIMES;
         setCardElement(MagicElement.FIRE);
     }
 
@@ -65,7 +67,7 @@ public class SpontaneousCombustion extends CasterCard {
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		if (c instanceof SpontaneousCombustion) actionsList.add(new SpontaneousCombustionAction((SpontaneousCombustion) c));
+    		if (c instanceof SpontaneousCombustion) actionsList.add(new SpontaneousCombustionAction((SpontaneousCombustion) c, magicNumber));
     		return actionsList;
     	};
     }

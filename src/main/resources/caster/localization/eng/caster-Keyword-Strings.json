@@ -80,7 +80,7 @@
       "Cast_time",
       "Cast_Time"
     ],
-    "DESCRIPTION": "The effects of this card will occur at the start of your turn, after an amount of turns equal to the card's #yCast #yTime has passed."
+    "DESCRIPTION": "#yCast this card: its effects will occur when its #yCast #yTime is 0. Reduce #yCast #yTime of #yCasted cards by #b1 at the start of your turn."
   },
   {
     "PROPER_NAME": "Shortened Chant",

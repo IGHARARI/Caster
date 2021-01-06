@@ -25,7 +25,7 @@ public class Heavy extends CasterCard {
 
     public static final String ID = CasterMod.makeID("Heavy");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("sandstorm.png");
+    public static final String IMG = makeCardPath("heavy.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

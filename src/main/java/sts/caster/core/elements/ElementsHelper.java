@@ -54,7 +54,7 @@ public class ElementsHelper {
     }
 
     private static ElementalStatusPower getMonsterElementalStatus(AbstractMonster mon) {
-        if (mon.hasPower(ElementalStatusPower.POWER_ID)) {
+        if (mon != null && mon.hasPower(ElementalStatusPower.POWER_ID)) {
             return (ElementalStatusPower) mon.getPower(ElementalStatusPower.POWER_ID);
         }
         return null;

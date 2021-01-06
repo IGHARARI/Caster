@@ -33,7 +33,7 @@ public class LAZER extends CasterCard {
     private static final int COST = 1;
     private static final int DAMAGE = 2;
     private static final int TIMES_DAMAGE = 4;
-    private static final int UPG_TIMES_DAMAGE = 2;
+    private static final int UPG_DAMAGE = 1;
 
     public LAZER() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -46,7 +46,7 @@ public class LAZER extends CasterCard {
     	for(int i = 0; i < magicNumber; i++) {
             SmallLaserEffect lazer = new SmallLaserEffect(p.dialogX, p.dialogY, m.drawX, m.drawY);
             lazer.duration = 0.5f;
-    		addToBot(new VFXAction(lazer, 0.1f));
+    		addToBot(new VFXAction(lazer, 0.05f));
     		addToBot(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AttackEffect.SLASH_HORIZONTAL, true));
     	}
     }
@@ -55,7 +55,7 @@ public class LAZER extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_TIMES_DAMAGE);
+            upgradeDamage(UPG_DAMAGE);
             initializeDescription();
         }
     }

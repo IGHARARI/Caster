@@ -221,7 +221,7 @@
   },
   "caster:SpontaneousCombustion": {
     "NAME": "Spontaneous Combustion",
-    "DESCRIPTION": "Deal !caster:D! damage. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage three times to the enemy with the lowest HP."
+    "DESCRIPTION": "Deal !caster:D! damage. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times to the enemy with the lowest HP."
   },
   "caster:LordOfVermillion": {
     "NAME": "Lord Of Vermillion",

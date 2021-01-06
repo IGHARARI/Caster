@@ -3,7 +3,7 @@
   "name": "The Caster",
   "author_list": ["Korbo"],
   "description": "The Caster, controller of elements.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",
   "dependencies": ["basemod", "stslib"],

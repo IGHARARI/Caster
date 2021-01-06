@@ -40,9 +40,9 @@ public class Tundra extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 3;
-    private static final int BASE_FROST = 3;
+    private static final int BASE_FROST = 7;
     private static final int BASE_DAMAGE = 6;
-    private static final int UPGR_DAMAGE = 3;
+    private static final int UPGR_DAMAGE = 4;
 
 
     public Tundra() {

@@ -151,7 +151,7 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	private void penNibCheck() {
-		if (AbstractDungeon.player.hasPower(PenNibPower.POWER_ID)) {
+		if (AbstractDungeon.player.hasPower(PenNibPower.POWER_ID) && delayedCard.damage > 0) {
 			AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, PenNibPower.POWER_ID));
 		}
 	}

@@ -59,7 +59,7 @@ public class DiamondDust extends CasterCard {
     	rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
     	initializeDescription();
     	addToBot(new ApplyPowerAction(m, p, new FrostPower(m, p, magicNumber), magicNumber));
-        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
 		addToBot(new ArbitraryCardAction(this, (c) -> {
             c.rawDescription = cardStrings.DESCRIPTION;
             c.initializeDescription();
