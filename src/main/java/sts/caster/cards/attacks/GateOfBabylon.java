@@ -1,24 +1,32 @@
 package sts.caster.cards.attacks;
 
 import static sts.caster.core.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeVFXPath;
 
 import java.util.HashSet;
 
+import basemod.helpers.VfxBuilder;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.AttackDamageRandomEnemyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import sts.caster.actions.RepeatingRandomDamageAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.patches.spellCardType.CasterCardType;
+import sts.caster.util.TextureHelper;
 
 public class GateOfBabylon extends CasterCard {
 
@@ -47,6 +55,34 @@ public class GateOfBabylon extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	int attacks = countSpellsInMasterDeck();
+
+        Texture magicCircle = TextureHelper.getTexture(makeVFXPath("magiccircle.png"));
+        Texture sword = TextureHelper.getTexture(makeVFXPath("sword.png"));
+
+        AbstractGameEffect gateVfx = new VfxBuilder(magicCircle, p.dialogX, p.dialogY, 1.8f)
+                .fadeIn(.5f)
+                .setScale(1f)
+                .rotate(100f)
+                .playSoundAt(0.2f, -.7f, "ORB_SLOT_GAIN")
+                .emitEvery(
+                        (x,y) -> {
+                            float randX = MathUtils.random(-magicCircle.getWidth()/4, magicCircle.getWidth()/2);
+                            float randY = MathUtils.random(-magicCircle.getHeight()/2, magicCircle.getHeight()/2);
+                            return new VfxBuilder(sword, p.dialogX + randX, p.dialogY + randY, .5f)
+                                    .setScale(.5f)
+                                    .setAlpha(0)
+                                    .fadeIn(.5f)
+                                    .setScale(1f)
+                                    .andThen(.33f)
+                                    .moveX(p.dialogX + randX, p.dialogX + randX + Settings.WIDTH, VfxBuilder.Interpolations.LINEAR)
+                                    .build();
+                        },
+                        1f/attacks*2
+                )
+                .build();
+
+
+        addToBot(new VFXAction(gateVfx, 1.3f));
         for(int i = 0; i < attacks; ++i) {
             this.addToBot(new AttackDamageRandomEnemyAction(this, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         }

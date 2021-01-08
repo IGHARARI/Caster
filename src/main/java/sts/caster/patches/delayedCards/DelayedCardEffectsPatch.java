@@ -63,6 +63,9 @@ public class DelayedCardEffectsPatch {
 					for (final DelayedCardEffect orbCard : DelayedCardsArea.delayedCards) {
 						orbCard.render(sb);
 					}
+					for (final DelayedCardEffect orbCard : DelayedCardsArea.evokingCards) {
+						orbCard.render(sb);
+					}
 					DelayedCardEffect hoveredCard = null;
 					for (final DelayedCardEffect orbCard : DelayedCardsArea.delayedCards) {
 						if (orbCard.renderPreviewIfHovered(sb)) hoveredCard = orbCard;
@@ -81,6 +84,9 @@ public class DelayedCardEffectsPatch {
 							continue;
 						}
 						//^avoid rendering the effects for cards being obscured by the pop up
+						orbCard.updateAnimation();
+					}
+					for (final DelayedCardEffect orbCard : DelayedCardsArea.evokingCards) {
 						orbCard.updateAnimation();
 					}
 				}

@@ -33,7 +33,8 @@ public class DelayedCardEffect extends AbstractOrb {
 	public int turnsUntilFire;
 
 	public static final String ORB_ID = "DelayedCard:";
-	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.66f;
+	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.1f;
+	public static final float ORIGINAL_WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.66f;
 	private static final float GLITTER_MIN_INTERVAL = 0.77f;
 	private static final float GLITTER_MAX_INTERVAL = 1.22f;
 
@@ -49,7 +50,8 @@ public class DelayedCardEffect extends AbstractOrb {
 	public Integer energyOnCast;
 
 	private Boolean isPowersApplied = false;
-	
+	private boolean beingEvoked;
+
 	public DelayedCardEffect(CasterCard card, int delayTurns, AbstractMonster target) {
 		this(card, delayTurns, 0, target);
 	}
@@ -84,7 +86,7 @@ public class DelayedCardEffect extends AbstractOrb {
 		cardMiniCopy.current_y = cY;
 		cardMiniCopy.hb.move(cX, cY);
 		cardMiniCopy.drawScale /= 5F;
-		
+		cardMiniCopy.targetDrawScale = cardMiniCopy.drawScale;
 
 		cardPreviewCopy = delayedCard.makeStatIdenticalCopy();
 		cardPreviewCopy.current_x = cX;
@@ -92,6 +94,8 @@ public class DelayedCardEffect extends AbstractOrb {
 		cardEvokeCopy = delayedCard.makeStatIdenticalCopy();
 		cardEvokeCopy.current_x = cX;
 		cardEvokeCopy.current_y = cY;
+
+		beingEvoked = false;
 	}
 
 	public void increaseDelay(int amount) {
@@ -126,19 +130,27 @@ public class DelayedCardEffect extends AbstractOrb {
 		passiveAmount = turnsUntilFire;
 		delayedCard.onStartOfTurnDelayEffect();
 		if (turnsUntilFire <= 0) {
-//			evokeCardEffect();
-			AbstractDungeon.actionManager.addToBottom(new QueueEvokeCardAction(this));
+			System.out.println("Adding to Evoke Area: " + this.ID);
+			DelayedCardsArea.evokingCards.add(this);
+			DelayedCardsArea.delayedCards.remove(this);
+			this.beingEvoked = true;
+			DelayedCardsArea.redrawEvokeCards();
+
+			AbstractDungeon.actionManager.addToBottom(new DelayedEffectRemoveAction(this));
+			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction(false));
+			AbstractDungeon.actionManager.addToBottom(new QueueEvokeCardAction(this)); // modified
 		}
 	}
 
 	public void evokeCardEffect(){
-		// Helper call to apply/update elemental affliction and then apply manastruck
 		penNibCheck();
+		// Helper call to apply/update elemental affliction and then apply manastruck
 		ElementsHelper.updateElementalAffliction(delayedCard, target);
-		AbstractDungeon.actionManager.addToTop(new DelayedEffectRemoveAction(this));
-		AbstractDungeon.actionManager.addToTop(new DelayedEffectHideEvokedCard(this));
-		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
-		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
+//		AbstractDungeon.actionManager.addToTop(new DelayedEffectRemoveAction(this));
+		AbstractDungeon.actionManager.addToTop(new DelayedEffectHideEvokedCard(this)); // modified
+//		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
+//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
+//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
 		applyPowersToAllCardCopies();
 		delayedCard.calculateCardDamage(target);
 		ArrayList<AbstractGameAction> delayedActions = delayedCard.buildActionsSupplier(energyOnCast).getActionList(delayedCard, target);
@@ -146,8 +158,8 @@ public class DelayedCardEffect extends AbstractOrb {
 			AbstractGameAction action = delayedActions.get(i);
 			AbstractDungeon.actionManager.addToTop(action);
 		}
-		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
-		AbstractDungeon.actionManager.addToTop(new DelayedEffectShowCardToEvoke(this));
+//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
+//		AbstractDungeon.actionManager.addToTop(new DelayedEffectShowCardToEvoke(this)); // modified
 	}
 
 	private void penNibCheck() {
@@ -171,11 +183,12 @@ public class DelayedCardEffect extends AbstractOrb {
 	public void render(SpriteBatch sb) {
 		cardMiniCopy.current_x = cX;
 		cardMiniCopy.current_y = cY;
+		cardMiniCopy.drawScale = MathHelper.cardScaleLerpSnap(cardMiniCopy.drawScale, cardMiniCopy.targetDrawScale);
 		cardMiniCopy.render(sb);
 		// renderText(sb);
 		// Reimplement render text so other patches on orbs don't break the spells
 		// Looking at you replay the spire.
-		renderSpellDelay(sb);
+		if (!beingEvoked) renderSpellDelay(sb);
 		hb.render(sb);
 		if (showEvokeCardOnScreen) {
 			renderCardCopy(sb, cardEvokeCopy, Settings.WIDTH/2f, Settings.HEIGHT/2f);
@@ -197,7 +210,6 @@ public class DelayedCardEffect extends AbstractOrb {
 	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
 			if (!isPowersApplied) {
-				logger.info("ApplyingPowers on spell");
 				isPowersApplied = true;
 				applyPowersToAllCardCopies();
 			}
@@ -234,10 +246,7 @@ public class DelayedCardEffect extends AbstractOrb {
 				break;
 	        }
 		} else {
-			if (isPowersApplied) {
-				logger.info("Turning ispowersapplied to false");
-				isPowersApplied = false;
-			}
+			if (isPowersApplied) isPowersApplied = false;
 		}
 		return hb.hovered;
 	}

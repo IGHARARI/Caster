@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import sts.caster.actions.FrozenTriggerAction;
+import sts.caster.actions.FrostTriggerAction;
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
 
@@ -48,7 +48,7 @@ public class FrostPower extends AbstractPower {
 	public int onAttacked(DamageInfo info, int damageAmount) {
 		if (damageAmount > 0 && DamageType.NORMAL.equals(info.type)) {
 			this.flash();
-			AbstractDungeon.actionManager.addToTop(new FrozenTriggerAction(this.owner));
+			AbstractDungeon.actionManager.addToTop(new FrostTriggerAction(this.owner));
 		}
 		return super.onAttacked(info, damageAmount);
 	}

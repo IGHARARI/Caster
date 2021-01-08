@@ -140,7 +140,7 @@
   },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy. NL Play a copy of this card."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy. NL Cast a copy of this card."
   },
   "caster:Accumulation": {
     "NAME": "Accumulation",

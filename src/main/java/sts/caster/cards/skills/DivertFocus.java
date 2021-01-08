@@ -51,7 +51,6 @@ public class DivertFocus extends CasterCard {
 		if (!p.hasPower(ArtifactPower.POWER_ID)) {
 			addToBot(new ApplyPowerAction(p, p, new GainFocusPower(p, magicNumber, true), magicNumber, true, AttackEffect.NONE));
 		}
-//    	addToBot(new DivertFocusAction(magicNumber));
     }
 
     @Override

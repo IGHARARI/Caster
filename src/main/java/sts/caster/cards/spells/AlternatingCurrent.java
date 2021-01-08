@@ -6,12 +6,16 @@ import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.audio.Sfx;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import sts.caster.actions.DelayedDamageRandomEnemyAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -19,6 +23,7 @@ import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 public class AlternatingCurrent extends CasterCard {
@@ -57,7 +62,10 @@ public class AlternatingCurrent extends CasterCard {
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    		actions.add(new DelayedDamageRandomEnemyAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.NONE));
+            ArrayList<MonsterToActionInterface> lightningEffects = new ArrayList<MonsterToActionInterface>();
+            lightningEffects.add(m -> new VFXAction(new LightningEffect(m.drawX, m.drawY), 0f));
+            lightningEffects.add(m -> new SFXAction("ORB_LIGHTNING_EVOKE"));
+    		actions.add(new DelayedDamageRandomEnemyAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.NONE, lightningEffects));
         	actions.add(new QueueDelayedCardAction(c, BASE_DELAY, t));
     		return actions;
     	};

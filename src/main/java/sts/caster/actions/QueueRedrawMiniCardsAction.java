@@ -12,7 +12,7 @@ public class QueueRedrawMiniCardsAction extends AbstractGameAction {
 		this(true);
 	}
 
-	private QueueRedrawMiniCardsAction(boolean delayed) {
+	public QueueRedrawMiniCardsAction(boolean delayed) {
 		actionType = ActionType.SPECIAL;
 		this.delayed= delayed;
 	}
@@ -24,6 +24,7 @@ public class QueueRedrawMiniCardsAction extends AbstractGameAction {
     			addToBot(new QueueRedrawMiniCardsAction(false));
     		} else {
     			DelayedCardsArea.repositionMiniCards();
+				DelayedCardsArea.redrawEvokeCards();
     		}
     	}
         isDone = true;

@@ -119,6 +119,10 @@ public class CasterMod implements
         return getModID() + "/images/powers/" + resourcePath;
     }
 
+    public static String makeVFXPath(String vfxPath) {
+        return getModID() + "/images/vfx/" + vfxPath;
+    }
+
     public CasterMod() {
         logger.info("Subscribe to BaseMod hooks");
 

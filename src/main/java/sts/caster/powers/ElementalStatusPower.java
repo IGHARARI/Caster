@@ -1,22 +1,14 @@
 package sts.caster.powers;
 
-import basemod.Pair;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import sts.caster.actions.FrozenTriggerAction;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.util.TextureHelper;
-
-import java.util.HashMap;
-import java.util.HashSet;
 
 import static sts.caster.core.CasterMod.makePowerPath;
 
