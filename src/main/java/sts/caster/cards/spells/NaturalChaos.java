@@ -26,7 +26,7 @@ public class NaturalChaos extends CasterCard {
 
     public static final String ID = CasterMod.makeID("NaturalChaos");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = makeCardPath("naturalchaos.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

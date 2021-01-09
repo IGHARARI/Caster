@@ -27,9 +27,9 @@
     "NAME": "Phoenix Flare",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL At the start of your turn, if this card is in your exhaust pile, put it in your hand. NL Exhaust."
   },
-  "caster:Barbroot": {
+  "caster:GigaDrain": {
     "NAME": "Giga Drain",
-    "DESCRIPTION": "Deal !D! damage. NL caster:Cast_Time !caster:Delay!: NL Heal HP equal to 25% of unblocked damage dealt.",
+    "DESCRIPTION": "Deal !D! damage. NL Heal HP equal to 25% of unblocked damage dealt.",
     "EXTENDED_DESCRIPTION": ["Heal !M! HP."]
   },
   "caster:WallOfMirrors": {
