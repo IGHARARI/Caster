@@ -276,7 +276,7 @@
   "caster:Enfeeble": {
     "NAME": "Enfeeble",
     "DESCRIPTION": "Apply !M! Weak.",
-    "UPGRADE_DESCRIPTION": "Apply !M! Weak twice."
+    "UPGRADE_DESCRIPTION": "Apply !M! Weak, then apply !M! Weak."
   },
   "caster:Unearth": {
     "NAME": "Unearth",

@@ -1,4 +1,4 @@
-package sts.caster.cards.spells;
+    package sts.caster.cards.spells;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
@@ -30,7 +30,7 @@ public class Superconduct extends CasterCard {
 
     public static final String ID = CasterMod.makeID("Superconduct");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = makeCardPath("superconduct.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

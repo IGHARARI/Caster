@@ -31,7 +31,6 @@ public class ShortenedChant extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int UPG_COST = 1;
     private static final int BASE_FOCUS_LOSS = 3;
     private static final int UPG_FOCUS_LOSS = -1;
     
@@ -51,7 +50,6 @@ public class ShortenedChant extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBaseCost(UPG_COST);
             upgradeMagicNumber(UPG_FOCUS_LOSS);
         }
     }
