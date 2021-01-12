@@ -50,8 +50,8 @@ public class FreezeInHell extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
+    private static final int UPG_COST = 1;
     private static final int FROST_AMOUNT = 1;
-    private static final int UPG_FROST_AMOUNT = 1;
 
     public FreezeInHell() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -68,7 +68,7 @@ public class FreezeInHell extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_FROST_AMOUNT);
+            upgradeBaseCost(UPG_COST);
             initializeDescription();
         }
     }

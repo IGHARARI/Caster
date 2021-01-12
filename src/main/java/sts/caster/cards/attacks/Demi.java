@@ -41,14 +41,15 @@ public class Demi extends CasterCard {
     private static final CardType TYPE = CardType.ATTACK;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 3;
-    private static final int UPG_COST = 2;
+    private static final int COST = 2;
     private static final int DAMAGE_PERCENT = 25;
+    private static final int DAMAGE_PERCENT_UPG = 30;
 
     public Demi() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseMagicNumber = magicNumber = DAMAGE_PERCENT;
         exhaust = true;
+        isEthereal = true;
     }
 
     @Override
@@ -110,7 +111,7 @@ public class Demi extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBaseCost(UPG_COST);
+            upgradeMagicNumber(DAMAGE_PERCENT_UPG);
             initializeDescription();
         }
     }

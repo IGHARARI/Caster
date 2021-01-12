@@ -267,7 +267,7 @@
   },
   "caster:Demi": {
     "NAME": "Demi",
-    "DESCRIPTION": "Remove ALL Block from the enemy. NL It loses !M! % of its current HP. NL Exhaust."
+    "DESCRIPTION": "Ethereal. NL Remove ALL Block from the enemy. NL It loses !M! % of its current HP. NL Exhaust."
   },
   "caster:Elementalize": {
     "NAME": "Elementalize",
