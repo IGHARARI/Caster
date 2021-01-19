@@ -1,11 +1,9 @@
 package sts.caster.cards;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,12 +15,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.DexterityPower;
-import com.megacrit.cardcrawl.powers.FocusPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
+import com.megacrit.cardcrawl.powers.*;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
@@ -32,8 +25,10 @@ import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.*;
 import sts.caster.util.PowersHelper;
 
+import static sts.caster.core.elements.ElementsHelper.willCauseManaStruck;
+
 public abstract class CasterCard extends CustomCard {
-	private final static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
+	private final static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(PenNibPower.POWER_ID, StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
 	
 	public static final Predicate<AbstractCard> isCardSpellPredicate = (c)-> c.type == CasterCardType.SPELL;
 	private static final String BASE_BG_PATH = "caster/images/card_backgrounds/";
@@ -107,7 +102,7 @@ public abstract class CasterCard extends CustomCard {
 				case ICE:
 					curTips.add(new TooltipInfo(ICE_DESC.TEXT[0], ICE_DESC.TEXT[1]));
 					break;
-				case THUNDER:
+				case ELECTRIC:
 					curTips.add(new TooltipInfo(LIGHTNING_DESC.TEXT[0], LIGHTNING_DESC.TEXT[1]));
 					break;
 				default:
@@ -144,7 +139,7 @@ public abstract class CasterCard extends CustomCard {
 		case ICE:
 			setBackgroundTexture(path + "ice_bg_s.png", path + "ice_bg_b.png");
 			break;
-		case THUNDER:
+		case ELECTRIC:
 			setBackgroundTexture(path + "lightning_bg_s.png", path + "lightning_bg_b.png");
 			break;
 		case DARK:
@@ -160,7 +155,16 @@ public abstract class CasterCard extends CustomCard {
 	
 	// Return an empty list by default to prevent NPEs on cards accidentally not overriding this.
 	public ActionListMaker buildActionsSupplier(Integer energySpent) {return (c, t)-> {return new ArrayList<AbstractGameAction>();};}
-	
+
+	@Override
+	public void triggerOnGlowCheck() {
+		if (willCauseManaStruck(this)) {
+			this.glowColor = Color.PURPLE.cpy();
+		} else {
+			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+		}
+	}
+
 
 	@Override
 	public void applyPowers() {

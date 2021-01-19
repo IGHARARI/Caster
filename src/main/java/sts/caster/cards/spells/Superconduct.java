@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import sts.caster.actions.ApplyElementalEffectChanceAction;
 import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -54,7 +53,7 @@ public class Superconduct extends CasterCard {
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
         m2 = baseM2 = ELEC_CARDS;
-        setCardElement(MagicElement.THUNDER);
+        setCardElement(MagicElement.ELECTRIC);
     }
 
     @Override

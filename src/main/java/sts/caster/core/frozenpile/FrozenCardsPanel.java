@@ -98,7 +98,7 @@ public class FrozenCardsPanel extends AbstractPanel {
             FontHelper.renderFontCentered(sb, FontHelper.turnNumFont, msg, this.current_x, this.current_y + 2.0f * Settings.scale, Color.LIGHT_GRAY.cpy());
             this.hb.render(sb);
             if (this.hb.hovered && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.isScreenUp) {
-                TipHelper.renderGenericTip(1550.0f * Settings.scale, 450.0f * Settings.scale, LABEL + " (" + InputActionSet.exhaustPile.getKeyString() + ")", MSG);
+                TipHelper.renderGenericTip(1550.0f * Settings.scale, 450.0f * Settings.scale, LABEL, MSG);
             }
         }
     }

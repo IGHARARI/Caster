@@ -97,7 +97,7 @@ public class TheCaster extends CustomPlayer {
         e.setTimeScale(1.0F);
 
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
-        dialogY = (drawY + 220.0F * Settings.scale); // you can just copy these values
+        dialogY = (drawY + 140.0F * Settings.scale); // you can just copy these values
 
 
     }
@@ -117,7 +117,6 @@ public class TheCaster extends CustomPlayer {
         retVal.add(CasterStrike.ID);
         retVal.add(CasterStrike.ID);
         retVal.add(CasterStrike.ID);
-        retVal.add(CasterDefend.ID);
         retVal.add(CasterDefend.ID);
         retVal.add(CasterDefend.ID);
         retVal.add(CasterDefend.ID);

@@ -14,9 +14,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
-import sts.caster.actions.QueueDelayedCardAction;
+import sts.caster.actions.LordOfVermillionAction;
 import sts.caster.actions.RandomTargetLightningDamageAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -50,22 +49,23 @@ public class LordOfVermillion extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
-        setCardElement(MagicElement.THUNDER);
+        setCardElement(MagicElement.ELECTRIC);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (energyOnUse < EnergyPanel.totalCount) {
-            energyOnUse = EnergyPanel.totalCount;
-        }
-        int effect = energyOnUse;
-        if (p.hasRelic(ChemicalX.ID)) {
-            effect += 2;
-        }
-    	addToBot(new QueueDelayedCardAction(this, delayTurns, effect, null));
-    	if (!freeToPlayOnce) {
-    		AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
-    	}
+        addToBot(new LordOfVermillionAction(this, energyOnUse));
+//        if (energyOnUse < EnergyPanel.totalCount) {
+//            energyOnUse = EnergyPanel.totalCount;
+//        }
+//        int effect = energyOnUse;
+//        if (p.hasRelic(ChemicalX.ID)) {
+//            effect += 2;
+//        }
+//    	addToBot(new QueueDelayedCardAction(this, delayTurns, effect, null));
+//    	if (!freeToPlayOnce) {
+//    		AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
+//    	}
     }
     
     @Override

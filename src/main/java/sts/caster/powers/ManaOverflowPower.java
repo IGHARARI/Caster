@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -25,7 +24,7 @@ import sts.caster.util.TextureHelper;
 
 public class ManaOverflowPower extends AbstractPower {
 	Predicate<CasterCard> isCardElemental = card -> {
-		return (card.cardElement == MagicElement.FIRE || card.cardElement == MagicElement.EARTH || card.cardElement == MagicElement.THUNDER || card.cardElement == MagicElement.ICE);
+		return (card.cardElement == MagicElement.FIRE || card.cardElement == MagicElement.EARTH || card.cardElement == MagicElement.ELECTRIC || card.cardElement == MagicElement.ICE);
 	};
 	Predicate<AbstractCard> isElementalSpellCard = card -> {
 		return (CasterCard.isCardSpellPredicate.test(card) && 

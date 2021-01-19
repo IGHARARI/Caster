@@ -49,7 +49,7 @@ public class JupitelThunder extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = HIT_TIMES;
-        setCardElement(MagicElement.THUNDER);
+        setCardElement(MagicElement.ELECTRIC);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class JupitelThunder extends CasterCard {
         	for (int i = 0; i < c.magicNumber; i++) {
         		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE, true));
         	}
-        	actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.THUNDER, c.magicNumber, 1, 1));
+//        	actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.ELECTRIC, c.magicNumber, 1, 1));
     		return actionsList;
     	};
     }

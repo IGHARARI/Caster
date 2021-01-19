@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.actions.DelayedActionOnAllEnemiesAction;
+import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -28,7 +28,7 @@ public class Tundra extends CasterCard {
 
     public static final String ID = CasterMod.makeID("Tundra");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = makeCardPath("tundra.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -40,7 +40,7 @@ public class Tundra extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 3;
-    private static final int BASE_FROST = 7;
+    private static final int BASE_FROST = 5;
     private static final int BASE_DAMAGE = 6;
     private static final int UPGR_DAMAGE = 4;
 
@@ -63,7 +63,7 @@ public class Tundra extends CasterCard {
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new DelayedActionOnAllEnemiesAction(
+    		actionsList.add(new ActionOnAllEnemiesAction(
 				m -> new ApplyPowerAction(m, AbstractDungeon.player, new FrostPower(m, AbstractDungeon.player, c.magicNumber), c.magicNumber)
 			));
     		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));

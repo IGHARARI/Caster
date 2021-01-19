@@ -1,6 +1,5 @@
 package sts.caster.cards.attacks;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -15,8 +14,6 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-
-import java.util.ArrayList;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -46,7 +43,7 @@ public class FlashSpeed extends CasterCard {
         magicNumber = baseMagicNumber = NUM_HITS;
         m2 = baseM2 = ELEC_AMOUNT;
         block = baseBlock = BLOCK;
-        setCardElement(MagicElement.THUNDER);
+        setCardElement(MagicElement.ELECTRIC);
     }
 
 

@@ -5,7 +5,6 @@ import static sts.caster.core.CasterMod.makeCardPath;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -34,7 +33,7 @@ public class Ramuh extends CasterCard {
 
     public Ramuh() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        setCardElement(MagicElement.THUNDER);
+        setCardElement(MagicElement.ELECTRIC);
     }
     
     @Override

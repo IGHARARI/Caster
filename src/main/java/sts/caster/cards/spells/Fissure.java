@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.IronWaveEffect;
 
-import sts.caster.actions.DelayedActionOnAllEnemiesAction;
+import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -60,7 +60,7 @@ public class Fissure extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
 		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
 		addToBot(new VFXAction(new IronWaveEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, Settings.WIDTH), 0.8f));
-        addToBot(new DelayedActionOnAllEnemiesAction(monster -> new StunMonsterAction(monster, AbstractDungeon.player)));
+        addToBot(new ActionOnAllEnemiesAction(monster -> new StunMonsterAction(monster, AbstractDungeon.player)));
     }
 
     

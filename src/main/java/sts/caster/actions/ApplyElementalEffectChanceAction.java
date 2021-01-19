@@ -48,7 +48,7 @@ public class ApplyElementalEffectChanceAction extends AbstractGameAction {
     			case ICE:
     				powerToApply = new FrostPower(target, source, stacksPerChance);
     				break;
-    			case THUNDER:
+    			case ELECTRIC:
     				powerToApply = new ShockedPower(target, source, stacksPerChance);
     				break;
 				default:

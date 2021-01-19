@@ -42,8 +42,12 @@
   },
   "caster:DiamondDust": {
     "NAME": "Diamond Dust",
-    "DESCRIPTION": "Apply !M! caster:Frost. NL caster:Cast_Time !caster:Delay!: NL Gain Block equal to your Block when you played this.",
-    "EXTENDED_DESCRIPTION": ["Apply !M! caster:Frost. NL caster:Cast_Time !caster:Delay!: NL Gain Block equal to your Block when you played this: !caster:M2! ."]
+    "DESCRIPTION": "Gain !B! Block. NL Increase this card's block by !M! this combat."
+  },
+  "caster:Bzzzt": {
+    "NAME": "BZZZT",
+    "DESCRIPTION": "Can only be played if you have no *Energy. NL Gain [E]. NL Draw !M! cards. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": ["I still have Energy..."]
   },
   "caster:GateOfBabylon": {
     "NAME": "Gate of Babylon",
@@ -56,7 +60,7 @@
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL caster:Shocker."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Draw !M! card."
   },
   "caster:Thundara": {
     "NAME": "Thundara",
@@ -83,6 +87,11 @@
     "NAME": "Discharge",
     "DESCRIPTION": "Remove ALL caster:Electrify from ALL cards in your hand. NL Deal !D! damage to a random enemy for each stack removed."
   },
+  "caster:Kindling": {
+    "NAME": "Kindling",
+    "DESCRIPTION": "If the enemy has caster:Blazed apply !M! caster:Blazed. NL Apply !M! caster:Blazed. NL Draw !caster:M2! card.",
+    "UPGRADE_DESCRIPTION": "If the enemy has caster:Blazed apply !M! caster:Blazed. NL Apply !M! caster:Blazed. NL Draw !caster:M2! cards."
+  },
   "caster:Surge": {
     "NAME": "Surge",
     "DESCRIPTION": "caster:Electrify !caster:M2! random card in your hand. NL Gain [E].",
@@ -105,6 +114,10 @@
     "NAME": "Flash Speed",
     "DESCRIPTION": "Deal !D! damage !M! times. NL Gain !B! Block. NL caster:Electrify !caster:M2! random card in your hand."
   },
+  "caster:VoltTackle": {
+    "NAME": "Volt Tackle",
+    "DESCRIPTION": "Deal !D! damage. NL caster:Electrify this card !M! times."
+  },
   "caster:FlashFrost": {
     "NAME": "Flash Frost",
     "DESCRIPTION": "Apply !M! caster:Frost. NL Exhaust.",
@@ -112,7 +125,7 @@
   },
   "caster:JupitelThunder": {
     "NAME": "Jupitel Thunder",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times. NL caster:Shocker."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
   },
   "caster:AshesToAshes": {
     "NAME": "Ashes to Ashes",
@@ -148,7 +161,7 @@
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
-    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: Deal !caster:D! damage, apply !M! caster:Frost."
+    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Apply !M! caster:Frost."
   },
   "caster:MagicResonance": {
     "NAME": "Magic Resonance",
@@ -229,8 +242,8 @@
   },
   "caster:Sleet": {
     "NAME": "Sleet",
-    "DESCRIPTION": "Draw !M! card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !caster:M2! times.",
-    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !caster:M2! times."
+    "DESCRIPTION": "Draw !M! card. NL caster:Cast_Time !caster:Delay!: NL Apply !caster:M2! caster:Frost to a random enemy 3 times.",
+    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL caster:Cast_Time !caster:Delay!: NL Apply !caster:M2! caster:Frost to a random enemy 3 times."
   },
   "caster:MeteorStorm": {
     "NAME": "Meteor Storm",
@@ -263,7 +276,7 @@
   },
   "caster:WallOfAsh": {
     "NAME": "Wall Of Ash",
-    "DESCRIPTION": "Gain !B! Block, your Block is also able to prevent HP Loss until next turn."
+    "DESCRIPTION": "Gain !B! Block. NL Shuffle *Ashes into your draw pile. NL Exhaust."
   },
   "caster:Demi": {
     "NAME": "Demi",
@@ -290,8 +303,8 @@
   },
   "caster:Ramuh": {
     "NAME": "Ramuh",
-    "DESCRIPTION": "Whenever you caster:Electrify a card, reduce its cost to 0 for the turn.",
-    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Electrify a card, reduce its cost to 0 for the turn."
+    "DESCRIPTION": "Whenever you caster:Electrify a card, reduce its cost by 1 for the turn.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Electrify a card, reduce its cost by 1 for the turn."
   },
   "caster:Grimoire": {
     "NAME": "Grimoire",

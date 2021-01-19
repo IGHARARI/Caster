@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -42,12 +43,15 @@ public class LightningBolt extends CasterCard {
     private static final int DELAY_TURNS = 1;
     private static final int BASE_DAMAGE = 6;
     private static final int UPGRADE_DAMAGE = 3;
+    private static final int DRAW_AMOUNT = 1;
+
 
     public LightningBolt() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
-        setCardElement(MagicElement.THUNDER);
+        magicNumber = baseMagicNumber = DRAW_AMOUNT;
+        setCardElement(MagicElement.ELECTRIC);
     }
 
     @Override
@@ -60,7 +64,8 @@ public class LightningBolt extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
-    		actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.THUNDER, 1, 1, 1));
+    		actionsList.add(new DrawCardAction(AbstractDungeon.player, c.magicNumber));
+//    		actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.ELECTRIC, 1, 1, 1));
     		return actionsList;
     	};
     }

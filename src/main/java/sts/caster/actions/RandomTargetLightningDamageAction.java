@@ -55,9 +55,9 @@ public class RandomTargetLightningDamageAction extends AbstractGameAction {
         if (this.isDone) {
             this.target.tint.color = Color.YELLOW.cpy();
             this.target.tint.changeColor(Color.WHITE.cpy());
-            CasterCard.customApplyEnemyPowersToSpellDamage(info, MagicElement.THUNDER, target);
+            CasterCard.customApplyEnemyPowersToSpellDamage(info, MagicElement.ELECTRIC, target);
             this.target.damage(this.info);
-            addToBot(new ApplyElementalEffectChanceAction(AbstractDungeon.player, target, MagicElement.THUNDER, 1, 1, 1));
+            addToBot(new ApplyElementalEffectChanceAction(AbstractDungeon.player, target, MagicElement.ELECTRIC, 1, 1, 1));
             if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
                 AbstractDungeon.actionManager.clearPostCombatActions();
             }

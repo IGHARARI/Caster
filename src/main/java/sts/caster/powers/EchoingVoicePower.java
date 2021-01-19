@@ -66,7 +66,7 @@ public class EchoingVoicePower extends AbstractPower {
                 tmp.calculateCardDamage(m);
             }
             tmp.purgeOnUse = true;
-            AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(tmp, m, card.energyOnUse));
+            AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), true);
             --this.amount;
             if (this.amount == 0) {
                 addToBot(new RemoveSpecificPowerAction(owner, owner, ID));

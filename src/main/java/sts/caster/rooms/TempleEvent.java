@@ -52,10 +52,10 @@ public class TempleEvent extends AbstractImageEvent {
     private void moveToPageTwo() {
     	this.imageEventText.updateBodyText(DESCRIPTIONS[1]);
     	this.imageEventText.clearAllDialogs();
-    	imageEventText.setDialogOption(TempleEvent.OPTIONS[2]);
-    	imageEventText.setDialogOption(TempleEvent.OPTIONS[3]);
-    	imageEventText.setDialogOption(TempleEvent.OPTIONS[4]);
-    	imageEventText.setDialogOption(TempleEvent.OPTIONS[5]);
+    	imageEventText.setDialogOption(TempleEvent.OPTIONS[2], new Heavy());
+    	imageEventText.setDialogOption(TempleEvent.OPTIONS[3], new Fira());
+    	imageEventText.setDialogOption(TempleEvent.OPTIONS[4], new Thundara());
+    	imageEventText.setDialogOption(TempleEvent.OPTIONS[5], new Slick());
     	currentScreen = 2;		
     }
     

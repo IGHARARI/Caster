@@ -52,7 +52,7 @@ public class ElementalStatusPower extends AbstractPower {
 				return DESCRIPTIONS[0];
 			case ICE:
 				return DESCRIPTIONS[1];
-			case THUNDER:
+			case ELECTRIC:
 				return DESCRIPTIONS[2];
 			case EARTH:
 				return DESCRIPTIONS[3];

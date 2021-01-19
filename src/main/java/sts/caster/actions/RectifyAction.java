@@ -56,7 +56,7 @@ public class RectifyAction extends AbstractGameAction implements basemod.helpers
 	        	showAndObtainCard(generateRandomSpell(MagicElement.FIRE), getForFree);
 	            break;
 	        case 1:
-	        	showAndObtainCard(generateRandomSpell(MagicElement.THUNDER), getForFree);
+	        	showAndObtainCard(generateRandomSpell(MagicElement.ELECTRIC), getForFree);
 	            break;
 	        case 2:
 	        	showAndObtainCard(generateRandomSpell(MagicElement.ICE), getForFree);

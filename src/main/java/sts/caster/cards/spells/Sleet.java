@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerToRandomEnemyAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -21,6 +22,7 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+import sts.caster.powers.FrostPower;
 
 public class Sleet extends CasterCard {
 
@@ -38,18 +40,18 @@ public class Sleet extends CasterCard {
 
     private static final int COST = 1;
     private static final int DELAY_TURNS = 1;
-    private static final int BASE_DAMAGE = 2;
-    private static final int HIT_TIMES = 4;
-    private static final int UPG_HIT_TIMES = 1;
+    private static final int BASE_FROST = 2;
     private static final int BASE_DRAW = 1;
     private static final int UPG_DRAW = 1;
 
+    private static final int TIMES_TO_FROST = 3;
+
+
     public Sleet() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = BASE_DRAW;
-        m2 = baseM2 = HIT_TIMES;
+        m2 = baseM2 = BASE_FROST;
         setCardElement(MagicElement.ICE);
     }
 
@@ -63,8 +65,8 @@ public class Sleet extends CasterCard {
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-        	for (int i = 0; i < c.m2; i++) {
-        		actionsList.add(new DelayedDamageRandomEnemyAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SLASH_VERTICAL));
+        	for (int i = 0; i < TIMES_TO_FROST; i++) {
+        		actionsList.add(new ApplyPowerToRandomEnemyAction(AbstractDungeon.player, new FrostPower(AbstractDungeon.player, AbstractDungeon.player, m2), m2));
         	}
     		return actionsList;
     	};
@@ -77,7 +79,6 @@ public class Sleet extends CasterCard {
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
             upgradeMagicNumber(UPG_DRAW);
-            upgradeM2(UPG_HIT_TIMES);
         }
     }
 }

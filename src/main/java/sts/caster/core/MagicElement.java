@@ -3,7 +3,7 @@ package sts.caster.core;
 public enum MagicElement {
 	FIRE,
 	ICE,
-	THUNDER,
+    ELECTRIC,
 	EARTH,
 	LIGHT,
 	DARK,

@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 import org.lwjgl.Sys;
 import sts.caster.actions.QueueRedrawMiniCardsAction;
+import sts.caster.cards.CasterCard;
 
 public class DelayedCardsArea {
 	public static ArrayList<DelayedCardEffect> delayedCards;
@@ -32,11 +33,11 @@ public class DelayedCardsArea {
 	
 	public static void repositionMiniCards() {
 		for (int turnsRemaining = 1 ; turnsRemaining < 4; turnsRemaining++) {
-			int columnIndex = 0;
+			int indexInColumn = 0;
 			for (DelayedCardEffect card : delayedCards) {
 				if (card.turnsUntilFire == turnsRemaining) {
-					positionCardInCardArea(turnsRemaining, columnIndex, card);
-					columnIndex++;
+					positionCardInCardArea(turnsRemaining, indexInColumn, card);
+					indexInColumn++;
 				}
 			}
 		}
@@ -97,5 +98,15 @@ public class DelayedCardsArea {
 		}
 
 		card.hb.move(card.tX, card.tY);
+	}
+
+	public static CasterCard getLastSpellForDelay(int delayTurns) {
+		CasterCard lastDelayedCard = null;
+		for (DelayedCardEffect card : delayedCards) {
+			if (card.turnsUntilFire == delayTurns) {
+				lastDelayedCard = card.delayedCard;
+			}
+		}
+		return lastDelayedCard;
 	}
 }

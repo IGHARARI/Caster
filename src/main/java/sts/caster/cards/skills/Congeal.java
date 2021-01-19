@@ -1,15 +1,12 @@
 package sts.caster.cards.skills;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.DelayedActionOnAllEnemiesAction;
-import sts.caster.actions.ThawCardAction;
+import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -34,9 +31,9 @@ public class Congeal extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
+    private static final int UPG_COST = 0;
     private static final int FROST_AMT = 3;
-    private static final int BASE_BLOCK = 3;
-    private static final int UPG_BLOCK = 2;
+    private static final int BASE_BLOCK = 4;
 
     public Congeal() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -47,7 +44,7 @@ public class Congeal extends CasterCard {
 
      @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-         addToBot(new DelayedActionOnAllEnemiesAction(
+         addToBot(new ActionOnAllEnemiesAction(
                  m -> new ApplyPowerAction(m, AbstractDungeon.player, new FrostPower(m, AbstractDungeon.player, magicNumber), magicNumber)
          ));
          addToBot(new ApplyPowerAction(p, p, new CongealPower(p, p, m2), m2));
@@ -57,7 +54,7 @@ public class Congeal extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_BLOCK);
+            upgradeBaseCost(UPG_COST);
             initializeDescription();
         }
     }

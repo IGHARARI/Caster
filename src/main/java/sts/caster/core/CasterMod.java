@@ -86,8 +86,8 @@ public class CasterMod implements
     public static final String ELECTRIFIED_TAG_IMAGE = "caster/images/512/electrified_blank_tag.png";
 
     // Character assets
-    private static final String THE_DEFAULT_BUTTON = "caster/images/charSelect/DefaultCharacterButton.png";
-    private static final String THE_DEFAULT_PORTRAIT = "caster/images/charSelect/DefaultCharacterPortraitBG.png";
+    private static final String THE_DEFAULT_BUTTON = "caster/images/charSelect/hatbutton.png";
+    private static final String THE_DEFAULT_PORTRAIT = "caster/images/charSelect/casterselect.png";
     public static final String THE_DEFAULT_SHOULDER_1 = "caster/images/char/defaultCharacter/shoulder.png";
     public static final String THE_DEFAULT_SHOULDER_2 = "caster/images/char/defaultCharacter/shoulder2.png";
     public static final String THE_DEFAULT_CORPSE = "caster/images/char/defaultCharacter/corpse.png";
@@ -265,6 +265,10 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Sultry.ID);
         BaseMod.addCard(new Fireball());
         UnlockTracker.unlockCard(Fireball.ID);
+        BaseMod.addCard(new VoltTackle());
+        UnlockTracker.unlockCard(VoltTackle.ID);
+        BaseMod.addCard(new Kindling());
+        UnlockTracker.unlockCard(Kindling.ID);
 
         // UNCOMMON
         BaseMod.addCard(new Fissure());
@@ -343,6 +347,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Inferno.ID);
         BaseMod.addCard(new Superconduct());
         UnlockTracker.unlockCard(Superconduct.ID);
+        BaseMod.addCard(new Bzzzt());
+        UnlockTracker.unlockCard(Bzzzt.ID);
 
 
         // RARE CARDS
@@ -491,16 +497,4 @@ public class CasterMod implements
         FrozenPileManager.resetFrozenCount();
 	    blockLostPerTurn.clear();
 	}
-
-	public static boolean causesReaction(MagicElement current, MagicElement newOne) {
-        MagicElement reactiveElements = elementalReactions.get(current);
-        return reactiveElements != null && reactiveElements.equals(newOne);
-    }
-    public static HashMap<MagicElement, MagicElement> elementalReactions = new HashMap<>();
-    static {
-        elementalReactions.put(MagicElement.FIRE, MagicElement.ICE);
-        elementalReactions.put(MagicElement.ICE, MagicElement.THUNDER);
-        elementalReactions.put(MagicElement.THUNDER, MagicElement.EARTH);
-        elementalReactions.put(MagicElement.EARTH, MagicElement.FIRE);
-    }
 }

@@ -95,7 +95,7 @@ public class SpellCardTypeAbstractCardPatches {
 	        		case ICE:
 	        			casterCard.setBackgroundTexture(path + "ice_bg_s.png", path + "ice_bg_b.png");
 	        			break;
-	        		case THUNDER:
+	        		case ELECTRIC:
 	        			casterCard.setBackgroundTexture(path + "lightning_bg_s.png", path + "lightning_bg_b.png");
 	        			break;
 	        		case DARK:
@@ -251,7 +251,7 @@ public class SpellCardTypeAbstractCardPatches {
 	        		case ICE:
 	        			casterCard.setBackgroundTexture(path + "ice_bg_s.png", path + "ice_bg_b.png");
 	        			break;
-	        		case THUNDER:
+	        		case ELECTRIC:
 	        			casterCard.setBackgroundTexture(path + "lightning_bg_s.png", path + "lightning_bg_b.png");
 	        			break;
 	        		case DARK:

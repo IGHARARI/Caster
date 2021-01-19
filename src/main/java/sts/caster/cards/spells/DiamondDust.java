@@ -33,53 +33,37 @@ public class DiamondDust extends CasterCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
-    private static final CardTarget TARGET = CardTarget.SELF_AND_ENEMY;
-    private static final CardType TYPE = CasterCardType.SPELL;
+    private static final CardTarget TARGET = CardTarget.SELF;
+    private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 2;
-    private static final int UPG_DELAY = -1;
-    private static final int FREEZE_AMOUNT = 4;
-    
+    private static final int BASE_BLOCK = 5;
+    private static final int UPG_BLOCK = 2;
+    private static final int PLUS_BLOCK_ON_PLAY = 2;
+    private static final int UPG_PLUS_BLOCK = 1;
+
 
 
     public DiamondDust() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseDelayTurns = delayTurns = BASE_DELAY;
-        magicNumber = baseMagicNumber = FREEZE_AMOUNT;
-        m2 = baseM2 = 0;
+        magicNumber = baseMagicNumber = PLUS_BLOCK_ON_PLAY;
+        baseBlock = block = BASE_BLOCK;
         setCardElement(MagicElement.ICE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	m2 = AbstractDungeon.player.currentBlock;
-    	if (m2 != 0) isM2Modified = true;
-    	rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
-    	initializeDescription();
-    	addToBot(new ApplyPowerAction(m, p, new FrostPower(m, p, magicNumber), magicNumber));
-        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
-		addToBot(new ArbitraryCardAction(this, (c) -> {
-            c.rawDescription = cardStrings.DESCRIPTION;
-            c.initializeDescription();
-        }));
-    }
-    
-    @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, c.m2));
-    		return actionsList;
-    	};
+        addToBot(new GainBlockAction(p, block));
+        addToBot(new ArbitraryCardAction(c -> this.upgradeBlock(magicNumber)));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeDelayTurns(UPG_DELAY);
+            upgradeBlock(UPG_BLOCK);
+            upgradeMagicNumber(UPG_PLUS_BLOCK);
             initializeDescription();
         }
     }

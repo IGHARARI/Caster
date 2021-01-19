@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import sts.caster.actions.DelayedActionOnAllEnemiesAction;
+import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -50,7 +50,7 @@ public class MegaloSpark extends CasterCard {
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         magicNumber = baseMagicNumber = ELEC_AMT;
-        setCardElement(MagicElement.THUNDER);
+        setCardElement(MagicElement.ELECTRIC);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class MegaloSpark extends CasterCard {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		for (int i = 0 ; i < 2; i++) {
-    			actionsList.add(new DelayedActionOnAllEnemiesAction(monster -> {
+    			actionsList.add(new ActionOnAllEnemiesAction(monster -> {
 	    				float tmp = customApplyEnemyPowersToSpellDamage(c.spellDamage, c.cardElement, monster);
 	    				return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, (int) tmp, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
 	    			}

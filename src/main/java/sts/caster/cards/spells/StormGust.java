@@ -6,17 +6,14 @@ import static sts.caster.core.CasterMod.makeVFXPath;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -26,7 +23,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.DamageImpactCurvyEffect;
-import com.megacrit.cardcrawl.vfx.combat.LightBulbEffect;
 import sts.caster.actions.*;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -138,7 +134,7 @@ public class StormGust extends CasterCard {
             MonsterToActionInterface frostApply = (mon) -> {
                 return new ApplyPowerAction(mon, AbstractDungeon.player, new FrostPower(mon, AbstractDungeon.player, c.m2), c.m2);
             };
-            actions.add(new DelayedActionOnAllEnemiesAction(frostApply));
+            actions.add(new ActionOnAllEnemiesAction(frostApply));
             return actions;
     	};
     }

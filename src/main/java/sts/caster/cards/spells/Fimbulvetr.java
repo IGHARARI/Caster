@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import sts.caster.actions.DelayedActionOnAllEnemiesAction;
+import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -22,7 +22,6 @@ import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -75,7 +74,7 @@ public class Fimbulvetr extends CasterCard {
             MonsterToActionInterface applyWeakBuilder = (m) -> {
                 return new ApplyPowerAction(m, AbstractDungeon.player, new WeakPower(m, magicNumber, false), magicNumber);
             };
-            actions.add(new DelayedActionOnAllEnemiesAction(applyWeakBuilder));
+            actions.add(new ActionOnAllEnemiesAction(applyWeakBuilder));
 
             return actions;
     	};

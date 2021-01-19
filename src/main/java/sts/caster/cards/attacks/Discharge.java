@@ -4,13 +4,13 @@ import static sts.caster.core.CasterMod.makeCardPath;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.actions.DischargeAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 
 public class Discharge extends CasterCard {
@@ -33,6 +33,7 @@ public class Discharge extends CasterCard {
     public Discharge() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDamage = damage = DAMAGE;
+        setCardElement(MagicElement.ELECTRIC);
     }
 
     @Override
