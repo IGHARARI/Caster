@@ -23,6 +23,10 @@
 	        "NAME": "Static Field",
 	        "DESCRIPTIONS": ["Gain #b", " Block whenever you #yElectrify a card."]
 	},
+	"caster:Gain": {
+	        "NAME": "Gain",
+	        "DESCRIPTIONS": ["Whenever you #yElectrify a Spell it gains #b", " damage."]
+	},
 	"caster:AshenWall": {
 	        "NAME": "Ashen Wall",
 	        "DESCRIPTIONS": ["HP Loss can be prevented by Block."]

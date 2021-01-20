@@ -32,6 +32,10 @@
     "DESCRIPTION": "Deal !D! damage. NL Heal HP equal to 25% of unblocked damage dealt.",
     "EXTENDED_DESCRIPTION": ["Heal !M! HP."]
   },
+  "caster:Gain": {
+    "NAME": "Gain",
+    "DESCRIPTION": "Whenever you caster:Electrify a *Spell it gains !M! additional damage."
+  },
   "caster:WallOfMirrors": {
     "NAME": "Wall Of Mirrors",
     "DESCRIPTION": "Prevent and reflect all damage dealt by target enemy this turn. NL Exhaust."
@@ -42,7 +46,7 @@
   },
   "caster:DiamondDust": {
     "NAME": "Diamond Dust",
-    "DESCRIPTION": "Gain !B! Block. NL Increase this card's block by !M! this combat."
+    "DESCRIPTION": "Gain !B! Block. NL Increase this card's Block by !M! this combat."
   },
   "caster:Bzzzt": {
     "NAME": "BZZZT",
@@ -68,7 +72,11 @@
   },
   "caster:Conflagrate": {
     "NAME": "Conflagrate",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Lose !M! HP and Deal !caster:D! damage to ALL enemies. NL If you caster:Freeze this card, reduce its HP loss to 0 for this combat."
+    "DESCRIPTION": "Whenever you caster:Freeze this card, caster:Thaw up to !M! cards. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+  },
+  "caster:Shatter": {
+    "NAME": "Shatter",
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy has caster:Frost deal !D! damage again."
   },
   "caster:MegaloSpark": {
     "NAME": "Megalo Spark",
@@ -238,7 +246,7 @@
   },
   "caster:LordOfVermillion": {
     "NAME": "Lord Of Vermillion",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M! [#F7FF00]x[] X times. NL caster:Shocker."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M! [#F7FF00]x[] X times."
   },
   "caster:Sleet": {
     "NAME": "Sleet",

@@ -39,7 +39,7 @@ public class SpontaneousCombustion extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 3;
-    private static final int BASE_DAMAGE = 8;
+    private static final int BASE_DAMAGE = 7;
     private static final int UPG_DMG = 2;
     private static final int HIT_TIMES = 3;
 

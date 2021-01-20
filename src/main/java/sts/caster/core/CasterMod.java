@@ -283,16 +283,12 @@ public class CasterMod implements
         UnlockTracker.unlockCard(SpontaneousCombustion.ID);
         BaseMod.addCard(new Eruption());
         UnlockTracker.unlockCard(Eruption.ID);
-        BaseMod.addCard(new MeteorStorm());
-        UnlockTracker.unlockCard(MeteorStorm.ID);
         BaseMod.addCard(new Accumulation());
         UnlockTracker.unlockCard(Accumulation.ID);
         BaseMod.addCard(new AlternatingCurrent());
         UnlockTracker.unlockCard(AlternatingCurrent.ID);
         BaseMod.addCard(new NaturalChaos());
         UnlockTracker.unlockCard(NaturalChaos.ID);
-        BaseMod.addCard(new BloodRitual());
-        UnlockTracker.unlockCard(BloodRitual.ID);
         BaseMod.addCard(new Grimoire());
         UnlockTracker.unlockCard(Grimoire.ID);
         BaseMod.addCard(new GaiasBlessing());
@@ -307,8 +303,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Conflagrate.ID);
         BaseMod.addCard(new Embers());
         UnlockTracker.unlockCard(Embers.ID);
-        BaseMod.addCard(new Rectify());
-        UnlockTracker.unlockCard(Rectify.ID);
         BaseMod.addCard(new WallOfSwords());
         UnlockTracker.unlockCard(WallOfSwords.ID);
         BaseMod.addCard(new WallOfAsh());
@@ -349,7 +343,10 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Superconduct.ID);
         BaseMod.addCard(new Bzzzt());
         UnlockTracker.unlockCard(Bzzzt.ID);
-
+        BaseMod.addCard(new Gain());
+        UnlockTracker.unlockCard(Gain.ID);
+        BaseMod.addCard(new Shatter());
+        UnlockTracker.unlockCard(Shatter.ID);
 
         // RARE CARDS
         BaseMod.addCard(new PhoenixFlare());
@@ -411,6 +408,12 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(AshesToAshes.ID);
 //        BaseMod.addCard(new Incinerate());
 //        UnlockTracker.unlockCard(Incinerate.ID);
+//        BaseMod.addCard(new MeteorStorm());
+//        UnlockTracker.unlockCard(MeteorStorm.ID);
+//        BaseMod.addCard(new Rectify());
+//        UnlockTracker.unlockCard(Rectify.ID);
+//        BaseMod.addCard(new BloodRitual());
+//        UnlockTracker.unlockCard(BloodRitual.ID);
 
         logger.info("Done adding cards!");
     }

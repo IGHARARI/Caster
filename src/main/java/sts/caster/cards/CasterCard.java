@@ -203,7 +203,7 @@ public abstract class CasterCard extends CustomCard {
 	private void applyCardDamageModifers(AbstractMonster mo) {
 		float damageCalculation = baseSpellDamage;
 		
-		damageCalculation = customApplyPlayerPowersToSpellDamage(damageCalculation);
+		damageCalculation = customApplyPlayerPowersToSpellDamage(damageCalculation, this);
 		if (mo != null && target != CardTarget.ALL_ENEMY && target != CardTarget.ALL) {
 			damageCalculation = customApplyEnemyPowersToSpellDamage(damageCalculation, cardElement, mo);
 
@@ -334,7 +334,7 @@ public abstract class CasterCard extends CustomCard {
 		copy.baseMagicNumber = baseMagicNumber;
 		copy.upgradedMagicNumber = upgradedMagicNumber;
 		copy.isMagicNumberModified = isMagicNumberModified;
-		
+
 		copy.rawDescription = rawDescription;
 		copy.initializeDescription();
 		
@@ -345,17 +345,17 @@ public abstract class CasterCard extends CustomCard {
 		info.output = (int) customApplyEnemyPowersToSpellDamage(info.output, elem, target);
 	}
 	
-	public static float customApplyPlayerPowersToSpellDamage(float damageToCalculate) {
+	public static float customApplyPlayerPowersToSpellDamage(float damageToCalculate, CasterCard casterCard) {
 		final AbstractPlayer player = AbstractDungeon.player;
 		float tmp = damageToCalculate;
 		if (player != null) {
 			for (final AbstractPower p : player.powers) {
 				if (ineffectivePowers.contains(p.ID)) continue;
-				tmp = p.atDamageGive(tmp, DamageType.NORMAL);
+				tmp = p.atDamageGive(tmp, DamageType.NORMAL, casterCard);
 			}
 			for (final AbstractPower p : player.powers) {
 				if (ineffectivePowers.contains(p.ID)) continue;
-				tmp = p.atDamageFinalGive(tmp, DamageType.NORMAL);
+				tmp = p.atDamageFinalGive(tmp, DamageType.NORMAL, casterCard);
 			}
 		}
 		tmp += PowersHelper.getPlayerPowerAmount(FocusPower.POWER_ID);
