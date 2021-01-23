@@ -44,6 +44,8 @@ import sts.caster.variables.SpellDamage;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @SpireInitializer
@@ -233,8 +235,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(FlashSpeed.ID);
         BaseMod.addCard(new FlashFrost());
         UnlockTracker.unlockCard(FlashFrost.ID);
-        BaseMod.addCard(new LightningBolt());
-        UnlockTracker.unlockCard(LightningBolt.ID);
         BaseMod.addCard(new LAZER());
         UnlockTracker.unlockCard(LAZER.ID);
         BaseMod.addCard(new JupitelThunder());
@@ -249,8 +249,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(GlacialShield.ID);
         BaseMod.addCard(new DiablosFlame());
         UnlockTracker.unlockCard(DiablosFlame.ID);
-        BaseMod.addCard(new MagicBarrier());
-        UnlockTracker.unlockCard(MagicBarrier.ID);
         BaseMod.addCard(new Charge());
         UnlockTracker.unlockCard(Charge.ID);
         BaseMod.addCard(new Sleet());
@@ -269,12 +267,18 @@ public class CasterMod implements
         UnlockTracker.unlockCard(VoltTackle.ID);
         BaseMod.addCard(new Kindling());
         UnlockTracker.unlockCard(Kindling.ID);
+        BaseMod.addCard(new NaturalChaos());
+        UnlockTracker.unlockCard(NaturalChaos.ID);
+        BaseMod.addCard(new WallOfThorns());
+        UnlockTracker.unlockCard(WallOfThorns.ID);
+        BaseMod.addCard(new AlternatingCurrent());
+        UnlockTracker.unlockCard(AlternatingCurrent.ID);
+        BaseMod.addCard(new BurnItDown());
+        UnlockTracker.unlockCard(BurnItDown.ID);
 
         // UNCOMMON
         BaseMod.addCard(new Fissure());
         UnlockTracker.unlockCard(Fissure.ID);
-        BaseMod.addCard(new WallOfThorns());
-        UnlockTracker.unlockCard(WallOfThorns.ID);
         BaseMod.addCard(new Incantation());
         UnlockTracker.unlockCard(Incantation.ID);
         BaseMod.addCard(new MagicAttunement());
@@ -285,16 +289,10 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Eruption.ID);
         BaseMod.addCard(new Accumulation());
         UnlockTracker.unlockCard(Accumulation.ID);
-        BaseMod.addCard(new AlternatingCurrent());
-        UnlockTracker.unlockCard(AlternatingCurrent.ID);
-        BaseMod.addCard(new NaturalChaos());
-        UnlockTracker.unlockCard(NaturalChaos.ID);
         BaseMod.addCard(new Grimoire());
         UnlockTracker.unlockCard(Grimoire.ID);
         BaseMod.addCard(new GaiasBlessing());
         UnlockTracker.unlockCard(GaiasBlessing.ID);
-        BaseMod.addCard(new MegaloSpark());
-        UnlockTracker.unlockCard(MegaloSpark.ID);
         BaseMod.addCard(new AbsoluteZero());
         UnlockTracker.unlockCard(AbsoluteZero.ID);
         BaseMod.addCard(new Unearth());
@@ -309,8 +307,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(WallOfAsh.ID);
         BaseMod.addCard(new ShivasGrace());
         UnlockTracker.unlockCard(ShivasGrace.ID);
-        BaseMod.addCard(new BurnItDown());
-        UnlockTracker.unlockCard(BurnItDown.ID);
         BaseMod.addCard(new GigaDrain());
         UnlockTracker.unlockCard(GigaDrain.ID);
         BaseMod.addCard(new WallOfMirrors());
@@ -347,6 +343,12 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Gain.ID);
         BaseMod.addCard(new Shatter());
         UnlockTracker.unlockCard(Shatter.ID);
+        BaseMod.addCard(new Electroplating());
+        UnlockTracker.unlockCard(Electroplating.ID);
+        BaseMod.addCard(new Thermodynamics());
+        UnlockTracker.unlockCard(Thermodynamics.ID);
+        BaseMod.addCard(new LightningBolt());
+        UnlockTracker.unlockCard(LightningBolt.ID);
 
         // RARE CARDS
         BaseMod.addCard(new PhoenixFlare());
@@ -414,6 +416,10 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(Rectify.ID);
 //        BaseMod.addCard(new BloodRitual());
 //        UnlockTracker.unlockCard(BloodRitual.ID);
+//        BaseMod.addCard(new MegaloSpark());
+//        UnlockTracker.unlockCard(MegaloSpark.ID);
+//        BaseMod.addCard(new MagicBarrier());
+//        UnlockTracker.unlockCard(MagicBarrier.ID);
 
         logger.info("Done adding cards!");
     }
@@ -500,4 +506,12 @@ public class CasterMod implements
         FrozenPileManager.resetFrozenCount();
 	    blockLostPerTurn.clear();
 	}
+
+//    @Override
+//    public void receivePostEnergyRecharge() {
+//        List<AbstractCard> frozenEmbers = FrozenPileManager.frozenPile.group.stream().filter(c -> c instanceof Embers).collect(Collectors.toList());
+//        for (AbstractCard ember : frozenEmbers) {
+//            ((Embers)ember).triggerWhenOnFrozenPile();
+//        }
+//    }
 }

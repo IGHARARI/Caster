@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -24,6 +25,7 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+import sts.caster.powers.BlazedPower;
 
 public class Conflagrate extends CasterCard {
 
@@ -45,6 +47,7 @@ public class Conflagrate extends CasterCard {
     private static final int UPG_DAMAGE = 3;
     private static final int THAW_BASE = 1;
     private static final int THAW_UPG = 1;
+    private static final int BLAZE = 5;
 
 
     public Conflagrate() {
@@ -52,6 +55,7 @@ public class Conflagrate extends CasterCard {
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage =  BASE_DAMAGE;
         magicNumber = baseMagicNumber = THAW_BASE;
+        m2 = baseM2 = BLAZE;
         setCardElement(MagicElement.FIRE);
     }
 
@@ -63,8 +67,10 @@ public class Conflagrate extends CasterCard {
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
+            AbstractPlayer p = AbstractDungeon.player;
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.FIRE));
+    		actionsList.add(new DamageAction(t, new DamageInfo(p, c.spellDamage), AttackEffect.FIRE));
+    		actionsList.add(new ApplyPowerAction(t, p, new BlazedPower(t, p, c.m2), c.m2));
     		return actionsList;
     	};
     }

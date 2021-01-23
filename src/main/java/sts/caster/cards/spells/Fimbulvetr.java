@@ -84,7 +84,8 @@ public class Fimbulvetr extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBaseCost(UPG_COST);
+            upgradeM2(1);
+            upgradeMagicNumber(1);
             initializeDescription();
         }
     }

@@ -3,6 +3,7 @@ package sts.caster.cards.spells;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -39,7 +40,7 @@ public class Frostbite extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int UPG_COST = 1;
+    private static final int UPG_DAMAGE = 1;
     private static final int BASE_DELAY = 2;
     private static final int BASE_DAMAGE = 3;
 
@@ -69,7 +70,7 @@ public class Frostbite extends CasterCard {
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    		Fimbulvetr fimbulvetr = new Fimbulvetr();
+            CasterCard fimbulvetr = (CasterCard) c.cardsToPreview;
             fimbulvetr.applyPowers();
         	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
             actions.add(new QueueDelayedCardAction(fimbulvetr, fimbulvetr.delayTurns, t));
@@ -81,7 +82,9 @@ public class Frostbite extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBaseCost(UPG_COST);
+            cardsToPreview.upgrade();
+            upgradeM2(UPG_DAMAGE);
+            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }

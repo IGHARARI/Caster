@@ -3,6 +3,7 @@ package sts.caster.cards.spells;
 import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -22,7 +23,9 @@ import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import sts.caster.actions.ElectrifySpecificCardAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
+import sts.caster.actions.RemoveElectrifyAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -40,42 +43,80 @@ public class Susanoo extends CasterCard {
 
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.ENEMY;
-    private static final CardType TYPE = CasterCardType.SPELL;
+    private static final CardType TYPE = CardType.ATTACK;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int DELAY_TURNS = 1;
-    private static final int BASE_DAMAGE = 32;
-    private static final int UPGRADE_DAMAGE = 8;
+    private static final int BASE_DAMAGE = 16;
+    private static final int UPGRADE_DAMAGE = 4;
+    private static final int BONUS_DMG_PER_ELEC = 2;
+    private static final int UPG_BONUS_DMG_PER_ELEC = 1;
 
     public Susanoo() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseSpellDamage = spellDamage = BASE_DAMAGE;
-        delayTurns = baseDelayTurns = DELAY_TURNS;
+        damage = baseDamage = BASE_DAMAGE;
+        magicNumber = baseMagicNumber = BONUS_DMG_PER_ELEC;
         setCardElement(MagicElement.ELECTRIC);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	for (AbstractCard card : AbstractDungeon.player.hand.group) {
-    		if (card == this) continue;
-    		addToBot(new ElectrifySpecificCardAction(card));
-    	}
-        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        for(int i = 0; i < 10; i++) {
+            float offset = MathUtils.random(-m.hb_w/3, m.hb_w/3);
+            addToBot(new VFXAction(new LightningEffect(m.drawX + offset, m.drawY), 0.1f));
+            addToBot(new SFXAction("ORB_LIGHTNING_EVOKE"));
+        }
+        addToBot(new LightningDamageAction(m, new DamageInfo(AbstractDungeon.player, damage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
+        for (AbstractCard c : p.hand.group) {
+            if (c.hasTag(CasterCardTags.ELECTRIFIED))
+                addToBot(new RemoveElectrifyAction(c));
+        }
+
+        for (AbstractCard c : p.drawPile.group) {
+            if (c.hasTag(CasterCardTags.ELECTRIFIED))
+                addToBot(new RemoveElectrifyAction(c));
+        }
+
+        for (AbstractCard c : p.discardPile.group) {
+            if (c.hasTag(CasterCardTags.ELECTRIFIED))
+                addToBot(new RemoveElectrifyAction(c));
+        }
     }
     
-    @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		for(int i = 0; i < 10; i++) {
-    			float offset = MathUtils.random(-t.hb_w/3, t.hb_w/3);
-    			actionsList.add(new VFXAction(new LightningEffect(t.drawX + offset, t.drawY), 0.1f));
-    			actionsList.add(new SFXAction("ORB_LIGHTNING_EVOKE"));
-    		}
-    		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
-    		return actionsList;
-    	};
+    public void calculateCardDamage(AbstractMonster mo) {
+        int realBaseDamage = this.baseDamage;
+        this.baseDamage += this.magicNumber * countElectrifiedStacks();
+        super.calculateCardDamage(mo);
+        this.baseDamage = realBaseDamage;
+        this.isDamageModified = this.damage != this.baseDamage;
+    }
+
+    public void applyPowers() {
+        int realBaseDamage = this.baseDamage;
+        this.baseDamage += this.magicNumber * countElectrifiedStacks();
+        super.applyPowers();
+        this.baseDamage = realBaseDamage;
+        this.isDamageModified = this.damage != this.baseDamage;
+    }
+
+    private int countElectrifiedStacks() {
+        Function<AbstractCard, Long> countTags = (AbstractCard card) -> card.tags.stream().filter(t -> t.equals(CasterCardTags.ELECTRIFIED)).count();
+        int totalStacks = 0;
+        AbstractPlayer p = AbstractDungeon.player;
+
+        for (AbstractCard c : p.hand.group) {
+            totalStacks += countTags.apply(c);
+        }
+
+        for (AbstractCard c : p.drawPile.group) {
+            totalStacks += countTags.apply(c);
+        }
+
+        for (AbstractCard c : p.discardPile.group) {
+            totalStacks += countTags.apply(c);
+        }
+
+        return totalStacks;
     }
 
     @Override
@@ -83,7 +124,8 @@ public class Susanoo extends CasterCard {
         if (!upgraded) {
             upgradeName();
             initializeDescription();
-            upgradeSpellDamage(UPGRADE_DAMAGE);
+            upgradeDamage(UPGRADE_DAMAGE);
+            upgradeMagicNumber(UPG_BONUS_DMG_PER_ELEC);
         }
     }
 }

@@ -75,7 +75,6 @@ public class WallOfSwords extends CasterCard {
         if (!upgraded) {
             upgradeName();
             upgradeBaseCost(UPG_COST);
-//            upgradeMagicNumber(UPG_MAX_THORNS);
             initializeDescription();
         }
     }

@@ -11,17 +11,23 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
 import basemod.BaseMod;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import sts.caster.core.CasterMod;
 import sts.caster.core.frozenpile.FrozenPileManager;
+import sts.caster.powers.ThermodynamicsPower;
 
 public class ThawCardAction extends AbstractGameAction {
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("ExhaustAction");
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("ThawCardAction");
     public static final String[] TEXT = ThawCardAction.uiStrings.TEXT;
     private AbstractPlayer p;
     private boolean isRandom;
     private boolean anyNumber;
+    private AbstractCard specificCard;
+
+    public ThawCardAction(final AbstractCard card) {
+        this.specificCard = card;
+        this.p = AbstractDungeon.player;
+        this.duration = Settings.ACTION_DUR_FAST;
+        this.actionType = ActionType.EXHAUST;
+    }
 
     public ThawCardAction(final int amount, final boolean isRandom) {
         this(amount, isRandom, false);
@@ -47,6 +53,14 @@ public class ThawCardAction extends AbstractGameAction {
 
     @Override
     public void update() {
+        if (specificCard != null) {
+            if (FrozenPileManager.frozenPile.contains((specificCard))){
+                thawSpecificCard(specificCard);
+            }
+            p.hand.refreshHandLayout();
+            isDone = true;
+            return;
+        }
         if (duration == Settings.ACTION_DUR_FAST) {
             if (FrozenPileManager.frozenPile.size() == 0) {
                 isDone = true;
@@ -56,28 +70,29 @@ public class ThawCardAction extends AbstractGameAction {
                 //I copy the list to avoid CME or any visual bugs 
                 ArrayList<AbstractCard> cardsCopy = new ArrayList<AbstractCard>(FrozenPileManager.frozenPile.group);
                 for (AbstractCard card : cardsCopy) {
-                    moveToHand(card);
+                    thawSpecificCard(card);
                 }
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
                 p.hand.refreshHandLayout();
                 isDone = true;
                 return;
             }
-            if (!isRandom) {
-                AbstractDungeon.gridSelectScreen.open(FrozenPileManager.frozenPile, amount, anyNumber, "Thaw cards");
+            if (!isRandom) {        // Thaw  +        ?(up to)           +   #N   +           (card./cards.)
+                String thawMessage = TEXT[0] + (anyNumber? TEXT[2] : "") + amount + (amount>1? TEXT[3] : TEXT[1]);
+                AbstractDungeon.gridSelectScreen.open(FrozenPileManager.frozenPile, amount, anyNumber, thawMessage);
                 AbstractDungeon.gridSelectScreen.forClarity = false;
                 tickDuration();
                 return;
             }
             for (int j = 0; j < amount; ++j) {
-            	moveToHand(FrozenPileManager.frozenPile.getRandomCard(AbstractDungeon.cardRandomRng));
+            	thawSpecificCard(FrozenPileManager.frozenPile.getRandomCard(AbstractDungeon.cardRandomRng));
             }
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
             p.hand.refreshHandLayout();
         }
         if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
             for (final AbstractCard c2 : AbstractDungeon.gridSelectScreen.selectedCards) {
-            	moveToHand(c2);
+            	thawSpecificCard(c2);
             }
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
             p.hand.refreshHandLayout();
@@ -85,7 +100,7 @@ public class ThawCardAction extends AbstractGameAction {
         this.tickDuration();
     }
     
-    private void moveToHand(AbstractCard c) {
+    private void thawSpecificCard(AbstractCard c) {
         c.stopGlowing();
         if (p.hand.size() < BaseMod.MAX_HAND_SIZE) {
         	p.hand.addToHand(c);
@@ -97,5 +112,8 @@ public class ThawCardAction extends AbstractGameAction {
         FrozenPileManager.frozenPile.removeCard(c);
         c.unhover();
         c.fadingOut = false;
+        if (AbstractDungeon.player.hasPower(ThermodynamicsPower.POWER_ID)) {
+            ((ThermodynamicsPower)AbstractDungeon.player.getPower(ThermodynamicsPower.POWER_ID)).onThawCard();
+        }
     }
 }

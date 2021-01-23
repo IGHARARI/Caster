@@ -30,27 +30,26 @@ public class ShortenedChant extends CasterCard {
     private static final CardType TYPE = CardType.POWER;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 2;
-    private static final int BASE_FOCUS_LOSS = 3;
-    private static final int UPG_FOCUS_LOSS = -1;
-    
+    private static final int COST = 3;
+    private static final int UPG_COST = 2;
+    private static final int CAST_REDUCTION = 1;
+
     
     public ShortenedChant() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = BASE_FOCUS_LOSS;
+        baseMagicNumber = magicNumber = CAST_REDUCTION;
     }
     
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new ShortenedChantPower(p, 1), 1));
-        addToBot(new ApplyPowerAction(p, p, new FocusPower(p, -magicNumber), -magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new ShortenedChantPower(p, magicNumber), magicNumber));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_FOCUS_LOSS);
+            upgradeBaseCost(UPG_COST);
         }
     }
 }

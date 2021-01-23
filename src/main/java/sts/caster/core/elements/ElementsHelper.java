@@ -79,7 +79,7 @@ public class ElementsHelper {
             int delayTurnToCheck = casterCard.delayTurns;
             while (delayTurnToCheck > 0) {
                 CasterCard lastCard = getLastSpellForDelay(delayTurnToCheck);
-                if (lastCard != null) {
+                if (lastCard != null && isEnemyTarget(lastCard.target)) {
                     return causesReaction(lastCard.cardElement, casterCard.cardElement);
                 }
                 delayTurnToCheck--;

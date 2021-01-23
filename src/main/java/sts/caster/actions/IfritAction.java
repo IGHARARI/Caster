@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import sts.caster.powers.BlazedPower;
 
@@ -19,6 +18,8 @@ public class IfritAction extends AbstractGameAction {
         this.duration = Settings.ACTION_DUR_MED;
 	}
 
+	final private int IFRIT_BLAZE_AMOUNT = 5;
+
 	@Override
     public void update() {
 		if (duration == Settings.ACTION_DUR_MED) {
@@ -28,14 +29,9 @@ public class IfritAction extends AbstractGameAction {
 				return;
 			}
             AbstractCard randomCard = p.hand.getRandomCard(AbstractDungeon.cardRandomRng);
-            int energyBurnt = 0;
-            if (randomCard.cost == -1) {
-            	energyBurnt += EnergyPanel.totalCount;
-            } else if (randomCard.cost >= 0) {
-            	energyBurnt += randomCard.cost;
-            }
+
             AbstractMonster m = AbstractDungeon.getMonsters().getRandomMonster(true);
-            addToBot(new ApplyPowerAction(m, p, new BlazedPower(m, p, energyBurnt), energyBurnt));
+            addToBot(new ApplyPowerAction(m, p, new BlazedPower(m, p, IFRIT_BLAZE_AMOUNT), IFRIT_BLAZE_AMOUNT));
             addToBot(new NonSkippableWaitAction(0.2f));
             
             AbstractMonster m2 = AbstractDungeon.getMonsters().getRandomMonster(true);

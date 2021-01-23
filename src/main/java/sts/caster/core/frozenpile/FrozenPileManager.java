@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import sts.caster.actions.CardOnFrozenTriggerAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.powers.ShivaPower;
+import sts.caster.powers.ThermodynamicsPower;
 
 public class FrozenPileManager {
 	public static CardGroup frozenPile = new CardGroup(CardGroupType.UNSPECIFIED);
@@ -33,7 +34,12 @@ public class FrozenPileManager {
     }
 
     private static void applyOnFrozenTriggers(AbstractCard card) {
-    	if (AbstractDungeon.player.hasPower(ShivaPower.POWER_ID)) AbstractDungeon.player.getPower(ShivaPower.POWER_ID).onSpecificTrigger();
+    	if (AbstractDungeon.player.hasPower(ShivaPower.POWER_ID)) {
+    	    AbstractDungeon.player.getPower(ShivaPower.POWER_ID).onSpecificTrigger();
+        }
+    	if (AbstractDungeon.player.hasPower(ThermodynamicsPower.POWER_ID)) {
+    	    ((ThermodynamicsPower)AbstractDungeon.player.getPower(ThermodynamicsPower.POWER_ID)).onFreezeCard();
+        }
     	if (card instanceof CasterCard) AbstractDungeon.actionManager.addToBottom(new CardOnFrozenTriggerAction((CasterCard) card));
 	}
 

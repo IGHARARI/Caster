@@ -42,8 +42,9 @@ public class LightningBolt extends CasterCard {
     private static final int COST = 0;
     private static final int DELAY_TURNS = 1;
     private static final int BASE_DAMAGE = 6;
-    private static final int UPGRADE_DAMAGE = 3;
+    private static final int UPGRADE_DAMAGE = 2;
     private static final int DRAW_AMOUNT = 1;
+    private static final int UPG_DRAW_AMOUNT = 1;
 
 
     public LightningBolt() {
@@ -65,7 +66,6 @@ public class LightningBolt extends CasterCard {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
     		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
     		actionsList.add(new DrawCardAction(AbstractDungeon.player, c.magicNumber));
-//    		actionsList.add(new ApplyElementalEffectChanceAction(AbstractDungeon.player, t, MagicElement.ELECTRIC, 1, 1, 1));
     		return actionsList;
     	};
     }
@@ -76,6 +76,7 @@ public class LightningBolt extends CasterCard {
             upgradeName();
             initializeDescription();
             upgradeSpellDamage(UPGRADE_DAMAGE);
+            upgradeMagicNumber(UPG_DRAW_AMOUNT);
         }
     }
 }

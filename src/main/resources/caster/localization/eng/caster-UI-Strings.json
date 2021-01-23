@@ -12,6 +12,9 @@
 	"FreezeCardAction": {
 		"TEXT": ["Freeze"]
 	},
+	"ThawCardAction": {
+		"TEXT": ["Thaw ", " card.", "up to ", " cards."]
+	},
 	"RememoSpell": {
 		"TEXT": ["Rememorize", "Forget ", " and memorize new Spell? (free Action)"]
 	},

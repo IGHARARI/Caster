@@ -27,6 +27,10 @@
 	        "NAME": "Gain",
 	        "DESCRIPTIONS": ["Whenever you #yElectrify a Spell it gains #b", " damage."]
 	},
+	"caster:Thermodynamics": {
+	        "NAME": "Thermodynamics",
+	        "DESCRIPTIONS": ["Whenever you #yFreeze a card, gain #b", " Block. NL Whenever you #yThaw a card, deal #b", " damage to a random enemy."]
+	},
 	"caster:AshenWall": {
 	        "NAME": "Ashen Wall",
 	        "DESCRIPTIONS": ["HP Loss can be prevented by Block."]

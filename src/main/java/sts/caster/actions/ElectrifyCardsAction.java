@@ -14,13 +14,20 @@ public class ElectrifyCardsAction extends AbstractGameAction {
     private int amount;
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings");
     public static final String[] TEXT = uiStrings.TEXT;
-    
-    public ElectrifyCardsAction(int amount, boolean isRandom) {
+
+    private final int electrifyAmount;
+
+    public ElectrifyCardsAction(int cardsAmount, boolean isRandom) {
+        this(cardsAmount, 1 , isRandom);
+    }
+
+    public ElectrifyCardsAction(int cardsAmount, int electrifyAmount, boolean isRandom) {
         this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
         this.duration = Settings.ACTION_DUR_FAST;
         this.actionType = ActionType.CARD_MANIPULATION;
-        this.amount = amount;
+        this.amount = cardsAmount;
+        this.electrifyAmount = electrifyAmount;
     }
     
     @Override
@@ -34,7 +41,7 @@ public class ElectrifyCardsAction extends AbstractGameAction {
                 this.amount = this.p.hand.size();
                 for (int i = 0; i < this.p.hand.size(); ++i) {
                     AbstractCard c = this.p.hand.getTopCard();
-                    electrifyCard(c);
+                    electrifyCard(c, electrifyAmount);
                 }
                 this.isDone = true;
                 return;
@@ -46,12 +53,12 @@ public class ElectrifyCardsAction extends AbstractGameAction {
             }
             for (int i = 0; i < this.amount; i++) { //else select targets randomly
             	AbstractCard c = p.hand.getRandomCard(AbstractDungeon.cardRandomRng);
-            	electrifyCard(c);
+            	electrifyCard(c, electrifyAmount);
             }
         }
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
             for (AbstractCard c2 : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
-            	electrifyCard(c2);
+            	electrifyCard(c2, electrifyAmount);
             	p.hand.addToBottom(c2);
             }
             AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
@@ -59,7 +66,9 @@ public class ElectrifyCardsAction extends AbstractGameAction {
         this.tickDuration();
     }
     
-    private void electrifyCard(AbstractCard card) {
-    	addToBot(new ElectrifySpecificCardAction(card));
+    private void electrifyCard(AbstractCard card, int times) {
+        for (int i = 0; i < times; i++) {
+        	addToBot(new ElectrifySpecificCardAction(card));
+        }
     }
 }

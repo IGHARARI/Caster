@@ -31,7 +31,7 @@ public class NaturalChaos extends CasterCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.UNCOMMON;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
@@ -39,7 +39,7 @@ public class NaturalChaos extends CasterCard {
     private static final int COST = 0;
     private static final int UPG_COST = 0;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_MIRE = 2;
+    private static final int BASE_MIRE = 1;
     private static final int UPG_MIRE = 1;
 
 

@@ -60,7 +60,7 @@
   },
   "caster:Tundra": {
     "NAME": "Tundra",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! caster:Frost and deal !caster:D! damage to ALL enemies. NL Play a copy of this card. NL Exhaust."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! caster:Frost and deal !caster:D! damage to ALL enemies. NL Cast a copy of this card. NL Exhaust."
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
@@ -72,11 +72,11 @@
   },
   "caster:Conflagrate": {
     "NAME": "Conflagrate",
-    "DESCRIPTION": "Whenever you caster:Freeze this card, caster:Thaw up to !M! cards. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Whenever you caster:Freeze this card, caster:Thaw up to !M! cards. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Apply !caster:M2! caster:Blazed."
   },
   "caster:Shatter": {
     "NAME": "Shatter",
-    "DESCRIPTION": "Deal !D! damage. NL If the enemy has caster:Frost deal !D! damage again."
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy has caster:Frost deal !D! damage !M! more times."
   },
   "caster:MegaloSpark": {
     "NAME": "Megalo Spark",
@@ -149,7 +149,7 @@
   },
   "caster:NaturalChaos": {
     "NAME": "Natural Chaos",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: Apply !M! caster:Mired to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! caster:Mired to ALL enemies. NL Exhaust."
   },
   "caster:GaiasBlessing": {
     "NAME": "Gaia's Blessing",
@@ -157,7 +157,15 @@
   },
   "caster:Ifrit": {
     "NAME": "Ifrit",
-    "DESCRIPTION": "At the start of your turn, caster:Burn a random card in your hand and play it. NL Apply caster:Blazed equal to its cost to a random enemy."
+    "DESCRIPTION": "At the start of your turn, caster:Burn a random card in your hand and play it. NL Apply 4 caster:Blazed to a random enemy."
+  },
+  "caster:Electroplating": {
+    "NAME": "Electroplating",
+    "DESCRIPTION": "Choose a card from your hand, caster:Electrify it !caster:M2! times. NL Gain !M! *Plated *Armor."
+  },
+  "caster:Thermodynamics": {
+    "NAME": "Thermodynamics",
+    "DESCRIPTION": "Whenever you caster:Freeze a card, gain !M! Block. NL Whenever you caster:Thaw a card, deal !M! damage to a random enemy."
   },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",
@@ -189,7 +197,7 @@
   },
   "caster:Susanoo": {
     "NAME": "Susano'o",
-    "DESCRIPTION": "caster:Electrify all cards in your hand. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Deal !D! damage. NL Remove ALL caster:Electrify from your hand, deck, and discard pile. NL Deals !M! additional damage for each stack removed."
   },
   "caster:DiablosFlame": {
     "NAME": "Diablo's Flame",
@@ -329,7 +337,8 @@
   },
   "caster:Embers": {
     "NAME": "Embers",
-    "DESCRIPTION": "Gain [E] for each enemy that intends to attack. NL caster:Thaw up to !M! cards."
+    "DESCRIPTION": "Unplayable. NL At the start of your turn, if this card is caster:Frozen caster:Thaw it, gain [E] and caster:Thaw up to !M! cards.",
+    "UPGRADE_DESCRIPTION": "Unplayable. NL At the start of your turn, if this card is caster:Frozen caster:Thaw it, gain [E] [E] and caster:Thaw up to !M! cards."
   },
   "caster:Sultry": {
     "NAME": "Sultry",
@@ -365,7 +374,7 @@
   },
   "caster:ShortenedChant": {
     "NAME": "Shortened Chant",
-    "DESCRIPTION": "Lose !M! Focus. NL Gain 1 caster:Shortened_Chant ."
+    "DESCRIPTION": "Reduce the caster:Cast_Time of your Spells by !M!."
   },
   "caster:EchoingVoice": {
     "NAME": "Echoing Voice",
@@ -401,11 +410,13 @@
   },
   "caster:Cool": {
     "NAME": "Cool",
-    "DESCRIPTION": "caster:Freeze 1 card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage for each card Frozen this combat, currently: !caster:D! damage. NL Play *Frostbite "
+    "DESCRIPTION": "caster:Freeze 1 card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Frostbite.",
+    "UPGRADE_DESCRIPTION": "caster:Freeze 1 card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Frostbite+."
   },
   "caster:Frostbite": {
     "NAME": "Frostbite",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Play *Fimbulvetr "
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Play *Fimbulvetr ",
+    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Play *Fimbulvetr+."
   },
   "caster:Fimbulvetr": {
     "NAME": "Fimbulvetr",

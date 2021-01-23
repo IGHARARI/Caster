@@ -3,6 +3,7 @@ package sts.caster.cards.spells;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -37,8 +38,8 @@ public class Cool extends CasterCard {
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 2;
-    private static final int UPG_COST = 1;
+    private static final int COST = 1;
+    private static final int UPG_DAMAGE = 1;
     private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 3;
     private static final int BASE_CARDS_FROZEN = 1;
@@ -71,7 +72,7 @@ public class Cool extends CasterCard {
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    		Frostbite frostbite = new Frostbite();
+            CasterCard frostbite = (CasterCard) c.cardsToPreview;
             frostbite.applyPowers();
             actions.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.BLUNT_HEAVY));
             actions.add(new QueueDelayedCardAction(frostbite, frostbite.delayTurns, t));
@@ -83,7 +84,9 @@ public class Cool extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBaseCost(UPG_COST);
+            cardsToPreview.upgrade();
+            upgradeM2(UPG_DAMAGE);
+            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }

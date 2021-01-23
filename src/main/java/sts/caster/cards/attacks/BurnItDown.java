@@ -27,14 +27,14 @@ public class BurnItDown extends CasterCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.UNCOMMON;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
     private static final CardType TYPE = CardType.ATTACK;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int DAMAGE = 10;
-    private static final int UPGRADE_PLUS_DMG = 3;
+    private static final int DAMAGE = 9;
+    private static final int UPGRADE_PLUS_DMG = 2;
 
     public BurnItDown() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -48,10 +48,7 @@ public class BurnItDown extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 		addToBot(new DamageAllEnemiesAction(p, multiDamage, DamageType.NORMAL, AttackEffect.FIRE));
-		AbstractCard wallCard = new WallOfAsh();
-		if (upgraded) wallCard.upgrade();
-		addToBot(new MakeTempCardInDiscardAction(wallCard, 1));
-		
+		addToBot(new MakeTempCardInDiscardAction(cardsToPreview, 1));
     }
 
     @Override
@@ -60,9 +57,7 @@ public class BurnItDown extends CasterCard {
             upgradeName();
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             upgradeDamage(UPGRADE_PLUS_DMG);
-            AbstractCard preview = new WallOfAsh();
-            preview.upgrade();
-            cardsToPreview = preview;
+            cardsToPreview.upgrade();
             initializeDescription();
         }
     }
