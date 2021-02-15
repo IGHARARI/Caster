@@ -40,7 +40,7 @@ public class Sleet extends CasterCard {
 
     private static final int COST = 1;
     private static final int DELAY_TURNS = 1;
-    private static final int BASE_FROST = 2;
+    private static final int BASE_FROST = 1;
     private static final int BASE_DRAW = 1;
     private static final int UPG_DRAW = 1;
 

@@ -31,8 +31,6 @@ public class FlashFrost extends CasterCard {
 
     private static final int COST = 0;
     private static final int BASE_FROST = 3;
-    private static final int UPGRADE_FROST = 1;
-
 
     public FlashFrost() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -53,7 +51,6 @@ public class FlashFrost extends CasterCard {
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
             isInnate = true;
-            upgradeMagicNumber(UPGRADE_FROST);
         }
     }
 }

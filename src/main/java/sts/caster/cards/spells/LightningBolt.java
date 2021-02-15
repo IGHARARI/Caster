@@ -34,7 +34,7 @@ public class LightningBolt extends CasterCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.COMMON;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;

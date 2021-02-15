@@ -40,8 +40,8 @@ public class FrostDriver extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_FROST = 2;
     private static final int BASE_DELAY = 1;
+    private static final int BASE_FROST = 2;
     private static final int BASE_DAMAGE = 4;
     private static final int UPG_DAMAGE = 2;
     private static final int BASE_BLOCK = 6;
