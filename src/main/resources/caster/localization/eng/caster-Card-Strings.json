@@ -177,7 +177,7 @@
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
-    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Apply !M! caster:Frost."
+    "DESCRIPTION": "Freeze !M! card. NL Deal !D! damage."
   },
   "caster:MagicResonance": {
     "NAME": "Magic Resonance",
@@ -258,8 +258,7 @@
   },
   "caster:Sleet": {
     "NAME": "Sleet",
-    "DESCRIPTION": "Draw !M! card. NL caster:Cast_Time !caster:Delay!: NL Apply !caster:M2! caster:Frost to a random enemy 3 times.",
-    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL caster:Cast_Time !caster:Delay!: NL Apply !caster:M2! caster:Frost to a random enemy 3 times."
+    "DESCRIPTION": "Draw !M! card and gain !B! Block for each enemy in combat."
   },
   "caster:MeteorStorm": {
     "NAME": "Meteor Storm",
@@ -272,7 +271,7 @@
   },
   "caster:Charge": {
     "NAME": "Charge",
-    "DESCRIPTION": "Draw !M! cards, then caster:Electrify a random card in your hand."
+    "DESCRIPTION": "Add a *Shocked into your draw pile, then draw !M! cards."
   },
   "caster:Sandstorm": {
     "NAME": "Sandstorm",
@@ -431,8 +430,36 @@
     "DESCRIPTION": "Gain !M! Blur. NL Gain !B! Block. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Gain !M! Blur. NL Gain !B! Block. NL caster:Freeze this card."
   },
+  "caster:SlipThrough": {
+    "NAME": "Slip Through",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "caster:PackedIce": {
+    "NAME": "Packed Ice",
+    "DESCRIPTION": "Gain !B! Block, then if you have more than !caster:M2! Block apply !M! Weak to ALL enemies."
+  },
+  "caster:MagicScroll": {
+    "NAME": "Magic Scroll",
+    "DESCRIPTION": "Draw !M! card, reduce the Cast Time of any Spells drawn this way by !caster:M2! for this turn."
+  },
+  "caster:Direct": {
+    "NAME": "Direct",
+    "DESCRIPTION": "Fetch !M! card that costs 0 from your draw pile. NL Exhaust."
+  },
+  "caster:Mirage": {
+    "NAME": "Mirage",
+    "DESCRIPTION": "Deal !D! damage. NL When you play discard, return it to your hand, and it gains Retain for this turn."
+  },
+  "caster:HeatRay": {
+    "NAME": "Heat Ray",
+    "DESCRIPTION": "Deal !D! damage. NL Decrease this card's damage by !M! this combat."
+  },
   "caster:Meteor": {
     "NAME": "Meteor",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+  },
+  "caster:Shocked": {
+    "NAME": "Shocked",
+    "DESCRIPTION": "When this is drawn, caster:Electrify all cards in your hand."
   }
 }

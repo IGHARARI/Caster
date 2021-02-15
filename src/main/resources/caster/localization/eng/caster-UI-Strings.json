@@ -41,5 +41,8 @@
 			"These cards were freezed this combat.",
 			"Return"
 		]
+	},
+	"RetainOnceCardMod": {
+		"TEXT": [ "Retain." ]
 	}
 }

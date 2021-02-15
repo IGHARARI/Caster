@@ -1,12 +1,19 @@
 package sts.caster.util;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.AbstractMonster.Intent;
 
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.random.Random;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.MagicElement;
 
@@ -50,6 +57,58 @@ public class BattleHelper {
             damages[i] = info.output;
         }
         return damages;
+	}
+
+	/** Combat Utils */
+	// Fetches all alive monsters.
+	public static ArrayList<AbstractMonster> getAliveMonsters() { return AbstractDungeon.getMonsters().monsters.stream().filter(m -> !m.isDeadOrEscaped()).collect(Collectors.toCollection(ArrayList::new)); }
+	// Fetches a random monster who is alive.
+	public static AbstractMonster getRandomAliveMonster(MonsterGroup group, Predicate<AbstractMonster> isCandidate, Random rng) { return getRandomMonster(group, m -> (!m.halfDead && !m.isDying && !m.isEscaping && isCandidate.test(m)), rng); }
+	// Fetches a random monster (No Predicate)
+	public static AbstractMonster getRandomAliveMonster(MonsterGroup group, Random rng) { return getRandomMonster(group, m -> (!m.halfDead && !m.isDying && !m.isEscaping), rng); }
+	// Fetches a random monster.
+	public static AbstractMonster getRandomMonster(MonsterGroup group, Predicate<AbstractMonster> isCandidate, Random rng) {
+		List<AbstractMonster> candidates = group.monsters.stream().filter(isCandidate).collect(Collectors.toList());
+		if (candidates.isEmpty()) { return null; }
+		return candidates.get(rng.random(0, candidates.size() - 1));
+	}
+	public static int getCardEffectiveCost(AbstractCard card) {
+		int cost = card.costForTurn;
+		if (card.cost == -1) cost = card.energyOnUse;
+		if (card.freeToPlayOnce || card.isInAutoplay) cost = 0;
+		return cost;
+	}
+
+	/** Intent Utilities */
+	// Searches for Debuff Intents.
+	public static boolean isDebuffIntent(Intent intent) {
+		return
+				intent == Intent.STRONG_DEBUFF ||
+						intent == Intent.ATTACK_DEBUFF ||
+						intent == Intent.DEBUFF ||
+						intent == Intent.DEFEND_DEBUFF;
+	}
+	// Searches for Attack Intents.
+	public static boolean isAttackIntent(Intent intent) {
+		return
+				intent == Intent.ATTACK ||
+						intent == Intent.ATTACK_BUFF ||
+						intent == Intent.ATTACK_DEBUFF ||
+						intent == Intent.ATTACK_DEFEND;
+	}
+	public static boolean isBlockIntent(Intent intent) {
+		return
+				intent == Intent.DEFEND ||
+						intent == Intent.DEFEND_BUFF ||
+						intent == Intent.DEFEND_DEBUFF ||
+						intent == Intent.ATTACK_DEFEND;
+	}
+	// Searches for Buff Intents.
+	public static boolean isBuffIntent(Intent intent) {
+		return
+				intent == Intent.BUFF ||
+						intent == Intent.ATTACK_BUFF ||
+						intent == Intent.DEFEND_BUFF;
 	}
 	
 }

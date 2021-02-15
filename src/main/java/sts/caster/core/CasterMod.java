@@ -44,8 +44,6 @@ import sts.caster.variables.SpellDamage;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @SpireInitializer
@@ -233,18 +231,10 @@ public class CasterMod implements
         // COMMON CARDS
         BaseMod.addCard(new FlashSpeed());
         UnlockTracker.unlockCard(FlashSpeed.ID);
-        BaseMod.addCard(new FlashFrost());
-        UnlockTracker.unlockCard(FlashFrost.ID);
-        BaseMod.addCard(new LAZER());
-        UnlockTracker.unlockCard(LAZER.ID);
         BaseMod.addCard(new JupitelThunder());
         UnlockTracker.unlockCard(JupitelThunder.ID);
-        BaseMod.addCard(new QuickCast());
-        UnlockTracker.unlockCard(QuickCast.ID);
         BaseMod.addCard(new MagicResonance());
         UnlockTracker.unlockCard(MagicResonance.ID);
-        BaseMod.addCard(new FrostDriver());
-        UnlockTracker.unlockCard(FrostDriver.ID);
         BaseMod.addCard(new GlacialShield());
         UnlockTracker.unlockCard(GlacialShield.ID);
         BaseMod.addCard(new DiablosFlame());
@@ -257,8 +247,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Sandstorm.ID);
         BaseMod.addCard(new Enfeeble());
         UnlockTracker.unlockCard(Enfeeble.ID);
-        BaseMod.addCard(new MagicWeapon());
-        UnlockTracker.unlockCard(MagicWeapon.ID);
         BaseMod.addCard(new Sultry());
         UnlockTracker.unlockCard(Sultry.ID);
         BaseMod.addCard(new Fireball());
@@ -267,14 +255,28 @@ public class CasterMod implements
         UnlockTracker.unlockCard(VoltTackle.ID);
         BaseMod.addCard(new Kindling());
         UnlockTracker.unlockCard(Kindling.ID);
-        BaseMod.addCard(new NaturalChaos());
-        UnlockTracker.unlockCard(NaturalChaos.ID);
         BaseMod.addCard(new WallOfThorns());
         UnlockTracker.unlockCard(WallOfThorns.ID);
         BaseMod.addCard(new AlternatingCurrent());
         UnlockTracker.unlockCard(AlternatingCurrent.ID);
         BaseMod.addCard(new BurnItDown());
         UnlockTracker.unlockCard(BurnItDown.ID);
+        BaseMod.addCard(new SlipThrough());
+        UnlockTracker.unlockCard(SlipThrough.ID);
+        BaseMod.addCard(new PackedIce());
+        UnlockTracker.unlockCard(PackedIce.ID);
+        BaseMod.addCard(new MagicScroll());
+        UnlockTracker.unlockCard(MagicScroll.ID);
+        BaseMod.addCard(new Direct());
+        UnlockTracker.unlockCard(Direct.ID);
+        BaseMod.addCard(new FrostDriver());
+        UnlockTracker.unlockCard(FrostDriver.ID);
+        BaseMod.addCard(new Mirage());
+        UnlockTracker.unlockCard(Mirage.ID);
+        BaseMod.addCard(new HeatRay());
+        UnlockTracker.unlockCard(HeatRay.ID);
+
+
 
         // UNCOMMON
         BaseMod.addCard(new Fissure());
@@ -420,6 +422,18 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(MegaloSpark.ID);
 //        BaseMod.addCard(new MagicBarrier());
 //        UnlockTracker.unlockCard(MagicBarrier.ID);
+
+        // DEPRECATED V2
+//        BaseMod.addCard(new QuickCast());
+//        UnlockTracker.unlockCard(QuickCast.ID);
+//        BaseMod.addCard(new NaturalChaos());
+//        UnlockTracker.unlockCard(NaturalChaos.ID);
+//        BaseMod.addCard(new MagicWeapon());
+//        UnlockTracker.unlockCard(MagicWeapon.ID);
+//        BaseMod.addCard(new LAZER());
+//        UnlockTracker.unlockCard(LAZER.ID);
+//        BaseMod.addCard(new FlashFrost());
+//        UnlockTracker.unlockCard(FlashFrost.ID);
 
         logger.info("Done adding cards!");
     }
