@@ -1,23 +1,18 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import sts.caster.actions.ThawCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.core.frozenpile.FrozenPileManager;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Embers extends CasterCard {
 
@@ -65,8 +60,9 @@ public class Embers extends CasterCard {
     }
 
     @Override
-    public void use(AbstractPlayer p, AbstractMonster m) { }
-    
+    public void use(AbstractPlayer p, AbstractMonster m) {
+    }
+
     @Override
     public void upgrade() {
         if (!upgraded) {

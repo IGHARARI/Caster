@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -13,7 +9,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.actions.LightningDamageAction;
@@ -24,6 +19,10 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class MegaloSpark extends CasterCard {
 
@@ -55,26 +54,26 @@ public class MegaloSpark extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new ElectrifyCardsAction(magicNumber, !this.upgraded));
-		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+        addToBot(new ElectrifyCardsAction(magicNumber, !this.upgraded));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
 
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		for (int i = 0 ; i < 2; i++) {
-    			actionsList.add(new ActionOnAllEnemiesAction(monster -> {
-	    				float tmp = customApplyEnemyPowersToSpellDamage(c.spellDamage, c.cardElement, monster);
-	    				return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, (int) tmp, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
-	    			}
-				));
-    		}
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            for (int i = 0; i < 2; i++) {
+                actionsList.add(new ActionOnAllEnemiesAction(monster -> {
+                    float tmp = customApplyEnemyPowersToSpellDamage(c.spellDamage, c.cardElement, monster);
+                    return new LightningDamageAction(monster, new DamageInfo(AbstractDungeon.player, (int) tmp, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL, true);
+                }
+                ));
+            }
+            return actionsList;
+        };
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

@@ -1,19 +1,14 @@
 package sts.caster.cards.skills;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.common.FetchAction;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.ModifyCastTimeAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.util.BattleHelper;
 
 import static sts.caster.core.CasterMod.makeCardPath;
@@ -42,9 +37,9 @@ public class Direct extends CasterCard {
         setCardElement(MagicElement.ELECTRIC);
     }
 
-     @Override
+    @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-         addToBot(new FetchAction(p.drawPile, c -> BattleHelper.getCardEffectiveCost(c) == 0, magicNumber));
+        addToBot(new FetchAction(p.drawPile, c -> BattleHelper.getCardEffectiveCost(c) == 0, magicNumber));
     }
 
     @Override

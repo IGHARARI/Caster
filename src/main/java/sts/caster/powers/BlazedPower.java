@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -59,8 +60,13 @@ public class BlazedPower extends AbstractPower {
 	@Override
 	public void atEndOfTurn(boolean isPlayer) {
 		if (attackedThisTurn) {
-			int amountToLose = (int) Math.ceil(((float)amount)/2f);
-			addToBot(new ReducePowerAction(owner, source, POWER_ID, amountToLose));
+			if (owner.hasPower(BurnOutPower.POWER_ID)) {
+				addToBot(new RemoveSpecificPowerAction(owner, source, BurnOutPower.POWER_ID));
+				addToBot(new RemoveSpecificPowerAction(owner, source, POWER_ID));
+			} else {
+				int amountToLose = (int) Math.ceil(((float)amount)/2f);
+				addToBot(new ReducePowerAction(owner, source, POWER_ID, amountToLose));
+			}
 		}
 		attackedThisTurn = false;
 	}

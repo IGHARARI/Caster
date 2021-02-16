@@ -1,20 +1,18 @@
 package sts.caster.cards.powers;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.special.Ashes;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.IfritPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Ifrit extends CasterCard {
 
@@ -39,7 +37,7 @@ public class Ifrit extends CasterCard {
         cardsToPreview = new Ashes();
         setCardElement(MagicElement.FIRE);
     }
-    
+
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new IfritPower(p, p, 1), 1));

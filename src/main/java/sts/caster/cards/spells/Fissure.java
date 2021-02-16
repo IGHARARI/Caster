@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
@@ -15,7 +11,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.IronWaveEffect;
-
 import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -25,6 +20,10 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Fissure extends CasterCard {
 
@@ -58,22 +57,22 @@ public class Fissure extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
-		addToBot(new VFXAction(new IronWaveEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, Settings.WIDTH), 0.8f));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+        addToBot(new VFXAction(new IronWaveEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, Settings.WIDTH), 0.8f));
         addToBot(new ActionOnAllEnemiesAction(monster -> new StunMonsterAction(monster, AbstractDungeon.player)));
     }
 
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new VFXAction(new IronWaveEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, Settings.WIDTH), 0.8f));
-    		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            actionsList.add(new VFXAction(new IronWaveEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, Settings.WIDTH), 0.8f));
+            actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
+            return actionsList;
+        };
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

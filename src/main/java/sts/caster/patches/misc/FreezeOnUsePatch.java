@@ -20,6 +20,7 @@ import sts.caster.actions.FreezeSpecificCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.frozenpile.FrozenPileManager;
+import sts.caster.patches.relics.FreezeOnUseCardField;
 import sts.caster.powers.AshenWallPower;
 
 import java.lang.reflect.InvocationTargetException;
@@ -32,7 +33,8 @@ public class FreezeOnUsePatch
 		@SpireInsertPatch(localvars = {  }, locator = LocatorPre.class)
 		public static SpireReturn  InsertPre(final UseCardAction __instance, AbstractCard ___targetCard) {
 			try {
-				if (___targetCard instanceof CasterCard && ((CasterCard) ___targetCard).freezeOnUse){
+				Boolean isFreezeOnUse = FreezeOnUseCardField.freezeOnuse.get(___targetCard);
+				if (isFreezeOnUse){
 					FrozenPileManager.moveToFrozenPile(AbstractDungeon.player.hand, ___targetCard);
 					___targetCard.exhaustOnUseOnce = false;
 					___targetCard.dontTriggerOnUseCard = false;

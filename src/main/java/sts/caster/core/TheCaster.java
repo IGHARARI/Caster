@@ -1,25 +1,11 @@
 package sts.caster.core;
 
-import static sts.caster.core.CasterMod.THE_DEFAULT_CORPSE;
-import static sts.caster.core.CasterMod.THE_DEFAULT_SHOULDER_1;
-import static sts.caster.core.CasterMod.THE_DEFAULT_SHOULDER_2;
-import static sts.caster.core.CasterMod.THE_CASTER_SPRITE_ATLAS;
-import static sts.caster.core.CasterMod.THE_CASTER_SPRITE_JSON;
-import static sts.caster.core.TheCaster.Enums.THE_CASTER_COLOR;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.evacipated.cardcrawl.mod.stslib.actions.common.MoveCardsAction;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.MoveCardsAction;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -27,13 +13,14 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
-
-import basemod.abstracts.CustomPlayer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.Channeling;
@@ -41,6 +28,13 @@ import sts.caster.cards.skills.DivertFocus;
 import sts.caster.cards.spells.Meteor;
 import sts.caster.cards.spells.PhoenixFlare;
 import sts.caster.relics.MagicBookRelic;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static sts.caster.core.CasterMod.*;
+import static sts.caster.core.TheCaster.Enums.THE_CASTER_COLOR;
 
 public class TheCaster extends CustomPlayer {
     public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
@@ -82,7 +76,7 @@ public class TheCaster extends CustomPlayer {
 
 
     public TheCaster(String name, PlayerClass setClass) {
-        super(name, setClass, orbTextures,"caster/images/char/defaultCharacter/orb/vfx.png", null, null,null);
+        super(name, setClass, orbTextures, "caster/images/char/defaultCharacter/orb/vfx.png", null, null, null);
 
         initializeClass(null, // required call to load textures and setup energy/loadout.
                 // I left these in DefaultMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
@@ -242,10 +236,11 @@ public class TheCaster extends CustomPlayer {
 
     @Override
     public void applyStartOfTurnCards() {
-        List<AbstractCard> phoenixes = AbstractDungeon.player.exhaustPile.group.stream().filter(c -> c.cardID == PhoenixFlare.ID).collect(Collectors.toList());;
+        List<AbstractCard> phoenixes = AbstractDungeon.player.exhaustPile.group.stream().filter(c -> c.cardID == PhoenixFlare.ID).collect(Collectors.toList());
+        ;
         if (phoenixes.size() > 0) {
             for (AbstractCard c : phoenixes) {
-                AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(AbstractDungeon.player.hand, AbstractDungeon.player.exhaustPile, (c2) -> c2 == c) );
+                AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(AbstractDungeon.player.hand, AbstractDungeon.player.exhaustPile, (c2) -> c2 == c));
             }
         }
         super.applyStartOfTurnCards();

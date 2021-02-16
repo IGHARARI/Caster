@@ -1,17 +1,15 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class AshesToAshes extends CasterCard {
 
@@ -29,7 +27,6 @@ public class AshesToAshes extends CasterCard {
 
     private static final int COST = 2;
     private static final int UPG_COST = 1;
-    
 
 
     public AshesToAshes() {
@@ -39,9 +36,9 @@ public class AshesToAshes extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new HealAction(p, p, p.exhaustPile.size()));
+        addToBot(new HealAction(p, p, p.exhaustPile.size()));
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

@@ -1,11 +1,6 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.badlogic.gdx.math.MathUtils;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.MoveCardsAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -18,7 +13,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -28,6 +22,10 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class PhoenixFlare extends CasterCard {
 
@@ -52,27 +50,27 @@ public class PhoenixFlare extends CasterCard {
     public PhoenixFlare() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
-        baseSpellDamage = spellDamage =  BASE_DAMAGE;
+        baseSpellDamage = spellDamage = BASE_DAMAGE;
         exhaust = true;
         setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		for (int i = 0; i < 8 ; i++) {
-    			actionsList.add(new VFXAction(new FlashAtkImgEffect(t.hb.cX+MathUtils.random(-t.hb_w/2.5f, t.hb_w/2.5f), t.hb.cY+MathUtils.random(-t.hb_h/2, t.hb_h/2), AttackEffect.FIRE, true), 0.08f));
-    			actionsList.add(new SFXAction("ATTACK_FIRE"));
-    		}
-    		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.FIRE));
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            for (int i = 0; i < 8; i++) {
+                actionsList.add(new VFXAction(new FlashAtkImgEffect(t.hb.cX + MathUtils.random(-t.hb_w / 2.5f, t.hb_w / 2.5f), t.hb.cY + MathUtils.random(-t.hb_h / 2, t.hb_h / 2), AttackEffect.FIRE, true), 0.08f));
+                actionsList.add(new SFXAction("ATTACK_FIRE"));
+            }
+            actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.FIRE));
+            return actionsList;
+        };
     }
 
     public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());

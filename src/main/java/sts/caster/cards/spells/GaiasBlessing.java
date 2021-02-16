@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,7 +8,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.RegenPower;
-
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -20,6 +15,10 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class GaiasBlessing extends CasterCard {
 
@@ -51,21 +50,21 @@ public class GaiasBlessing extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new ApplyPowerAction(p, p, new RegenPower(p, magicNumber), magicNumber));
-		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+        addToBot(new ApplyPowerAction(p, p, new RegenPower(p, magicNumber), magicNumber));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
 
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		AbstractPlayer p = AbstractDungeon.player;
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new ApplyPowerAction(p, p, new RegenPower(p, c.magicNumber), c.magicNumber));
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            AbstractPlayer p = AbstractDungeon.player;
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            actionsList.add(new ApplyPowerAction(p, p, new RegenPower(p, c.magicNumber), c.magicNumber));
+            return actionsList;
+        };
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

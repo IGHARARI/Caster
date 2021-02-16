@@ -1,18 +1,16 @@
 package sts.caster.cards.powers;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
+import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
-import basemod.abstracts.CustomCard;
 import sts.caster.cards.spells.Meteor;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class MeteorStorm extends CustomCard {
 
@@ -37,13 +35,13 @@ public class MeteorStorm extends CustomCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = METEOR_AMOUNT;
     }
-    
+
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-    	Meteor freeMeteor = new Meteor();
-    	freeMeteor.cost = 0;
-    	freeMeteor.costForTurn = 0;
-    	freeMeteor.isCostModified = true;
+        Meteor freeMeteor = new Meteor();
+        freeMeteor.cost = 0;
+        freeMeteor.costForTurn = 0;
+        freeMeteor.isCostModified = true;
         addToBot(new MakeTempCardInDrawPileAction(freeMeteor, magicNumber, true, false));
     }
 

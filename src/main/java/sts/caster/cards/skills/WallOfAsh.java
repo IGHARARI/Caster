@@ -1,21 +1,17 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.special.Ashes;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
-import sts.caster.powers.AshenWallPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class WallOfAsh extends CasterCard {
 
@@ -34,7 +30,7 @@ public class WallOfAsh extends CasterCard {
     private static final int COST = 1;
     private static final int BLOCK_AMT = 14;
     private static final int UPG_BLOCK_AMT = 4;
-    
+
     public WallOfAsh() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         block = baseBlock = BLOCK_AMT;
@@ -44,10 +40,10 @@ public class WallOfAsh extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new GainBlockAction(p, p, block));
+        addToBot(new GainBlockAction(p, p, block));
         addToBot(new MakeTempCardInDrawPileAction(this.cardsToPreview, 1, true, true));
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

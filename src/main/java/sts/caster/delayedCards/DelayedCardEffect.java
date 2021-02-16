@@ -146,11 +146,7 @@ public class DelayedCardEffect extends AbstractOrb {
 		penNibCheck();
 		// Helper call to apply/update elemental affliction and then apply manastruck
 		ElementsHelper.updateElementalAffliction(delayedCard, target);
-//		AbstractDungeon.actionManager.addToTop(new DelayedEffectRemoveAction(this));
 		AbstractDungeon.actionManager.addToTop(new DelayedEffectHideEvokedCard(this)); // modified
-//		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
-//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
-//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
 		applyPowersToAllCardCopies();
 		delayedCard.calculateCardDamage(target);
 		ArrayList<AbstractGameAction> delayedActions = delayedCard.buildActionsSupplier(energyOnCast).getActionList(delayedCard, target);
@@ -158,8 +154,6 @@ public class DelayedCardEffect extends AbstractOrb {
 			AbstractGameAction action = delayedActions.get(i);
 			AbstractDungeon.actionManager.addToTop(action);
 		}
-//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
-//		AbstractDungeon.actionManager.addToTop(new DelayedEffectShowCardToEvoke(this)); // modified
 	}
 
 	private void penNibCheck() {
@@ -252,14 +246,14 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	private void applyPowersToAllCardCopies() {
-		delayedCard.applyPowers();
 		delayedCard.calculateCardDamage(target);
-		cardPreviewCopy.applyPowers();
 		cardPreviewCopy.calculateCardDamage(target);
-		cardMiniCopy.applyPowers();
 		cardMiniCopy.calculateCardDamage(target);
-		cardEvokeCopy.applyPowers();
 		cardEvokeCopy.calculateCardDamage(target);
+		delayedCard.applyPowers();
+		cardPreviewCopy.applyPowers();
+		cardMiniCopy.applyPowers();
+		cardEvokeCopy.applyPowers();
 	}
 
 	private void renderCardCopy(SpriteBatch sb, AbstractCard card, float targetX, float targetY) {

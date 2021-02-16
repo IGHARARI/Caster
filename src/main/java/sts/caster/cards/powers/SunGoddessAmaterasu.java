@@ -1,19 +1,17 @@
 package sts.caster.cards.powers;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.AmaterasuPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class SunGoddessAmaterasu extends CasterCard {
 
@@ -38,15 +36,15 @@ public class SunGoddessAmaterasu extends CasterCard {
         baseMagicNumber = magicNumber = PERCENT_INCREASE;
         setCardElement(MagicElement.FIRE);
     }
-    
+
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new AmaterasuPower(p, magicNumber), magicNumber));
     }
-    
+
     @Override
     public float getTitleFontSize() {
-    	return 17;
+        return 17;
     }
 
     @Override

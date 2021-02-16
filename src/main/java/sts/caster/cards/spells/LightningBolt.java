@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -14,8 +10,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
-import sts.caster.actions.ApplyElementalEffectChanceAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -24,6 +18,10 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class LightningBolt extends CasterCard {
 
@@ -59,15 +57,15 @@ public class LightningBolt extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
-    		actionsList.add(new DrawCardAction(AbstractDungeon.player, c.magicNumber));
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
+            actionsList.add(new DrawCardAction(AbstractDungeon.player, c.magicNumber));
+            return actionsList;
+        };
     }
 
     @Override

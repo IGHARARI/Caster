@@ -42,19 +42,19 @@ public class MagicScroll extends CasterCard {
         setCardElement(MagicElement.NEUTRAL);
     }
 
-     @Override
+    @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-         addToBot(new DrawCardAction(magicNumber, new AbstractGameAction() {
-             @Override
-             public void update() {
-                 for (AbstractCard c: DrawCardAction.drawnCards) {
-                     if (c instanceof CasterCard && c.type == CasterCardType.SPELL) {
-                         addToBot(new ModifyCastTimeAction((CasterCard) c, -m2));
-                     }
-                 }
-                 isDone = true;
-             }
-         }));
+        addToBot(new DrawCardAction(magicNumber, new AbstractGameAction() {
+            @Override
+            public void update() {
+                for (AbstractCard c : DrawCardAction.drawnCards) {
+                    if (c instanceof CasterCard && c.type == CasterCardType.SPELL) {
+                        addToBot(new ModifyCastTimeAction((CasterCard) c, -m2));
+                    }
+                }
+                isDone = true;
+            }
+        }));
     }
 
     @Override

@@ -10,7 +10,6 @@ import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.GainPower;
-import sts.caster.powers.StaticFieldPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -39,7 +38,7 @@ public class Gain extends CasterCard {
         magicNumber = baseMagicNumber = BASE_DMG_BONUS;
         setCardElement(MagicElement.ELECTRIC);
     }
-    
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new GainPower(p, p, magicNumber), magicNumber));

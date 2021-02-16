@@ -67,18 +67,18 @@ public class LordOfVermillion extends CasterCard {
 //    		AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
 //    	}
     }
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer spentEnergy) {
-    	return (c, t) -> {
-    		int energyMultiplier = spentEnergy;
-    		if (AbstractDungeon.player.hasRelic(ChemicalX.ID)) energyMultiplier += 2;
-    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	for (int i = 0; i < energyMultiplier*c.magicNumber; i++) {
-        		actions.add(new RandomTargetLightningDamageAction(new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE));
-        	}
-    		return actions;
-    	};
+        return (c, t) -> {
+            int energyMultiplier = spentEnergy;
+            if (AbstractDungeon.player.hasRelic(ChemicalX.ID)) energyMultiplier += 2;
+            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+            for (int i = 0; i < energyMultiplier * c.magicNumber; i++) {
+                actions.add(new RandomTargetLightningDamageAction(new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE));
+            }
+            return actions;
+        };
     }
 
     @Override

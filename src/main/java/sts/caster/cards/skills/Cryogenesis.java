@@ -1,18 +1,16 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.CryogenesisAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Cryogenesis extends CasterCard {
 
@@ -31,7 +29,6 @@ public class Cryogenesis extends CasterCard {
     private static final int COST = 0;
     private static final int DRAW_AMOUNT = 1;
     private static final int UPG_DRAW_AMOUNT = 1;
-    
 
 
     public Cryogenesis() {
@@ -43,9 +40,9 @@ public class Cryogenesis extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new CryogenesisAction(magicNumber));
+        addToBot(new CryogenesisAction(magicNumber));
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

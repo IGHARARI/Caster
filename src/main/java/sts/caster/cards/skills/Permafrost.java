@@ -50,7 +50,7 @@ public class Permafrost extends CasterCard {
             DelayedCardsArea.repositionMiniCards();
         }));
         addToBot(new GainBlockAction(p, block));
-        addToBot(new ApplyPowerAction(p, p, new NextTurnBlockPower(p, block/2), block/2));
+        addToBot(new ApplyPowerAction(p, p, new NextTurnBlockPower(p, block / 2), block / 2));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Permafrost extends CasterCard {
         int sum = 0;
         if (DelayedCardsArea.delayedCards != null) {
             for (DelayedCardEffect delayCard : DelayedCardsArea.delayedCards) {
-                sum += delayCard.turnsUntilFire +1;
+                sum += delayCard.turnsUntilFire + 1;
             }
         }
         return sum;

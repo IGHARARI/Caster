@@ -1,11 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -16,7 +10,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.ArbitraryCardAction;
 import sts.caster.actions.LightningDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -26,6 +19,12 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Thundara extends CasterCard {
 
@@ -61,7 +60,7 @@ public class Thundara extends CasterCard {
                 .filter((c) -> c != this && c.type == CasterCardType.SPELL && c.costForTurn > 0)
                 .collect(Collectors.toList());
         if (inHandSpells.size() > 0) {
-            AbstractCard card = inHandSpells.get(AbstractDungeon.cardRandomRng.random(inHandSpells.size()-1));
+            AbstractCard card = inHandSpells.get(AbstractDungeon.cardRandomRng.random(inHandSpells.size() - 1));
             addToBot(new ArbitraryCardAction(card, (c) -> {
                 c.flash();
                 c.setCostForTurn(-99);
@@ -69,16 +68,16 @@ public class Thundara extends CasterCard {
         }
         addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		for (int i = 0; i < magicNumber; i++) {
-    			actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
-    		}
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            for (int i = 0; i < magicNumber; i++) {
+                actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
+            }
+            return actionsList;
+        };
     }
 
     @Override

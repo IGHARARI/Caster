@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -12,7 +8,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -23,6 +18,10 @@ import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.FrostPower;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Tundra extends CasterCard {
 
@@ -53,25 +52,25 @@ public class Tundra extends CasterCard {
         exhaust = true;
         setCardElement(MagicElement.ICE);
     }
-    
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
 
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new ActionOnAllEnemiesAction(
-				m -> new ApplyPowerAction(m, AbstractDungeon.player, new FrostPower(m, AbstractDungeon.player, c.magicNumber), c.magicNumber)
-			));
-    		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
-    		actionsList.add(new QueueDelayedCardAction(c, BASE_DELAY, t));
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            actionsList.add(new ActionOnAllEnemiesAction(
+                    m -> new ApplyPowerAction(m, AbstractDungeon.player, new FrostPower(m, AbstractDungeon.player, c.magicNumber), c.magicNumber)
+            ));
+            actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
+            actionsList.add(new QueueDelayedCardAction(c, BASE_DELAY, t));
+            return actionsList;
+        };
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

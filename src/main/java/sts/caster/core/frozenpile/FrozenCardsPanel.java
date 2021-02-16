@@ -11,16 +11,14 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.TipHelper;
-import com.megacrit.cardcrawl.helpers.input.InputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.AbstractPanel;
 import com.megacrit.cardcrawl.vfx.ExhaustPileParticle;
-
 import sts.caster.patches.frozenpile.FrozenPileEnums;
 
 public class FrozenCardsPanel extends AbstractPanel {
-//    private static final TutorialStrings tutorialStrings;
+    //    private static final TutorialStrings tutorialStrings;
     public static final String MSG = "Click to view cards Frozen this combat.";
     public static final String LABEL = "Frozen Cards";
     public static float fontScale;
@@ -31,13 +29,13 @@ public class FrozenCardsPanel extends AbstractPanel {
     private Hitbox hb;
     public static float energyVfxTimer;
     public static final float ENERGY_VFX_TIME = 2.0f;
-    
+
     public FrozenCardsPanel() {
         super(Settings.WIDTH - 70.0f * Settings.scale, 264.0f * Settings.scale, Settings.WIDTH + 100.0f * Settings.scale, 264.0f * Settings.scale, 0.0f, 0.0f, null, false);
         this.gl = new GlyphLayout();
         this.hb = new Hitbox(0.0f, 0.0f, 100.0f * Settings.scale, 100.0f * Settings.scale);
     }
-    
+
     @Override
     public void updatePositions() {
         super.updatePositions();
@@ -65,20 +63,19 @@ public class FrozenCardsPanel extends AbstractPanel {
                 if (AbstractDungeon.previousScreen == null) {
                     AbstractDungeon.previousScreen = AbstractDungeon.screen;
                 }
-            }
-            else {
+            } else {
                 AbstractDungeon.previousScreen = null;
             }
             this.openFrozenPile();
         }
     }
-    
+
     private void openFrozenPile() {
         FrozenPileManager.frozenPileViewScreen.open();
         this.hb.hovered = false;
         InputHelper.justClickedLeft = false;
     }
-    
+
     private void updateVfx() {
         FrozenCardsPanel.energyVfxTimer -= Gdx.graphics.getDeltaTime();
         if (FrozenCardsPanel.energyVfxTimer < 0.0f) {
@@ -86,7 +83,7 @@ public class FrozenCardsPanel extends AbstractPanel {
             FrozenCardsPanel.energyVfxTimer = 0.05f;
         }
     }
-    
+
     @Override
     public void render(final SpriteBatch sb) {
         if (!Settings.hideLowerElements && !FrozenPileManager.frozenPile.isEmpty()) {
@@ -102,7 +99,7 @@ public class FrozenCardsPanel extends AbstractPanel {
             }
         }
     }
-    
+
     static {
         FrozenCardsPanel.fontScale = 1.0f;
         COUNT_CIRCLE_W = 128.0f * Settings.scale;

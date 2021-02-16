@@ -1,10 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,7 +8,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
 import sts.caster.actions.ModifyCardInBattleSpellDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -23,6 +17,11 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class PyroclasticTide extends CasterCard {
 
@@ -46,7 +45,7 @@ public class PyroclasticTide extends CasterCard {
     private static final int UPG_DMG_BOOST = 1;
 
     private Predicate<AbstractCard> isCardFireSpell = card -> {
-    	return card.type == CasterCardType.SPELL && (card instanceof CasterCard) && ((CasterCard)card).cardElement == MagicElement.FIRE;
+        return card.type == CasterCardType.SPELL && (card instanceof CasterCard) && ((CasterCard) card).cardElement == MagicElement.FIRE;
     };
 
     public PyroclasticTide() {
@@ -59,17 +58,17 @@ public class PyroclasticTide extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new ModifyCardInBattleSpellDamageAction(isCardFireSpell, magicNumber));
-		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        addToBot(new ModifyCardInBattleSpellDamageAction(isCardFireSpell, magicNumber));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.FIRE));
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.FIRE));
+            return actionsList;
+        };
     }
 
     @Override

@@ -57,7 +57,7 @@ public class Fimbulvetr extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
 
     @Override
@@ -68,16 +68,16 @@ public class Fimbulvetr extends CasterCard {
 
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+            actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
             MonsterToActionInterface applyWeakBuilder = (m) -> {
                 return new ApplyPowerAction(m, AbstractDungeon.player, new WeakPower(m, magicNumber, false), magicNumber);
             };
             actions.add(new ActionOnAllEnemiesAction(applyWeakBuilder));
 
             return actions;
-    	};
+        };
     }
 
     @Override

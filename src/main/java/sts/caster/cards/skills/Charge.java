@@ -1,20 +1,18 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
-import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.special.Shocked;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Charge extends CasterCard {
 
@@ -45,7 +43,7 @@ public class Charge extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new MakeTempCardInDrawPileAction(this.cardsToPreview, 1, true, true));
-    	addToBot(new DrawCardAction(p, magicNumber));
+        addToBot(new DrawCardAction(p, magicNumber));
     }
 
     @Override

@@ -1,12 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-import static sts.caster.core.CasterMod.makeVFXPath;
-
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.function.BiFunction;
-
 import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,7 +13,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.DamageImpactCurvyEffect;
 import sts.caster.actions.*;
@@ -33,6 +25,13 @@ import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.FrostPower;
 import sts.caster.util.TextureHelper;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.function.BiFunction;
+
+import static sts.caster.core.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeVFXPath;
 
 public class StormGust extends CasterCard {
 
@@ -68,10 +67,10 @@ public class StormGust extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new FreezeCardAction(magicNumber, false, false, false));
-		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+        addToBot(new FreezeCardAction(magicNumber, false, false, false));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
 //        AbstractGameEffect fallingShard = new VfxBuilder(iceShard, randStartingPoint, 0,  0.5f)
@@ -94,8 +93,8 @@ public class StormGust extends CasterCard {
             double xv2 = randEndingPoint - randStartingPoint;
             double yv2 = screenBot - screenTop;
             double randAngle = Math.toDegrees(Math.atan2(yv2, xv2)) + 90f;
-            float randomScaling =  shardRandom.nextFloat()*2;
-            return new VfxBuilder(iceShard, randStartingPoint, screenTop, 0.33f / (1+randomScaling))
+            float randomScaling = shardRandom.nextFloat() * 2;
+            return new VfxBuilder(iceShard, randStartingPoint, screenTop, 0.33f / (1 + randomScaling))
                     .setAngle((float) randAngle)
                     .setScale((1f + randomScaling) / 8)
                     .moveX(randStartingPoint, randEndingPoint, VfxBuilder.Interpolations.LINEAR)
@@ -111,13 +110,13 @@ public class StormGust extends CasterCard {
         };
         AbstractGameEffect storm = new VfxBuilder(2)
                 .emitEvery(
-                    (x,y) -> {
-                        float halfScreen = Settings.WIDTH * Settings.scale / 2;
-                        float randStartingPoint = halfScreen * (1 + shardRandom.nextFloat());
-                        float randEndingPoint = halfScreen * (1 + shardRandom.nextFloat());
-                        return iceShardBuilder.apply(randStartingPoint, randEndingPoint);
-                    },
-                    0.02f
+                        (x, y) -> {
+                            float halfScreen = Settings.WIDTH * Settings.scale / 2;
+                            float randStartingPoint = halfScreen * (1 + shardRandom.nextFloat());
+                            float randEndingPoint = halfScreen * (1 + shardRandom.nextFloat());
+                            return iceShardBuilder.apply(randStartingPoint, randEndingPoint);
+                        },
+                        0.02f
                 )
                 .playSoundAt(.60f, "ATTACK_DAGGER_4")
                 .playSoundAt(.75f, "ATTACK_DAGGER_4")
@@ -126,17 +125,17 @@ public class StormGust extends CasterCard {
                 .playSoundAt(1.25f, "ATTACK_DAGGER_4")
                 .build();
 
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-    		actions.add(new VFXAction(storm));
-    		actions.add(new NonSkippableWaitAction(1f));
-        	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+            actions.add(new VFXAction(storm));
+            actions.add(new NonSkippableWaitAction(1f));
+            actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
             MonsterToActionInterface frostApply = (mon) -> {
                 return new ApplyPowerAction(mon, AbstractDungeon.player, new FrostPower(mon, AbstractDungeon.player, c.m2), c.m2);
             };
             actions.add(new ActionOnAllEnemiesAction(frostApply));
             return actions;
-    	};
+        };
     }
 
     @Override

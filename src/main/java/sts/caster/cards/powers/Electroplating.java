@@ -11,7 +11,6 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.powers.GainPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -43,7 +42,7 @@ public class Electroplating extends CasterCard {
         m2 = baseM2 = BASE_ELECTRIFIED;
         setCardElement(MagicElement.ELECTRIC);
     }
-    
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ElectrifyCardsAction(1, m2, false));

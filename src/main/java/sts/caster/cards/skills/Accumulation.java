@@ -1,18 +1,16 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.delayedCards.DelayedCardsArea;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Accumulation extends CasterCard {
 
@@ -41,15 +39,15 @@ public class Accumulation extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new GainBlockAction(p, p, block));
+        addToBot(new GainBlockAction(p, p, block));
     }
-    
+
     @Override
     public void applyPowers() {
-    	baseBlock = countCardsInCastArea() * magicNumber;
-    	block = baseBlock;
-    	isBlockModified = true;
-    	super.applyPowers();
+        baseBlock = countCardsInCastArea() * magicNumber;
+        block = baseBlock;
+        isBlockModified = true;
+        super.applyPowers();
     }
 
     @Override
@@ -60,8 +58,8 @@ public class Accumulation extends CasterCard {
             initializeDescription();
         }
     }
-    
+
     public static int countCardsInCastArea() {
-		return (DelayedCardsArea.delayedCards != null) ? DelayedCardsArea.delayedCards.size() : 0;
+        return (DelayedCardsArea.delayedCards != null) ? DelayedCardsArea.delayedCards.size() : 0;
     }
 }

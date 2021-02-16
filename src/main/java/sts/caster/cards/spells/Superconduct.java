@@ -1,4 +1,4 @@
-    package sts.caster.cards.spells;
+package sts.caster.cards.spells;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
@@ -58,7 +58,7 @@ public class Superconduct extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new ElectrifyCardsAction(m2, true));
+        addToBot(new ElectrifyCardsAction(m2, true));
         if (energyOnUse < EnergyPanel.totalCount) {
             energyOnUse = EnergyPanel.totalCount;
         }
@@ -71,16 +71,16 @@ public class Superconduct extends CasterCard {
             AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
         }
     }
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-        	for (int i = 0; i < c.magicNumber; i++) {
-        		actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE, true));
-        	}
-    		return actionsList;
-    	};
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            for (int i = 0; i < c.magicNumber; i++) {
+                actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE, true));
+            }
+            return actionsList;
+        };
     }
 
     @Override

@@ -1,7 +1,6 @@
 package sts.caster.cards.mods;
 
 import basemod.abstracts.AbstractCardModifier;
-import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
@@ -9,7 +8,8 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 public class RetainOnceCardMod extends AbstractCardModifier {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("RetainOnceCardMod");
 
-    public RetainOnceCardMod() { }
+    public RetainOnceCardMod() {
+    }
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -28,7 +28,7 @@ public class RetainOnceCardMod extends AbstractCardModifier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return uiStrings.TEXT[0] + " NL Hi there NL " + rawDescription;
+        return uiStrings.TEXT[0] + " NL " + rawDescription;
     }
 
     @Override

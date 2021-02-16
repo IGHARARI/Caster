@@ -242,7 +242,7 @@
   },
   "caster:Eruption": {
     "NAME": "Eruption",
-    "DESCRIPTION": "Increase this card's damage by !M! this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Deal !D! damage. NL Add !M! *Lava to your hand."
   },
   "caster:Fira": {
     "NAME": "Fira",
@@ -460,6 +460,40 @@
   },
   "caster:Shocked": {
     "NAME": "Shocked",
-    "DESCRIPTION": "When this is drawn, caster:Electrify all cards in your hand."
+    "DESCRIPTION": "When this is drawn, caster:Electrify all cards in your hand. NL Ethereal."
+  },
+  "caster:BurnOut": {
+    "NAME": "Burn Out",
+    "DESCRIPTION": "Double an enemy's caster:Blazed, next time caster:Blazed is triggered the enemy loses all caster:Blazed stacks. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Double an enemy's caster:Blazed, next time caster:Blazed is triggered the enemy loses all caster:Blazed stacks."
+  },
+  "caster:Lava": {
+    "NAME": "Lava",
+    "DESCRIPTION": "Retain. NL While this is in your hand, Fire Attacks and Spells deal !M! more damage. NL This turn Fire Attack and Spells deal !caster:M2! more damage. NL Exhaust."
+  },
+  "caster:SuperCool": {
+    "NAME": "Super Cool",
+    "DESCRIPTION": "Gain !B! Block. NL All cards in your hand gain: caster:Freeze this card when it's played."
+  },
+  "caster:Avalanche": {
+    "NAME": "Avalanche",
+    "DESCRIPTION": "Deal !D! to All enemies. NL Shuffle !M! *Snowed into your draw pile.",
+    "UPGRADE_DESCRIPTION": "Deal !D! to All enemies. NL Shuffle !M! *Snowed+ into your draw pile."
+  },
+  "caster:Snowed": {
+    "NAME": "Snowed",
+    "DESCRIPTION": "When drawn gain !M! Block. NL Exhaust."
+  },
+  "caster:Jumper": {
+    "NAME": "Jumper",
+    "DESCRIPTION": "Innate. NL Gain [E] [E]. NL Exhaust."
+  },
+  "caster:Igloo": {
+    "NAME": "Igloo",
+    "DESCRIPTION": "Innate. NL Draw !M! cards. NL Exhaust."
+  },
+  "caster:MatchBox": {
+    "NAME": "MatchBox",
+    "DESCRIPTION": "Innate. NL Deal !D! damage to ALL enemies. NL Exhaust."
   }
 }

@@ -1,19 +1,17 @@
 package sts.caster.cards.powers;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.IzanagiPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class IzanagisObdurance extends CasterCard {
 
@@ -39,7 +37,7 @@ public class IzanagisObdurance extends CasterCard {
         magicNumber = baseMagicNumber = BASE_BLOCK_AMT;
         setCardElement(MagicElement.EARTH);
     }
-    
+
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new IzanagiPower(p, magicNumber), magicNumber));
@@ -47,9 +45,9 @@ public class IzanagisObdurance extends CasterCard {
 
     @Override
     public float getTitleFontSize() {
-    	return 20;
+        return 20;
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

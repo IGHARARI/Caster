@@ -1,7 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -17,13 +15,14 @@ import com.megacrit.cardcrawl.powers.GainStrengthPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect;
 import com.megacrit.cardcrawl.vfx.combat.ShockWaveEffect.ShockWaveType;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.GainFocusPower;
 import sts.caster.powers.MiredPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Sandstorm extends CasterCard {
 
@@ -54,22 +53,22 @@ public class Sandstorm extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new ApplyPowerAction(p, p, new FocusPower(p, -m2), -m2));
-		if (!p.hasPower(ArtifactPower.POWER_ID)) {
-			addToBot(new ApplyPowerAction(p, p, new GainFocusPower(p, m2, true), m2, true, AttackEffect.NONE));
-		}
-		
-		addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .40f));
-		addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .27f));
-		addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .16f));
+        addToBot(new ApplyPowerAction(p, p, new FocusPower(p, -m2), -m2));
+        if (!p.hasPower(ArtifactPower.POWER_ID)) {
+            addToBot(new ApplyPowerAction(p, p, new GainFocusPower(p, m2, true), m2, true, AttackEffect.NONE));
+        }
+
+        addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .40f));
+        addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .27f));
+        addToBot(new VFXAction(p, new ShockWaveEffect(p.hb.cX, p.hb.cY, Color.BROWN, ShockWaveType.CHAOTIC), .16f));
         for (final AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             addToBot(new ApplyPowerAction(mo, p, new StrengthPower(mo, -magicNumber), -magicNumber, true, AttackEffect.NONE));
             addToBot(new ApplyPowerAction(mo, p, new MiredPower(mo, p, 1), 1, true, AttackEffect.NONE));
         }
         for (final AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-        	if (!mo.hasPower(ArtifactPower.POWER_ID)) {
-        		addToBot(new ApplyPowerAction(mo, p, new GainStrengthPower(mo, magicNumber), magicNumber, true, AttackEffect.NONE));
-        	}
+            if (!mo.hasPower(ArtifactPower.POWER_ID)) {
+                addToBot(new ApplyPowerAction(mo, p, new GainStrengthPower(mo, magicNumber), magicNumber, true, AttackEffect.NONE));
+            }
         }
     }
 

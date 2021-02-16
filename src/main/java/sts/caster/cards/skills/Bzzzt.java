@@ -2,13 +2,11 @@ package sts.caster.cards.skills;
 
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -44,8 +42,8 @@ public class Bzzzt extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new DrawCardAction(p, magicNumber));
-    	addToBot(new GainEnergyAction(ENERGY_GAIN));
+        addToBot(new DrawCardAction(p, magicNumber));
+        addToBot(new GainEnergyAction(ENERGY_GAIN));
     }
 
     @Override

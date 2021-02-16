@@ -3,31 +3,22 @@ package sts.caster.cards.spells;
 import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.BlurPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import sts.caster.actions.FreezeCardAction;
-import sts.caster.actions.FreezeSpecificCardAction;
-import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
-import sts.caster.patches.spellCardType.CasterCardType;
+import sts.caster.patches.relics.FreezeOnUseCardField;
 import sts.caster.util.TextureHelper;
-
-import java.util.ArrayList;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 import static sts.caster.core.CasterMod.makeVFXPath;
@@ -66,14 +57,14 @@ public class IceWall extends CasterCard {
         Texture iceSpike = TextureHelper.getTexture(makeVFXPath("icespike.png"));
 
         AbstractGameEffect wallVfx = new VfxBuilder((TextureAtlas.AtlasRegion) null, p.drawX, p.drawY, .8f)
-                .moveX(p.drawX + 70f  * Settings.scale, p.drawX + 400f * Settings.scale, VfxBuilder.Interpolations.LINEAR)
+                .moveX(p.drawX + 70f * Settings.scale, p.drawX + 400f * Settings.scale, VfxBuilder.Interpolations.LINEAR)
                 .moveY(p.drawY - 90f * Settings.scale, p.drawY + 20f * Settings.scale, VfxBuilder.Interpolations.LINEAR)
                 .emitEvery(
-                        (x,y) -> {
-                            return new VfxBuilder(iceSpike,x, y, 1f)
+                        (x, y) -> {
+                            return new VfxBuilder(iceSpike, x, y, 1f)
                                     .setScale(0f)
                                     .scale(0, 1f, VfxBuilder.Interpolations.EXP10)
-                                    .moveY(y, y + iceSpike.getHeight()/2, VfxBuilder.Interpolations.EXP10)
+                                    .moveY(y, y + iceSpike.getHeight() / 2, VfxBuilder.Interpolations.EXP10)
                                     .playSoundAt(0.1f, .5f, "TINGSHA")
                                     .build();
                         },
@@ -84,7 +75,7 @@ public class IceWall extends CasterCard {
 
         addToBot(new VFXAction(wallVfx, 0.6f));
         addToBot(new GainBlockAction(p, p, block));
-    	addToBot(new ApplyPowerAction(p, p, new BlurPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new BlurPower(p, magicNumber), magicNumber));
     }
 
     @Override
@@ -94,7 +85,7 @@ public class IceWall extends CasterCard {
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             upgradeBlock(UPG_BLOCK);
             exhaust = false;
-            freezeOnUse = true;
+            FreezeOnUseCardField.freezeOnuse.set(this, true);
             initializeDescription();
         }
     }

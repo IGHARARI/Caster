@@ -1,7 +1,5 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -11,11 +9,12 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster.Intent;
 import com.megacrit.cardcrawl.powers.WeakPower;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class WallOfRocks extends CasterCard {
 
@@ -35,7 +34,7 @@ public class WallOfRocks extends CasterCard {
     private static final int BLOCK_AMT = 13;
     private static final int UPG_BLOCK_AMT = 4;
     private static final int WEAK_AMT = 3;
-    
+
     public WallOfRocks() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         block = baseBlock = BLOCK_AMT;
@@ -45,15 +44,15 @@ public class WallOfRocks extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new GainBlockAction(p, p, block));
-    	for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
-    		if (mon.isDeadOrEscaped()) continue;
-    		if ((mon.intent == Intent.ATTACK || mon.intent == Intent.ATTACK_BUFF || mon.intent == Intent.ATTACK_DEBUFF || mon.intent == Intent.ATTACK_DEFEND)) {
-    			addToBot(new ApplyPowerAction(mon, p, new WeakPower(mon, magicNumber, false), magicNumber));
-    		}
-    	}
+        addToBot(new GainBlockAction(p, p, block));
+        for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
+            if (mon.isDeadOrEscaped()) continue;
+            if ((mon.intent == Intent.ATTACK || mon.intent == Intent.ATTACK_BUFF || mon.intent == Intent.ATTACK_DEBUFF || mon.intent == Intent.ATTACK_DEFEND)) {
+                addToBot(new ApplyPowerAction(mon, p, new WeakPower(mon, magicNumber, false), magicNumber));
+            }
+        }
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

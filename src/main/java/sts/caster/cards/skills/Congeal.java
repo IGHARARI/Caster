@@ -42,12 +42,12 @@ public class Congeal extends CasterCard {
         setCardElement(MagicElement.ICE);
     }
 
-     @Override
+    @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-         addToBot(new ActionOnAllEnemiesAction(
-                 m -> new ApplyPowerAction(m, AbstractDungeon.player, new FrostPower(m, AbstractDungeon.player, magicNumber), magicNumber)
-         ));
-         addToBot(new ApplyPowerAction(p, p, new CongealPower(p, p, m2), m2));
+        addToBot(new ActionOnAllEnemiesAction(
+                m -> new ApplyPowerAction(m, AbstractDungeon.player, new FrostPower(m, AbstractDungeon.player, magicNumber), magicNumber)
+        ));
+        addToBot(new ApplyPowerAction(p, p, new CongealPower(p, p, m2), m2));
     }
 
     @Override

@@ -1,18 +1,16 @@
 package sts.caster.cards.powers;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.IncantationPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Incantation extends CasterCard {
 
@@ -32,13 +30,13 @@ public class Incantation extends CasterCard {
     private static final int COST = 2;
     private static final int BASE_CAST_TIME_REDUCTION = 1;
     private static final int UPG_CAST_TIME_REDUCTION = 1;
-    
-    
+
+
     public Incantation() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_CAST_TIME_REDUCTION;
     }
-    
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new IncantationPower(p, p, magicNumber), magicNumber));

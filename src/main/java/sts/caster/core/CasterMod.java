@@ -58,7 +58,7 @@ public class CasterMod implements
         OnStartBattleSubscriber,
         PostInitializeSubscriber {
 
-	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
+    public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
     private static String modID;
 
     private static final String MODNAME = "The Caster";
@@ -66,7 +66,7 @@ public class CasterMod implements
     private static final String DESCRIPTION = "The Caster, controller of elements and destroyer of... conical structures.";
 
     public static HashMap<Integer, Integer> blockLostPerTurn = new HashMap<Integer, Integer>();
-    
+
     // Character Color
     public static final Color CASTER_COLOR = CardHelper.getColor(64.0f, 70.0f, 70.0f);
 
@@ -277,7 +277,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(HeatRay.ID);
 
 
-
         // UNCOMMON
         BaseMod.addCard(new Fissure());
         UnlockTracker.unlockCard(Fissure.ID);
@@ -351,6 +350,18 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Thermodynamics.ID);
         BaseMod.addCard(new LightningBolt());
         UnlockTracker.unlockCard(LightningBolt.ID);
+        BaseMod.addCard(new BurnOut());
+        UnlockTracker.unlockCard(BurnOut.ID);
+        BaseMod.addCard(new Avalanche());
+        UnlockTracker.unlockCard(Avalanche.ID);
+        BaseMod.addCard(new SuperCool());
+        UnlockTracker.unlockCard(SuperCool.ID);
+        BaseMod.addCard(new Jumper());
+        UnlockTracker.unlockCard(Jumper.ID);
+        BaseMod.addCard(new Igloo());
+        UnlockTracker.unlockCard(Igloo.ID);
+        BaseMod.addCard(new MatchBox());
+        UnlockTracker.unlockCard(MatchBox.ID);
 
         // RARE CARDS
         BaseMod.addCard(new PhoenixFlare());
@@ -468,7 +479,7 @@ public class CasterMod implements
 
         //UI Strings
         BaseMod.loadCustomStringsFile(UIStrings.class,
-        		getModID() + "/localization/eng/caster-UI-Strings.json");
+                getModID() + "/localization/eng/caster-UI-Strings.json");
 
         logger.info("Done editing strings");
     }
@@ -491,35 +502,36 @@ public class CasterMod implements
         return getModID() + ":" + idText;
     }
 
-    
+
     public static final int ELECTRIFY_DAMAGE = 2;
-	@Override
-	public void receiveCardUsed(AbstractCard card) {
-		if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
-			String electrifiedMessage = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings").TEXT[0];
-			AbstractDungeon.effectList.add(new BlockedWordEffect(AbstractDungeon.player, AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, electrifiedMessage));
-			int tagsBeforeRemove = card.tags.size();
-			card.tags.removeIf((tag) -> tag == CasterCardTags.ELECTRIFIED);
-			int amountElectrified = tagsBeforeRemove - card.tags.size();
-			AbstractDungeon.actionManager.addToBottom(new VFXAction(new LightningEffect(AbstractDungeon.player.drawX, AbstractDungeon.player.drawY), 0.1f));
+
+    @Override
+    public void receiveCardUsed(AbstractCard card) {
+        if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
+            String electrifiedMessage = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings").TEXT[0];
+            AbstractDungeon.effectList.add(new BlockedWordEffect(AbstractDungeon.player, AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, electrifiedMessage));
+            int tagsBeforeRemove = card.tags.size();
+            card.tags.removeIf((tag) -> tag == CasterCardTags.ELECTRIFIED);
+            int amountElectrified = tagsBeforeRemove - card.tags.size();
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(new LightningEffect(AbstractDungeon.player.drawX, AbstractDungeon.player.drawY), 0.1f));
             AbstractDungeon.actionManager.addToBottom(new SFXAction("ORB_LIGHTNING_EVOKE"));
-			DamageInfo damage = new DamageInfo(AbstractDungeon.player, ELECTRIFY_DAMAGE * amountElectrified, DamageInfo.DamageType.NORMAL);
+            DamageInfo damage = new DamageInfo(AbstractDungeon.player, ELECTRIFY_DAMAGE * amountElectrified, DamageInfo.DamageType.NORMAL);
             AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, damage));
-		}
-	}
+        }
+    }
 
-	@Override
-	public void receivePostCreateStartingDeck(PlayerClass playerClass, CardGroup deck) {
-		if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(MagicBookRelic.ID)) {
-			((MagicBookRelic)AbstractDungeon.player.getRelic(MagicBookRelic.ID)).onTrigger();
-		}
-	}
+    @Override
+    public void receivePostCreateStartingDeck(PlayerClass playerClass, CardGroup deck) {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(MagicBookRelic.ID)) {
+            ((MagicBookRelic) AbstractDungeon.player.getRelic(MagicBookRelic.ID)).onTrigger();
+        }
+    }
 
-	@Override
-	public void receiveOnBattleStart(AbstractRoom p0) {
+    @Override
+    public void receiveOnBattleStart(AbstractRoom p0) {
         FrozenPileManager.resetFrozenCount();
-	    blockLostPerTurn.clear();
-	}
+        blockLostPerTurn.clear();
+    }
 
 //    @Override
 //    public void receivePostEnergyRecharge() {

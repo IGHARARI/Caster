@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.powers.*;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
+import sts.caster.cards.special.Lava;
 import sts.caster.core.MagicElement;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
@@ -38,9 +39,6 @@ public abstract class CasterCard extends CustomCard {
 	private static final UIStrings LIGHTNING_DESC = CardCrawlGame.languagePack.getUIString("LightningElement");
 	private static final UIStrings EARTH_DESC = CardCrawlGame.languagePack.getUIString("EarthElement");
 	
-	
-	public boolean freezeOnUse;
-
 	public int delayTurnsModificationForTurn;
 	public int delayTurns;
 	public int baseDelayTurns;	
@@ -168,13 +166,36 @@ public abstract class CasterCard extends CustomCard {
 
 	@Override
 	public void applyPowers() {
+		int realBaseDamage = baseDamage;
+		int realBaseSpellDamage = baseSpellDamage;
+
+		if (this.cardElement == MagicElement.FIRE) {
+			baseDamage += getLavaModifiers();
+			baseSpellDamage += getLavaModifiers();
+		}
+
 		if (this.type == CasterCardType.SPELL) {
 			calculateCardDamage(null);
 		} else {
 			super.applyPowers();
 		}
+
+		baseDamage = realBaseDamage;
+		baseSpellDamage = realBaseSpellDamage;
+		isDamageModified = damage != baseDamage;
+		isSpellDamageModified = spellDamage != baseSpellDamage;
 	}
-	
+
+	private int getLavaModifiers() {
+		int totalModifier = 0;
+		for (AbstractCard c : AbstractDungeon.player.hand.group) {
+			if (c.cardID == Lava.ID) {
+				totalModifier += c.magicNumber;
+			}
+		}
+		return totalModifier;
+	}
+
 	@Override
 	public void calculateCardDamage(AbstractMonster mo) {
 		if (this.type == CasterCardType.SPELL) {

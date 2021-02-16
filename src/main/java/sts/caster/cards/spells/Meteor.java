@@ -1,12 +1,6 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-import static sts.caster.core.CasterMod.makeVFXPath;
-
-import java.util.ArrayList;
-
 import basemod.helpers.VfxBuilder;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
@@ -20,11 +14,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import com.megacrit.cardcrawl.vfx.FireBurstParticleEffect;
-import com.megacrit.cardcrawl.vfx.combat.DamageImpactBlurEffect;
-import com.megacrit.cardcrawl.vfx.combat.DamageImpactCurvyEffect;
 import com.megacrit.cardcrawl.vfx.combat.FireballEffect;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
@@ -34,6 +24,11 @@ import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListMaker;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.util.TextureHelper;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeVFXPath;
 
 public class Meteor extends CasterCard {
 
@@ -55,7 +50,6 @@ public class Meteor extends CasterCard {
     private static final int UPGRADE_DAMAGE = 5;
 
 
-
     public Meteor() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
@@ -67,13 +61,13 @@ public class Meteor extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
-    
+
     @Override
     public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
 
-    		Texture meteor = TextureHelper.getTexture(makeVFXPath("meteor.png"));
+            Texture meteor = TextureHelper.getTexture(makeVFXPath("meteor.png"));
             float screenTop = Settings.HEIGHT * Settings.scale;
             float charX = AbstractDungeon.player.drawX;
             AbstractGameEffect meteorvfx = new VfxBuilder(meteor, charX, screenTop, 1f)
@@ -86,16 +80,16 @@ public class Meteor extends CasterCard {
                     .fadeOut(0.3f)
                     .triggerVfxAt(1f, 1,
                             (x2, y2) -> {
-                                return new FireballEffect(x2, y2, x2+10f, y2+10f);
+                                return new FireballEffect(x2, y2, x2 + 10f, y2 + 10f);
                             }
                     )
                     .playSoundAt(.6f, "BLUNT_HEAVY")
                     .build();
 
             actions.add(new VFXAction(meteorvfx, 1f));
-    		actions.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.FIRE));
-    		return actions;
-    	};
+            actions.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.FIRE));
+            return actions;
+        };
     }
 
     @Override

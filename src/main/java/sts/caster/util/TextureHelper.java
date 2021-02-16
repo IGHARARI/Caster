@@ -29,7 +29,7 @@ public class TextureHelper {
                 loadTexture(textureString);
             } catch (GdxRuntimeException e) {
                 logger.error("Could not find texture: " + textureString);
-                return getTexture("theDefaultResources/images/ui/missing_texture.png");
+                return getTexture("resources/caster/images/ui/missing_texture.png");
             }
         }
         return textures.get(textureString);

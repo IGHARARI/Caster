@@ -1,19 +1,18 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.BlazedPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class DiablosFlame extends CasterCard {
 
@@ -42,9 +41,9 @@ public class DiablosFlame extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		for(AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
-    		addToBot(new ApplyPowerAction(mon, p, new BlazedPower(mon, p, magicNumber), magicNumber));
-    	}
+        for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
+            addToBot(new ApplyPowerAction(mon, p, new BlazedPower(mon, p, magicNumber), magicNumber));
+        }
     }
 
     @Override

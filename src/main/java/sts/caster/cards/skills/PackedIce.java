@@ -47,21 +47,21 @@ public class PackedIce extends CasterCard {
         setCardElement(MagicElement.ICE);
     }
 
-     @Override
+    @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-         addToBot(new GainBlockAction(p, block));
-         addToBot(new AbstractGameAction() {
-             @Override
-             public void update() {
-                 if (AbstractDungeon.player.currentBlock >= m2) {
-                     ArrayList<AbstractMonster> mons = BattleHelper.getAliveMonsters();
-                     for (AbstractMonster m : mons) {
-                         addToBot(new ApplyPowerAction(m, p, new WeakPower(m, magicNumber, false)));
-                     }
-                 }
-                 isDone = true;
-             }
-         });
+        addToBot(new GainBlockAction(p, block));
+        addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                if (AbstractDungeon.player.currentBlock >= m2) {
+                    ArrayList<AbstractMonster> mons = BattleHelper.getAliveMonsters();
+                    for (AbstractMonster m : mons) {
+                        addToBot(new ApplyPowerAction(m, p, new WeakPower(m, magicNumber, false)));
+                    }
+                }
+                isDone = true;
+            }
+        });
     }
 
     @Override
