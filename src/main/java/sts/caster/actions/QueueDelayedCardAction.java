@@ -4,8 +4,8 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.cards.CasterCard;
-import sts.caster.delayedCards.DelayedCardEffect;
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.CastingSpellCard;
+import sts.caster.delayedCards.SpellCardsArea;
 
 public class QueueDelayedCardAction extends AbstractGameAction {
     private CasterCard card;
@@ -27,9 +27,9 @@ public class QueueDelayedCardAction extends AbstractGameAction {
 
 	@Override
     public void update() {
-		DelayedCardEffect delayedCard = new DelayedCardEffect(card, turnsDelay, energyOnUse, target);
-		DelayedCardsArea.addCardToArea(delayedCard);
-		DelayedCardsArea.repositionMiniCards();
+		CastingSpellCard delayedCard = new CastingSpellCard(card, turnsDelay, energyOnUse, target);
+		SpellCardsArea.addCardToArea(delayedCard);
+		SpellCardsArea.repositionMiniCards();
         isDone = true;
     }
 }

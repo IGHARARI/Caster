@@ -5,11 +5,11 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
 
-public class DelayedEffectRemoveAction extends AbstractGameAction {
+public class RemoveEvokingSpellCard extends AbstractGameAction {
 
 	CastingSpellCard delayedCard;
 	
-	public DelayedEffectRemoveAction(CastingSpellCard delayedCard) {
+	public RemoveEvokingSpellCard(CastingSpellCard delayedCard) {
         actionType = ActionType.SPECIAL;
         this.delayedCard = delayedCard;
 	}
@@ -17,8 +17,9 @@ public class DelayedEffectRemoveAction extends AbstractGameAction {
 	@Override
     public void update() {
     	if (!isDone) {
-			if (delayedCard != null && delayedCard.turnsUntilFire <= 0) {
-				SpellCardsArea.removeCardFromArea(delayedCard);
+			if (delayedCard != null) {
+				SpellCardsArea.cardsBeingEvoked.remove(delayedCard);
+//				delayedCard.showEvokeCardOnScreen = false;
 			}
     	}
         isDone = true;

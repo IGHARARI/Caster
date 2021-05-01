@@ -16,7 +16,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.BlazedPower;
 
@@ -39,12 +39,12 @@ public class Conflagrate extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 13;
+    private static final int BASE_DELAY = 2;
+    private static final int BASE_DAMAGE = 16;
     private static final int UPG_DAMAGE = 3;
     private static final int THAW_BASE = 1;
     private static final int THAW_UPG = 1;
-    private static final int BLAZE = 5;
+    private static final int BLAZE = 6;
 
 
     public Conflagrate() {
@@ -62,7 +62,7 @@ public class Conflagrate extends CasterCard {
     }
 
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
         return (c, t) -> {
             AbstractPlayer p = AbstractDungeon.player;
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();

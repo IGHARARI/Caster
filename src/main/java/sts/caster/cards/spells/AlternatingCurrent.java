@@ -4,6 +4,7 @@ import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.ArrayList;
 
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -18,10 +19,11 @@ import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import sts.caster.actions.DelayedDamageRandomEnemyAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
 
@@ -41,7 +43,7 @@ public class AlternatingCurrent extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 3;
+    private static final int BASE_DAMAGE = 8;
     private static final int UPGRADE_DAMAGE = 2;
 
 
@@ -49,6 +51,7 @@ public class AlternatingCurrent extends CasterCard {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns =  BASE_DELAY;
+        CardModifierManager.addModifier(this, new RecurringSpellCardMod(2));
         setCardElement(MagicElement.ELECTRIC);
     }
 
@@ -58,14 +61,14 @@ public class AlternatingCurrent extends CasterCard {
     }
     
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             ArrayList<MonsterToActionInterface> lightningEffects = new ArrayList<MonsterToActionInterface>();
             lightningEffects.add(m -> new VFXAction(new LightningEffect(m.drawX, m.drawY), 0f));
             lightningEffects.add(m -> new SFXAction("ORB_LIGHTNING_EVOKE"));
     		actions.add(new DelayedDamageRandomEnemyAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.NONE, lightningEffects));
-        	actions.add(new QueueDelayedCardAction(c, BASE_DELAY, t));
+//        	actions.add(new QueueDelayedCardAction(c, BASE_DELAY, t));
     		return actions;
     	};
     }

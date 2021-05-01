@@ -21,8 +21,8 @@ import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import sts.caster.actions.DelayedEffectOnStartOfTurnTriggerAction;
 import sts.caster.actions.QueueRedrawMiniCardsAction;
-import sts.caster.delayedCards.DelayedCardEffect;
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.CastingSpellCard;
+import sts.caster.delayedCards.SpellCardsArea;
 
 
 public class DelayedCardEffectsPatch {
@@ -31,8 +31,8 @@ public class DelayedCardEffectsPatch {
 	public static class inCombatUpdatePatch {
 
 		public static void Postfix(AbstractPlayer __instance) {
-			if (DelayedCardsArea.delayedCards != null) {
-				for (DelayedCardEffect card : DelayedCardsArea.delayedCards) {
+			if (SpellCardsArea.spellCardsBeingCasted != null) {
+				for (CastingSpellCard card : SpellCardsArea.spellCardsBeingCasted) {
 					card.update();
 				}
 			}
@@ -59,16 +59,16 @@ public class DelayedCardEffectsPatch {
 		public static void Postfix(AbstractPlayer __instance, SpriteBatch sb) {
 			
 			if ((AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT || AbstractDungeon.getCurrRoom() instanceof MonsterRoom) && !__instance.isDead) {
-				if (DelayedCardsArea.delayedCards != null) {
-					for (final DelayedCardEffect orbCard : DelayedCardsArea.delayedCards) {
-						orbCard.render(sb);
+				if (SpellCardsArea.spellCardsBeingCasted != null) {
+					for (final CastingSpellCard spellCard : SpellCardsArea.spellCardsBeingCasted) {
+						spellCard.render(sb);
 					}
-					for (final DelayedCardEffect orbCard : DelayedCardsArea.evokingCards) {
-						orbCard.render(sb);
+					for (final CastingSpellCard spellCard : SpellCardsArea.cardsBeingEvoked) {
+						spellCard.render(sb);
 					}
-					DelayedCardEffect hoveredCard = null;
-					for (final DelayedCardEffect orbCard : DelayedCardsArea.delayedCards) {
-						if (orbCard.renderPreviewIfHovered(sb)) hoveredCard = orbCard;
+					CastingSpellCard hoveredCard = null;
+					for (final CastingSpellCard spellCard : SpellCardsArea.spellCardsBeingCasted) {
+						if (spellCard.renderPreviewIfHovered(sb)) hoveredCard = spellCard;
 					}
 					float hovXLeft = 0f, hovXRight = 0f, hovYTop = 0f, hovYBot = 0f;
 					if (hoveredCard != null) {
@@ -77,7 +77,7 @@ public class DelayedCardEffectsPatch {
 						hovYTop = hoveredCard.hb.cY + AbstractCard.IMG_HEIGHT_S*Settings.scale/2f;
 						hovYBot = hoveredCard.hb.cY - AbstractCard.IMG_HEIGHT_S*Settings.scale/2f;
 					}
-					for (final DelayedCardEffect orbCard : DelayedCardsArea.delayedCards) {
+					for (final CastingSpellCard orbCard : SpellCardsArea.spellCardsBeingCasted) {
 						if (hoveredCard != null && 
 								(hovXLeft < orbCard.hb.cX  && orbCard.hb.cX < hovXRight) && 
 									(hovYBot < orbCard.hb.cY  && orbCard.hb.cY < hovYTop)) {
@@ -86,7 +86,7 @@ public class DelayedCardEffectsPatch {
 						//^avoid rendering the effects for cards being obscured by the pop up
 						orbCard.updateAnimation();
 					}
-					for (final DelayedCardEffect orbCard : DelayedCardsArea.evokingCards) {
+					for (final CastingSpellCard orbCard : SpellCardsArea.cardsBeingEvoked) {
 						orbCard.updateAnimation();
 					}
 				}
@@ -98,7 +98,7 @@ public class DelayedCardEffectsPatch {
 	public static class preBattlePrepPatch {
 		
 		public static void Prefix(AbstractPlayer __instance) {
-			DelayedCardsArea.initializeCardArea();
+			SpellCardsArea.initializeCardArea();
 		}
 	}
 	
@@ -107,7 +107,7 @@ public class DelayedCardEffectsPatch {
 		
 		@SpireInsertPatch(locator=Locator.class, localvars={})
 		public static void Insert(GameActionManager __instance) {
-			for (final DelayedCardEffect orbCard : DelayedCardsArea.delayedCards) {
+			for (final CastingSpellCard orbCard : SpellCardsArea.spellCardsBeingCasted) {
 				AbstractDungeon.actionManager.addToBottom(new DelayedEffectOnStartOfTurnTriggerAction(orbCard));
 			}
 			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());

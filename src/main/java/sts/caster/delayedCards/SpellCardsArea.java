@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import org.lwjgl.Sys;
 import sts.caster.actions.QueueRedrawMiniCardsAction;
 import sts.caster.cards.CasterCard;
 
-public class DelayedCardsArea {
-	public static ArrayList<DelayedCardEffect> delayedCards;
-	public static ArrayList<DelayedCardEffect> evokingCards;
+public class SpellCardsArea {
+	public static ArrayList<CastingSpellCard> spellCardsBeingCasted;
+	public static ArrayList<CastingSpellCard> cardsBeingEvoked;
 
 	public static final float CARD_AREA_X_RIGHT_OFFSET = 200f * Settings.scale;
 	public static final float VERT_SPACE_BTWN_CARDS = 65f * Settings.scale;
@@ -27,14 +26,14 @@ public class DelayedCardsArea {
 	public static final float EVOKE_CARD_TARGET_SCALE = 0.5f;
 
 	public static void initializeCardArea() {
-		delayedCards = new ArrayList<DelayedCardEffect>();
-		evokingCards = new ArrayList<DelayedCardEffect>();
+		spellCardsBeingCasted = new ArrayList<CastingSpellCard>();
+		cardsBeingEvoked = new ArrayList<CastingSpellCard>();
 	}
 	
 	public static void repositionMiniCards() {
 		for (int turnsRemaining = 1 ; turnsRemaining < 4; turnsRemaining++) {
 			int indexInColumn = 0;
-			for (DelayedCardEffect card : delayedCards) {
+			for (CastingSpellCard card : spellCardsBeingCasted) {
 				if (card.turnsUntilFire == turnsRemaining) {
 					positionCardInCardArea(turnsRemaining, indexInColumn, card);
 					indexInColumn++;
@@ -42,7 +41,7 @@ public class DelayedCardsArea {
 			}
 		}
 		int columnIndex = 0;
-		for (DelayedCardEffect card : delayedCards) {
+		for (CastingSpellCard card : spellCardsBeingCasted) {
 			if (card.turnsUntilFire > 3) {
 				positionCardInCardArea(4, columnIndex, card);
 				columnIndex++;
@@ -51,18 +50,18 @@ public class DelayedCardsArea {
 	}
 
 	public static void redrawEvokeCards(){
-		for (int i = 0; i < evokingCards.size(); i++) {
-			positionCardInEvokeArea(i, evokingCards.get(i));
+		for (int i = 0; i < cardsBeingEvoked.size(); i++) {
+			positionCardInEvokeArea(i, cardsBeingEvoked.get(i));
 		}
 	}
 	
-	public static void removeCardFromArea(DelayedCardEffect card) {
-		delayedCards.remove(card);
+	public static void removeCardFromArea(CastingSpellCard card) {
+		spellCardsBeingCasted.remove(card);
 		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
 	}
 	
-	public static void addCardToArea(DelayedCardEffect card) {
-		delayedCards.add(card);
+	public static void addCardToArea(CastingSpellCard card) {
+		spellCardsBeingCasted.add(card);
 		if (card.turnsUntilFire == 0) {
 			card.evokeCardEffect();
 			removeCardFromArea(card);
@@ -70,7 +69,7 @@ public class DelayedCardsArea {
 		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
 	}
 	
-	public static void positionCardInCardArea(int columnNumber, int indexInColumn, DelayedCardEffect card) {
+	public static void positionCardInCardArea(int columnNumber, int indexInColumn, CastingSpellCard card) {
         final float rightBorder = AbstractDungeon.player.drawX + CARD_AREA_X_RIGHT_OFFSET;
         float columnXOffset = 0;
         if (indexInColumn >= MAX_CARDS_PER_COLUMN) {
@@ -83,7 +82,7 @@ public class DelayedCardsArea {
         card.hb.move(card.tX, card.tY);
     }
 
-	public static void positionCardInEvokeArea(int index, DelayedCardEffect card) {
+	public static void positionCardInEvokeArea(int index, CastingSpellCard card) {
         float rightBorder = AbstractDungeon.player.drawX + EVOKE_AREA_RIGHT_BORDER_OFFSET;
         if (index == 0) {
 			card.cardMiniCopy.targetDrawScale = EVOKE_CARD_TARGET_SCALE;
@@ -102,9 +101,9 @@ public class DelayedCardsArea {
 
 	public static CasterCard getLastSpellForDelay(int delayTurns) {
 		CasterCard lastDelayedCard = null;
-		for (DelayedCardEffect card : delayedCards) {
+		for (CastingSpellCard card : spellCardsBeingCasted) {
 			if (card.turnsUntilFire == delayTurns) {
-				lastDelayedCard = card.delayedCard;
+				lastDelayedCard = card.spellCard;
 			}
 		}
 		return lastDelayedCard;

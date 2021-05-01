@@ -20,6 +20,13 @@
   },
   {
     "NAMES": [
+      "Echo",
+      "echo"
+    ],
+    "DESCRIPTION": "Cast this Spell once again after it's effects take place, then reduce Echo by #g1."
+  },
+  {
+    "NAMES": [
       "Burn",
       "burn"
     ],

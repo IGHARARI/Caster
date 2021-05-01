@@ -2,13 +2,13 @@ package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 
-import sts.caster.delayedCards.DelayedCardEffect;
+import sts.caster.delayedCards.CastingSpellCard;
 
 public class DelayedEffectOnStartOfTurnTriggerAction extends AbstractGameAction {
 
-	DelayedCardEffect delayedCard;
+	CastingSpellCard delayedCard;
 	
-	public DelayedEffectOnStartOfTurnTriggerAction(DelayedCardEffect delayedCard) {
+	public DelayedEffectOnStartOfTurnTriggerAction(CastingSpellCard delayedCard) {
         actionType = ActionType.SPECIAL;
         this.delayedCard = delayedCard;
 	}

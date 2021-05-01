@@ -20,7 +20,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.FrostPower;
@@ -72,7 +72,7 @@ public class StormGust extends CasterCard {
     }
 
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
 //        AbstractGameEffect fallingShard = new VfxBuilder(iceShard, randStartingPoint, 0,  0.5f)
 //                .setAngle(45)
 //                .setScale(1f/8)

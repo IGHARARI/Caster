@@ -3,11 +3,11 @@ package sts.caster.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.Settings;
 
-import sts.caster.delayedCards.DelayedCardEffect;
+import sts.caster.delayedCards.CastingSpellCard;
 
 public class NonSkippableWaitAction extends AbstractGameAction {
 
-	DelayedCardEffect delayedCard;
+	CastingSpellCard delayedCard;
 	
     public NonSkippableWaitAction(final float setDur) {
         this.setValues(null, null, 0);

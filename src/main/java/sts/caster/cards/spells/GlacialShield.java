@@ -1,5 +1,6 @@
 package sts.caster.cards.spells;
 
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,10 +11,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.FreezeCardAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
@@ -35,8 +37,8 @@ public class GlacialShield extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 2;
-    private static final int BASE_BLOCK = 8;
+    private static final int BASE_DELAY = 1;
+    private static final int BASE_BLOCK = 6;
     private static final int UPG_BLOCK = 2;
     private static final int FREEZE_AMOUNT = 1;
 
@@ -46,6 +48,7 @@ public class GlacialShield extends CasterCard {
         baseSpellBlock = spellBlock = BASE_BLOCK;
         baseDelayTurns = delayTurns = BASE_DELAY;
         magicNumber = baseMagicNumber = FREEZE_AMOUNT;
+        CardModifierManager.addModifier(this, new RecurringSpellCardMod(2));
         setCardElement(MagicElement.ICE);
     }
 
@@ -57,7 +60,7 @@ public class GlacialShield extends CasterCard {
     }
 
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
             actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, c.spellBlock));

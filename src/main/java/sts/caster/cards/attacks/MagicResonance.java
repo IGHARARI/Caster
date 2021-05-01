@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.SpellCardsArea;
 
 public class MagicResonance extends CasterCard {
 
@@ -40,7 +40,7 @@ public class MagicResonance extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	int delayedCardsAmount = DelayedCardsArea.delayedCards.size();
+    	int delayedCardsAmount = SpellCardsArea.spellCardsBeingCasted.size();
     	for(int i = 0; i < delayedCardsAmount; i++) {
     		AttackEffect slash;
     		switch (AbstractDungeon.cardRandomRng.random(3)) {

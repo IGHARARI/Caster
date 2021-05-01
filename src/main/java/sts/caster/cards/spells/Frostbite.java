@@ -14,7 +14,7 @@ import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.core.frozenpile.FrozenPileManager;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class Frostbite extends CasterCard {
     }
 
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             CasterCard fimbulvetr = (CasterCard) c.cardsToPreview;

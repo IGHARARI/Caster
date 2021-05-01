@@ -34,7 +34,7 @@
   },
   "caster:Gain": {
     "NAME": "Gain",
-    "DESCRIPTION": "Whenever you caster:Electrify a *Spell it gains !M! additional damage."
+    "DESCRIPTION": "Every time you caster:Electrify 4 cards, gain !M! Focus."
   },
   "caster:WallOfMirrors": {
     "NAME": "Wall Of Mirrors",
@@ -60,7 +60,7 @@
   },
   "caster:Tundra": {
     "NAME": "Tundra",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! caster:Frost and deal !caster:D! damage to ALL enemies. NL Cast a copy of this card. NL Exhaust."
+    "DESCRIPTION": "Apply !M! Vulnerable to ALL enemies. NL caster:Cast_Time !caster:Delay!: NL Apply !M! Vulnerable and deal !caster:D! damage to ALL enemies. NL Exhaust."
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
@@ -85,7 +85,7 @@
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
-    "DESCRIPTION": "When you draw this card, you may caster:Freeze 1 card. NL Whenever Freezing this card, double its base damage this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Deal !D! damage. NL Whenever Freezing this card, double its base damage this combat. NL caster:Freeze this card."
   },
   "caster:StaticField": {
     "NAME": "Static Field",
@@ -133,7 +133,7 @@
   },
   "caster:JupitelThunder": {
     "NAME": "Jupitel Thunder",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times. NL Hits 1 extra time for every card played after playing this"
   },
   "caster:AshesToAshes": {
     "NAME": "Ashes to Ashes",
@@ -169,7 +169,7 @@
   },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy. NL Cast a copy of this card."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy."
   },
   "caster:Accumulation": {
     "NAME": "Accumulation",
@@ -304,7 +304,7 @@
   "caster:Enfeeble": {
     "NAME": "Enfeeble",
     "DESCRIPTION": "Apply !M! Weak.",
-    "UPGRADE_DESCRIPTION": "Apply !M! Weak, then apply !M! Weak."
+    "UPGRADE_DESCRIPTION": "Apply !M! Weak. NL Apply !M! Vulnerable."
   },
   "caster:Unearth": {
     "NAME": "Unearth",
@@ -448,7 +448,7 @@
   },
   "caster:Mirage": {
     "NAME": "Mirage",
-    "DESCRIPTION": "Deal !D! damage. NL When you play discard, return it to your hand, and it gains Retain for this turn."
+    "DESCRIPTION": "Deal !D! damage. NL When you play this card, return it to your hand and it gains Retain for this turn."
   },
   "caster:HeatRay": {
     "NAME": "Heat Ray",
@@ -460,7 +460,7 @@
   },
   "caster:Shocked": {
     "NAME": "Shocked",
-    "DESCRIPTION": "When this is drawn, caster:Electrify all cards in your hand. NL Ethereal."
+    "DESCRIPTION": "Unplayable. NL When this is drawn, caster:Electrify all cards in your hand. NL Ethereal."
   },
   "caster:BurnOut": {
     "NAME": "Burn Out",
@@ -493,7 +493,16 @@
     "DESCRIPTION": "Innate. NL Draw !M! cards. NL Exhaust."
   },
   "caster:MatchBox": {
-    "NAME": "MatchBox",
+    "NAME": "Match Box",
     "DESCRIPTION": "Innate. NL Deal !D! damage to ALL enemies. NL Exhaust."
+  },
+  "caster:WallOfLightning": {
+    "NAME": "Wall Of Lightning",
+    "DESCRIPTION": "Gain !B! Block. NL Costs 1 less energy for each time you caster:Electrified a card this combat."
+  },
+  "caster:BurningSpirit": {
+    "NAME": "Burning Spirit",
+    "DESCRIPTION": "Next turn, gain [E] [E].",
+    "UPGRADE_DESCRIPTION": "Next turn, gain [E] [E] [E] [E]."
   }
 }

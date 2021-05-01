@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.SpellCardsArea;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -60,6 +60,6 @@ public class Accumulation extends CasterCard {
     }
 
     public static int countCardsInCastArea() {
-        return (DelayedCardsArea.delayedCards != null) ? DelayedCardsArea.delayedCards.size() : 0;
+        return (SpellCardsArea.spellCardsBeingCasted != null) ? SpellCardsArea.spellCardsBeingCasted.size() : 0;
     }
 }

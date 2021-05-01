@@ -7,6 +7,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import sts.caster.cards.CasterCard;
 
-public interface ActionListMaker {
+public interface ActionListSupplier {
 	public ArrayList<AbstractGameAction> getActionList(CasterCard card, AbstractMonster target);
 }

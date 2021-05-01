@@ -21,7 +21,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 public class LordOfVermillion extends CasterCard {
@@ -69,7 +69,7 @@ public class LordOfVermillion extends CasterCard {
     }
 
     @Override
-    public ActionListMaker buildActionsSupplier(Integer spentEnergy) {
+    public ActionListSupplier actionListSupplier(Integer spentEnergy) {
         return (c, t) -> {
             int energyMultiplier = spentEnergy;
             if (AbstractDungeon.player.hasRelic(ChemicalX.ID)) energyMultiplier += 2;

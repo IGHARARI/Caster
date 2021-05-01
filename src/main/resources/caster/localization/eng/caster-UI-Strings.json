@@ -47,5 +47,8 @@
 	},
 	"FreezeOnUseCardMod": {
 		"TEXT": [ "caster:Freeze this card when it's played." ]
+	},
+	"RecurringSpellCardMod": {
+		"TEXT": [ "caster:Echo ","." ]
 	}
 }

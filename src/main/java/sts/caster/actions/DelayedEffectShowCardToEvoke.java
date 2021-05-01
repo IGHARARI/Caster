@@ -3,14 +3,13 @@ package sts.caster.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.Settings;
 
-import sts.caster.delayedCards.DelayedCardEffect;
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.CastingSpellCard;
 
 public class DelayedEffectShowCardToEvoke extends AbstractGameAction {
 
-	DelayedCardEffect delayedCard;
+	CastingSpellCard delayedCard;
 	
-	public DelayedEffectShowCardToEvoke(DelayedCardEffect delayedCard) {
+	public DelayedEffectShowCardToEvoke(CastingSpellCard delayedCard) {
         actionType = ActionType.SPECIAL;
         this.delayedCard = delayedCard;
         this.duration = Settings.ACTION_DUR_FAST;

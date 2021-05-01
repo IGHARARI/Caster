@@ -21,7 +21,7 @@ import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
 import sts.caster.cards.special.Lava;
 import sts.caster.core.MagicElement;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.*;
 import sts.caster.util.PowersHelper;
@@ -152,7 +152,7 @@ public abstract class CasterCard extends CustomCard {
 	}
 	
 	// Return an empty list by default to prevent NPEs on cards accidentally not overriding this.
-	public ActionListMaker buildActionsSupplier(Integer energySpent) {return (c, t)-> {return new ArrayList<AbstractGameAction>();};}
+	public ActionListSupplier actionListSupplier(Integer energySpent) {return (c, t)-> {return new ArrayList<AbstractGameAction>();};}
 
 	@Override
 	public void triggerOnGlowCheck() {

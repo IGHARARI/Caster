@@ -1,9 +1,8 @@
 package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.SpellCardsArea;
 
 public class QueueRedrawMiniCardsAction extends AbstractGameAction {
 	private boolean delayed;
@@ -23,8 +22,8 @@ public class QueueRedrawMiniCardsAction extends AbstractGameAction {
     		if(delayed) {
     			addToBot(new QueueRedrawMiniCardsAction(false));
     		} else {
-    			DelayedCardsArea.repositionMiniCards();
-				DelayedCardsArea.redrawEvokeCards();
+    			SpellCardsArea.repositionMiniCards();
+				SpellCardsArea.redrawEvokeCards();
     		}
     	}
         isDone = true;

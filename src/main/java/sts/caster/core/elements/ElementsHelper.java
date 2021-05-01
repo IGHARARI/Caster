@@ -15,7 +15,7 @@ import sts.caster.powers.ManaImbalancePower;
 
 import java.util.HashMap;
 
-import static sts.caster.delayedCards.DelayedCardsArea.getLastSpellForDelay;
+import static sts.caster.delayedCards.SpellCardsArea.getLastSpellForDelay;
 
 public class ElementsHelper {
 

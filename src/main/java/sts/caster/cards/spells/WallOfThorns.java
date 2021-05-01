@@ -14,7 +14,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class WallOfThorns extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 2;
+    private static final int BASE_DELAY = 1;
     private static final int BASE_BLOCK = 3;
     private static final int UPG_BLOCK = 1;
     private static final int BASE_THORNS = 3;
@@ -58,7 +58,7 @@ public class WallOfThorns extends CasterCard {
     }
 
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
         return (c, t) -> {
             AbstractPlayer p = AbstractDungeon.player;
             ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();

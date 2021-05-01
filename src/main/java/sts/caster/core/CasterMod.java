@@ -56,6 +56,7 @@ public class CasterMod implements
         OnCardUseSubscriber,
         PostCreateStartingDeckSubscriber,
         OnStartBattleSubscriber,
+        PostBattleSubscriber,
         PostInitializeSubscriber {
 
     public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
@@ -65,7 +66,12 @@ public class CasterMod implements
     private static final String AUTHOR = "Korbo";
     private static final String DESCRIPTION = "The Caster, controller of elements and destroyer of... conical structures.";
 
+    // SPECIAL MECHANIC ATTRIBUTES
     public static HashMap<Integer, Integer> blockLostPerTurn = new HashMap<Integer, Integer>();
+    public static int cardsElectrifiedThisCombat = 0;
+    public static final int ELECTRIFY_DAMAGE = 2;
+
+
 
     // Character Color
     public static final Color CASTER_COLOR = CardHelper.getColor(64.0f, 70.0f, 70.0f);
@@ -280,24 +286,14 @@ public class CasterMod implements
         // UNCOMMON
         BaseMod.addCard(new Fissure());
         UnlockTracker.unlockCard(Fissure.ID);
-        BaseMod.addCard(new Incantation());
-        UnlockTracker.unlockCard(Incantation.ID);
-        BaseMod.addCard(new MagicAttunement());
-        UnlockTracker.unlockCard(MagicAttunement.ID);
         BaseMod.addCard(new SpontaneousCombustion());
         UnlockTracker.unlockCard(SpontaneousCombustion.ID);
         BaseMod.addCard(new Eruption());
         UnlockTracker.unlockCard(Eruption.ID);
-        BaseMod.addCard(new Accumulation());
-        UnlockTracker.unlockCard(Accumulation.ID);
         BaseMod.addCard(new Grimoire());
         UnlockTracker.unlockCard(Grimoire.ID);
-        BaseMod.addCard(new GaiasBlessing());
-        UnlockTracker.unlockCard(GaiasBlessing.ID);
         BaseMod.addCard(new AbsoluteZero());
         UnlockTracker.unlockCard(AbsoluteZero.ID);
-        BaseMod.addCard(new Unearth());
-        UnlockTracker.unlockCard(Unearth.ID);
         BaseMod.addCard(new Conflagrate());
         UnlockTracker.unlockCard(Conflagrate.ID);
         BaseMod.addCard(new Embers());
@@ -342,8 +338,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Bzzzt.ID);
         BaseMod.addCard(new Gain());
         UnlockTracker.unlockCard(Gain.ID);
-        BaseMod.addCard(new Shatter());
-        UnlockTracker.unlockCard(Shatter.ID);
         BaseMod.addCard(new Electroplating());
         UnlockTracker.unlockCard(Electroplating.ID);
         BaseMod.addCard(new Thermodynamics());
@@ -362,6 +356,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Igloo.ID);
         BaseMod.addCard(new MatchBox());
         UnlockTracker.unlockCard(MatchBox.ID);
+        BaseMod.addCard(new WallOfLightning());
+        UnlockTracker.unlockCard(WallOfLightning.ID);
 
         // RARE CARDS
         BaseMod.addCard(new PhoenixFlare());
@@ -374,8 +370,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(SunGoddessAmaterasu.ID);
         BaseMod.addCard(new EchoingVoice());
         UnlockTracker.unlockCard(EchoingVoice.ID);
-        BaseMod.addCard(new ManaOverflow());
-        UnlockTracker.unlockCard(ManaOverflow.ID);
         BaseMod.addCard(new Ramuh());
         UnlockTracker.unlockCard(Ramuh.ID);
         BaseMod.addCard(new Ifrit());
@@ -384,8 +378,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Explosion.ID);
         BaseMod.addCard(new Susanoo());
         UnlockTracker.unlockCard(Susanoo.ID);
-        BaseMod.addCard(new FreezeInHell());
-        UnlockTracker.unlockCard(FreezeInHell.ID);
         BaseMod.addCard(new StormGust());
         UnlockTracker.unlockCard(StormGust.ID);
         BaseMod.addCard(new GateOfBabylon());
@@ -400,6 +392,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Cool.ID);
         BaseMod.addCard(new IceWall());
         UnlockTracker.unlockCard(IceWall.ID);
+        BaseMod.addCard(new BurningSpirit());
+        UnlockTracker.unlockCard(BurningSpirit.ID);
 
         // UNOBTAINABLE
         BaseMod.addCard(new Ashes());
@@ -445,6 +439,24 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(LAZER.ID);
 //        BaseMod.addCard(new FlashFrost());
 //        UnlockTracker.unlockCard(FlashFrost.ID);
+
+//        BaseMod.addCard(new Incantation());
+//        UnlockTracker.unlockCard(Incantation.ID);
+//        BaseMod.addCard(new MagicAttunement());
+//        UnlockTracker.unlockCard(MagicAttunement.ID);
+//        BaseMod.addCard(new Accumulation());
+//        UnlockTracker.unlockCard(Accumulation.ID);
+//        BaseMod.addCard(new GaiasBlessing());
+//        UnlockTracker.unlockCard(GaiasBlessing.ID);
+//        BaseMod.addCard(new Unearth());
+//        UnlockTracker.unlockCard(Unearth.ID);
+//        BaseMod.addCard(new Shatter());
+//        UnlockTracker.unlockCard(Shatter.ID);
+
+//        BaseMod.addCard(new ManaOverflow());
+//        UnlockTracker.unlockCard(ManaOverflow.ID);
+//        BaseMod.addCard(new FreezeInHell());
+//        UnlockTracker.unlockCard(FreezeInHell.ID);
 
         logger.info("Done adding cards!");
     }
@@ -503,8 +515,6 @@ public class CasterMod implements
     }
 
 
-    public static final int ELECTRIFY_DAMAGE = 2;
-
     @Override
     public void receiveCardUsed(AbstractCard card) {
         if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
@@ -531,6 +541,12 @@ public class CasterMod implements
     public void receiveOnBattleStart(AbstractRoom p0) {
         FrozenPileManager.resetFrozenCount();
         blockLostPerTurn.clear();
+        cardsElectrifiedThisCombat = 0;
+    }
+
+    @Override
+    public void receivePostBattle(AbstractRoom abstractRoom) {
+        cardsElectrifiedThisCombat = 0;
     }
 
 //    @Override
