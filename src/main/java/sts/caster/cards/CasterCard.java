@@ -198,6 +198,14 @@ public abstract class CasterCard extends CustomCard {
 
 	@Override
 	public void calculateCardDamage(AbstractMonster mo) {
+		int realBaseDamage = baseDamage;
+		int realBaseSpellDamage = baseSpellDamage;
+
+		if (this.cardElement == MagicElement.FIRE) {
+			baseDamage += getLavaModifiers();
+			baseSpellDamage += getLavaModifiers();
+		}
+
 		if (this.type == CasterCardType.SPELL) {
 			resetCardSpellDamage();
 			resetCardSpellBlock();
@@ -209,6 +217,8 @@ public abstract class CasterCard extends CustomCard {
 		} else {
 			super.calculateCardDamage(mo);
 		}
+		baseDamage = realBaseDamage;
+		baseSpellDamage = realBaseSpellDamage;
 	}
 
 	private void resetCardSpellBlock() {

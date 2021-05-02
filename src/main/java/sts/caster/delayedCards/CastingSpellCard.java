@@ -160,7 +160,7 @@ public class CastingSpellCard extends AbstractOrb {
 		ElementsHelper.updateElementalAffliction(spellCard, target);
 		AbstractDungeon.actionManager.addToTop(new RemoveEvokingSpellCard(this)); // modified
 		applyPowersToAllCardCopies();
-		spellCard.calculateCardDamage(target);
+//		spellCard.calculateCardDamage(target);
 		ArrayList<AbstractGameAction> delayedActions = spellCard.actionListSupplier(energyOnCast).getActionList(spellCard, target);
 		for (int i = delayedActions.size() -1; i >= 0; i--) {
 			AbstractGameAction action = delayedActions.get(i);
