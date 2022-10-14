@@ -29,8 +29,8 @@ public class Channeling extends CasterCard {
 
     private static final int COST = 0;
     private static final int BASE_BLOCK = 2;
-    private static final int UPG_BLOCK = 2;
-    private static final int EXTRA_BLOCK_DIFF = 2;
+    private static final int UPG_BLOCK = 1;
+    private static final int EXTRA_BLOCK_DIFF = 1;
     private static final int UPG_EXTRA_BLOCK = 1;
 
 

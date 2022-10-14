@@ -1,5 +1,6 @@
 package sts.caster.rooms;
 
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -7,6 +8,7 @@ import com.megacrit.cardcrawl.events.AbstractImageEvent;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Vajra;
+import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 import sts.caster.cards.CasterCard;
@@ -56,13 +58,14 @@ public class TempleEvent extends AbstractImageEvent {
     	imageEventText.setDialogOption(TempleEvent.OPTIONS[3], new Fira());
     	imageEventText.setDialogOption(TempleEvent.OPTIONS[4], new Thundara());
     	imageEventText.setDialogOption(TempleEvent.OPTIONS[5], new Slick());
-    	currentScreen = 2;		
+		imageEventText.setDialogOption(TempleEvent.OPTIONS[6]);
+    	currentScreen = 2;
     }
     
     private void moveToPageThree() {
     	this.imageEventText.updateBodyText(DESCRIPTIONS[2]);
     	this.imageEventText.clearAllDialogs();
-    	imageEventText.setDialogOption(TempleEvent.OPTIONS[6]);
+    	imageEventText.setDialogOption(TempleEvent.OPTIONS[7]);
     	currentScreen = 3;
     }
     
@@ -100,6 +103,11 @@ public class TempleEvent extends AbstractImageEvent {
 			case 3:
 				c = new Slick();
 				AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(c, (float) (Settings.WIDTH / 2), (float) (Settings.HEIGHT / 2)));
+				break;
+			case 4:
+				CardCrawlGame.sound.play("CARD_EXHAUST");
+				AbstractDungeon.topLevelEffects.add(new PurgeCardEffect((AbstractCard)AbstractDungeon.gridSelectScreen.selectedCards.get(0), (float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2)));
+				AbstractDungeon.player.masterDeck.removeCard((AbstractCard)AbstractDungeon.gridSelectScreen.selectedCards.get(0));
 				break;
 			default:
 				break;

@@ -31,7 +31,7 @@ public class Avalanche extends CasterCard {
 
     private static final int COST = 3;
     private static final int UPG_COST = 2;
-    private static final int BASE_DAMAGE = 24;
+    private static final int BASE_DAMAGE = 21;
     private static final int SNOWED_AMOUNT = 3;
 
     public Avalanche() {

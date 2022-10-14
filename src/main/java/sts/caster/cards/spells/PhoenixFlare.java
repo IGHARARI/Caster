@@ -42,9 +42,9 @@ public class PhoenixFlare extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 2;
-    private static final int UPG_DELAY = -1;
-    private static final int BASE_DAMAGE = 18;
+    private static final int BASE_DELAY = 1;
+    private static final int BASE_DAMAGE = 13;
+    private static final int UPG_DAMAGE = 18;
 
 
     public PhoenixFlare() {
@@ -80,7 +80,7 @@ public class PhoenixFlare extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeDelayTurns(UPG_DELAY);
+            upgradeSpellDamage(UPG_DAMAGE);
             initializeDescription();
         }
     }

@@ -43,7 +43,7 @@ public class Demi extends CasterCard {
 
     private static final int COST = 2;
     private static final int DAMAGE_PERCENT = 25;
-    private static final int DAMAGE_PERCENT_UPG = 5;
+    private static final int DAMAGE_PERCENT_UPG = 10;
 
     public Demi() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);

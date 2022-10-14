@@ -157,7 +157,7 @@ public class CastingSpellCard extends AbstractOrb {
 	public void evokeCardEffect(){
 		penNibCheck();
 		// Helper call to apply/update elemental affliction and then apply manastruck
-		ElementsHelper.updateElementalAffliction(spellCard, target);
+		//ElementsHelper.updateElementalAffliction(spellCard, target);
 		AbstractDungeon.actionManager.addToTop(new RemoveEvokingSpellCard(this)); // modified
 		applyPowersToAllCardCopies();
 //		spellCard.calculateCardDamage(target);

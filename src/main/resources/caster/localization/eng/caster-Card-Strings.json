@@ -17,7 +17,7 @@
   },
   "caster:Channeling": {
     "NAME": "Channeling",
-    "DESCRIPTION": "Gain !B! Block. NL If you've played a Spell this turn: Gain !M! Block."
+    "DESCRIPTION": "Gain !B! Block. NL If you've played a Spell this turn: Gain !M! additional Block."
   },
   "caster:LAZER": {
     "NAME": "LAZER",
@@ -68,7 +68,7 @@
   },
   "caster:Thundara": {
     "NAME": "Thundara",
-    "DESCRIPTION": "Reduce the cost of a random Spell in your hand to 0 this turn. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
+    "DESCRIPTION": "Reduce the cost of a random Spell in your hand to 0 this turn. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times. NL Cannot be Upgraded."
   },
   "caster:Conflagrate": {
     "NAME": "Conflagrate",
@@ -246,7 +246,7 @@
   },
   "caster:Fira": {
     "NAME": "Fira",
-    "DESCRIPTION": "Deals !M! additional damage for every turn you've been in combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Deals !M! additional damage for every turn you've been in combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Cannot be Upgraded."
   },
   "caster:SpontaneousCombustion": {
     "NAME": "Spontaneous Combustion",
@@ -279,11 +279,11 @@
   },
   "caster:Heavy": {
     "NAME": "Heavy",
-    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage to ALL enemies equal to the damage you blocked last round ."
+    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage to ALL enemies equal to the damage you blocked last round. NL Cannot be Upgraded."
   },
   "caster:Slick": {
     "NAME": "Slick",
-    "DESCRIPTION": "Gain !M! Blur. NL Draw 2 cards. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block."
+    "DESCRIPTION": "Gain !M! Blur. NL Draw 2 cards. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block. NL Cannot be Upgraded."
   },
   "caster:WallOfSwords": {
     "NAME": "Wall Of Swords",
@@ -414,8 +414,8 @@
   },
   "caster:Frostbite": {
     "NAME": "Frostbite",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Play *Fimbulvetr ",
-    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Play *Fimbulvetr+."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Fimbulvetr ",
+    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Fimbulvetr+."
   },
   "caster:Fimbulvetr": {
     "NAME": "Fimbulvetr",
@@ -436,7 +436,7 @@
   },
   "caster:PackedIce": {
     "NAME": "Packed Ice",
-    "DESCRIPTION": "Gain !B! Block, then if you have more than !caster:M2! Block apply !M! Weak to ALL enemies."
+    "DESCRIPTION": "Gain !B! Block, then if you have !caster:M2! or more Block apply !M! Weak to ALL enemies."
   },
   "caster:MagicScroll": {
     "NAME": "Magic Scroll",
@@ -477,8 +477,8 @@
   },
   "caster:Avalanche": {
     "NAME": "Avalanche",
-    "DESCRIPTION": "Deal !D! to All enemies. NL Shuffle !M! *Snowed into your draw pile.",
-    "UPGRADE_DESCRIPTION": "Deal !D! to All enemies. NL Shuffle !M! *Snowed+ into your draw pile."
+    "DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed into your draw pile.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed+ into your draw pile."
   },
   "caster:Snowed": {
     "NAME": "Snowed",
