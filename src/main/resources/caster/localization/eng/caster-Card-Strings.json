@@ -408,7 +408,7 @@
     "DESCRIPTION": "Deal !D! damage. NL Enemy loses !M! Strength for the rest of this turn."
   },
   "caster:Cool": {
-    "NAME": "Cool",
+    "NAME": "Chill",
     "DESCRIPTION": "caster:Freeze 1 card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Frostbite.",
     "UPGRADE_DESCRIPTION": "caster:Freeze 1 card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Frostbite+."
   },
@@ -485,7 +485,7 @@
     "DESCRIPTION": "When drawn gain !M! Block. NL Exhaust."
   },
   "caster:Jumper": {
-    "NAME": "Jumper",
+    "NAME": "Jump Start",
     "DESCRIPTION": "Innate. NL Gain [E] [E]. NL Exhaust."
   },
   "caster:Igloo": {
