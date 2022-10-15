@@ -21,7 +21,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 public class LordOfVermillion extends CasterCard {
@@ -67,18 +67,18 @@ public class LordOfVermillion extends CasterCard {
 //    		AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
 //    	}
     }
-    
+
     @Override
-    public ActionListMaker buildActionsSupplier(Integer spentEnergy) {
-    	return (c, t) -> {
-    		int energyMultiplier = spentEnergy;
-    		if (AbstractDungeon.player.hasRelic(ChemicalX.ID)) energyMultiplier += 2;
-    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	for (int i = 0; i < energyMultiplier*c.magicNumber; i++) {
-        		actions.add(new RandomTargetLightningDamageAction(new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE));
-        	}
-    		return actions;
-    	};
+    public ActionListSupplier actionListSupplier(Integer spentEnergy) {
+        return (c, t) -> {
+            int energyMultiplier = spentEnergy;
+            if (AbstractDungeon.player.hasRelic(ChemicalX.ID)) energyMultiplier += 2;
+            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+            for (int i = 0; i < energyMultiplier * c.magicNumber; i++) {
+                actions.add(new RandomTargetLightningDamageAction(new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.NONE));
+            }
+            return actions;
+        };
     }
 
     @Override

@@ -119,6 +119,14 @@
 		"NAME": "Manastruck",
 		"DESCRIPTIONS": ["Target takes #g50% more damage from Spells."]
 	},
+	"caster:Lava": {
+		"NAME": "Lava",
+		"DESCRIPTIONS": ["#rFire Attacks and Spells deal ", " more damage."]
+	},
+	"caster:BurnOut": {
+		"NAME": "Burn Out",
+		"DESCRIPTIONS": ["Next time #gBlazed is triggered, all #yBlazed stacks are removed."]
+	},
 	"caster:RarePower": {
 		"NAME": "Placeholder Power",
 		"DESCRIPTIONS": ["At the start of your turn, TOUCH ", " enemy." , " enemies."]

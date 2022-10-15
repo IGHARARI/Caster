@@ -1,18 +1,17 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Enfeeble extends CasterCard {
 
@@ -29,22 +28,18 @@ public class Enfeeble extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_WEAK = 2;
-    private static final int WEAK_TIMES = 1;
-    private static final int UPGR_WEAK_TIMES = 1;
+    private static final int BASE_DEBUFF_AMT = 2;
 
 
     public Enfeeble() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = BASE_WEAK;
-        m2 = baseM2 = WEAK_TIMES;
+        magicNumber = baseMagicNumber = BASE_DEBUFF_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	for (int i = 0; i < m2; i++) {
-    		addToBot(new ApplyPowerAction(m, p, new WeakPower(m, magicNumber, false), magicNumber));
-    	}
+        addToBot(new ApplyPowerAction(m, p, new WeakPower(m, magicNumber, false), magicNumber));
+        if (upgraded) addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, magicNumber, false), magicNumber));
     }
 
     @Override
@@ -52,7 +47,6 @@ public class Enfeeble extends CasterCard {
         if (!upgraded) {
             upgradeName();
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-            upgradeM2(UPGR_WEAK_TIMES);
             initializeDescription();
         }
     }

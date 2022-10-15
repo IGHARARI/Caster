@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.LoseBlockAction;
@@ -13,13 +9,16 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ThornsPower;
-
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class WallOfSwords extends CasterCard {
 
@@ -40,7 +39,6 @@ public class WallOfSwords extends CasterCard {
     private static final int BASE_DELAY = 1;
     private static final int BASE_MAX_THORNS = 8;
     private static final int UPG_MAX_THORNS = 3;
-    
 
 
     public WallOfSwords() {
@@ -52,24 +50,24 @@ public class WallOfSwords extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
 
-    
+
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		AbstractPlayer p = AbstractDungeon.player;
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		if (p.currentBlock > 0) {
-    			int blockToLose = Math.min(magicNumber, p.currentBlock);
-    			actionsList.add(new LoseBlockAction(p, p, blockToLose));
-    			actionsList.add(new ApplyPowerAction(p, p, new ThornsPower(p, blockToLose), blockToLose));
-    		}
-    		return actionsList;
-    	};
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
+        return (c, t) -> {
+            AbstractPlayer p = AbstractDungeon.player;
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            if (p.currentBlock > 0) {
+                int blockToLose = Math.min(magicNumber, p.currentBlock);
+                actionsList.add(new LoseBlockAction(p, p, blockToLose));
+                actionsList.add(new ApplyPowerAction(p, p, new ThornsPower(p, blockToLose), blockToLose));
+            }
+            return actionsList;
+        };
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

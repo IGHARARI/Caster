@@ -38,8 +38,17 @@
 	},
 	"FrozenViewScreen": {
 		"TEXT": [
-			"These cards were freezed this combat.",
+			"These cards were Frozen this combat.",
 			"Return"
 		]
+	},
+	"RetainOnceCardMod": {
+		"TEXT": [ "Retain." ]
+	},
+	"FreezeOnUseCardMod": {
+		"TEXT": [ "caster:Freeze this card when it's played." ]
+	},
+	"RecurringSpellCardMod": {
+		"TEXT": [ "caster:Echo ","." ]
 	}
 }

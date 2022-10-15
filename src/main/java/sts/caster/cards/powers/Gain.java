@@ -10,7 +10,6 @@ import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.GainPower;
-import sts.caster.powers.StaticFieldPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -30,16 +29,16 @@ public class Gain extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DMG_BONUS = 1;
-    private static final int UPG_DMG_BONUS = 1;
+    private static final int BASE_FOCUS_BONUS = 1;
+    private static final int UPG_FOCUS_BONUS = 1;
 
 
     public Gain() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = BASE_DMG_BONUS;
+        magicNumber = baseMagicNumber = BASE_FOCUS_BONUS;
         setCardElement(MagicElement.ELECTRIC);
     }
-    
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new GainPower(p, p, magicNumber), magicNumber));
@@ -50,7 +49,7 @@ public class Gain extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_DMG_BONUS);
+            upgradeMagicNumber(UPG_FOCUS_BONUS);
         }
     }
 }

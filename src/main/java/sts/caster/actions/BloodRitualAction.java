@@ -2,10 +2,9 @@ package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import sts.caster.delayedCards.DelayedCardEffect;
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.CastingSpellCard;
+import sts.caster.delayedCards.SpellCardsArea;
 
 public class BloodRitualAction extends AbstractGameAction {
 
@@ -18,7 +17,7 @@ public class BloodRitualAction extends AbstractGameAction {
 	@Override
     public void update() {
 		if (duration == Settings.ACTION_DUR_FAST) {
-			for(DelayedCardEffect card : DelayedCardsArea.delayedCards) {
+			for(CastingSpellCard card : SpellCardsArea.spellCardsBeingCasted) {
 				addToBot(new DelayedCardOnStartOfTurnTriggerAction(card));
 			}
 		}

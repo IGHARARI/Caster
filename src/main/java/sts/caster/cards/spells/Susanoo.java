@@ -1,12 +1,6 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-import java.util.function.Function;
-
 import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
@@ -19,18 +13,17 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
-
-import sts.caster.actions.ElectrifySpecificCardAction;
 import sts.caster.actions.LightningDamageAction;
-import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.actions.RemoveElectrifyAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
-import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.function.Function;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Susanoo extends CasterCard {
 
@@ -61,8 +54,8 @@ public class Susanoo extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        for(int i = 0; i < 10; i++) {
-            float offset = MathUtils.random(-m.hb_w/3, m.hb_w/3);
+        for (int i = 0; i < 10; i++) {
+            float offset = MathUtils.random(-m.hb_w / 3, m.hb_w / 3);
             addToBot(new VFXAction(new LightningEffect(m.drawX + offset, m.drawY), 0.1f));
             addToBot(new SFXAction("ORB_LIGHTNING_EVOKE"));
         }
@@ -82,7 +75,7 @@ public class Susanoo extends CasterCard {
                 addToBot(new RemoveElectrifyAction(c));
         }
     }
-    
+
     public void calculateCardDamage(AbstractMonster mo) {
         int realBaseDamage = this.baseDamage;
         this.baseDamage += this.magicNumber * countElectrifiedStacks();

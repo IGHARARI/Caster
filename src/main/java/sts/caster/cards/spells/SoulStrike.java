@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -15,14 +11,17 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.FlyingOrbEffect;
-
 import sts.caster.actions.NonSkippableWaitAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class SoulStrike extends CasterCard {
 
@@ -49,24 +48,24 @@ public class SoulStrike extends CasterCard {
         this.isEthereal = true;
         this.exhaust = true;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
-        delayTurns = baseDelayTurns =  BASE_DELAY;
+        delayTurns = baseDelayTurns = BASE_DELAY;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
-    
+
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	actions.add(new SFXAction("ATTACK_MAGIC_FAST_1"));
-        	actions.add(new VFXAction(new FlyingOrbEffect(t.drawX, t.drawY)));
-        	actions.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage)));
-        	actions.add(new NonSkippableWaitAction(0.05f));
-    		return actions;
-    	};
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+            actions.add(new SFXAction("ATTACK_MAGIC_FAST_1"));
+            actions.add(new VFXAction(new FlyingOrbEffect(t.drawX, t.drawY)));
+            actions.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage)));
+            actions.add(new NonSkippableWaitAction(0.05f));
+            return actions;
+        };
     }
 
     @Override

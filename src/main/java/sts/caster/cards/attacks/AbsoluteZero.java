@@ -1,32 +1,20 @@
-package sts.caster.cards.spells;
+package sts.caster.cards.attacks;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.actions.utility.ConditionalDrawAction;
+import com.megacrit.cardcrawl.actions.common.ModifyDamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.tempCards.Miracle;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
-import sts.caster.actions.FreezeCardAction;
-import sts.caster.actions.ModifyCardInBattleSpellDamageAction;
-import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
-import sts.caster.patches.spellCardType.CasterCardType;
+import sts.caster.patches.relics.FreezeOnUseCardField;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class AbsoluteZero extends CasterCard {
 
@@ -39,52 +27,39 @@ public class AbsoluteZero extends CasterCard {
 
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
-    private static final CardType TYPE = CasterCardType.SPELL;
+    private static final CardType TYPE = CardType.ATTACK;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 6;
     private static final int UPGR_DAMAGE = 3;
 
 
     public AbsoluteZero() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseSpellDamage = spellDamage = BASE_DAMAGE;
-        baseDelayTurns = delayTurns = BASE_DELAY;
+        baseDamage = damage = BASE_DAMAGE;
+        FreezeOnUseCardField.freezeOnuse.set(this, true);
         setCardElement(MagicElement.ICE);
     }
 
-    public void triggerWhenDrawn() {
-        this.addToTop(new FreezeCardAction(1, false, true, true));
-    }
-    
     @Override
     public void onFrozen() {
-    	flash();
-    	addToBot(new ModifyCardInBattleSpellDamageAction(this, baseSpellDamage));
-    }
-
-	@Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        flash();
+        addToBot(new ModifyDamageAction(this.uuid, baseDamage));
     }
 
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.SLASH_HEAVY));
-    		return actionsList;
-    	};
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new DamageAction(m, new DamageInfo(p, damage), AttackEffect.SLASH_HEAVY));
     }
-    
+
+
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
+            upgradeDamage(UPGR_DAMAGE);
             initializeDescription();
-            upgradeSpellDamage(UPGR_DAMAGE);
         }
     }
 }

@@ -12,8 +12,8 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.delayedCards.DelayedCardEffect;
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.CastingSpellCard;
+import sts.caster.delayedCards.SpellCardsArea;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -42,15 +42,15 @@ public class Permafrost extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
         addToBot(new ArbitraryCardAction(this, (c) -> {
-            if (DelayedCardsArea.delayedCards != null) {
-                for (DelayedCardEffect delayCard : DelayedCardsArea.delayedCards) {
-                    delayCard.increaseDelay(1);
+            if (SpellCardsArea.spellCardsBeingCasted != null) {
+                for (CastingSpellCard delayCard : SpellCardsArea.spellCardsBeingCasted) {
+                    delayCard.increaseCastingDelay(1);
                 }
             }
-            DelayedCardsArea.repositionMiniCards();
+            SpellCardsArea.repositionMiniCards();
         }));
         addToBot(new GainBlockAction(p, block));
-        addToBot(new ApplyPowerAction(p, p, new NextTurnBlockPower(p, block/2), block/2));
+        addToBot(new ApplyPowerAction(p, p, new NextTurnBlockPower(p, block / 2), block / 2));
     }
 
     @Override
@@ -63,9 +63,9 @@ public class Permafrost extends CasterCard {
 
     private int sumCastingTimeInCastArea() {
         int sum = 0;
-        if (DelayedCardsArea.delayedCards != null) {
-            for (DelayedCardEffect delayCard : DelayedCardsArea.delayedCards) {
-                sum += delayCard.turnsUntilFire +1;
+        if (SpellCardsArea.spellCardsBeingCasted != null) {
+            for (CastingSpellCard delayCard : SpellCardsArea.spellCardsBeingCasted) {
+                sum += delayCard.turnsUntilFire + 1;
             }
         }
         return sum;

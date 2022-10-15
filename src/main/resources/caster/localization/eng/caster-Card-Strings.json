@@ -17,7 +17,7 @@
   },
   "caster:Channeling": {
     "NAME": "Channeling",
-    "DESCRIPTION": "Gain !B! Block. NL If you've played a Spell this turn: Gain !M! Block."
+    "DESCRIPTION": "Gain !B! Block. NL If you've played a Spell this turn: Gain !M! additional Block."
   },
   "caster:LAZER": {
     "NAME": "LAZER",
@@ -34,7 +34,7 @@
   },
   "caster:Gain": {
     "NAME": "Gain",
-    "DESCRIPTION": "Whenever you caster:Electrify a *Spell it gains !M! additional damage."
+    "DESCRIPTION": "Every time you caster:Electrify 4 cards, gain !M! Focus."
   },
   "caster:WallOfMirrors": {
     "NAME": "Wall Of Mirrors",
@@ -60,7 +60,7 @@
   },
   "caster:Tundra": {
     "NAME": "Tundra",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! caster:Frost and deal !caster:D! damage to ALL enemies. NL Cast a copy of this card. NL Exhaust."
+    "DESCRIPTION": "Apply !M! Vulnerable to ALL enemies. NL caster:Cast_Time !caster:Delay!: NL Apply !M! Vulnerable and deal !caster:D! damage to ALL enemies. NL Exhaust."
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
@@ -68,7 +68,7 @@
   },
   "caster:Thundara": {
     "NAME": "Thundara",
-    "DESCRIPTION": "Reduce the cost of a random Spell in your hand to 0 this turn. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
+    "DESCRIPTION": "Reduce the cost of a random Spell in your hand to 0 this turn. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times. NL Cannot be Upgraded."
   },
   "caster:Conflagrate": {
     "NAME": "Conflagrate",
@@ -85,7 +85,7 @@
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
-    "DESCRIPTION": "When you draw this card, you may caster:Freeze 1 card. NL Whenever Freezing this card, double its base damage this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Deal !D! damage. NL Whenever Freezing this card, double its base damage this combat. NL caster:Freeze this card."
   },
   "caster:StaticField": {
     "NAME": "Static Field",
@@ -133,7 +133,7 @@
   },
   "caster:JupitelThunder": {
     "NAME": "Jupitel Thunder",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times. NL Hits 1 extra time for every card played after playing this"
   },
   "caster:AshesToAshes": {
     "NAME": "Ashes to Ashes",
@@ -169,7 +169,7 @@
   },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy. NL Cast a copy of this card."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy."
   },
   "caster:Accumulation": {
     "NAME": "Accumulation",
@@ -177,7 +177,7 @@
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
-    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Apply !M! caster:Frost."
+    "DESCRIPTION": "Freeze !M! card. NL Deal !D! damage."
   },
   "caster:MagicResonance": {
     "NAME": "Magic Resonance",
@@ -242,11 +242,11 @@
   },
   "caster:Eruption": {
     "NAME": "Eruption",
-    "DESCRIPTION": "Increase this card's damage by !M! this combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Deal !D! damage. NL Add !M! *Lava to your hand."
   },
   "caster:Fira": {
     "NAME": "Fira",
-    "DESCRIPTION": "Deals !M! additional damage for every turn you've been in combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "Deals !M! additional damage for every turn you've been in combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Cannot be Upgraded."
   },
   "caster:SpontaneousCombustion": {
     "NAME": "Spontaneous Combustion",
@@ -258,8 +258,7 @@
   },
   "caster:Sleet": {
     "NAME": "Sleet",
-    "DESCRIPTION": "Draw !M! card. NL caster:Cast_Time !caster:Delay!: NL Apply !caster:M2! caster:Frost to a random enemy 3 times.",
-    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL caster:Cast_Time !caster:Delay!: NL Apply !caster:M2! caster:Frost to a random enemy 3 times."
+    "DESCRIPTION": "Draw !M! card and gain !B! Block for each enemy in combat."
   },
   "caster:MeteorStorm": {
     "NAME": "Meteor Storm",
@@ -272,7 +271,7 @@
   },
   "caster:Charge": {
     "NAME": "Charge",
-    "DESCRIPTION": "Draw !M! cards, then caster:Electrify a random card in your hand."
+    "DESCRIPTION": "Add a *Shocked into your draw pile, then draw !M! cards."
   },
   "caster:Sandstorm": {
     "NAME": "Sandstorm",
@@ -280,11 +279,11 @@
   },
   "caster:Heavy": {
     "NAME": "Heavy",
-    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage to ALL enemies equal to the damage you blocked last round ."
+    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage to ALL enemies equal to the damage you blocked last round. NL Cannot be Upgraded."
   },
   "caster:Slick": {
     "NAME": "Slick",
-    "DESCRIPTION": "Gain !M! Blur. NL Draw 2 cards. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block."
+    "DESCRIPTION": "Gain !M! Blur. NL Draw 2 cards. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block. NL Cannot be Upgraded."
   },
   "caster:WallOfSwords": {
     "NAME": "Wall Of Swords",
@@ -305,7 +304,7 @@
   "caster:Enfeeble": {
     "NAME": "Enfeeble",
     "DESCRIPTION": "Apply !M! Weak.",
-    "UPGRADE_DESCRIPTION": "Apply !M! Weak, then apply !M! Weak."
+    "UPGRADE_DESCRIPTION": "Apply !M! Weak. NL Apply !M! Vulnerable."
   },
   "caster:Unearth": {
     "NAME": "Unearth",
@@ -409,14 +408,14 @@
     "DESCRIPTION": "Deal !D! damage. NL Enemy loses !M! Strength for the rest of this turn."
   },
   "caster:Cool": {
-    "NAME": "Cool",
+    "NAME": "Chill",
     "DESCRIPTION": "caster:Freeze 1 card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Frostbite.",
     "UPGRADE_DESCRIPTION": "caster:Freeze 1 card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Frostbite+."
   },
   "caster:Frostbite": {
     "NAME": "Frostbite",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Play *Fimbulvetr ",
-    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Play *Fimbulvetr+."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Fimbulvetr ",
+    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:M2! damage to ALL enemies for each card Frozen this combat, currently: !caster:D! damage. NL Cast *Fimbulvetr+."
   },
   "caster:Fimbulvetr": {
     "NAME": "Fimbulvetr",
@@ -431,8 +430,79 @@
     "DESCRIPTION": "Gain !M! Blur. NL Gain !B! Block. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Gain !M! Blur. NL Gain !B! Block. NL caster:Freeze this card."
   },
+  "caster:SlipThrough": {
+    "NAME": "Slip Through",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "caster:PackedIce": {
+    "NAME": "Packed Ice",
+    "DESCRIPTION": "Gain !B! Block, then if you have !caster:M2! or more Block apply !M! Weak to ALL enemies."
+  },
+  "caster:MagicScroll": {
+    "NAME": "Magic Scroll",
+    "DESCRIPTION": "Draw !M! card, reduce the Cast Time of any Spells drawn this way by !caster:M2! for this turn."
+  },
+  "caster:Direct": {
+    "NAME": "Direct",
+    "DESCRIPTION": "Fetch !M! card that costs 0 from your draw pile. NL Exhaust."
+  },
+  "caster:Mirage": {
+    "NAME": "Mirage",
+    "DESCRIPTION": "Deal !D! damage. NL When you play this card, return it to your hand and it gains Retain for this turn."
+  },
+  "caster:HeatRay": {
+    "NAME": "Heat Ray",
+    "DESCRIPTION": "Deal !D! damage. NL Decrease this card's damage by !M! this combat."
+  },
   "caster:Meteor": {
     "NAME": "Meteor",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+  },
+  "caster:Shocked": {
+    "NAME": "Shocked",
+    "DESCRIPTION": "Unplayable. NL When this is drawn, caster:Electrify all cards in your hand. NL Ethereal."
+  },
+  "caster:BurnOut": {
+    "NAME": "Burn Out",
+    "DESCRIPTION": "Double an enemy's caster:Blazed, next time caster:Blazed is triggered the enemy loses all caster:Blazed stacks. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Double an enemy's caster:Blazed, next time caster:Blazed is triggered the enemy loses all caster:Blazed stacks."
+  },
+  "caster:Lava": {
+    "NAME": "Lava",
+    "DESCRIPTION": "Retain. NL While this is in your hand, Fire Attacks and Spells deal !M! more damage. NL This turn Fire Attack and Spells deal !caster:M2! more damage. NL Exhaust."
+  },
+  "caster:SuperCool": {
+    "NAME": "Super Cool",
+    "DESCRIPTION": "Gain !B! Block. NL All cards in your hand gain: caster:Freeze this card when it's played."
+  },
+  "caster:Avalanche": {
+    "NAME": "Avalanche",
+    "DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed into your draw pile.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed+ into your draw pile."
+  },
+  "caster:Snowed": {
+    "NAME": "Snowed",
+    "DESCRIPTION": "When drawn gain !M! Block. NL Exhaust."
+  },
+  "caster:Jumper": {
+    "NAME": "Jump Start",
+    "DESCRIPTION": "Innate. NL Gain [E] [E]. NL Exhaust."
+  },
+  "caster:Igloo": {
+    "NAME": "Igloo",
+    "DESCRIPTION": "Innate. NL Draw !M! cards. NL Exhaust."
+  },
+  "caster:MatchBox": {
+    "NAME": "Match Box",
+    "DESCRIPTION": "Innate. NL Deal !D! damage to ALL enemies. NL Exhaust."
+  },
+  "caster:WallOfLightning": {
+    "NAME": "Wall Of Lightning",
+    "DESCRIPTION": "Gain !B! Block. NL Costs 1 less energy for each time you caster:Electrified a card this combat."
+  },
+  "caster:BurningSpirit": {
+    "NAME": "Burning Spirit",
+    "DESCRIPTION": "Next turn, gain [E] [E].",
+    "UPGRADE_DESCRIPTION": "Next turn, gain [E] [E] [E] [E]."
   }
 }

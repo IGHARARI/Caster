@@ -1,20 +1,15 @@
 package sts.caster.cards.skills;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.ArtifactPower;
-import com.megacrit.cardcrawl.powers.FocusPower;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.patches.spellCardType.CasterCardType;
-import sts.caster.powers.GainFocusPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -34,8 +29,8 @@ public class Channeling extends CasterCard {
 
     private static final int COST = 0;
     private static final int BASE_BLOCK = 2;
-    private static final int UPG_BLOCK = 2;
-    private static final int EXTRA_BLOCK_DIFF = 2;
+    private static final int UPG_BLOCK = 1;
+    private static final int EXTRA_BLOCK_DIFF = 1;
     private static final int UPG_EXTRA_BLOCK = 1;
 
 
@@ -59,10 +54,10 @@ public class Channeling extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new GainBlockAction(p, p, block));
-    	if(AbstractDungeon.actionManager.cardsPlayedThisTurn.stream().anyMatch(c -> c.type == CasterCardType.SPELL)) {
-        	addToBot(new GainBlockAction(p, p, magicNumber));
-    	}
+        addToBot(new GainBlockAction(p, p, block));
+        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.stream().anyMatch(c -> c.type == CasterCardType.SPELL)) {
+            addToBot(new GainBlockAction(p, p, magicNumber));
+        }
     }
 
     @Override

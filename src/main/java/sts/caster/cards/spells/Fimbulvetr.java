@@ -17,7 +17,7 @@ import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.core.frozenpile.FrozenPileManager;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
 
@@ -57,7 +57,7 @@ public class Fimbulvetr extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
 
     @Override
@@ -67,17 +67,17 @@ public class Fimbulvetr extends CasterCard {
     }
 
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-        	actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+            actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
             MonsterToActionInterface applyWeakBuilder = (m) -> {
                 return new ApplyPowerAction(m, AbstractDungeon.player, new WeakPower(m, magicNumber, false), magicNumber);
             };
             actions.add(new ActionOnAllEnemiesAction(applyWeakBuilder));
 
             return actions;
-    	};
+        };
     }
 
     @Override

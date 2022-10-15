@@ -2,12 +2,12 @@ package sts.caster.delayedCards;
 
 import java.util.ArrayList;
 
+import basemod.abstracts.AbstractCardModifier;
+import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
@@ -19,20 +19,20 @@ import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.PenNibPower;
-import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sts.caster.actions.*;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.elements.ElementsHelper;
 
-public class DelayedCardEffect extends AbstractOrb {
+public class CastingSpellCard extends AbstractOrb {
 	public int turnsUntilFire;
 
-	public static final String ORB_ID = "DelayedCard:";
+	public static final String ID_PREFIX = "DelayedCard:";
 	public static final float WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.1f;
 	public static final float ORIGINAL_WAIT_TIME_BETWEEN_DELAYED_EFFECTS = 0.66f;
 	private static final float GLITTER_MIN_INTERVAL = 0.77f;
@@ -40,37 +40,33 @@ public class DelayedCardEffect extends AbstractOrb {
 
 	private float vfxTimer = 1.0f;
 	
-	public CasterCard delayedCard = null;
+	public CasterCard spellCard = null;
 	public CasterCard cardMiniCopy = null;
 	public CasterCard cardPreviewCopy = null;
-	public CasterCard cardEvokeCopy = null;
-	public boolean showEvokeCardOnScreen = false;
-	
+
 	public AbstractMonster target = null;
 	public Integer energyOnCast;
 
 	private Boolean isPowersApplied = false;
 	private boolean beingEvoked;
 
-	public DelayedCardEffect(CasterCard card, int delayTurns, AbstractMonster target) {
+	public CastingSpellCard(CasterCard card, int delayTurns, AbstractMonster target) {
 		this(card, delayTurns, 0, target);
 	}
-	public DelayedCardEffect(CasterCard card, int delayTurns, Integer energyOnCast, AbstractMonster target) {
+	public CastingSpellCard(CasterCard card, int delayTurns, Integer energyOnCast, AbstractMonster target) {
         super();
         
-		ID = ORB_ID + card.uuid;
+		ID = ID_PREFIX + card.uuid;
 		name = card.name;
 
-		this.delayedCard = card.makeStatIdenticalCopy();
-		if (delayedCard.cost == -1) {
-			delayedCard.rawDescription += " NL Casted for " + energyOnCast + " Energy.";
-			delayedCard.initializeDescription();
+		this.spellCard = card.makeStatIdenticalCopy();
+		if (spellCard.cost == -1) {
+			spellCard.rawDescription += " NL Casted for " + energyOnCast + " Energy.";
+			spellCard.initializeDescription();
 		}
 		this.turnsUntilFire = delayTurns;
 		this.target = target;
 		this.energyOnCast = energyOnCast;
-		passiveAmount = basePassiveAmount = delayTurns;
-		
 		this.updateDescription();
 		
 		channelAnimTimer = 0.5f;
@@ -81,26 +77,22 @@ public class DelayedCardEffect extends AbstractOrb {
 		hb = new Hitbox(38.0f * Settings.scale, 65.0f * Settings.scale);
 		hb.move(cX, cY);
 		
-		cardMiniCopy = delayedCard.makeStatIdenticalCopy();
+		cardMiniCopy = spellCard.makeStatIdenticalCopy();
 		cardMiniCopy.current_x = cX;
 		cardMiniCopy.current_y = cY;
 		cardMiniCopy.hb.move(cX, cY);
 		cardMiniCopy.drawScale /= 5F;
 		cardMiniCopy.targetDrawScale = cardMiniCopy.drawScale;
 
-		cardPreviewCopy = delayedCard.makeStatIdenticalCopy();
+		cardPreviewCopy = spellCard.makeStatIdenticalCopy();
 		cardPreviewCopy.current_x = cX;
 		cardPreviewCopy.current_y = cY;
-		cardEvokeCopy = delayedCard.makeStatIdenticalCopy();
-		cardEvokeCopy.current_x = cX;
-		cardEvokeCopy.current_y = cY;
 
 		beingEvoked = false;
 	}
 
-	public void increaseDelay(int amount) {
+	public void increaseCastingDelay(int amount) {
 		turnsUntilFire += amount;
-		passiveAmount = turnsUntilFire;
 	}
 
 	@Override
@@ -112,13 +104,10 @@ public class DelayedCardEffect extends AbstractOrb {
 	@Override
 	public void update() {
         if (hb.hovered && hb.justHovered) {
-        	delayedCard.calculateCardDamage(target);
-        	cardPreviewCopy.calculateCardDamage(target);
-        	cardEvokeCopy.calculateCardDamage(target);
-        	cardMiniCopy.calculateCardDamage(target);
+			applyPowersToAllCardCopies();
         }
         this.hb.update();
-        if (this.hb.hovered && (delayedCard.target == CardTarget.ENEMY || delayedCard.target == CardTarget.SELF_AND_ENEMY) && target != null && target.isDeadOrEscaped()) {
+        if (this.hb.hovered && (spellCard.target == CardTarget.ENEMY || spellCard.target == CardTarget.SELF_AND_ENEMY) && target != null && target.isDeadOrEscaped()) {
             TipHelper.renderGenericTip(this.tX + 96.0f * Settings.scale, this.tY + 64.0f * Settings.scale, this.name, "The original target for this Spell is now dead.");
         }
         this.fontScale = MathHelper.scaleLerpSnap(this.fontScale, 0.7f);
@@ -127,43 +116,60 @@ public class DelayedCardEffect extends AbstractOrb {
 	@Override
 	public void onStartOfTurn() {
 		turnsUntilFire--;
-		passiveAmount = turnsUntilFire;
-		delayedCard.onStartOfTurnDelayEffect();
+		spellCard.onStartOfTurnDelayEffect();
 		if (turnsUntilFire <= 0) {
-			System.out.println("Adding to Evoke Area: " + this.ID);
-			DelayedCardsArea.evokingCards.add(this);
-			DelayedCardsArea.delayedCards.remove(this);
+			SpellCardsArea.cardsBeingEvoked.add(this);
+			SpellCardsArea.spellCardsBeingCasted.remove(this);
 			this.beingEvoked = true;
-			DelayedCardsArea.redrawEvokeCards();
+			SpellCardsArea.redrawEvokeCards();
 
 			AbstractDungeon.actionManager.addToBottom(new DelayedEffectRemoveAction(this));
 			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction(false));
 			AbstractDungeon.actionManager.addToBottom(new QueueEvokeCardAction(this)); // modified
+
+			if (CardModifierManager.hasModifier(this.spellCard, RecurringSpellCardMod.ID)){
+				ArrayList<AbstractCardModifier> mods = CardModifierManager.getModifiers(this.spellCard, RecurringSpellCardMod.ID);
+				for (AbstractCardModifier mod : mods) {
+					RecurringSpellCardMod recurMod = (RecurringSpellCardMod) mod;
+
+					if (recurMod.recurAmount > 0) {
+						CasterCard cardToCast = this.spellCard;
+						AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+							@Override
+							public void update() {
+								AbstractMonster randomTarget = AbstractDungeon.getRandomMonster();
+								AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(cardToCast, cardToCast.delayTurns, randomTarget));
+								this.isDone = true;
+							}
+						});
+
+						recurMod.reduceRecurrence();
+					}
+
+					if (recurMod.recurAmount <= 0) {
+						CardModifierManager.removeSpecificModifier(this.spellCard, mod, true);
+					}
+				}
+			}
 		}
 	}
 
 	public void evokeCardEffect(){
 		penNibCheck();
 		// Helper call to apply/update elemental affliction and then apply manastruck
-		ElementsHelper.updateElementalAffliction(delayedCard, target);
-//		AbstractDungeon.actionManager.addToTop(new DelayedEffectRemoveAction(this));
-		AbstractDungeon.actionManager.addToTop(new DelayedEffectHideEvokedCard(this)); // modified
-//		AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(cardEvokeCopy)));
-//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS/1.5f));
-//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
+		//ElementsHelper.updateElementalAffliction(spellCard, target);
+		AbstractDungeon.actionManager.addToTop(new RemoveEvokingSpellCard(this)); // modified
 		applyPowersToAllCardCopies();
-		delayedCard.calculateCardDamage(target);
-		ArrayList<AbstractGameAction> delayedActions = delayedCard.buildActionsSupplier(energyOnCast).getActionList(delayedCard, target);
+//		spellCard.calculateCardDamage(target);
+		ArrayList<AbstractGameAction> delayedActions = spellCard.actionListSupplier(energyOnCast).getActionList(spellCard, target);
 		for (int i = delayedActions.size() -1; i >= 0; i--) {
 			AbstractGameAction action = delayedActions.get(i);
 			AbstractDungeon.actionManager.addToTop(action);
 		}
-//		AbstractDungeon.actionManager.addToTop(new NonSkippableWaitAction(WAIT_TIME_BETWEEN_DELAYED_EFFECTS));
-//		AbstractDungeon.actionManager.addToTop(new DelayedEffectShowCardToEvoke(this)); // modified
 	}
 
 	private void penNibCheck() {
-		if (AbstractDungeon.player.hasPower(PenNibPower.POWER_ID) && delayedCard.damage > 0) {
+		if (AbstractDungeon.player.hasPower(PenNibPower.POWER_ID) && spellCard.damage > 0) {
 			AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, PenNibPower.POWER_ID));
 		}
 	}
@@ -190,15 +196,12 @@ public class DelayedCardEffect extends AbstractOrb {
 		// Looking at you replay the spire.
 		if (!beingEvoked) renderSpellDelay(sb);
 		hb.render(sb);
-		if (showEvokeCardOnScreen) {
-			renderCardCopy(sb, cardEvokeCopy, Settings.WIDTH/2f, Settings.HEIGHT/2f);
-		}
 	}
 
 	private void renderSpellDelay(SpriteBatch sb) {
 		FontHelper.renderFontCentered(sb,
 				FontHelper.cardEnergyFont_L,
-				Integer.toString(this.passiveAmount),
+				Integer.toString(this.turnsUntilFire),
 				this.cX + NUM_X_OFFSET,
 				this.cY + this.bobEffect.y / 2.0F + NUM_Y_OFFSET,
 				this.c,
@@ -213,9 +216,10 @@ public class DelayedCardEffect extends AbstractOrb {
 				isPowersApplied = true;
 				applyPowersToAllCardCopies();
 			}
-			renderCardCopy(sb, cardPreviewCopy, cX, cY);
+
+			renderSpecificCard(sb, cardPreviewCopy, cX, cY);
 			
-	        switch (this.delayedCard.target) {
+	        switch (this.spellCard.target) {
 	            case ENEMY: {
 	            	if (target != null && !target.isDeadOrEscaped()) {
 	            		target.renderReticle(sb);
@@ -252,17 +256,15 @@ public class DelayedCardEffect extends AbstractOrb {
 	}
 
 	private void applyPowersToAllCardCopies() {
-		delayedCard.applyPowers();
-		delayedCard.calculateCardDamage(target);
-		cardPreviewCopy.applyPowers();
 		cardPreviewCopy.calculateCardDamage(target);
-		cardMiniCopy.applyPowers();
+		cardPreviewCopy.applyPowers();
 		cardMiniCopy.calculateCardDamage(target);
-		cardEvokeCopy.applyPowers();
-		cardEvokeCopy.calculateCardDamage(target);
+		cardMiniCopy.applyPowers();
+		spellCard.calculateCardDamage(target);
+		spellCard.applyPowers();
 	}
 
-	private void renderCardCopy(SpriteBatch sb, AbstractCard card, float targetX, float targetY) {
+	private void renderSpecificCard(SpriteBatch sb, AbstractCard card, float targetX, float targetY) {
 		card.current_x = targetX;
 		card.current_y = targetY;
 		card.hb.cX = targetX;
@@ -280,7 +282,7 @@ public class DelayedCardEffect extends AbstractOrb {
 
 	@Override
 	public AbstractOrb makeCopy() {
-		return new DelayedCardEffect(this.delayedCard, turnsUntilFire, energyOnCast, target);
+		return new CastingSpellCard(this.spellCard, turnsUntilFire, energyOnCast, target);
 	}
 
 	@Override

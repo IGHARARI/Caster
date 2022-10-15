@@ -1,7 +1,6 @@
 package sts.caster.ui;
 
-import java.util.ArrayList;
-
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,7 +16,7 @@ import com.megacrit.cardcrawl.rooms.RestRoom;
 import com.megacrit.cardcrawl.ui.campfire.AbstractCampfireOption;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
-import basemod.ReflectionHacks;
+import java.util.ArrayList;
 
 public class CampfireResetEffect extends AbstractGameEffect {
     private static final float DUR = 1.5f;
@@ -26,17 +25,18 @@ public class CampfireResetEffect extends AbstractGameEffect {
     private AbstractCampfireOption caller;
 
     public CampfireResetEffect() {
-    	this(null);
+        this(null);
     }
+
     public CampfireResetEffect(AbstractCampfireOption caller) {
-    	this.caller = caller;
+        this.caller = caller;
         this.openedScreen = false;
         this.screenColor = AbstractDungeon.fadeColor.cpy();
         this.duration = 1.5f;
         this.screenColor.a = 0.0f;
         AbstractDungeon.overlayMenu.proceedButton.hide();
     }
-    
+
     @Override
     public void update() {
         if (!AbstractDungeon.isScreenUp) {
@@ -49,9 +49,9 @@ public class CampfireResetEffect extends AbstractGameEffect {
             AbstractDungeon.closeCurrentScreen();
             CardCrawlGame.sound.play("GHOST_ORB_IGNITE_1");
             if (AbstractDungeon.getCurrRoom() instanceof RestRoom) {
-                final RestRoom r = (RestRoom)AbstractDungeon.getCurrRoom();
+                final RestRoom r = (RestRoom) AbstractDungeon.getCurrRoom();
                 if (this.caller != null) {
-                	final ArrayList<AbstractCampfireOption> campfireButtons = (ArrayList<AbstractCampfireOption>)ReflectionHacks.getPrivate((Object)(r.campfireUI), (Class)CampfireUI.class, "buttons");
+                    final ArrayList<AbstractCampfireOption> campfireButtons = (ArrayList<AbstractCampfireOption>) ReflectionHacks.getPrivate((Object) (r.campfireUI), (Class) CampfireUI.class, "buttons");
                     campfireButtons.remove(this.caller);
                 }
                 r.campfireUI.reopen();
@@ -62,21 +62,20 @@ public class CampfireResetEffect extends AbstractGameEffect {
             if (CampfireUI.hidden) {
                 AbstractRoom.waitTimer = 0.0f;
                 AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
-                ((RestRoom)AbstractDungeon.getCurrRoom()).cutFireSound();
+                ((RestRoom) AbstractDungeon.getCurrRoom()).cutFireSound();
             }
             CardCrawlGame.music.unsilenceBGM();
         }
     }
-    
+
     private void updateBlackScreenColor() {
         if (this.duration > 1.0f) {
             this.screenColor.a = Interpolation.fade.apply(1.0f, 0.0f, (this.duration - 1.0f) * 2.0f);
-        }
-        else {
+        } else {
             this.screenColor.a = Interpolation.fade.apply(0.0f, 1.0f, this.duration / 1.5f);
         }
     }
-    
+
     @Override
     public void render(final SpriteBatch sb) {
         sb.setColor(this.screenColor);
@@ -85,9 +84,9 @@ public class CampfireResetEffect extends AbstractGameEffect {
             AbstractDungeon.gridSelectScreen.render(sb);
         }
     }
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
+
+    @Override
+    public void dispose() {
+
+    }
 }

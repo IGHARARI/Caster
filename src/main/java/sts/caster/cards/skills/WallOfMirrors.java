@@ -1,18 +1,16 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.WallOfMirrorsPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class WallOfMirrors extends CasterCard {
 
@@ -39,7 +37,7 @@ public class WallOfMirrors extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new ApplyPowerAction(m, p, new WallOfMirrorsPower(m, p, 1), 1));
+        addToBot(new ApplyPowerAction(m, p, new WallOfMirrorsPower(m, p, 1), 1));
     }
 
     @Override

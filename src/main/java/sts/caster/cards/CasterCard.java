@@ -19,8 +19,9 @@ import com.megacrit.cardcrawl.powers.*;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
+import sts.caster.cards.special.Lava;
 import sts.caster.core.MagicElement;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.*;
 import sts.caster.util.PowersHelper;
@@ -33,13 +34,6 @@ public abstract class CasterCard extends CustomCard {
 	public static final Predicate<AbstractCard> isCardSpellPredicate = (c)-> c.type == CasterCardType.SPELL;
 	private static final String BASE_BG_PATH = "caster/images/card_backgrounds/";
 	private static final UIStrings SPELL_DESC = CardCrawlGame.languagePack.getUIString("SpellsDescription");
-	private static final UIStrings FIRE_DESC = CardCrawlGame.languagePack.getUIString("FireElement");
-	private static final UIStrings ICE_DESC = CardCrawlGame.languagePack.getUIString("IceElement");
-	private static final UIStrings LIGHTNING_DESC = CardCrawlGame.languagePack.getUIString("LightningElement");
-	private static final UIStrings EARTH_DESC = CardCrawlGame.languagePack.getUIString("EarthElement");
-	
-	
-	public boolean freezeOnUse;
 
 	public int delayTurnsModificationForTurn;
 	public int delayTurns;
@@ -92,22 +86,22 @@ public abstract class CasterCard extends CustomCard {
 		if (type == CasterCardType.SPELL) {
 			if (curTips == null) curTips = new ArrayList<TooltipInfo>();
 			curTips.add(new TooltipInfo(SPELL_DESC.TEXT[0], SPELL_DESC.TEXT[1]));
-			switch (cardElement) {
-				case EARTH:
-					curTips.add(new TooltipInfo(EARTH_DESC.TEXT[0], EARTH_DESC.TEXT[1]));
-					break;
-				case FIRE:
-					curTips.add(new TooltipInfo(FIRE_DESC.TEXT[0], FIRE_DESC.TEXT[1]));
-					break;
-				case ICE:
-					curTips.add(new TooltipInfo(ICE_DESC.TEXT[0], ICE_DESC.TEXT[1]));
-					break;
-				case ELECTRIC:
-					curTips.add(new TooltipInfo(LIGHTNING_DESC.TEXT[0], LIGHTNING_DESC.TEXT[1]));
-					break;
-				default:
-					break;
-			}
+//			switch (cardElement) {
+//				case EARTH:
+//					curTips.add(new TooltipInfo(EARTH_DESC.TEXT[0], EARTH_DESC.TEXT[1]));
+//					break;
+//				case FIRE:
+//					curTips.add(new TooltipInfo(FIRE_DESC.TEXT[0], FIRE_DESC.TEXT[1]));
+//					break;
+//				case ICE:
+//					curTips.add(new TooltipInfo(ICE_DESC.TEXT[0], ICE_DESC.TEXT[1]));
+//					break;
+//				case ELECTRIC:
+//					curTips.add(new TooltipInfo(LIGHTNING_DESC.TEXT[0], LIGHTNING_DESC.TEXT[1]));
+//					break;
+//				default:
+//					break;
+//			}
 		}
 		return curTips;
 	}
@@ -154,29 +148,60 @@ public abstract class CasterCard extends CustomCard {
 	}
 	
 	// Return an empty list by default to prevent NPEs on cards accidentally not overriding this.
-	public ActionListMaker buildActionsSupplier(Integer energySpent) {return (c, t)-> {return new ArrayList<AbstractGameAction>();};}
+	public ActionListSupplier actionListSupplier(Integer energySpent) {return (c, t)-> {return new ArrayList<AbstractGameAction>();};}
 
-	@Override
-	public void triggerOnGlowCheck() {
-		if (willCauseManaStruck(this)) {
-			this.glowColor = Color.PURPLE.cpy();
-		} else {
-			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-		}
-	}
+//	@Override
+//	public void triggerOnGlowCheck() {
+//		if (willCauseManaStruck(this)) {
+//			this.glowColor = Color.PURPLE.cpy();
+//		} else {
+//			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+//		}
+//	}
 
 
 	@Override
 	public void applyPowers() {
+		int realBaseDamage = baseDamage;
+		int realBaseSpellDamage = baseSpellDamage;
+
+		if (this.cardElement == MagicElement.FIRE) {
+			baseDamage += getLavaModifiers();
+			baseSpellDamage += getLavaModifiers();
+		}
+
 		if (this.type == CasterCardType.SPELL) {
 			calculateCardDamage(null);
 		} else {
 			super.applyPowers();
 		}
+
+		baseDamage = realBaseDamage;
+		baseSpellDamage = realBaseSpellDamage;
+		isDamageModified = damage != baseDamage;
+		isSpellDamageModified = spellDamage != baseSpellDamage;
 	}
-	
+
+	private int getLavaModifiers() {
+		int totalModifier = 0;
+		for (AbstractCard c : AbstractDungeon.player.hand.group) {
+			if (c.cardID == Lava.ID) {
+				totalModifier += c.magicNumber;
+			}
+		}
+		return totalModifier;
+	}
+
 	@Override
 	public void calculateCardDamage(AbstractMonster mo) {
+		int realBaseDamage = baseDamage;
+		int realBaseSpellDamage = baseSpellDamage;
+
+		if (this.cardElement == MagicElement.FIRE) {
+			baseDamage += getLavaModifiers();
+			baseSpellDamage += getLavaModifiers();
+		}
+
 		if (this.type == CasterCardType.SPELL) {
 			resetCardSpellDamage();
 			resetCardSpellBlock();
@@ -188,6 +213,8 @@ public abstract class CasterCard extends CustomCard {
 		} else {
 			super.calculateCardDamage(mo);
 		}
+		baseDamage = realBaseDamage;
+		baseSpellDamage = realBaseSpellDamage;
 	}
 
 	private void resetCardSpellBlock() {

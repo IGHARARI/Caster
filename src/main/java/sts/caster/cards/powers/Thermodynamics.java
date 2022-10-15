@@ -5,8 +5,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.PlatedArmorPower;
-import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -40,7 +38,7 @@ public class Thermodynamics extends CasterCard {
         magicNumber = baseMagicNumber = BASE_ONTRIGGER_BLOCK_DMG;
         setCardElement(MagicElement.NEUTRAL);
     }
-    
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new ThermodynamicsPower(p, p, magicNumber), magicNumber));

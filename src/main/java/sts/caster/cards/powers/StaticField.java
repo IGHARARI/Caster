@@ -1,18 +1,17 @@
 package sts.caster.cards.powers;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.StaticFieldPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class StaticField extends CasterCard {
 
@@ -32,14 +31,14 @@ public class StaticField extends CasterCard {
     private static final int COST = 1;
     private static final int BASE_BLOCK_PER_ELEC = 2;
     private static final int UPG_BLOCK_PER_ELEC = 1;
-    
-    
+
+
     public StaticField() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_BLOCK_PER_ELEC;
         setCardElement(MagicElement.ELECTRIC);
     }
-    
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new StaticFieldPower(p, p, magicNumber), magicNumber));

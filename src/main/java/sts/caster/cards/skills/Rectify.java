@@ -1,17 +1,15 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.RectifyAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Rectify extends CasterCard {
 
@@ -28,7 +26,7 @@ public class Rectify extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    
+
     public Rectify() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         exhaust = true;
@@ -36,9 +34,9 @@ public class Rectify extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new RectifyAction(upgraded));
+        addToBot(new RectifyAction(upgraded));
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

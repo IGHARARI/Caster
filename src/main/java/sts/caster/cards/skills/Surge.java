@@ -1,18 +1,17 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Surge extends CasterCard {
 
@@ -44,10 +43,10 @@ public class Surge extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new ElectrifyCardsAction(m2, true));
-    	addToBot(new GainEnergyAction(magicNumber));
+        addToBot(new ElectrifyCardsAction(m2, true));
+        addToBot(new GainEnergyAction(magicNumber));
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

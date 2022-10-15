@@ -9,7 +9,7 @@
       "freezing",
       "Freezing"
     ],
-    "DESCRIPTION": "Frozen cards are removed from play until end of combat."
+    "DESCRIPTION": "Frozen cards are moved to the Frozen pile until end of combat."
   },
   {
     "NAMES": [
@@ -17,6 +17,13 @@
       "thaw"
     ],
     "DESCRIPTION": "Put a card from your Frozen pile into your hand."
+  },
+  {
+    "NAMES": [
+      "Echo",
+      "echo"
+    ],
+    "DESCRIPTION": "Cast this Spell once again after it's effects take place, then reduce Echo by #g1."
   },
   {
     "NAMES": [
@@ -70,17 +77,17 @@
       "electrify:",
       "electrified:"
     ],
-    "DESCRIPTION": "When playing an electrified card, receive #r2 damage per stack, then it loses Electrified."
+    "DESCRIPTION": "When playing an electrified card, receive #r2 (blockable) damage per stack, then it loses Electrified."
   },
   {
-    "PROPER_NAME": "Cast Time",
+    "PROPER_NAME": "Cast Time N",
     "NAMES": [
       "Cast Time",
       "cast_time",
       "Cast_time",
       "Cast_Time"
     ],
-    "DESCRIPTION": "#yCast this card: its effects will occur when its #yCast #yTime is 0. Reduce #yCast #yTime of #yCasted cards by #b1 at the start of your turn."
+    "DESCRIPTION": "Playing a #ySpell adds it to the Casting area. Reduce #yN by #b1 at the start of your turn for all your Casting spells. The Spell's effects occur when #yN is #b0."
   },
   {
     "PROPER_NAME": "Shortened Chant",

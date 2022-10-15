@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -14,14 +10,17 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.BlurPower;
-
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
+import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Slick extends CasterCard {
 
@@ -53,18 +52,18 @@ public class Slick extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new ApplyPowerAction(p, p, new BlurPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new BlurPower(p, magicNumber), magicNumber));
         addToBot(new DrawCardAction(p, 2));
-		addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
-    
+
     @Override
-    public ActionListMaker buildActionsSupplier(Integer energySpent) {
-    	return (c, t) -> {
-    		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, c.spellBlock));
-    		return actionsList;
-    	};
+    public ActionListSupplier actionListSupplier(Integer energySpent) {
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
+            actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, c.spellBlock));
+            return actionsList;
+        };
     }
 
     @Override

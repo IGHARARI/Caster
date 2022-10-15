@@ -1,7 +1,5 @@
 package sts.caster.core.frozenpile;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -17,11 +15,11 @@ import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.screens.mainMenu.ScrollBar;
 import com.megacrit.cardcrawl.screens.mainMenu.ScrollBarListener;
-
 import sts.caster.patches.frozenpile.FrozenPileEnums;
 
-public class FrozenPileViewScreen implements ScrollBarListener
-{
+import java.util.ArrayList;
+
+public class FrozenPileViewScreen implements ScrollBarListener {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FrozenViewScreen");
     public static final String[] TEXT = uiStrings.TEXT;
     private CardGroup frozenPileCopy;
@@ -42,7 +40,7 @@ public class FrozenPileViewScreen implements ScrollBarListener
     private static final float SCROLL_BAR_THRESHOLD = 500.0f * Settings.scale;
     private ScrollBar scrollBar;
     private AbstractCard controllerCard;
-    
+
     public FrozenPileViewScreen() {
         this.frozenPileCopy = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         this.isHovered = false;
@@ -63,7 +61,7 @@ public class FrozenPileViewScreen implements ScrollBarListener
         FrozenPileViewScreen.padY = AbstractCard.IMG_HEIGHT * 0.75f + Settings.CARD_VIEW_PAD_Y;
         (this.scrollBar = new ScrollBar(this)).move(0.0f, -30.0f * Settings.scale);
     }
-    
+
     public void update() {
         boolean isDraggingScrollBar = false;
         if (this.shouldShowScrollBar()) {
@@ -78,17 +76,16 @@ public class FrozenPileViewScreen implements ScrollBarListener
         if (Settings.isControllerMode && this.controllerCard != null && !CardCrawlGame.isPopupOpen && !AbstractDungeon.topPanel.selectPotionMode) {
             if (Gdx.input.getY() > Settings.HEIGHT * 0.7f) {
                 this.currentDiffY += Settings.SCROLL_SPEED;
-            }
-            else if (Gdx.input.getY() < Settings.HEIGHT * 0.3f) {
+            } else if (Gdx.input.getY() < Settings.HEIGHT * 0.3f) {
                 this.currentDiffY -= Settings.SCROLL_SPEED;
             }
         }
         this.updatePositions();
         if (Settings.isControllerMode && this.controllerCard != null) {
-            Gdx.input.setCursorPosition((int)this.controllerCard.hb.cX, (int)(Settings.HEIGHT - this.controllerCard.hb.cY));
+            Gdx.input.setCursorPosition((int) this.controllerCard.hb.cX, (int) (Settings.HEIGHT - this.controllerCard.hb.cY));
         }
     }
-    
+
     private void updateControllerInput() {
         if (!Settings.isControllerMode || AbstractDungeon.topPanel.selectPotionMode) {
             return;
@@ -103,10 +100,9 @@ public class FrozenPileViewScreen implements ScrollBarListener
             ++index;
         }
         if (!anyHovered) {
-            Gdx.input.setCursorPosition((int)this.frozenPileCopy.group.get(0).hb.cX, Settings.HEIGHT - (int)this.frozenPileCopy.group.get(0).hb.cY);
+            Gdx.input.setCursorPosition((int) this.frozenPileCopy.group.get(0).hb.cX, Settings.HEIGHT - (int) this.frozenPileCopy.group.get(0).hb.cY);
             this.controllerCard = this.frozenPileCopy.group.get(0);
-        }
-        else if ((CInputActionSet.up.isJustPressed() || CInputActionSet.altUp.isJustPressed()) && this.frozenPileCopy.size() > CARDS_PER_LINE) {
+        } else if ((CInputActionSet.up.isJustPressed() || CInputActionSet.altUp.isJustPressed()) && this.frozenPileCopy.size() > CARDS_PER_LINE) {
             index -= CARDS_PER_LINE;
             if (index < 0) {
                 final int wrap = this.frozenPileCopy.size() / CARDS_PER_LINE;
@@ -115,67 +111,58 @@ public class FrozenPileViewScreen implements ScrollBarListener
                     index += CARDS_PER_LINE;
                 }
             }
-            Gdx.input.setCursorPosition((int)this.frozenPileCopy.group.get(index).hb.cX, Settings.HEIGHT - (int)this.frozenPileCopy.group.get(index).hb.cY);
+            Gdx.input.setCursorPosition((int) this.frozenPileCopy.group.get(index).hb.cX, Settings.HEIGHT - (int) this.frozenPileCopy.group.get(index).hb.cY);
             this.controllerCard = this.frozenPileCopy.group.get(index);
-        }
-        else if ((CInputActionSet.down.isJustPressed() || CInputActionSet.altDown.isJustPressed()) && this.frozenPileCopy.size() > CARDS_PER_LINE) {
+        } else if ((CInputActionSet.down.isJustPressed() || CInputActionSet.altDown.isJustPressed()) && this.frozenPileCopy.size() > CARDS_PER_LINE) {
             if (index < this.frozenPileCopy.size() - CARDS_PER_LINE) {
                 index += CARDS_PER_LINE;
-            }
-            else {
+            } else {
                 index %= CARDS_PER_LINE;
             }
-            Gdx.input.setCursorPosition((int)this.frozenPileCopy.group.get(index).hb.cX, Settings.HEIGHT - (int)this.frozenPileCopy.group.get(index).hb.cY);
+            Gdx.input.setCursorPosition((int) this.frozenPileCopy.group.get(index).hb.cX, Settings.HEIGHT - (int) this.frozenPileCopy.group.get(index).hb.cY);
             this.controllerCard = this.frozenPileCopy.group.get(index);
-        }
-        else if (CInputActionSet.left.isJustPressed() || CInputActionSet.altLeft.isJustPressed()) {
+        } else if (CInputActionSet.left.isJustPressed() || CInputActionSet.altLeft.isJustPressed()) {
             if (index % CARDS_PER_LINE > 0) {
                 --index;
-            }
-            else {
+            } else {
                 index += 4;
                 if (index > this.frozenPileCopy.size() - 1) {
                     index = this.frozenPileCopy.size() - 1;
                 }
             }
-            Gdx.input.setCursorPosition((int)this.frozenPileCopy.group.get(index).hb.cX, Settings.HEIGHT - (int)this.frozenPileCopy.group.get(index).hb.cY);
+            Gdx.input.setCursorPosition((int) this.frozenPileCopy.group.get(index).hb.cX, Settings.HEIGHT - (int) this.frozenPileCopy.group.get(index).hb.cY);
             this.controllerCard = this.frozenPileCopy.group.get(index);
-        }
-        else if (CInputActionSet.right.isJustPressed() || CInputActionSet.altRight.isJustPressed()) {
+        } else if (CInputActionSet.right.isJustPressed() || CInputActionSet.altRight.isJustPressed()) {
             if (index % CARDS_PER_LINE < 4) {
                 if (++index > this.frozenPileCopy.size() - 1) {
                     index -= this.frozenPileCopy.size() % CARDS_PER_LINE;
                 }
-            }
-            else {
+            } else {
                 index -= 4;
                 if (index < 0) {
                     index = 0;
                 }
             }
-            Gdx.input.setCursorPosition((int)this.frozenPileCopy.group.get(index).hb.cX, Settings.HEIGHT - (int)this.frozenPileCopy.group.get(index).hb.cY);
+            Gdx.input.setCursorPosition((int) this.frozenPileCopy.group.get(index).hb.cX, Settings.HEIGHT - (int) this.frozenPileCopy.group.get(index).hb.cY);
             this.controllerCard = this.frozenPileCopy.group.get(index);
         }
     }
-    
+
     private void updateScrolling() {
         final int y = InputHelper.mY;
         if (!this.grabbedScreen) {
             if (InputHelper.scrolledDown) {
                 this.currentDiffY += Settings.SCROLL_SPEED;
-            }
-            else if (InputHelper.scrolledUp) {
+            } else if (InputHelper.scrolledUp) {
                 this.currentDiffY -= Settings.SCROLL_SPEED;
             }
             if (InputHelper.justClickedLeft) {
                 this.grabbedScreen = true;
                 this.grabStartY = y - this.currentDiffY;
             }
-        }
-        else if (InputHelper.isMouseDown) {
+        } else if (InputHelper.isMouseDown) {
             this.currentDiffY = y - this.grabStartY;
-        }
-        else {
+        } else {
             this.grabbedScreen = false;
         }
         if (this.prevDeckSize != this.frozenPileCopy.size()) {
@@ -184,7 +171,7 @@ public class FrozenPileViewScreen implements ScrollBarListener
         this.resetScrolling();
         this.updateBarPosition();
     }
-    
+
     private void calculateScrollBounds() {
         if (this.frozenPileCopy.size() > 10) {
             int scrollTmp = this.frozenPileCopy.size() / CARDS_PER_LINE - 2;
@@ -192,22 +179,20 @@ public class FrozenPileViewScreen implements ScrollBarListener
                 ++scrollTmp;
             }
             this.scrollUpperBound = Settings.DEFAULT_SCROLL_LIMIT + scrollTmp * FrozenPileViewScreen.padY;
-        }
-        else {
+        } else {
             this.scrollUpperBound = Settings.DEFAULT_SCROLL_LIMIT;
         }
         this.prevDeckSize = this.frozenPileCopy.size();
     }
-    
+
     private void resetScrolling() {
         if (this.currentDiffY < this.scrollLowerBound) {
             this.currentDiffY = MathHelper.scrollSnapLerpSpeed(this.currentDiffY, this.scrollLowerBound);
-        }
-        else if (this.currentDiffY > this.scrollUpperBound) {
+        } else if (this.currentDiffY > this.scrollUpperBound) {
             this.currentDiffY = MathHelper.scrollSnapLerpSpeed(this.currentDiffY, this.scrollUpperBound);
         }
     }
-    
+
     private void updatePositions() {
         this.hoveredCard = null;
         int lineNum = 0;
@@ -226,11 +211,11 @@ public class FrozenPileViewScreen implements ScrollBarListener
             }
         }
     }
-    
+
     public void reopen() {
         AbstractDungeon.overlayMenu.cancelButton.show(TEXT[1]);
     }
-    
+
     public void open() {
         CardCrawlGame.sound.play("DECK_OPEN");
         AbstractDungeon.overlayMenu.showBlackScreen();
@@ -255,13 +240,12 @@ public class FrozenPileViewScreen implements ScrollBarListener
         this.hideCards();
         if (this.frozenPileCopy.group.size() <= CARDS_PER_LINE) {
             FrozenPileViewScreen.drawStartY = Settings.HEIGHT * 0.5f;
-        }
-        else {
+        } else {
             FrozenPileViewScreen.drawStartY = Settings.HEIGHT * 0.66f;
         }
         this.calculateScrollBounds();
     }
-    
+
     private void hideCards() {
         int lineNum = 0;
         final ArrayList<AbstractCard> cards = this.frozenPileCopy.group;
@@ -276,12 +260,11 @@ public class FrozenPileViewScreen implements ScrollBarListener
             cards.get(i).drawScale = 0.75f;
         }
     }
-    
+
     public void render(final SpriteBatch sb) {
         if (this.hoveredCard == null) {
             this.frozenPileCopy.render(sb);
-        }
-        else {
+        } else {
             this.frozenPileCopy.renderExceptOneCard(sb, this.hoveredCard);
             this.hoveredCard.renderHoverShadow(sb);
             this.hoveredCard.render(sb);
@@ -292,18 +275,18 @@ public class FrozenPileViewScreen implements ScrollBarListener
             this.scrollBar.render(sb);
         }
     }
-    
+
     @Override
     public void scrolledUsingBar(final float newPercent) {
         this.currentDiffY = MathHelper.valueFromPercentBetween(this.scrollLowerBound, this.scrollUpperBound, newPercent);
         this.updateBarPosition();
     }
-    
+
     private void updateBarPosition() {
         final float percent = MathHelper.percentFromValueBetween(this.scrollLowerBound, this.scrollUpperBound, this.currentDiffY);
         this.scrollBar.parentScrolledToPercent(percent);
     }
-    
+
     private boolean shouldShowScrollBar() {
         return this.scrollUpperBound > FrozenPileViewScreen.SCROLL_BAR_THRESHOLD;
     }

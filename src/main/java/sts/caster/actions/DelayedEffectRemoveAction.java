@@ -2,14 +2,14 @@ package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 
-import sts.caster.delayedCards.DelayedCardEffect;
-import sts.caster.delayedCards.DelayedCardsArea;
+import sts.caster.delayedCards.CastingSpellCard;
+import sts.caster.delayedCards.SpellCardsArea;
 
 public class DelayedEffectRemoveAction extends AbstractGameAction {
 
-	DelayedCardEffect delayedCard;
+	CastingSpellCard delayedCard;
 	
-	public DelayedEffectRemoveAction(DelayedCardEffect delayedCard) {
+	public DelayedEffectRemoveAction(CastingSpellCard delayedCard) {
         actionType = ActionType.SPECIAL;
         this.delayedCard = delayedCard;
 	}
@@ -18,7 +18,7 @@ public class DelayedEffectRemoveAction extends AbstractGameAction {
     public void update() {
     	if (!isDone) {
 			if (delayedCard != null && delayedCard.turnsUntilFire <= 0) {
-				DelayedCardsArea.removeCardFromArea(delayedCard);
+				SpellCardsArea.removeCardFromArea(delayedCard);
 			}
     	}
         isDone = true;

@@ -1,20 +1,18 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.ThawCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class FireWall extends CasterCard {
 
@@ -35,7 +33,6 @@ public class FireWall extends CasterCard {
     private static final int UPG_BLOCK = 3;
     private static final int THAW_AMOUNT = 1;
     private static final int HP_LOSS_AMOUNT = 1;
-    
 
 
     public FireWall() {
@@ -48,11 +45,11 @@ public class FireWall extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new GainBlockAction(p, p, block));
-    	addToBot(new LoseHPAction(p, p, magicNumber));
-    	addToBot(new ThawCardAction(magicNumber, false));
+        addToBot(new GainBlockAction(p, p, block));
+        addToBot(new LoseHPAction(p, p, magicNumber));
+        addToBot(new ThawCardAction(magicNumber, false));
     }
-    
+
     @Override
     public void upgrade() {
         if (!upgraded) {

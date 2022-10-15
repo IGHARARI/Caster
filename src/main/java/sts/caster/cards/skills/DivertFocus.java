@@ -1,22 +1,20 @@
 package sts.caster.cards.skills;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.FocusPower;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.GainFocusPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class DivertFocus extends CasterCard {
 
@@ -46,11 +44,11 @@ public class DivertFocus extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new GainBlockAction(p, p, block));
-		addToBot(new ApplyPowerAction(p, p, new FocusPower(p, -magicNumber), -magicNumber));
-		if (!p.hasPower(ArtifactPower.POWER_ID)) {
-			addToBot(new ApplyPowerAction(p, p, new GainFocusPower(p, magicNumber, true), magicNumber, true, AttackEffect.NONE));
-		}
+        addToBot(new GainBlockAction(p, p, block));
+        addToBot(new ApplyPowerAction(p, p, new FocusPower(p, -magicNumber), -magicNumber));
+        if (!p.hasPower(ArtifactPower.POWER_ID)) {
+            addToBot(new ApplyPowerAction(p, p, new GainFocusPower(p, magicNumber, true), magicNumber, true, AttackEffect.NONE));
+        }
     }
 
     @Override

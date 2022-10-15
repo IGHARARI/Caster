@@ -15,7 +15,7 @@ import sts.caster.powers.ManaImbalancePower;
 
 import java.util.HashMap;
 
-import static sts.caster.delayedCards.DelayedCardsArea.getLastSpellForDelay;
+import static sts.caster.delayedCards.SpellCardsArea.getLastSpellForDelay;
 
 public class ElementsHelper {
 
@@ -95,16 +95,18 @@ public class ElementsHelper {
 
     private static boolean isEnemyTarget(AbstractCard.CardTarget target) {
         return target.equals(AbstractCard.CardTarget.ENEMY) ||
-               target.equals(AbstractCard.CardTarget.ALL_ENEMY) ||
-               target.equals(AbstractCard.CardTarget.ALL) ||
-               target.equals(AbstractCard.CardTarget.SELF_AND_ENEMY);
+                target.equals(AbstractCard.CardTarget.ALL_ENEMY) ||
+                target.equals(AbstractCard.CardTarget.ALL) ||
+                target.equals(AbstractCard.CardTarget.SELF_AND_ENEMY);
     }
 
     public static boolean causesReaction(MagicElement current, MagicElement newOne) {
         MagicElement reactiveElements = elementalReactions.get(current);
         return reactiveElements != null && reactiveElements.equals(newOne);
     }
+
     public static HashMap<MagicElement, MagicElement> elementalReactions = new HashMap<>();
+
     static {
         elementalReactions.put(MagicElement.FIRE, MagicElement.ICE);
         elementalReactions.put(MagicElement.ICE, MagicElement.ELECTRIC);

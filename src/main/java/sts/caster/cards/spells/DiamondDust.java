@@ -1,27 +1,17 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.ArbitraryCardAction;
-import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.interfaces.ActionListMaker;
-import sts.caster.patches.spellCardType.CasterCardType;
-import sts.caster.powers.FrostPower;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class DiamondDust extends CasterCard {
 
@@ -38,11 +28,10 @@ public class DiamondDust extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_BLOCK = 5;
+    private static final int BASE_BLOCK = 6;
     private static final int UPG_BLOCK = 2;
-    private static final int PLUS_BLOCK_ON_PLAY = 2;
-    private static final int UPG_PLUS_BLOCK = 1;
-
+    private static final int PLUS_BLOCK_ON_PLAY = 4;
+    private static final int UPG_PLUS_BLOCK = 2;
 
 
     public DiamondDust() {
