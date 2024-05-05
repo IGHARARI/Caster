@@ -177,7 +177,7 @@
   },
   "caster:FrostDriver": {
     "NAME": "Frost Driver",
-    "DESCRIPTION": "Freeze !M! card. NL Deal !D! damage."
+    "DESCRIPTION": "caster:Freeze !M! card. NL Deal !D! damage."
   },
   "caster:MagicResonance": {
     "NAME": "Magic Resonance",
@@ -427,8 +427,8 @@
   },
   "caster:IceWall": {
     "NAME": "Ice Wall",
-    "DESCRIPTION": "Gain !M! Blur. NL Gain !B! Block. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Blur. NL Gain !B! Block. NL caster:Freeze this card."
+    "DESCRIPTION":         "Gain !B! Block. NL Block is not removed at the start of your next turn. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Block is not removed at the start of your next turn. NL caster:Freeze this card."
   },
   "caster:SlipThrough": {
     "NAME": "Slip Through",
