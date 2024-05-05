@@ -59,7 +59,7 @@
       "Mired",
       "mired"
     ],
-    "DESCRIPTION": "When a #yMired creatures receives Attack damage heal #g2 HP, then decrease #yMired by #b1"
+    "DESCRIPTION": "When a #yMired creatures receives Attack damage you heal #g2 HP, then decrease #yMired by #b1"
   },
   {
     "NAMES": [

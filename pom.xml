@@ -3,7 +3,7 @@
     <groupId>sts.caster</groupId>
     <artifactId>caster</artifactId>
     <!--<version>1.2.0</version>-->
-    <version>0.0.2</version>
+    <version>${Caster.version}</version>
     <name>Caster</name>
 
     <properties>
@@ -11,6 +11,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <SlayTheSpire.version>01-23-2019</SlayTheSpire.version>
         <ModTheSpire.version>3.8.0</ModTheSpire.version>
+        <Caster.version>2.0.3</Caster.version>
         <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
         <!--Also change the path at the very bottom of the file.-->
         <Steam.path>C:/Program Files (x86)/Steam/steamapps</Steam.path>

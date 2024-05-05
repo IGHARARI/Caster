@@ -1,6 +1,7 @@
 package sts.caster.rooms;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -26,6 +27,7 @@ public class TempleEvent extends AbstractImageEvent {
     public static final String[] OPTIONS;
     private static final String DIALOG_1;
     int currentScreen;
+	private boolean selectingCard;
     
     public TempleEvent() {
     	super(NAME, DIALOG_1, null);
@@ -105,15 +107,29 @@ public class TempleEvent extends AbstractImageEvent {
 				AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(c, (float) (Settings.WIDTH / 2), (float) (Settings.HEIGHT / 2)));
 				break;
 			case 4:
-				CardCrawlGame.sound.play("CARD_EXHAUST");
-				AbstractDungeon.topLevelEffects.add(new PurgeCardEffect((AbstractCard)AbstractDungeon.gridSelectScreen.selectedCards.get(0), (float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2)));
-				AbstractDungeon.player.masterDeck.removeCard((AbstractCard)AbstractDungeon.gridSelectScreen.selectedCards.get(0));
-				break;
+				if (CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck.getPurgeableCards()).size() > 0) {
+					AbstractDungeon.gridSelectScreen.open(CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck.getPurgeableCards()), 1, OPTIONS[6], false, false, false, true);
+					this.selectingCard = true;
+				}
+				return;
 			default:
 				break;
 		}
     	
         moveToPageThree();
+	}
+
+	public void update() {
+		super.update();
+		if (this.selectingCard && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+			AbstractCard offeredCard = AbstractDungeon.gridSelectScreen.selectedCards.remove(0);
+
+			CardCrawlGame.sound.play("CARD_EXHAUST");
+			AbstractDungeon.topLevelEffects.add(new PurgeCardEffect(offeredCard, (float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2)));
+			AbstractDungeon.player.masterDeck.removeCard(offeredCard);
+			this.selectingCard = false;
+			moveToPageThree();
+		}
 	}
 
 	private void processThirdScreenButtonPress(int buttonPressed) {
