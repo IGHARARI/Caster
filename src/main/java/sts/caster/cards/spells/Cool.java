@@ -89,4 +89,9 @@ public class Cool extends CasterCard {
             initializeDescription();
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage;
+    }
 }

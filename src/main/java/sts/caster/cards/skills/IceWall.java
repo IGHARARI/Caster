@@ -1,4 +1,4 @@
-package sts.caster.cards.spells;
+package sts.caster.cards.skills;
 
 import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Texture;

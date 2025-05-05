@@ -178,11 +178,10 @@ public class CasterMod implements
 
         // Create the Mod Menu
         ModPanel settingsPanel = new ModPanel();
-        settingsPanel.addUIElement(new ModLabel("THis mod doesn't have any settings! Some may come later.", 400.0f, 700.0f,
+        settingsPanel.addUIElement(new ModLabel("This mod doesn't have any settings! Some may come later.", 400.0f, 700.0f,
                 settingsPanel, (me) -> {
         }));
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
-
         logger.info("Done loading badge Image and mod options");
 
     }

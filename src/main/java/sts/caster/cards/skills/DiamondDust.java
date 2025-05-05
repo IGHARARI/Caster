@@ -1,4 +1,4 @@
-package sts.caster.cards.spells;
+package sts.caster.cards.skills;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

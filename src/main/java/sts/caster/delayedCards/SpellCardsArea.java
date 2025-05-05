@@ -1,6 +1,8 @@
 package sts.caster.delayedCards;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -29,7 +31,7 @@ public class SpellCardsArea {
 		spellCardsBeingCasted = new ArrayList<CastingSpellCard>();
 		cardsBeingEvoked = new ArrayList<CastingSpellCard>();
 	}
-	
+
 	public static void repositionMiniCards() {
 		for (int turnsRemaining = 1 ; turnsRemaining < 4; turnsRemaining++) {
 			int indexInColumn = 0;
@@ -58,6 +60,7 @@ public class SpellCardsArea {
 	public static void removeCardFromArea(CastingSpellCard card) {
 		spellCardsBeingCasted.remove(card);
 		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
+		SpellIntentsManager.refreshSpellIntents();
 	}
 	
 	public static void addCardToArea(CastingSpellCard card) {
@@ -67,6 +70,7 @@ public class SpellCardsArea {
 			removeCardFromArea(card);
 		}
 		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
+		SpellIntentsManager.refreshSpellIntents();
 	}
 	
 	public static void positionCardInCardArea(int columnNumber, int indexInColumn, CastingSpellCard card) {

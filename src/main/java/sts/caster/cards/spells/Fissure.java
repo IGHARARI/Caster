@@ -81,4 +81,9 @@ public class Fissure extends CasterCard {
             upgradeSpellDamage(UPG_DAMAGE);
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage;
+    }
 }

@@ -422,4 +422,5 @@ public abstract class CasterCard extends CustomCard {
 	}
 	
 	public void onFrozen() {}
+	public int getIntentNumber() { return target == CardTarget.SELF ? spellBlock : spellDamage; }
 }

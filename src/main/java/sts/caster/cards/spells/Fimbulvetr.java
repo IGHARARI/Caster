@@ -89,4 +89,8 @@ public class Fimbulvetr extends CasterCard {
             initializeDescription();
         }
     }
+    @Override
+    public int getIntentNumber() {
+        return spellDamage;
+    }
 }

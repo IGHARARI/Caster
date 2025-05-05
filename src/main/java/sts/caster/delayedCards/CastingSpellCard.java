@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
@@ -21,13 +22,13 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.PenNibPower;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import sts.caster.actions.*;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.elements.ElementsHelper;
+import sts.caster.powers.BlazedPower;
+import sts.caster.powers.SpellDamageDisplayPower;
 
 public class CastingSpellCard extends AbstractOrb {
 	public int turnsUntilFire;
@@ -49,6 +50,7 @@ public class CastingSpellCard extends AbstractOrb {
 
 	private Boolean isPowersApplied = false;
 	private boolean beingEvoked;
+	private SpellDamageDisplayPower damageDisplayPower;
 
 	public CastingSpellCard(CasterCard card, int delayTurns, AbstractMonster target) {
 		this(card, delayTurns, 0, target);
@@ -89,6 +91,10 @@ public class CastingSpellCard extends AbstractOrb {
 		cardPreviewCopy.current_y = cY;
 
 		beingEvoked = false;
+		if (this.spellCard.target == CardTarget.ENEMY){
+			this.damageDisplayPower = new SpellDamageDisplayPower(target, p, this);
+			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(target, p, damageDisplayPower));
+		}
 	}
 
 	public void increaseCastingDelay(int amount) {
@@ -155,6 +161,9 @@ public class CastingSpellCard extends AbstractOrb {
 	}
 
 	public void evokeCardEffect(){
+		if (damageDisplayPower != null) {
+			AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(target, AbstractDungeon.player, damageDisplayPower));
+		}
 		penNibCheck();
 		// Helper call to apply/update elemental affliction and then apply manastruck
 		//ElementsHelper.updateElementalAffliction(spellCard, target);
@@ -198,6 +207,17 @@ public class CastingSpellCard extends AbstractOrb {
 		hb.render(sb);
 	}
 
+	public int getDamageAmount() {
+		if (!isPowersApplied) {
+			isPowersApplied = true;
+			applyPowersToAllCardCopies();
+		}
+
+		int d = spellCard.spellDamage;
+		isPowersApplied = false;
+		return d;
+	}
+
 	private void renderSpellDelay(SpriteBatch sb) {
 		FontHelper.renderFontCentered(sb,
 				FontHelper.cardEnergyFont_L,
@@ -209,7 +229,6 @@ public class CastingSpellCard extends AbstractOrb {
 		);
 	}
 
-	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
 	public boolean renderPreviewIfHovered(SpriteBatch sb) {
 		if (hb.hovered) {
 			if (!isPowersApplied) {

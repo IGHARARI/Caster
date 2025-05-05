@@ -88,4 +88,9 @@ public class Thundara extends CasterCard {
             this.initializeTitle();
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage * magicNumber;
+    }
 }

@@ -2,6 +2,7 @@ package sts.caster.cards.spells;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -86,5 +87,10 @@ public class JupitelThunder extends CasterCard {
             upgradeSpellDamage(UPGRADE_DAMAGE);
             initializeDescription();
         }
+    }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage * magicNumber;
     }
 }

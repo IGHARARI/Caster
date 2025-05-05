@@ -74,4 +74,9 @@ public class Fireball extends CasterCard {
             upgradeSpellDamage(DMG_UPGRADE);
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage;
+    }
 }

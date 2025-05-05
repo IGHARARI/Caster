@@ -79,4 +79,9 @@ public class SpontaneousCombustion extends CasterCard {
             initializeDescription();
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage * magicNumber;
+    }
 }

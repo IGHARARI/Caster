@@ -80,4 +80,9 @@ public class Fira extends CasterCard {
             this.initializeTitle();
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage;
+    }
 }

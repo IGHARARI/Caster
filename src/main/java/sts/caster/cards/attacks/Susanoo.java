@@ -1,4 +1,4 @@
-package sts.caster.cards.spells;
+package sts.caster.cards.attacks;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;

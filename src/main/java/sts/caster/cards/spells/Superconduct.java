@@ -91,4 +91,9 @@ public class Superconduct extends CasterCard {
             initializeDescription();
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage * magicNumber;
+    }
 }

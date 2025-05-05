@@ -81,4 +81,9 @@ public class AlternatingCurrent extends CasterCard {
             upgradeSpellDamage(UPGRADE_DAMAGE);
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage;
+    }
 }

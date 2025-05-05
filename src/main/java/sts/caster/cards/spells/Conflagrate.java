@@ -86,4 +86,9 @@ public class Conflagrate extends CasterCard {
             upgradeMagicNumber(THAW_UPG);
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage;
+    }
 }

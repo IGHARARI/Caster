@@ -44,6 +44,8 @@ public class LordOfVermillion extends CasterCard {
     private static final int HIT_TIMES = 4;
     private static final int UPGR_HIT_TIMES = 2;
 
+    private int energyUsed;
+
     public LordOfVermillion() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
@@ -55,6 +57,7 @@ public class LordOfVermillion extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new LordOfVermillionAction(this, energyOnUse));
+        energyUsed = energyOnUse;
 //        if (energyOnUse < EnergyPanel.totalCount) {
 //            energyOnUse = EnergyPanel.totalCount;
 //        }
@@ -88,5 +91,11 @@ public class LordOfVermillion extends CasterCard {
             initializeDescription();
             upgradeMagicNumber(UPGR_HIT_TIMES);
         }
+    }
+
+    @Override
+    public int getIntentNumber() {
+        int energyMultiplier = energyUsed;
+        return spellDamage * energyMultiplier * magicNumber;
     }
 }

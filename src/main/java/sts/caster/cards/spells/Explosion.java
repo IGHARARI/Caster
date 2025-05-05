@@ -115,4 +115,9 @@ public class Explosion extends CasterCard {
             upgradeMagicNumber(UPG_DOWNGRADE);
         }
     }
+
+    @Override
+    public int getIntentNumber() {
+        return spellDamage;
+    }
 }
