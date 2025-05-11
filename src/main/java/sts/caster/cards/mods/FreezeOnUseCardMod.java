@@ -2,18 +2,13 @@ package sts.caster.cards.mods;
 
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import sts.caster.actions.FreezeSpecificCardAction;
 import sts.caster.core.CasterMod;
-import sts.caster.patches.relics.FreezeOnUseCardField;
 
 public class FreezeOnUseCardMod extends AbstractCardModifier {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FreezeOnUseCardMod");

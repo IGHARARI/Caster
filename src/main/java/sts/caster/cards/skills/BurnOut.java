@@ -1,7 +1,6 @@
 package sts.caster.cards.skills;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -12,7 +11,6 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.powers.BlazedPower;
 import sts.caster.powers.BurnOutPower;
-import sts.caster.util.BattleHelper;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
