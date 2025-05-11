@@ -19,6 +19,7 @@ import sts.caster.patches.frozenpile.FrozenPileEnums;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class FrozenPileViewScreen implements ScrollBarListener {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FrozenViewScreen");
     public static final String[] TEXT = uiStrings.TEXT;

@@ -10,6 +10,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.powers.ShivaPower;
 import sts.caster.powers.ThermodynamicsPower;
 
+@Deprecated
 public class FrozenPileManager {
     public static CardGroup frozenPile = new CardGroup(CardGroupType.UNSPECIFIED);
     public static FrozenPileViewScreen frozenPileViewScreen = new FrozenPileViewScreen();

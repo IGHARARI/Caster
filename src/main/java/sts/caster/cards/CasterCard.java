@@ -3,7 +3,6 @@ package sts.caster.cards;
 import java.util.*;
 import java.util.function.Predicate;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -25,8 +24,6 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.*;
 import sts.caster.util.PowersHelper;
-
-import static sts.caster.core.elements.ElementsHelper.willCauseManaStruck;
 
 public abstract class CasterCard extends CustomCard {
 	private final static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(PenNibPower.POWER_ID, StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));
@@ -185,7 +182,7 @@ public abstract class CasterCard extends CustomCard {
 	private int getLavaModifiers() {
 		int totalModifier = 0;
 		for (AbstractCard c : AbstractDungeon.player.hand.group) {
-			if (c.cardID == Lava.ID) {
+			if (Objects.equals(c.cardID, Lava.ID)) {
 				totalModifier += c.magicNumber;
 			}
 		}

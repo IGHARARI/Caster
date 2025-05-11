@@ -1,6 +1,8 @@
 package sts.caster.delayedCards;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
@@ -22,12 +24,12 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.PenNibPower;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sts.caster.actions.*;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
-import sts.caster.core.elements.ElementsHelper;
-import sts.caster.powers.BlazedPower;
 import sts.caster.powers.SpellDamageDisplayPower;
 
 public class CastingSpellCard extends AbstractOrb {
@@ -41,11 +43,11 @@ public class CastingSpellCard extends AbstractOrb {
 
 	private float vfxTimer = 1.0f;
 	
-	public CasterCard spellCard = null;
+	public CasterCard spellCard;
 	public CasterCard cardMiniCopy = null;
 	public CasterCard cardPreviewCopy = null;
 
-	public AbstractMonster target = null;
+	public AbstractMonster target;
 	public Integer energyOnCast;
 
 	private Boolean isPowersApplied = false;
@@ -97,8 +99,16 @@ public class CastingSpellCard extends AbstractOrb {
 		}
 	}
 
-	public void increaseCastingDelay(int amount) {
-		turnsUntilFire += amount;
+	static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
+	public void modifyCastingDelay(int modifyAmount) {
+		turnsUntilFire += modifyAmount;
+		if (turnsUntilFire <= 0) {
+			cardFireEvent();
+		}
+	}
+
+	public List<CasterCard> getAllCardCopies(){
+		return Arrays.asList(spellCard, cardMiniCopy, cardPreviewCopy);
 	}
 
 	@Override
@@ -124,37 +134,33 @@ public class CastingSpellCard extends AbstractOrb {
 		turnsUntilFire--;
 		spellCard.onStartOfTurnDelayEffect();
 		if (turnsUntilFire <= 0) {
-			SpellCardsArea.cardsBeingEvoked.add(this);
-			SpellCardsArea.spellCardsBeingCasted.remove(this);
-			this.beingEvoked = true;
-			SpellCardsArea.redrawEvokeCards();
+			cardFireEvent();
+		}
+	}
 
-			AbstractDungeon.actionManager.addToBottom(new DelayedEffectRemoveAction(this));
-			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction(false));
-			AbstractDungeon.actionManager.addToBottom(new QueueEvokeCardAction(this)); // modified
+	public void cardFireEvent() {
+		SpellCardsArea.cardsBeingEvoked.add(this);
+		SpellCardsArea.spellCardsBeingCasted.remove(this);
+		this.beingEvoked = true;
+		SpellCardsArea.redrawEvokeCards();
 
-			if (CardModifierManager.hasModifier(this.spellCard, RecurringSpellCardMod.ID)){
-				ArrayList<AbstractCardModifier> mods = CardModifierManager.getModifiers(this.spellCard, RecurringSpellCardMod.ID);
-				for (AbstractCardModifier mod : mods) {
-					RecurringSpellCardMod recurMod = (RecurringSpellCardMod) mod;
+		AbstractDungeon.actionManager.addToBottom(new DelayedEffectRemoveAction(this));
+		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction(false));
+		AbstractDungeon.actionManager.addToBottom(new QueueEvokeCardAction(this)); // modified
 
-					if (recurMod.recurAmount > 0) {
-						CasterCard cardToCast = this.spellCard;
-						AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
-							@Override
-							public void update() {
-								AbstractMonster randomTarget = AbstractDungeon.getRandomMonster();
-								AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(cardToCast, cardToCast.delayTurns, randomTarget));
-								this.isDone = true;
-							}
-						});
+		if (CardModifierManager.hasModifier(this.spellCard, RecurringSpellCardMod.ID)) {
+			ArrayList<AbstractCardModifier> mods = CardModifierManager.getModifiers(this.spellCard, RecurringSpellCardMod.ID);
+			for (AbstractCardModifier mod : mods) {
+				RecurringSpellCardMod recurMod = (RecurringSpellCardMod) mod;
 
-						recurMod.reduceRecurrence();
-					}
+				if (recurMod.recurAmount > 0) {
+					CasterCard cardToCast = this.spellCard;
+					recurMod.reduceRecurrence();
+					AbstractDungeon.actionManager.addToBottom(new QueueRecurringEffectAction(cardToCast, cardToCast.delayTurns, energyOnCast, target));
+				}
 
-					if (recurMod.recurAmount <= 0) {
-						CardModifierManager.removeSpecificModifier(this.spellCard, mod, true);
-					}
+				if (recurMod.recurAmount <= 0) {
+					CardModifierManager.removeSpecificModifier(this.spellCard, mod, true);
 				}
 			}
 		}

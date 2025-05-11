@@ -1,27 +1,14 @@
 package sts.caster.patches.misc;
 
 import basemod.helpers.SuperclassFinder;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.utility.HandCheckAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
-import org.clapper.util.classutil.ClassFinder;
-import sts.caster.actions.FreezeSpecificCardAction;
-import sts.caster.cards.CasterCard;
-import sts.caster.core.CasterMod;
 import sts.caster.core.frozenpile.FrozenPileManager;
 import sts.caster.patches.relics.FreezeOnUseCardField;
-import sts.caster.powers.AshenWallPower;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

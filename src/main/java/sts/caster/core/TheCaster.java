@@ -23,8 +23,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.skills.CasterDefend;
-import sts.caster.cards.skills.Channeling;
-import sts.caster.cards.skills.DivertFocus;
+import sts.caster.cards.skills.DivertMana;
+import sts.caster.cards.skills.FocusMana;
+import sts.caster.cards.skills.TapMana;
+import sts.caster.cards.spells.ManaBlast;
 import sts.caster.cards.spells.Meteor;
 import sts.caster.cards.spells.PhoenixFlare;
 import sts.caster.relics.MagicBookRelic;
@@ -109,15 +111,17 @@ public class TheCaster extends CustomPlayer {
 
         retVal.add(CasterStrike.ID);
         retVal.add(CasterStrike.ID);
-        retVal.add(CasterStrike.ID);
-        retVal.add(CasterStrike.ID);
-        retVal.add(CasterDefend.ID);
+        retVal.add(ManaBlast.ID);
+        retVal.add(ManaBlast.ID);
+//        retVal.add(CasterDefend.ID);
         retVal.add(CasterDefend.ID);
         retVal.add(CasterDefend.ID);
 
         retVal.add(Meteor.ID);
-        retVal.add(DivertFocus.ID);
-        retVal.add(Channeling.ID);
+//        retVal.add(DivertFocus.ID);
+        retVal.add(DivertMana.ID);
+        retVal.add(FocusMana.ID);
+        retVal.add(TapMana.ID);
 
         return retVal;
     }

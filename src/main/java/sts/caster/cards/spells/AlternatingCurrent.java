@@ -3,7 +3,9 @@ package sts.caster.cards.spells;
 import static sts.caster.core.CasterMod.makeCardPath;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
@@ -45,14 +47,20 @@ public class AlternatingCurrent extends CasterCard {
     private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 8;
     private static final int UPGRADE_DAMAGE = 2;
-
+    private static final int BASE_RECUR = 2;
 
     public AlternatingCurrent() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns =  BASE_DELAY;
-        CardModifierManager.addModifier(this, new RecurringSpellCardMod(2));
         setCardElement(MagicElement.ELECTRIC);
+    }
+
+    @Override
+    protected List<AbstractCardModifier> getInitialModifiers() {
+        List<AbstractCardModifier> mods = new ArrayList<>();
+        mods.add(new RecurringSpellCardMod(BASE_RECUR));
+        return mods;
     }
 
     @Override

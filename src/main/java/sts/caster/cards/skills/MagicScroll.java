@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.ModifyCastTimeAction;
+import sts.caster.actions.ModifyCastTimeForOneTurnAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -49,7 +49,7 @@ public class MagicScroll extends CasterCard {
             public void update() {
                 for (AbstractCard c : DrawCardAction.drawnCards) {
                     if (c instanceof CasterCard && c.type == CasterCardType.SPELL) {
-                        addToBot(new ModifyCastTimeAction((CasterCard) c, -m2));
+                        addToBot(new ModifyCastTimeForOneTurnAction((CasterCard) c, -m2));
                     }
                 }
                 isDone = true;

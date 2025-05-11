@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.ui.panels.AbstractPanel;
 import com.megacrit.cardcrawl.vfx.ExhaustPileParticle;
 import sts.caster.patches.frozenpile.FrozenPileEnums;
 
+@Deprecated
 public class FrozenCardsPanel extends AbstractPanel {
     //    private static final TutorialStrings tutorialStrings;
     public static final String MSG = "Click to view cards Frozen this combat.";

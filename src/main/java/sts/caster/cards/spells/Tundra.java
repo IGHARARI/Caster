@@ -1,5 +1,6 @@
 package sts.caster.cards.spells;
 
+import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
@@ -22,6 +23,8 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -52,9 +55,15 @@ public class Tundra extends CasterCard {
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseMagicNumber = magicNumber = BASE_VULN;
-        CardModifierManager.addModifier(this, new RecurringSpellCardMod(BASE_RECUR));
         exhaust = true;
         setCardElement(MagicElement.ICE);
+    }
+
+    @Override
+    protected List<AbstractCardModifier> getInitialModifiers() {
+        List<AbstractCardModifier> mods = new ArrayList<>();
+        mods.add(new RecurringSpellCardMod(BASE_RECUR));
+        return mods;
     }
 
     @Override

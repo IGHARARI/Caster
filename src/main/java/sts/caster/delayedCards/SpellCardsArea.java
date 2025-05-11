@@ -1,14 +1,15 @@
 package sts.caster.delayedCards;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sts.caster.actions.QueueRedrawMiniCardsAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.core.CasterMod;
 
 public class SpellCardsArea {
 	public static ArrayList<CastingSpellCard> spellCardsBeingCasted;
@@ -32,7 +33,9 @@ public class SpellCardsArea {
 		cardsBeingEvoked = new ArrayList<CastingSpellCard>();
 	}
 
+	static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
 	public static void repositionMiniCards() {
+
 		for (int turnsRemaining = 1 ; turnsRemaining < 4; turnsRemaining++) {
 			int indexInColumn = 0;
 			for (CastingSpellCard card : spellCardsBeingCasted) {
@@ -66,7 +69,7 @@ public class SpellCardsArea {
 	public static void addCardToArea(CastingSpellCard card) {
 		spellCardsBeingCasted.add(card);
 		if (card.turnsUntilFire == 0) {
-			card.evokeCardEffect();
+			card.cardFireEvent();
 			removeCardFromArea(card);
 		}
 		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());

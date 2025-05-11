@@ -27,6 +27,7 @@ import javassist.CtBehavior;
 import sts.caster.core.frozenpile.FrozenCardsPanel;
 import sts.caster.core.frozenpile.FrozenPileManager;
 
+@Deprecated
 public class FrozenPileRenderingPatch {
 
 	@SpirePatch(clz=AbstractDungeon.class, method="update")

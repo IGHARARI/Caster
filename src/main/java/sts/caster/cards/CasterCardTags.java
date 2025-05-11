@@ -8,4 +8,6 @@ public class CasterCardTags {
 	@SpireEnum(name = "ELECTRIFIED")
 	public static AbstractCard.CardTags ELECTRIFIED;
 
+	@SpireEnum(name = "FROZEN")
+	public static AbstractCard.CardTags FROZEN;
 }

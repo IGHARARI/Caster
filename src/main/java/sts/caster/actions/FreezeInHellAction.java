@@ -40,7 +40,6 @@ public class FreezeInHellAction extends AbstractGameAction {
         isDone = true;
     }
 
-	public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
 	private void playCard(AbstractCard card) {
 //		AbstractDungeon.getCurrRoom().souls.remove(card);
 		AbstractDungeon.player.limbo.group.add(card);
@@ -53,7 +52,6 @@ public class FreezeInHellAction extends AbstractGameAction {
 		card.targetDrawScale = 0.75F;
 		card.applyPowers();
 		AbstractMonster targetMonster = AbstractDungeon.getCurrRoom().monsters.getRandomMonster((AbstractMonster)null, true, AbstractDungeon.cardRandomRng);
-		logger.info("Attempting to play: " + card.cardID + " on target " + targetMonster.id);
 		card.exhaustOnUseOnce = true;
 		FrozenPileManager.frozenPile.removeCard(card);
 		this.addToTop(new NewQueueCardAction(card, targetMonster, true, true));

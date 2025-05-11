@@ -44,7 +44,7 @@ public class QuickCastAction extends AbstractGameAction {
                 if (p.hand.group.size() - notDelayed.size() == 1) {
                 	for (final AbstractCard c : this.p.hand.group) {
                 		if (hasDelay(c)) {
-                			addToBot(new ModifyCastTimeAction((CasterCard)c, -reduceAmount));
+                			addToBot(new ModifyCastTimeForOneTurnAction((CasterCard)c, -reduceAmount));
                 			isDone = true;
                 			return;
                 		}
@@ -59,7 +59,7 @@ public class QuickCastAction extends AbstractGameAction {
     				for (final AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
     					if (c instanceof CasterCard) {
     						CasterCard casterCard = (CasterCard) c;
-    						addToBot(new ModifyCastTimeAction(casterCard, -reduceAmount));
+    						addToBot(new ModifyCastTimeForOneTurnAction(casterCard, -reduceAmount));
     						p.hand.addToTop(c);
     					}
     				}
@@ -80,7 +80,7 @@ public class QuickCastAction extends AbstractGameAction {
 			}
 			if (delayedCards.size() > 0) {
 				AbstractCard card = delayedCards.get(AbstractDungeon.cardRandomRng.random(delayedCards.size()-1));
-				if (card instanceof CasterCard) addToBot(new ModifyCastTimeAction((CasterCard)card, -reduceAmount));
+				if (card instanceof CasterCard) addToBot(new ModifyCastTimeForOneTurnAction((CasterCard)card, -reduceAmount));
 			}    		
     	}
 		if (this.p.hand.isEmpty()) {

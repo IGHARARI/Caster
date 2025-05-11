@@ -5,12 +5,12 @@ import com.megacrit.cardcrawl.core.Settings;
 
 import sts.caster.cards.CasterCard;
 
-public class ModifyCastTimeAction extends AbstractGameAction {
+public class ModifyCastTimeForOneTurnAction extends AbstractGameAction {
     
     private int modifyAmount;
     private CasterCard card;
 	
-    public ModifyCastTimeAction(CasterCard card, int modifyAmount) {
+    public ModifyCastTimeForOneTurnAction(CasterCard card, int modifyAmount) {
         this.actionType = ActionType.CARD_MANIPULATION;
         this.duration = Settings.ACTION_DUR_FAST;
         this.modifyAmount = modifyAmount;

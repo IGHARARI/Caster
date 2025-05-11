@@ -64,7 +64,7 @@ public class CasterMod implements
 
     private static final String MODNAME = "The Caster";
     private static final String AUTHOR = "Korbo";
-    private static final String DESCRIPTION = "The Caster, controller of elements and destroyer of... conical structures.";
+    private static final String DESCRIPTION = "The Caster. Blob of oblivion.";
 
     // SPECIAL MECHANIC ATTRIBUTES
     public static HashMap<Integer, Integer> blockLostPerTurn = new HashMap<Integer, Integer>();
@@ -216,6 +216,14 @@ public class CasterMod implements
         UnlockTracker.unlockCard(CasterStrike.ID);
         BaseMod.addCard(new CasterDefend());
         UnlockTracker.unlockCard(CasterDefend.ID);
+        BaseMod.addCard(new ManaBlast());
+        UnlockTracker.unlockCard(ManaBlast.ID);
+        BaseMod.addCard(new DivertMana());
+        UnlockTracker.unlockCard(DivertMana.ID);
+        BaseMod.addCard(new TapMana());
+        UnlockTracker.unlockCard(TapMana.ID);
+        BaseMod.addCard(new FocusMana());
+        UnlockTracker.unlockCard(FocusMana.ID);
         BaseMod.addCard(new Meteor());
         UnlockTracker.unlockCard(Meteor.ID);
         BaseMod.addCard(new DivertFocus());

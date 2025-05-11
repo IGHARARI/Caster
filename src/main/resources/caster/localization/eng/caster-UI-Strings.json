@@ -9,6 +9,9 @@
 	"ElectrifiedStrings": {
 		"TEXT": ["Electrified", "Electrify"]
 	},
+	"FrozenTagStrings": {
+		"TEXT": ["Frozen", "Freeze"]
+	},
 	"FreezeCardAction": {
 		"TEXT": ["Freeze"]
 	},
@@ -47,6 +50,9 @@
 	},
 	"FreezeOnUseCardMod": {
 		"TEXT": [ "caster:Freeze this card when it's played." ]
+	},
+	"FrozenCardMod": {
+		"TEXT": [ "Frozen" ]
 	},
 	"RecurringSpellCardMod": {
 		"TEXT": [ "caster:Echo ","." ]

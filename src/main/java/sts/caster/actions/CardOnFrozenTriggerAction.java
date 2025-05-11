@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 
 import sts.caster.cards.CasterCard;
 
+@Deprecated
 public class CardOnFrozenTriggerAction extends AbstractGameAction {
 
 	CasterCard card;
