@@ -1,9 +1,5 @@
 package sts.caster.delayedCards;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.Gdx;
@@ -18,12 +14,14 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.*;
+import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.Hitbox;
+import com.megacrit.cardcrawl.helpers.MathHelper;
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.PenNibPower;
 import com.megacrit.cardcrawl.vfx.combat.FrostOrbPassiveEffect;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sts.caster.actions.*;
@@ -31,6 +29,10 @@ import sts.caster.cards.CasterCard;
 import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.powers.SpellDamageDisplayPower;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CastingSpellCard extends AbstractOrb {
 	public int turnsUntilFire;

@@ -2,7 +2,6 @@ package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.Settings;
-
 import sts.caster.cards.CasterCard;
 
 public class ModifyCastTimeForOneTurnAction extends AbstractGameAction {

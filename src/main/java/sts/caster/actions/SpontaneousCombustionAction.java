@@ -5,7 +5,6 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.cards.spells.SpontaneousCombustion;
 
 public class SpontaneousCombustionAction extends AbstractGameAction {

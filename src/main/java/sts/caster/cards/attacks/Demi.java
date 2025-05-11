@@ -1,10 +1,5 @@
 package sts.caster.cards.attacks;
 
-import static com.badlogic.gdx.graphics.Color.rgba8888;
-import static com.badlogic.gdx.graphics.Color.valueOf;
-import static sts.caster.core.CasterMod.makeCardPath;
-import static sts.caster.core.CasterMod.makeVFXPath;
-
 import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,19 +9,19 @@ import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.common.RemoveAllBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import com.megacrit.cardcrawl.vfx.combat.FireballEffect;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.util.TextureHelper;
 
 import java.util.ArrayList;
+
+import static com.badlogic.gdx.graphics.Color.valueOf;
+import static sts.caster.core.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeVFXPath;
 
 public class Demi extends CasterCard {
 

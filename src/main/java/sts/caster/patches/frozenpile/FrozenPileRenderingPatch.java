@@ -1,16 +1,7 @@
 package sts.caster.patches.frozenpile;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.UUID;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.modthespire.lib.ByRef;
-import com.evacipated.cardcrawl.modthespire.lib.LineFinder;
-import com.evacipated.cardcrawl.modthespire.lib.Matcher;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -21,11 +12,14 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon.CurrentScreen;
 import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import sts.caster.core.frozenpile.FrozenCardsPanel;
 import sts.caster.core.frozenpile.FrozenPileManager;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.UUID;
 
 @Deprecated
 public class FrozenPileRenderingPatch {

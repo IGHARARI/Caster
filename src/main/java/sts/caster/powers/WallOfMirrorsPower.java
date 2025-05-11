@@ -1,7 +1,5 @@
 package sts.caster.powers;
 
-import static sts.caster.core.CasterMod.makePowerPath;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.abstracts.TwoAmountPower;
@@ -12,11 +10,11 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
+
+import static sts.caster.core.CasterMod.makePowerPath;
 
 //Gain 1 dex for the turn for each card played.
 

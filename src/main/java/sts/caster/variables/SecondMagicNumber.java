@@ -1,13 +1,12 @@
 package sts.caster.variables;
 
-import static sts.caster.core.CasterMod.makeID;
-
+import basemod.abstracts.DynamicVariable;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
-
-import basemod.abstracts.DynamicVariable;
 import sts.caster.cards.CasterCard;
+
+import static sts.caster.core.CasterMod.makeID;
 
 public class SecondMagicNumber extends DynamicVariable {
     @Override

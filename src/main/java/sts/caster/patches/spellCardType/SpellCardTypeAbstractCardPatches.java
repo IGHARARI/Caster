@@ -1,33 +1,26 @@
 package sts.caster.patches.spellCardType;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-
+import basemod.abstracts.CustomCard;
+import basemod.helpers.SuperclassFinder;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.evacipated.cardcrawl.modthespire.lib.ByRef;
-import com.evacipated.cardcrawl.modthespire.lib.LineFinder;
-import com.evacipated.cardcrawl.modthespire.lib.Matcher;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
-
-import basemod.abstracts.CustomCard;
-import basemod.helpers.SuperclassFinder;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import sts.caster.cards.CasterCard;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class SpellCardTypeAbstractCardPatches {
     private static void renderHelper(final AbstractCard card, final SpriteBatch sb, final Color color, final AtlasRegion texture, final float xPos, final float yPos) {

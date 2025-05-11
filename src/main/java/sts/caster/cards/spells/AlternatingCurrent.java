@@ -1,12 +1,6 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import basemod.abstracts.AbstractCardModifier;
-import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -16,7 +10,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import sts.caster.actions.DelayedDamageRandomEnemyAction;
 import sts.caster.actions.QueueDelayedCardAction;
@@ -28,6 +21,11 @@ import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class AlternatingCurrent extends CasterCard {
 

@@ -1,7 +1,5 @@
 package sts.caster.powers;
 
-import static sts.caster.core.CasterMod.makePowerPath;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -11,9 +9,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
+
+import static sts.caster.core.CasterMod.makePowerPath;
 
 public class InfernoPower extends AbstractPower {
 	public AbstractCreature source;

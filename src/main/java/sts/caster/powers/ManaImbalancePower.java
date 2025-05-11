@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import sts.caster.core.CasterMod;
-import sts.caster.core.MagicElement;
 import sts.caster.util.TextureHelper;
 
 import static sts.caster.core.CasterMod.makePowerPath;

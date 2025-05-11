@@ -1,10 +1,5 @@
 package sts.caster.cards.attacks;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -15,12 +10,16 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.ConditionalDiscardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class MagicWeapon extends CasterCard {
 

@@ -1,7 +1,6 @@
 package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-
 import sts.caster.delayedCards.CastingSpellCard;
 
 public class DelayedEffectOnStartOfTurnTriggerAction extends AbstractGameAction {

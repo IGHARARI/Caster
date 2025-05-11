@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Vajra;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.spells.Fira;
 import sts.caster.cards.spells.Heavy;

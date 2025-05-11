@@ -1,7 +1,5 @@
 package sts.caster.powers;
 
-import static sts.caster.core.CasterMod.makePowerPath;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -17,7 +15,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-
 import sts.caster.actions.ConditionalAction;
 import sts.caster.core.CasterMod;
 import sts.caster.util.PowersHelper;
@@ -25,6 +22,8 @@ import sts.caster.util.TextureHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static sts.caster.core.CasterMod.makePowerPath;
 
 //Gain 1 dex for the turn for each card played.
 

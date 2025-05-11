@@ -1,9 +1,5 @@
 package sts.caster.cards.spells;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -12,7 +8,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.actions.SpontaneousCombustionAction;
 import sts.caster.cards.CasterCard;
@@ -21,6 +16,10 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class SpontaneousCombustion extends CasterCard {
 

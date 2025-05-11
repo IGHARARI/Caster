@@ -1,26 +1,14 @@
 package sts.caster.actions;
 
-import basemod.devcommands.hand.Hand;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
-import com.megacrit.cardcrawl.actions.common.PlayTopCardAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
-import com.megacrit.cardcrawl.actions.utility.UnlimboAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import sts.caster.core.CasterMod;
 import sts.caster.core.frozenpile.FrozenPileManager;
-
-import java.util.function.BooleanSupplier;
-import java.util.function.Consumer;
 
 public class FreezeInHellAction extends AbstractGameAction {
 

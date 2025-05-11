@@ -1,14 +1,6 @@
 package sts.caster.patches.spellCardType;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Objects;
-
-import com.evacipated.cardcrawl.modthespire.lib.LineFinder;
-import com.evacipated.cardcrawl.modthespire.lib.Matcher;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardColor;
@@ -16,10 +8,13 @@ import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
-
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import sts.caster.core.TheCaster;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class SpellCardTypeMerchantPatches {
 	

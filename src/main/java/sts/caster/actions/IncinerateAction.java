@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-
 import sts.caster.powers.BlazedPower;
 
 public class IncinerateAction extends AbstractGameAction {

@@ -1,10 +1,5 @@
 package sts.caster.cards.attacks;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-import static sts.caster.core.CasterMod.makeVFXPath;
-
-import java.util.HashSet;
-
 import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
@@ -12,21 +7,23 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.AttackDamageRandomEnemyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import sts.caster.actions.RepeatingRandomDamageAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.util.TextureHelper;
+
+import java.util.HashSet;
+
+import static sts.caster.core.CasterMod.makeCardPath;
+import static sts.caster.core.CasterMod.makeVFXPath;
 
 public class GateOfBabylon extends CasterCard {
 

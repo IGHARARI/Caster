@@ -1,8 +1,7 @@
 package sts.caster.cards;
 
-import java.util.*;
-import java.util.function.Predicate;
-
+import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,15 +14,16 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
-
-import basemod.abstracts.CustomCard;
-import basemod.helpers.TooltipInfo;
 import sts.caster.cards.special.Lava;
 import sts.caster.core.MagicElement;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
-import sts.caster.powers.*;
+import sts.caster.powers.ManaImbalancePower;
+import sts.caster.powers.ShortenedChantPower;
 import sts.caster.util.PowersHelper;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 public abstract class CasterCard extends CustomCard {
 	private final static HashSet<String> ineffectivePowers = new HashSet<String>(Arrays.asList(PenNibPower.POWER_ID, StrengthPower.POWER_ID, DexterityPower.POWER_ID, WeakPower.POWER_ID, VulnerablePower.POWER_ID));

@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import com.megacrit.cardcrawl.vfx.combat.ImpactSparkEffect;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.MagicElement;
 

@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import sts.caster.actions.IfritAction;
 import sts.caster.core.CasterMod;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.util.TextureHelper;

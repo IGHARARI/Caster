@@ -1,13 +1,12 @@
 package sts.caster.variables;
 
 import basemod.abstracts.DynamicVariable;
-import sts.caster.cards.CasterCard;
-
-import static sts.caster.core.CasterMod.makeID;
-
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
+import sts.caster.cards.CasterCard;
+
+import static sts.caster.core.CasterMod.makeID;
 
 public class SpellBlock extends DynamicVariable {
 

@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-
 import sts.caster.core.CasterMod;
 
 public class DamageAllEnemiesForBlockLostAction extends AbstractGameAction {

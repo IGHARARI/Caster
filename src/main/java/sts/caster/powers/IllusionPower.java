@@ -1,22 +1,20 @@
 package sts.caster.powers;
 
-import static sts.caster.core.CasterMod.makePowerPath;
-
-import java.lang.reflect.Field;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
+
+import java.lang.reflect.Field;
+
+import static sts.caster.core.CasterMod.makePowerPath;
 
 //Gain 1 dex for the turn for each card played.
 

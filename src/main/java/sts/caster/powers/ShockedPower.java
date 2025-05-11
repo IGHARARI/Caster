@@ -1,7 +1,5 @@
 package sts.caster.powers;
 
-import static sts.caster.core.CasterMod.makePowerPath;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -9,12 +7,12 @@ import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.LoseBlockAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
+
+import static sts.caster.core.CasterMod.makePowerPath;
 
 public class ShockedPower extends AbstractPower {
 	public AbstractCreature source;

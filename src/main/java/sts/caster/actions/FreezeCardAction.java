@@ -7,12 +7,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
-
 import sts.caster.core.frozenpile.FrozenPileManager;
-
-import java.util.function.BooleanSupplier;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class FreezeCardAction extends AbstractGameAction {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FreezeCardAction");

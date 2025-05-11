@@ -1,12 +1,6 @@
 package sts.caster.relics;
 
 import basemod.abstracts.CustomRelic;
-import sts.caster.core.CasterMod;
-import sts.caster.util.TextureHelper;
-
-import static sts.caster.core.CasterMod.makeRelicOutlinePath;
-import static sts.caster.core.CasterMod.makeRelicPath;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
@@ -17,6 +11,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
+import sts.caster.core.CasterMod;
+import sts.caster.util.TextureHelper;
+
+import static sts.caster.core.CasterMod.makeRelicOutlinePath;
+import static sts.caster.core.CasterMod.makeRelicPath;
 
 public class DefaultClickableRelic extends CustomRelic implements ClickableRelic { // You must implement things you want to use from StSlib
     /*

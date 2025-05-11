@@ -1,15 +1,14 @@
 package sts.caster.actions;
 
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
 
 public class QuickCastAction extends AbstractGameAction {
     

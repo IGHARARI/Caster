@@ -1,13 +1,12 @@
 package sts.caster.relics;
 
-import static sts.caster.core.CasterMod.makeRelicOutlinePath;
-import static sts.caster.core.CasterMod.makeRelicPath;
-
-import com.badlogic.gdx.graphics.Texture;
-
 import basemod.abstracts.CustomRelic;
+import com.badlogic.gdx.graphics.Texture;
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
+
+import static sts.caster.core.CasterMod.makeRelicOutlinePath;
+import static sts.caster.core.CasterMod.makeRelicPath;
 
 public class PlaceholderRelic extends CustomRelic {
 

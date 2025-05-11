@@ -1,15 +1,9 @@
 package sts.caster.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
-import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
 import sts.caster.cards.spells.LordOfVermillion;
 
 public class LordOfVermillionAction extends AbstractGameAction {

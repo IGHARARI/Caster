@@ -1,17 +1,16 @@
 package sts.caster.cards.attacks;
 
-import static sts.caster.core.CasterMod.makeCardPath;
-
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
 import sts.caster.actions.DischargeAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+
+import static sts.caster.core.CasterMod.makeCardPath;
 
 public class Discharge extends CasterCard {
 

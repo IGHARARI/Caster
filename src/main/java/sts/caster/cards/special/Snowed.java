@@ -1,13 +1,11 @@
 package sts.caster.cards.special;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.ElectrifySpecificCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 

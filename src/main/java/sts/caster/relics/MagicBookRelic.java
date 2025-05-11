@@ -1,7 +1,8 @@
 package sts.caster.relics;
 
-import java.util.function.Predicate;
-
+import basemod.abstracts.CustomBottleRelic;
+import basemod.abstracts.CustomRelic;
+import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -11,16 +12,14 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-
-import basemod.abstracts.CustomBottleRelic;
-import basemod.abstracts.CustomRelic;
-import basemod.abstracts.CustomSavable;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.spells.Meteor;
 import sts.caster.core.CasterMod;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.util.TextureHelper;
+
+import java.util.function.Predicate;
 
 public class MagicBookRelic extends CustomRelic implements CustomBottleRelic, CustomSavable<Integer> {
 

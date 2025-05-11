@@ -1,15 +1,14 @@
 package sts.caster.delayedCards;
 
-import java.util.ArrayList;
-
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sts.caster.actions.QueueRedrawMiniCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+
+import java.util.ArrayList;
 
 public class SpellCardsArea {
 	public static ArrayList<CastingSpellCard> spellCardsBeingCasted;

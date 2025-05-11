@@ -1,7 +1,8 @@
 package sts.caster.actions;
 
-import java.util.ArrayList;
-
+import basemod.BaseMod;
+import basemod.helpers.ModalChoice;
+import basemod.helpers.ModalChoiceBuilder;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
@@ -13,14 +14,12 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
-
-import basemod.BaseMod;
-import basemod.helpers.ModalChoice;
-import basemod.helpers.ModalChoiceBuilder;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.patches.spellCardType.CasterCardType;
+
+import java.util.ArrayList;
 
 public class RectifyAction extends AbstractGameAction implements basemod.helpers.ModalChoice.Callback {
 	private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("RectifyAction");

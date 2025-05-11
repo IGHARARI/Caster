@@ -1,13 +1,12 @@
 package sts.caster.actions;
 
-import java.util.function.Predicate;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-
 import sts.caster.cards.CasterCard;
 import sts.caster.core.frozenpile.FrozenPileManager;
+
+import java.util.function.Predicate;
 
 public class ModifyCardInBattleSpellDamageAction extends AbstractGameAction {
 

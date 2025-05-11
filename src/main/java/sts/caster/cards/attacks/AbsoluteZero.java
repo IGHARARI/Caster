@@ -3,7 +3,6 @@ package sts.caster.cards.attacks;
 import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.ModifyDamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,7 +13,6 @@ import sts.caster.cards.mods.FreezeOnUseCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.patches.relics.FreezeOnUseCardField;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 

@@ -1,16 +1,15 @@
 package sts.caster.patches.relics;
 
-import java.util.ArrayList;
-
+import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.CampfireUI;
 import com.megacrit.cardcrawl.ui.campfire.AbstractCampfireOption;
-
-import basemod.ReflectionHacks;
 import sts.caster.relics.MagicBookRelic;
 import sts.caster.ui.RememorizeCardOption;
+
+import java.util.ArrayList;
 
 @SpirePatch(clz = CampfireUI.class, method = "initializeButtons")
 public class MagicBookCampfireOptionPatch
