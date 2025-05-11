@@ -44,8 +44,8 @@ public class CastingSpellCard extends AbstractOrb {
 	private float vfxTimer = 1.0f;
 	
 	public CasterCard spellCard;
-	public CasterCard cardMiniCopy = null;
-	public CasterCard cardPreviewCopy = null;
+	public CasterCard cardMiniCopy;
+	public CasterCard cardPreviewCopy;
 
 	public AbstractMonster target;
 	public Integer energyOnCast;

@@ -41,7 +41,7 @@ public class IceWall extends CasterCard {
     private static final int BASE_BLOCK = 24;
     private static final int UPG_BLOCK = 4;
     private static final int BASE_BLUR = 1;
-    private boolean wasUsed = false;
+    private boolean wasUsed;
 
     public IceWall() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);

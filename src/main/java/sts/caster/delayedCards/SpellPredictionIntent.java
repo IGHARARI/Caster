@@ -14,8 +14,8 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
 public class SpellPredictionIntent extends AbstractOrb {
 
-	public AbstractMonster target = null;
-	public int intentAmount = 0;
+	public AbstractMonster target;
+	public int intentAmount;
 	public AbstractCreature hoverTarget;
 	public SpellIntentType spellIntentType;
 	private Texture intentIcon;

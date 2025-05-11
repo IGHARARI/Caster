@@ -32,7 +32,7 @@ public class DefaultClickableRelic extends CustomRelic implements ClickableRelic
     private static final Texture IMG = TextureHelper.getTexture(makeRelicPath("default_clickable_relic.png"));
     private static final Texture OUTLINE = TextureHelper.getTexture(makeRelicOutlinePath("default_clickable_relic.png"));
 
-    private boolean usedThisTurn = false; // You can also have a relic be only usable once per combat. Check out Hubris for more examples, including other StSlib things.
+    private boolean usedThisTurn; // You can also have a relic be only usable once per combat. Check out Hubris for more examples, including other StSlib things.
 
     public DefaultClickableRelic() {
         super(ID, IMG, OUTLINE, RelicTier.COMMON, LandingSound.CLINK);

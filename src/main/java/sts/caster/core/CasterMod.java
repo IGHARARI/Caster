@@ -68,7 +68,7 @@ public class CasterMod implements
 
     // SPECIAL MECHANIC ATTRIBUTES
     public static HashMap<Integer, Integer> blockLostPerTurn = new HashMap<Integer, Integer>();
-    public static int cardsElectrifiedThisCombat = 0;
+    public static int cardsElectrifiedThisCombat;
     public static final int ELECTRIFY_DAMAGE = 2;
 
 

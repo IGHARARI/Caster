@@ -44,7 +44,7 @@ public class GateOfBabylon extends CasterCard {
     private static final int COST = 2;
     private static final int BASE_DAMAGE = 4;
     private static final int UPGR_DAMAGE = 2;
-    private boolean descriptionChanged = false;
+    private boolean descriptionChanged;
 
     public GateOfBabylon() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);

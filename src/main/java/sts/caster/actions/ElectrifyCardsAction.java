@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 
 public class ElectrifyCardsAction extends AbstractGameAction {
     private AbstractPlayer p;
-    private boolean isRandom = false;
+    private boolean isRandom;
     private int amount;
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings");
     public static final String[] TEXT = uiStrings.TEXT;

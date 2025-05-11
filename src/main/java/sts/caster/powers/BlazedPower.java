@@ -46,7 +46,7 @@ public class BlazedPower extends AbstractPower {
 		updateDescription();
 	}
 
-	private boolean attackedThisTurn = false;
+	private boolean attackedThisTurn;
 	
 	@Override
 	public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
