@@ -33,7 +33,6 @@ import sts.caster.cards.powers.*;
 import sts.caster.cards.skills.*;
 import sts.caster.cards.special.Ashes;
 import sts.caster.cards.spells.*;
-import sts.caster.core.frozenpile.FrozenPileManager;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.relics.MagicBookRelic;
 import sts.caster.util.TextureHelper;
@@ -44,6 +43,8 @@ import sts.caster.variables.SpellDamage;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+
+import static sts.caster.core.freeze.FreezeHelper.resetFrozenThisCombatCount;
 
 
 @SpireInitializer
@@ -546,7 +547,8 @@ public class CasterMod implements
 
     @Override
     public void receiveOnBattleStart(AbstractRoom p0) {
-        FrozenPileManager.resetFrozenCount();
+//        DeprecatedFrozenPileManager.resetFrozenCount();
+        resetFrozenThisCombatCount();
         blockLostPerTurn.clear();
         cardsElectrifiedThisCombat = 0;
     }
@@ -558,9 +560,9 @@ public class CasterMod implements
 
 //    @Override
 //    public void receivePostEnergyRecharge() {
-//        List<AbstractCard> frozenEmbers = FrozenPileManager.frozenPile.group.stream().filter(c -> c instanceof Embers).collect(Collectors.toList());
+//        List<AbstractCard> frozenEmbers = DeprecatedFrozenPileManager.frozenPile.group.stream().filter(c -> c instanceof Embers).collect(Collectors.toList());
 //        for (AbstractCard ember : frozenEmbers) {
-//            ((Embers)ember).triggerWhenOnFrozenPile();
+//            ((Embers)ember).triggerWhenFrozen();
 //        }
 //    }
 }

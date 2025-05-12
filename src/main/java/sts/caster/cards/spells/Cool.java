@@ -15,13 +15,13 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.core.frozenpile.FrozenPileManager;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
 
 import static sts.caster.core.CasterMod.makeCardPath;
+import static sts.caster.core.freeze.FreezeHelper.getFrozenThisCombatCount;
 
 public class Cool extends CasterCard {
 
@@ -63,7 +63,7 @@ public class Cool extends CasterCard {
 
     @Override
     public void applyPowers() {
-        baseSpellDamage = FrozenPileManager.getFrozenCount() * m2;
+        baseSpellDamage = getFrozenThisCombatCount() * m2;
         super.applyPowers();
     }
 

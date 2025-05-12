@@ -4,7 +4,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import sts.caster.cards.CasterCard;
-import sts.caster.core.frozenpile.FrozenPileManager;
 
 import java.util.function.Predicate;
 
@@ -54,11 +53,11 @@ public class ModifyCardInBattleSpellDamageAction extends AbstractGameAction {
                 increaseSpellDamage(c);
             }
         }
-        for (final AbstractCard c : FrozenPileManager.frozenPile.group) {
-        	if (pred.test(c)) {
-        		increaseSpellDamage(c);
-        	}
-        }
+//        for (final AbstractCard c : DeprecatedFrozenPileManager.frozenPile.group) {
+//        	if (pred.test(c)) {
+//        		increaseSpellDamage(c);
+//        	}
+//        }
         
         
         this.isDone = true;

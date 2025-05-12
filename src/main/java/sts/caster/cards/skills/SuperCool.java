@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.mods.DeprecatedFreezeOnUseCardMod;
+import sts.caster.cards.mods.FreezeOnUseCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -45,7 +45,7 @@ public class SuperCool extends CasterCard {
         addToBot(new GainBlockAction(p, block));
         for (AbstractCard c : p.hand.group) {
             if (c != this) {
-                CardModifierManager.addModifier(c, new DeprecatedFreezeOnUseCardMod());
+                CardModifierManager.addModifier(c, new FreezeOnUseCardMod(true));
                 c.superFlash(Color.BLUE.cpy());
             }
         }

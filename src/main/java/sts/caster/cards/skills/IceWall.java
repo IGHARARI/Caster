@@ -1,5 +1,6 @@
 package sts.caster.cards.skills;
 
+import basemod.helpers.CardModifierManager;
 import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -14,10 +15,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.BlurPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.FreezeOnUseCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.patches.relics.FreezeOnUseCardField;
 import sts.caster.util.TextureHelper;
 
 import static sts.caster.core.CasterMod.makeCardPath;
@@ -85,7 +86,7 @@ public class IceWall extends CasterCard {
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             upgradeBlock(UPG_BLOCK);
             exhaust = false;
-            FreezeOnUseCardField.freezeOnuse.set(this, true);
+            CardModifierManager.addModifier(this, new FreezeOnUseCardMod());
             initializeDescription();
         }
     }

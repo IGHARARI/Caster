@@ -253,8 +253,8 @@
   },
   "caster:StormGust": {
     "NAME": "Storm Gust",
-    "DESCRIPTION": "caster:Freeze !M! cards. caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. NL Apply !caster:M2! caster:Frost to ALL enemies.",
-    "UPGRADE_DESCRIPTION": "caster:Freeze !M! card. caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. NL Apply !caster:M2! caster:Frost to ALL enemies."
+    "DESCRIPTION": "caster:Freeze !M! cards. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. NL Apply !caster:M2! caster:Frost to ALL enemies.",
+    "UPGRADE_DESCRIPTION": "caster:Freeze !M! card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. NL Apply !caster:M2! caster:Frost to ALL enemies."
   },
   "caster:Eruption": {
     "NAME": "Eruption",
@@ -489,7 +489,7 @@
   },
   "caster:SuperCool": {
     "NAME": "Super Cool",
-    "DESCRIPTION": "Gain !B! Block. NL All cards in your hand gain: caster:Freeze this card when it's played."
+    "DESCRIPTION": "Gain !B! Block. NL All cards in your hand gain: caster:Freeze this card the next time it's played."
   },
   "caster:Avalanche": {
     "NAME": "Avalanche",

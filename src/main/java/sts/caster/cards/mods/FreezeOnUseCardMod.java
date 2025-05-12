@@ -8,14 +8,18 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import sts.caster.actions.FreezeSpecificCardAction;
-import sts.caster.core.CasterMod;
 
 public class FreezeOnUseCardMod extends AbstractCardModifier {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FreezeOnUseCardMod");
 
     static final String ID = "caster:FreezeOnUseCardMod";
+    private boolean removeOnTrigger;
 
     public FreezeOnUseCardMod() { }
+
+    public FreezeOnUseCardMod(boolean removeOnTrigger) {
+        this.removeOnTrigger = removeOnTrigger;
+    }
 
     @Override
     public String identifier(AbstractCard card) {
@@ -24,10 +28,12 @@ public class FreezeOnUseCardMod extends AbstractCardModifier {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        CasterMod.logger.info("Trying to add frozen mod..");
         addToBot(new FreezeSpecificCardAction(card));
-//        CardModifierManager.addModifier(card, new FrozenCardMod());
-        CasterMod.logger.info("Added frozen mod");
+    }
+
+    @Override
+    public boolean removeOnCardPlayed(AbstractCard card) {
+        return removeOnTrigger;
     }
 
     @Override

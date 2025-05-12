@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.skills.WallOfLightning;
 import sts.caster.core.CasterMod;
-import sts.caster.core.frozenpile.FrozenPileManager;
 import sts.caster.powers.GainPower;
 import sts.caster.powers.RamuhPower;
 import sts.caster.powers.StaticFieldPower;
@@ -39,7 +38,7 @@ public class ElectrifySpecificCardAction extends AbstractGameAction {
 			triggerCardWasElectrifiedForGroup(AbstractDungeon.player.drawPile.group);
 			triggerCardWasElectrifiedForGroup(AbstractDungeon.player.discardPile.group);
 			triggerCardWasElectrifiedForGroup(AbstractDungeon.player.exhaustPile.group);
-			triggerCardWasElectrifiedForGroup(FrozenPileManager.frozenPile.group);
+//			triggerCardWasElectrifiedForGroup(DeprecatedFrozenPileManager.frozenPile.group);
 
 			if (AbstractDungeon.player.hasPower(StaticFieldPower.POWER_ID)) {
 				AbstractDungeon.player.getPower(StaticFieldPower.POWER_ID).onSpecificTrigger();

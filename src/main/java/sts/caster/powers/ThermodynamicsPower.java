@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -13,13 +14,15 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import sts.caster.core.CasterMod;
+import sts.caster.interfaces.OnFreezePower;
+import sts.caster.interfaces.OnThawPower;
 import sts.caster.util.TextureHelper;
 
 import static sts.caster.core.CasterMod.makePowerPath;
 
 //Gain 1 dex for the turn for each card played.
 
-public class ThermodynamicsPower extends AbstractPower {
+public class ThermodynamicsPower extends AbstractPower implements OnFreezePower, OnThawPower {
 	public AbstractCreature source;
 
 	public static final String POWER_ID = CasterMod.makeID("Thermodynamics");
@@ -45,17 +48,18 @@ public class ThermodynamicsPower extends AbstractPower {
 		updateDescription();
 	}
 
-	public void onThawCard() {
-		addToBot(new DamageRandomEnemyAction(new DamageInfo(AbstractDungeon.player, amount, DamageType.THORNS), AttackEffect.FIRE));
-	}
-
-	public void onFreezeCard() {
-		addToBot(new GainBlockAction(AbstractDungeon.player, amount, true));
-	}
-
 	@Override
 	public void updateDescription() {
         description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1] + amount + DESCRIPTIONS[2];
 	}
 
+	@Override
+	public void onFreeze(AbstractCard c) {
+		addToBot(new GainBlockAction(AbstractDungeon.player, amount, true));
+	}
+
+	@Override
+	public void onThaw(AbstractCard c) {
+		addToBot(new DamageRandomEnemyAction(new DamageInfo(AbstractDungeon.player, amount, DamageType.THORNS), AttackEffect.FIRE));
+	}
 }

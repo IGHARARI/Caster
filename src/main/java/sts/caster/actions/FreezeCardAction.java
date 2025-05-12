@@ -1,5 +1,6 @@
 package sts.caster.actions;
 
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -7,7 +8,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import sts.caster.core.frozenpile.FrozenPileManager;
+import sts.caster.cards.mods.FrozenCardMod;
+import sts.caster.core.CasterMod;
+import sts.caster.core.freeze.FreezeHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FreezeCardAction extends AbstractGameAction {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FreezeCardAction");
@@ -16,6 +22,7 @@ public class FreezeCardAction extends AbstractGameAction {
     private boolean isRandom;
     private boolean anyNumber;
     private boolean canPickZero;
+    private List<AbstractCard> alreadyFrozen = new ArrayList();
 
     public FreezeCardAction(final int amount, final boolean isRandom) {
         this(amount, isRandom, false, false);
@@ -35,38 +42,106 @@ public class FreezeCardAction extends AbstractGameAction {
     public FreezeCardAction(final int amount, final boolean isRandom, final boolean anyNumber) {
         this(amount, isRandom, anyNumber, false);
     }
-    
+
+    // Refactor for the new freeze.
+//    @Override
+//    public void update() {
+//        if (this.duration == Settings.ACTION_DUR_FAST) {
+//            if (this.p.hand.size() == 0) {
+//                this.isDone = true;
+//                return;
+//            }
+//            if (!this.anyNumber && this.p.hand.size() <= this.amount) {
+//                this.amount = this.p.hand.size();
+//                for (int tmp = this.p.hand.size(), i = 0; i < tmp; ++i) {
+//                    final AbstractCard c = this.p.hand.getTopCard();
+//                    DeprecatedFrozenPileManager.moveToFrozenPile(p.hand, c);
+//                }
+//                this.isDone = true;
+//                return;
+//            }
+//            if (!this.isRandom) {
+//                AbstractDungeon.handCardSelectScreen.open(TEXT[0], this.amount, this.anyNumber, this.canPickZero);
+//                this.tickDuration();
+//                return;
+//            }
+//            for (int j = 0; j < this.amount; ++j) {
+//            	DeprecatedFrozenPileManager.moveToFrozenPile(p.hand, p.hand.getRandomCard(AbstractDungeon.cardRandomRng));
+//            }
+//        }
+//        if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+//            for (final AbstractCard c2 : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
+//                DeprecatedFrozenPileManager.moveToFrozenPile(p.hand, c2);
+//            }
+//            AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
+//        }
+//        this.tickDuration();
+//    }
     @Override
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
+            alreadyFrozen = FreezeHelper.getFrozenCardsForPile(p.hand);
             if (this.p.hand.size() == 0) {
                 this.isDone = true;
                 return;
             }
-            if (!this.anyNumber && this.p.hand.size() <= this.amount) {
-                this.amount = this.p.hand.size();
-                for (int tmp = this.p.hand.size(), i = 0; i < tmp; ++i) {
-                    final AbstractCard c = this.p.hand.getTopCard();
-                    FrozenPileManager.moveToFrozenPile(p.hand, c);
-                }
+            if (alreadyFrozen.size() == this.p.hand.size()) {
                 this.isDone = true;
                 return;
             }
+
+            if ((this.p.hand.group.size() - alreadyFrozen.size()) == 1) {
+                for(AbstractCard c : this.p.hand.group) {
+                    if (!CardModifierManager.hasModifier(c, FrozenCardMod.ID)) {
+                        addToBot(new FreezeSpecificCardAction(c));
+                        this.isDone = true;
+                        return;
+                    }
+                }
+            }
+
+            this.p.hand.group.removeAll(alreadyFrozen);
+            if (!this.anyNumber && this.p.hand.size() <= this.amount) {
+                this.amount = this.p.hand.size();
+                for(AbstractCard c : this.p.hand.group) {
+                    addToBot(new FreezeSpecificCardAction(c));
+                }
+                this.isDone = true;
+                this.returnCards();
+                return;
+            }
+
             if (!this.isRandom) {
                 AbstractDungeon.handCardSelectScreen.open(TEXT[0], this.amount, this.anyNumber, this.canPickZero);
                 this.tickDuration();
                 return;
             }
+            // It's random, shuffle (to randomize) and freeze the bottom amount
+            p.hand.shuffle();
             for (int j = 0; j < this.amount; ++j) {
-            	FrozenPileManager.moveToFrozenPile(p.hand, p.hand.getRandomCard(AbstractDungeon.cardRandomRng));
+                addToBot(new FreezeSpecificCardAction(p.hand.group.get(j)));
             }
+            this.returnCards();
         }
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
             for (final AbstractCard c2 : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
-                FrozenPileManager.moveToFrozenPile(p.hand, c2);
+                addToBot(new FreezeSpecificCardAction(c2));
+                c2.superFlash();
+                p.hand.addToTop(c2);
             }
+            this.returnCards();
             AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
+            this.isDone = true;
         }
         this.tickDuration();
+    }
+
+    private void returnCards() {
+        CasterMod.logger.info("adding back " + this.alreadyFrozen.size() + " cards ");
+        for(AbstractCard c : this.alreadyFrozen) {
+            this.p.hand.addToTop(c);
+            CasterMod.logger.info("returned to hand " + c.name);
+        }
+        this.p.hand.refreshHandLayout();
     }
 }

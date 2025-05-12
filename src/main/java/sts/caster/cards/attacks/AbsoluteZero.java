@@ -3,6 +3,7 @@ package sts.caster.cards.attacks;
 import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.ModifyDamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -38,15 +39,14 @@ public class AbsoluteZero extends CasterCard {
     public AbsoluteZero() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDamage = damage = BASE_DAMAGE;
-//        FreezeOnUseCardField.freezeOnuse.set(this, true);
         CardModifierManager.addModifier(this, new FreezeOnUseCardMod());
         setCardElement(MagicElement.ICE);
     }
 
     @Override
     public void onFrozen() {
-//        flash();
-//        addToBot(new ModifyDamageAction(this.uuid, baseDamage));
+        flash();
+        addToBot(new ModifyDamageAction(this.uuid, baseDamage));
     }
 
     @Override

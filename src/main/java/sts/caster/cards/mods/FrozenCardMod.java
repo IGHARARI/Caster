@@ -4,12 +4,22 @@ import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import sts.caster.actions.CardOnFrozenTriggerAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
+import sts.caster.core.freeze.FreezeHelper;
+import sts.caster.interfaces.OnFreezePower;
+import sts.caster.interfaces.OnThawPower;
+
+import java.util.List;
+
+import static sts.caster.core.freeze.FreezeHelper.getCurrentlyAppliedOnFreezePowers;
+import static sts.caster.core.freeze.FreezeHelper.getCurrentlyAppliedOnThawPowers;
 
 public class FrozenCardMod extends AbstractCardModifier {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FrozenCardMod");
@@ -32,27 +42,37 @@ public class FrozenCardMod extends AbstractCardModifier {
     @Override
     public void onDrawn(AbstractCard card) {
         addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, ON_DRAW_BLOCK_AMOUNT));
-        card.retain = true;
     }
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.retain = true;
         card.tags.add(CasterCardTags.FROZEN);
+        FreezeHelper.increaseFrozenThisCombatCount(1);
+
         if (card instanceof CasterCard) {
-            ((CasterCard) card).onFrozen();
+            addToBot(new CardOnFrozenTriggerAction((CasterCard)card));
         }
+
+        List<OnFreezePower> onFreezePowers = getCurrentlyAppliedOnFreezePowers(AbstractDungeon.player);
+        for (OnFreezePower power : onFreezePowers) {
+            power.onFreeze(card);
+        }
+
+        card.applyPowers();
     }
 
     @Override
-    public void onRetained(AbstractCard card) {
+    public void atEndOfTurn(AbstractCard card, CardGroup group) {
         card.retain = true;
     }
 
     @Override
     public void onRemove(AbstractCard card) {
-        card.retain = false;
         card.tags.remove(CasterCardTags.FROZEN);
+        List<OnThawPower> onThawPowers = getCurrentlyAppliedOnThawPowers(AbstractDungeon.player);
+        for (OnThawPower power : onThawPowers) {
+            power.onThaw(card);
+        }
     }
 
     @Override
