@@ -562,7 +562,7 @@ public class CasterMod implements
 //    public void receivePostEnergyRecharge() {
 //        List<AbstractCard> frozenEmbers = DeprecatedFrozenPileManager.frozenPile.group.stream().filter(c -> c instanceof Embers).collect(Collectors.toList());
 //        for (AbstractCard ember : frozenEmbers) {
-//            ((Embers)ember).triggerWhenFrozen();
+//            ((Embers)ember).thawActions();
 //        }
 //    }
 }

@@ -1,11 +1,14 @@
 package sts.caster.cards.skills;
 
 import basemod.helpers.CardModifierManager;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import sts.caster.actions.ThawCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.mods.FrozenCardMod;
@@ -47,17 +50,19 @@ public class Embers extends CasterCard {
         return false;
     }
 
-    public void triggerWhenFrozen() {
+    public void thawActions() {
+        addToBot(new VFXAction(new ShowCardBrieflyEffect(this)));
+        addToBot(new WaitAction(0.5f));
         addToBot(new ThawCardAction(this));
         addToBot(new GainEnergyAction(m2));
         addToBot(new ThawCardAction(magicNumber, false, true));
     }
 
     @Override
-    public void triggerAtStartOfTurn() {
+    public void atTurnStart() {
         CasterMod.logger.info("Triggering atStartOfTurn for Embers");
         if (CardModifierManager.hasModifier(this, FrozenCardMod.ID)) {
-            triggerWhenFrozen();
+            this.thawActions();
         }
     }
 

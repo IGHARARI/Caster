@@ -9,11 +9,12 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import sts.caster.cards.mods.FrozenCardMod;
-import sts.caster.core.CasterMod;
 import sts.caster.core.freeze.FreezeHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class FreezeCardAction extends AbstractGameAction {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FreezeCardAction");
@@ -23,6 +24,7 @@ public class FreezeCardAction extends AbstractGameAction {
     private boolean anyNumber;
     private boolean canPickZero;
     private List<AbstractCard> alreadyFrozen = new ArrayList();
+    private List<AbstractCard> sortedCopyOfInitialHand = new ArrayList();
 
     public FreezeCardAction(final int amount, final boolean isRandom) {
         this(amount, isRandom, false, false);
@@ -81,6 +83,7 @@ public class FreezeCardAction extends AbstractGameAction {
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             alreadyFrozen = FreezeHelper.getFrozenCardsForPile(p.hand);
+            sortedCopyOfInitialHand = new ArrayList<>(p.hand.group);
             if (this.p.hand.size() == 0) {
                 this.isDone = true;
                 return;
@@ -117,9 +120,10 @@ public class FreezeCardAction extends AbstractGameAction {
                 return;
             }
             // It's random, shuffle (to randomize) and freeze the bottom amount
-            p.hand.shuffle();
+            List<AbstractCard> handCopy = new ArrayList<AbstractCard>(p.hand.group);
+            Collections.shuffle(handCopy, new Random(AbstractDungeon.shuffleRng.randomLong()));
             for (int j = 0; j < this.amount; ++j) {
-                addToBot(new FreezeSpecificCardAction(p.hand.group.get(j)));
+                addToBot(new FreezeSpecificCardAction(handCopy.get(j)));
             }
             this.returnCards();
         }
@@ -137,10 +141,9 @@ public class FreezeCardAction extends AbstractGameAction {
     }
 
     private void returnCards() {
-        CasterMod.logger.info("adding back " + this.alreadyFrozen.size() + " cards ");
-        for(AbstractCard c : this.alreadyFrozen) {
+        this.p.hand.clear();
+        for(AbstractCard c : this.sortedCopyOfInitialHand) {
             this.p.hand.addToTop(c);
-            CasterMod.logger.info("returned to hand " + c.name);
         }
         this.p.hand.refreshHandLayout();
     }
