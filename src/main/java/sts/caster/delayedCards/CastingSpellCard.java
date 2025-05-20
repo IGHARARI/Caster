@@ -64,8 +64,9 @@ public class CastingSpellCard extends AbstractOrb {
         
 		ID = ID_PREFIX + card.uuid;
 		name = card.name;
-
+		CasterMod.logger.info(card.uuid + " ARGS spellDamage " + card.spellDamage);
 		this.spellCard = card.makeStatIdenticalCopy();
+		CasterMod.logger.info(this.spellCard.uuid + " SPELLCARD COPY spellDamage " + this.spellCard.spellDamage);
 		if (spellCard.cost == -1) {
 			spellCard.rawDescription += " NL Casted for " + energyOnCast + " Energy.";
 			spellCard.initializeDescription();
@@ -157,8 +158,8 @@ public class CastingSpellCard extends AbstractOrb {
 
 				if (recurMod.recurAmount > 0) {
 					CasterCard cardToCast = this.spellCard;
-					recurMod.reduceRecurrence();
 					AbstractDungeon.actionManager.addToBottom(new QueueRecurringEffectAction(cardToCast, cardToCast.delayTurns, energyOnCast, target));
+					recurMod.reduceRecurrence(cardToCast);
 				}
 
 				if (recurMod.recurAmount <= 0) {

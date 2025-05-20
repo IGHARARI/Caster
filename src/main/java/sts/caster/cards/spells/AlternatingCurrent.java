@@ -20,6 +20,7 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.interfaces.MonsterToActionInterface;
+import sts.caster.interfaces.OnRecurringSpell;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.List;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class AlternatingCurrent extends CasterCard {
+public class AlternatingCurrent extends CasterCard implements OnRecurringSpell {
 
     public static final String ID = CasterMod.makeID("AlternatingCurrent");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -43,9 +44,10 @@ public class AlternatingCurrent extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 8;
+    private static final int BASE_DAMAGE = 4;
     private static final int UPGRADE_DAMAGE = 2;
-    private static final int BASE_RECUR = 2;
+    private static final int BASE_RECUR = 5;
+    private static final int DAMAGE_BONUS_PER_RECUR = 1;
 
     public AlternatingCurrent() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -79,6 +81,7 @@ public class AlternatingCurrent extends CasterCard {
     	};
     }
 
+
     @Override
     public void upgrade() {
         if (!upgraded) {
@@ -91,5 +94,12 @@ public class AlternatingCurrent extends CasterCard {
     @Override
     public int getIntentNumber() {
         return spellDamage;
+    }
+
+    @Override
+    public void onRecurring() {
+        CasterMod.logger.info("Alternating spell damage before recurring " + spellDamage);
+        upgradeSpellDamage(DAMAGE_BONUS_PER_RECUR);
+        CasterMod.logger.info("Alternating spell damage after recurring " + spellDamage);
     }
 }

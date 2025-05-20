@@ -174,7 +174,7 @@
   },
   "caster:AlternatingCurrent": {
     "NAME": "Alternating Current",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy. NL Deals 1 extra damage each time it Echoes."
   },
   "caster:Accumulation": {
     "NAME": "Accumulation",
@@ -416,7 +416,7 @@
   },
   "caster:Direct": {
     "NAME": "Direct",
-    "DESCRIPTION": "Fetch !M! card that costs 0 from your draw pile. NL Exhaust."
+    "DESCRIPTION": "Fetch up to !M! caster:Electrified cards from your draw or dicard pile. NL Gain !B! block."
   },
   "caster:Mirage": {
     "NAME": "Mirage",

@@ -22,7 +22,7 @@ public class Surge extends CasterCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.UNCOMMON;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
@@ -44,7 +44,7 @@ public class Surge extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ElectrifyCardsAction(m2, true));
-        addToBot(new GainEnergyAction(magicNumber));
+        addToBot(new GainEnergyAction(this.magicNumber));
     }
 
     @Override
