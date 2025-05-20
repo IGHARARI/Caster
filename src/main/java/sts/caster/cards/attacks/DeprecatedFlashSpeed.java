@@ -17,9 +17,9 @@ import sts.caster.core.TheCaster;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class FlashSpeed extends CasterCard {
+public class DeprecatedFlashSpeed extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("FlashSpeed");
+    public static final String ID = CasterMod.makeID("DeprecatedFlashSpeed");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("flashspeed.png");
     public static final String NAME = cardStrings.NAME;
@@ -37,7 +37,7 @@ public class FlashSpeed extends CasterCard {
     private static final int BLOCK = 2;
     private static final int ELEC_AMOUNT = 1;
 
-    public FlashSpeed() {
+    public DeprecatedFlashSpeed() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDamage = DAMAGE;
         magicNumber = baseMagicNumber = NUM_HITS;

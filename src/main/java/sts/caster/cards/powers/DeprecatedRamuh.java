@@ -7,46 +7,46 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.powers.ShortenedChantPower;
+import sts.caster.powers.RamuhPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class ShortenedChant extends CasterCard {
+public class DeprecatedRamuh extends CasterCard {
 
-
-    public static final String ID = CasterMod.makeID("ShortenedChant");
+    public static final String ID = CasterMod.makeID("DeprecatedRamuh");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("shortchant.png");
+    public static final String IMG = makeCardPath("ramuh.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CardType.POWER;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 3;
-    private static final int UPG_COST = 2;
-    private static final int CAST_REDUCTION = 1;
+    private static final int COST = 1;
 
-
-    public ShortenedChant() {
+    public DeprecatedRamuh() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseMagicNumber = magicNumber = CAST_REDUCTION;
+        setCardElement(MagicElement.ELECTRIC);
     }
 
     @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new ShortenedChantPower(p, magicNumber), magicNumber));
+    public void use(final AbstractPlayer p, final AbstractMonster m) {
+        addToBot(new ApplyPowerAction(p, p, new RamuhPower(p, 1), 1));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBaseCost(UPG_COST);
+            isInnate = true;
+            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            initializeDescription();
         }
     }
 }

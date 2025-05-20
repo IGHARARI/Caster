@@ -24,9 +24,9 @@ import sts.caster.powers.MiredPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class Sandstorm extends CasterCard {
+public class DeprecatedSandstorm extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("Sandstorm");
+    public static final String ID = CasterMod.makeID("DeprecatedSandstorm");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("sandstorm.png");
 
@@ -44,7 +44,7 @@ public class Sandstorm extends CasterCard {
     private static final int UPGRADE_STR_LOSS = 2;
 
 
-    public Sandstorm() {
+    public DeprecatedSandstorm() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_STR_LOSS;
         m2 = baseM2 = BASE_FOCUS_LOSS;

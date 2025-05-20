@@ -51,16 +51,16 @@ public class Embers extends CasterCard {
     }
 
     public void thawActions() {
+        this.superFlash();
         addToBot(new VFXAction(new ShowCardBrieflyEffect(this)));
         addToBot(new WaitAction(0.5f));
         addToBot(new ThawCardAction(this));
         addToBot(new GainEnergyAction(m2));
-        addToBot(new ThawCardAction(magicNumber, false, true));
+        addToBot(new ThawCardAction(magicNumber, false, true, this));
     }
 
     @Override
     public void atTurnStart() {
-        CasterMod.logger.info("Triggering atStartOfTurn for Embers");
         if (CardModifierManager.hasModifier(this, FrozenCardMod.ID)) {
             this.thawActions();
         }

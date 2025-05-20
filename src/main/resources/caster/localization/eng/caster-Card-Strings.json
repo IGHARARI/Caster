@@ -43,11 +43,7 @@
     "NAME": "Phoenix Flare",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL At the start of your turn, if this card is in your exhaust pile, put it in your hand. NL Exhaust."
   },
-  "caster:GigaDrain": {
-    "NAME": "Giga Drain",
-    "DESCRIPTION": "Deal !D! damage. NL Heal HP equal to 25% of unblocked damage dealt.",
-    "EXTENDED_DESCRIPTION": ["Heal !M! HP."]
-  },
+
   "caster:Gain": {
     "NAME": "Gain",
     "DESCRIPTION": "Every time you caster:Electrify 4 cards, gain !M! Focus."
@@ -60,10 +56,7 @@
     "NAME": "Wall Of Rocks",
     "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak to ALL attacking enemies."
   },
-  "caster:DiamondDust": {
-    "NAME": "Diamond Dust",
-    "DESCRIPTION": "Gain !B! Block. NL Increase this card's Block by !M! this combat."
-  },
+
   "caster:Bzzzt": {
     "NAME": "BZZZT",
     "DESCRIPTION": "Can only be played if you have no *Energy. NL Gain [E]. NL Draw !M! cards. NL Exhaust.",
@@ -134,10 +127,6 @@
     "NAME": "Freeze In Hell",
     "DESCRIPTION": "Whenever you play a card, Apply !M! caster:Frost to ALL enemies."
   },
-  "caster:FlashSpeed": {
-    "NAME": "Flash Speed",
-    "DESCRIPTION": "Deal !D! damage !M! times. NL Gain !B! Block. NL caster:Electrify !caster:M2! random card in your hand."
-  },
   "caster:VoltTackle": {
     "NAME": "Volt Tackle",
     "DESCRIPTION": "Deal !D! damage. NL caster:Electrify this card !M! times."
@@ -207,10 +196,6 @@
     "NAME": "Soul Strike",
     "DESCRIPTION": "Ethereal. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Exhaust."
   },
-  "caster:Fissure": {
-    "NAME": "Fissure",
-    "DESCRIPTION": "Apply !M! Stun to ALL enemies. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL Enemies. NL Exhaust."
-  },
   "caster:Susanoo": {
     "NAME": "Susano'o",
     "DESCRIPTION": "Deal !D! damage. NL Remove ALL caster:Electrify from your hand, deck, and discard pile. NL Deals !M! additional damage for each stack removed."
@@ -264,10 +249,6 @@
     "NAME": "Fira",
     "DESCRIPTION": "Deals !M! additional damage for every turn you've been in combat. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Cannot be Upgraded."
   },
-  "caster:SpontaneousCombustion": {
-    "NAME": "Spontaneous Combustion",
-    "DESCRIPTION": "Deal !caster:D! damage. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times to the enemy with the lowest HP."
-  },
   "caster:LordOfVermillion": {
     "NAME": "Lord Of Vermillion",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to a random enemy !M! [#F7FF00]x[] X times."
@@ -288,10 +269,6 @@
   "caster:Charge": {
     "NAME": "Charge",
     "DESCRIPTION": "Add a *Shocked into your draw pile, then draw !M! cards."
-  },
-  "caster:Sandstorm": {
-    "NAME": "Sandstorm",
-    "DESCRIPTION": "ALL enemies lose !M! Strength for 1 turn and gain 1 caster:Mired. NL Lose !caster:M2! Focus until the end of next turn."
   },
   "caster:Heavy": {
     "NAME": "Heavy",
@@ -332,20 +309,7 @@
     "DESCRIPTION": "caster:Freeze !M! random card in your hand. NL Gain !caster:B! Block. caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block.",
     "UPGRADE_DESCRIPTION": "caster:Freeze !M! card in your hand. NL Gain !caster:B! Block. caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block."
   },
-  "caster:Ramuh": {
-    "NAME": "Ramuh",
-    "DESCRIPTION": "Whenever you caster:Electrify a card, reduce its cost by 1 for the turn.",
-    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Electrify a card, reduce its cost by 1 for the turn."
-  },
-  "caster:Grimoire": {
-    "NAME": "Grimoire",
-    "DESCRIPTION": "Gain !M! Focus."
-  },
-  "caster:Focusyn": {
-    "NAME": "Immersion",
-    "DESCRIPTION": "Gain X Focus.",
-    "UPGRADE_DESCRIPTION": "Gain X Focus. NL Refund !stslib:refund!."
-  },
+
   "caster:Inferno": {
     "NAME": "Inferno",
     "DESCRIPTION": "At the end of your turn, apply !M! caster:Blazed to ALL enemies."
@@ -386,10 +350,6 @@
   "caster:IzanagisObdurance": {
     "NAME": "Izanagi's Obdurance",
     "DESCRIPTION": "Whenever you gain Block, gain !M! Temporary_HP."
-  },
-  "caster:ShortenedChant": {
-    "NAME": "Shortened Chant",
-    "DESCRIPTION": "Reduce the caster:Cast_Time of your Spells by !M!."
   },
   "caster:EchoingVoice": {
     "NAME": "Echoing Voice",
@@ -446,10 +406,6 @@
     "DESCRIPTION":         "Gain !B! Block. NL Block is not removed at the start of your next turn. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Block is not removed at the start of your next turn. NL caster:Freeze this card."
   },
-  "caster:SlipThrough": {
-    "NAME": "Slip Through",
-    "DESCRIPTION": "Gain !B! Block."
-  },
   "caster:PackedIce": {
     "NAME": "Packed Ice",
     "DESCRIPTION": "Gain !B! Block, then if you have !caster:M2! or more Block apply !M! Weak to ALL enemies."
@@ -465,10 +421,6 @@
   "caster:Mirage": {
     "NAME": "Mirage",
     "DESCRIPTION": "Deal !D! damage. NL When you play this card, return it to your hand and it gains Retain for this turn."
-  },
-  "caster:HeatRay": {
-    "NAME": "Heat Ray",
-    "DESCRIPTION": "Deal !D! damage. NL Decrease this card's damage by !M! this combat."
   },
   "caster:Meteor": {
     "NAME": "Meteor",
@@ -520,5 +472,56 @@
     "NAME": "Burning Spirit",
     "DESCRIPTION": "Next turn, gain [E] [E].",
     "UPGRADE_DESCRIPTION": "Next turn, gain [E] [E] [E] [E]."
+  },
+  "caster:DeprecatedSandstorm": {
+    "NAME": "Sandstorm",
+    "DESCRIPTION": "ALL enemies lose !M! Strength for 1 turn and gain 1 caster:Mired. NL Lose !caster:M2! Focus until the end of next turn."
+  },
+  "caster:DeprecatedGigaDrain": {
+    "NAME": "Giga Drain",
+    "DESCRIPTION": "Deal !D! damage. NL Heal HP equal to 25% of unblocked damage dealt.",
+    "EXTENDED_DESCRIPTION": ["Heal !M! HP."]
+  },
+  "caster:DeprecatedDiamondDust": {
+    "NAME": "Diamond Dust",
+    "DESCRIPTION": "Gain !B! Block. NL Increase this card's Block by !M! this combat."
+  },
+  "caster:DeprecatedSlipThrough": {
+    "NAME": "Slip Through",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "caster:DeprecatedRamuh": {
+    "NAME": "Ramuh",
+    "DESCRIPTION": "Whenever you caster:Electrify a card, reduce its cost by 1 for the turn.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Electrify a card, reduce its cost by 1 for the turn."
+  },
+  "caster:DeprecatedGrimoire": {
+    "NAME": "Grimoire",
+    "DESCRIPTION": "Gain !M! Focus."
+  },
+  "caster:DeprecatedFocusyn": {
+    "NAME": "Immersion",
+    "DESCRIPTION": "Gain X Focus.",
+    "UPGRADE_DESCRIPTION": "Gain X Focus. NL Refund !stslib:refund!."
+  },
+  "caster:DeprecatedHeatRay": {
+    "NAME": "Heat Ray",
+    "DESCRIPTION": "Deal !D! damage. NL Decrease this card's damage by !M! this combat."
+  },
+  "caster:DeprecatedShortenedChant": {
+    "NAME": "Shortened Chant",
+    "DESCRIPTION": "Reduce the caster:Cast_Time of your Spells by !M!."
+  },
+  "caster:DeprecatedSpontaneousCombustion": {
+    "NAME": "Spontaneous Combustion",
+    "DESCRIPTION": "Deal !caster:D! damage. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times to the enemy with the lowest HP."
+  },
+  "caster:DeprecatedFissure": {
+    "NAME": "Fissure",
+    "DESCRIPTION": "Apply !M! Stun to ALL enemies. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL Enemies. NL Exhaust."
+  },
+  "caster:DeprecatedFlashSpeed": {
+    "NAME": "Flash Speed",
+    "DESCRIPTION": "Deal !D! damage !M! times. NL Gain !B! Block. NL caster:Electrify !caster:M2! random card in your hand."
   }
 }

@@ -48,12 +48,12 @@ public class Sultry extends CasterCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new ThawCardAction(magicNumber, false, upgraded));
+        addToBot(new ThawCardAction(magicNumber, false, upgraded, this));
     }
 
     public void triggerWhenDrawn() {
         addToBot(new DrawCardAction(m2));
-        if (!upgraded) addToBot(new ThawCardAction(magicNumber, false));
+        if (!upgraded) addToBot(new ThawCardAction(magicNumber, false, this));
     }
 
     @Override

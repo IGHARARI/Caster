@@ -21,9 +21,9 @@ import java.util.ArrayList;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class SpontaneousCombustion extends CasterCard {
+public class DeprecatedSpontaneousCombustion extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("SpontaneousCombustion");
+    public static final String ID = CasterMod.makeID("DeprecatedSpontaneousCombustion");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("spontaneouscomb.png");
 
@@ -42,7 +42,7 @@ public class SpontaneousCombustion extends CasterCard {
     private static final int HIT_TIMES = 3;
 
 
-    public SpontaneousCombustion() {
+    public DeprecatedSpontaneousCombustion() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage =  BASE_DAMAGE;
@@ -65,7 +65,7 @@ public class SpontaneousCombustion extends CasterCard {
     public ActionListSupplier actionListSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		if (c instanceof SpontaneousCombustion) actionsList.add(new SpontaneousCombustionAction((SpontaneousCombustion) c, magicNumber));
+    		if (c instanceof DeprecatedSpontaneousCombustion) actionsList.add(new SpontaneousCombustionAction((DeprecatedSpontaneousCombustion) c, magicNumber));
     		return actionsList;
     	};
     }

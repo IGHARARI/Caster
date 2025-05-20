@@ -22,6 +22,7 @@ public class ThawCardAction extends AbstractGameAction {
     private boolean isRandom;
     private boolean anyNumber;
     private AbstractCard specificCard;
+    private AbstractCard sourceCard;
 
     public ThawCardAction(final AbstractCard card) {
         this.specificCard = card;
@@ -30,11 +31,11 @@ public class ThawCardAction extends AbstractGameAction {
         this.actionType = ActionType.EXHAUST;
     }
 
-    public ThawCardAction(final int amount, final boolean isRandom) {
-        this(amount, isRandom, false);
+    public ThawCardAction(final int amount, final boolean isRandom, final AbstractCard sourceCard) {
+        this(amount, isRandom, false, sourceCard);
     }
-    
-    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber) {
+
+    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final AbstractCard sourceCard) {
         this.anyNumber = anyNumber;
         this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
@@ -43,7 +44,7 @@ public class ThawCardAction extends AbstractGameAction {
         this.actionType = ActionType.EXHAUST;
     }
 
-    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final boolean canPickZero) {
+    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final boolean canPickZero, final AbstractCard sourceCard) {
         this.anyNumber = anyNumber;
         this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
@@ -122,6 +123,7 @@ public class ThawCardAction extends AbstractGameAction {
             }
             if (!anyNumber && frozenInHand.size() <= amount) {
                 //I copy the list to avoid CME or any visual bugs
+                // EDIT: Revision, shouldn't this just addToBot a bunch of ThawCardActions for each card?
                 ArrayList<AbstractCard> cardsCopy = new ArrayList<AbstractCard>(frozenInHand);
                 for (AbstractCard card : cardsCopy) {
                     thawSpecificCard(card);
@@ -131,8 +133,9 @@ public class ThawCardAction extends AbstractGameAction {
                 isDone = true;
                 return;
             }
-            if (!isRandom) {        // Thaw  +        ?(up to)           +   #N   +           (card./cards.)
-                String thawMessage = TEXT[0] + (anyNumber? TEXT[2] : "") + amount + (amount>1? TEXT[3] : TEXT[1]);
+            String cardName = sourceCard != null ? sourceCard.name + ": " : "";
+            if (!isRandom) {       //[Card Name]: Thaw  +        ?(up to)           +   #N   +           (card./cards.)
+                String thawMessage = cardName + TEXT[0] + (anyNumber? TEXT[2] : "") + amount + (amount>1? TEXT[3] : TEXT[1]);
                 AbstractDungeon.gridSelectScreen.open(frozenHandGroup, amount, anyNumber, thawMessage);
                 AbstractDungeon.gridSelectScreen.forClarity = false;
                 tickDuration();

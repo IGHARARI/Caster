@@ -31,7 +31,6 @@ import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.attacks.*;
 import sts.caster.cards.powers.*;
 import sts.caster.cards.skills.*;
-import sts.caster.cards.special.Ashes;
 import sts.caster.cards.spells.*;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.relics.MagicBookRelic;
@@ -233,18 +232,16 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Channeling.ID);
 
         // EVENT SPECIALS
-        BaseMod.addCard(new Fira());
-        UnlockTracker.unlockCard(Fira.ID);
-        BaseMod.addCard(new Thundara());
-        UnlockTracker.unlockCard(Thundara.ID);
-        BaseMod.addCard(new Heavy());
-        UnlockTracker.unlockCard(Heavy.ID);
-        BaseMod.addCard(new Slick());
-        UnlockTracker.unlockCard(Slick.ID);
+//        BaseMod.addCard(new Fira());
+//        UnlockTracker.unlockCard(Fira.ID);
+//        BaseMod.addCard(new Thundara());
+//        UnlockTracker.unlockCard(Thundara.ID);
+//        BaseMod.addCard(new Heavy());
+//        UnlockTracker.unlockCard(Heavy.ID);
+//        BaseMod.addCard(new Slick());
+//        UnlockTracker.unlockCard(Slick.ID);
 
         // COMMON CARDS
-        BaseMod.addCard(new FlashSpeed());
-        UnlockTracker.unlockCard(FlashSpeed.ID);
         BaseMod.addCard(new JupitelThunder());
         UnlockTracker.unlockCard(JupitelThunder.ID);
         BaseMod.addCard(new MagicResonance());
@@ -257,8 +254,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Charge.ID);
         BaseMod.addCard(new Sleet());
         UnlockTracker.unlockCard(Sleet.ID);
-        BaseMod.addCard(new Sandstorm());
-        UnlockTracker.unlockCard(Sandstorm.ID);
         BaseMod.addCard(new Enfeeble());
         UnlockTracker.unlockCard(Enfeeble.ID);
         BaseMod.addCard(new Sultry());
@@ -275,8 +270,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(AlternatingCurrent.ID);
         BaseMod.addCard(new BurnItDown());
         UnlockTracker.unlockCard(BurnItDown.ID);
-        BaseMod.addCard(new SlipThrough());
-        UnlockTracker.unlockCard(SlipThrough.ID);
         BaseMod.addCard(new PackedIce());
         UnlockTracker.unlockCard(PackedIce.ID);
         BaseMod.addCard(new MagicScroll());
@@ -287,19 +280,11 @@ public class CasterMod implements
         UnlockTracker.unlockCard(FrostDriver.ID);
         BaseMod.addCard(new Mirage());
         UnlockTracker.unlockCard(Mirage.ID);
-        BaseMod.addCard(new HeatRay());
-        UnlockTracker.unlockCard(HeatRay.ID);
 
 
         // UNCOMMON
-        BaseMod.addCard(new Fissure());
-        UnlockTracker.unlockCard(Fissure.ID);
-        BaseMod.addCard(new SpontaneousCombustion());
-        UnlockTracker.unlockCard(SpontaneousCombustion.ID);
         BaseMod.addCard(new Eruption());
         UnlockTracker.unlockCard(Eruption.ID);
-        BaseMod.addCard(new Grimoire());
-        UnlockTracker.unlockCard(Grimoire.ID);
         BaseMod.addCard(new AbsoluteZero());
         UnlockTracker.unlockCard(AbsoluteZero.ID);
         BaseMod.addCard(new Conflagrate());
@@ -312,8 +297,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(WallOfAsh.ID);
         BaseMod.addCard(new ShivasGrace());
         UnlockTracker.unlockCard(ShivasGrace.ID);
-        BaseMod.addCard(new GigaDrain());
-        UnlockTracker.unlockCard(GigaDrain.ID);
         BaseMod.addCard(new WallOfMirrors());
         UnlockTracker.unlockCard(WallOfMirrors.ID);
         BaseMod.addCard(new Cryogenesis());
@@ -330,8 +313,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Illusion.ID);
         BaseMod.addCard(new WallOfRocks());
         UnlockTracker.unlockCard(WallOfRocks.ID);
-        BaseMod.addCard(new DiamondDust());
-        UnlockTracker.unlockCard(DiamondDust.ID);
         BaseMod.addCard(new Tundra());
         UnlockTracker.unlockCard(Tundra.ID);
         BaseMod.addCard(new Permafrost());
@@ -378,8 +359,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(SunGoddessAmaterasu.ID);
         BaseMod.addCard(new EchoingVoice());
         UnlockTracker.unlockCard(EchoingVoice.ID);
-        BaseMod.addCard(new Ramuh());
-        UnlockTracker.unlockCard(Ramuh.ID);
         BaseMod.addCard(new Ifrit());
         UnlockTracker.unlockCard(Ifrit.ID);
         BaseMod.addCard(new Explosion());
@@ -390,10 +369,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(StormGust.ID);
         BaseMod.addCard(new GateOfBabylon());
         UnlockTracker.unlockCard(GateOfBabylon.ID);
-        BaseMod.addCard(new ShortenedChant());
-        UnlockTracker.unlockCard(ShortenedChant.ID);
-        BaseMod.addCard(new Focusyn());
-        UnlockTracker.unlockCard(Focusyn.ID);
         BaseMod.addCard(new Demi());
         UnlockTracker.unlockCard(Demi.ID);
         BaseMod.addCard(new Cool());
@@ -404,10 +379,10 @@ public class CasterMod implements
         UnlockTracker.unlockCard(BurningSpirit.ID);
 
         // UNOBTAINABLE
-        BaseMod.addCard(new Ashes());
-        UnlockTracker.unlockCard(Ashes.ID);
-        BaseMod.addCard(new SoulStrike());
-        UnlockTracker.unlockCard(SoulStrike.ID);
+//        BaseMod.addCard(new Ashes());
+//        UnlockTracker.unlockCard(Ashes.ID);
+//        BaseMod.addCard(new SoulStrike());
+//        UnlockTracker.unlockCard(SoulStrike.ID);
 
 
         // DEPRECATED
@@ -465,6 +440,33 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(ManaOverflow.ID);
 //        BaseMod.addCard(new FreezeInHell());
 //        UnlockTracker.unlockCard(FreezeInHell.ID);
+
+
+        // Deprecated v3
+//        BaseMod.addCard(new DeprecatedRamuh());
+//        UnlockTracker.unlockCard(DeprecatedRamuh.ID);
+//        BaseMod.addCard(new DeprecatedShortenedChant());
+//        UnlockTracker.unlockCard(DeprecatedShortenedChant.ID);
+//        BaseMod.addCard(new DeprecatedFocusyn());
+//        UnlockTracker.unlockCard(DeprecatedFocusyn.ID);
+//        BaseMod.addCard(new DeprecatedSlipThrough());
+//        UnlockTracker.unlockCard(DeprecatedSlipThrough.ID);
+//        BaseMod.addCard(new DeprecatedDiamondDust());
+//        UnlockTracker.unlockCard(DeprecatedDiamondDust.ID);
+//        BaseMod.addCard(new DeprecatedFlashSpeed());
+//        UnlockTracker.unlockCard(DeprecatedFlashSpeed.ID);
+//        BaseMod.addCard(new DeprecatedSandstorm());
+//        UnlockTracker.unlockCard(DeprecatedSandstorm.ID);
+//        BaseMod.addCard(new DeprecatedFissure());
+//        UnlockTracker.unlockCard(DeprecatedFissure.ID);
+//        BaseMod.addCard(new DeprecatedSpontaneousCombustion());
+//        UnlockTracker.unlockCard(DeprecatedSpontaneousCombustion.ID);
+//        BaseMod.addCard(new DeprecatedHeatRay());
+//        UnlockTracker.unlockCard(DeprecatedHeatRay.ID);
+//        BaseMod.addCard(new DeprecatedGrimoire());
+//        UnlockTracker.unlockCard(DeprecatedGrimoire.ID);
+//        BaseMod.addCard(new DeprecatedGigaDrain());
+//        UnlockTracker.unlockCard(DeprecatedGigaDrain.ID);
 
         logger.info("Done adding cards!");
     }

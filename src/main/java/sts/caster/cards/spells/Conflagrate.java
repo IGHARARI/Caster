@@ -74,7 +74,7 @@ public class Conflagrate extends CasterCard {
 
     @Override
     public void onFrozen() {
-        addToBot(new ThawCardAction(magicNumber, false, true, true));
+        addToBot(new ThawCardAction(magicNumber, false, true, true, this));
     }
 
     @Override

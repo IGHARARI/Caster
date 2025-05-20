@@ -25,9 +25,9 @@ import java.util.ArrayList;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class Fissure extends CasterCard {
+public class DeprecatedFissure extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("Fissure");
+    public static final String ID = CasterMod.makeID("DeprecatedFissure");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("fissure.png");
 
@@ -46,7 +46,7 @@ public class Fissure extends CasterCard {
     private static final int STUN_AMNT = 1;
 
 
-    public Fissure() {
+    public DeprecatedFissure() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage = BASE_DAMAGE;

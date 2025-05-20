@@ -15,7 +15,7 @@ import static sts.caster.core.CasterMod.makePowerPath;
 public class RamuhPower extends AbstractPower {
 	public AbstractCreature source;
 
-	public static final String POWER_ID = CasterMod.makeID("Ramuh");
+	public static final String POWER_ID = CasterMod.makeID("DeprecatedRamuh");
 	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

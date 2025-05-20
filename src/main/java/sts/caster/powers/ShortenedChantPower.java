@@ -14,7 +14,7 @@ import static sts.caster.core.CasterMod.makePowerPath;
 public class ShortenedChantPower extends AbstractPower {
 	public AbstractCreature source;
 
-	public static final String POWER_ID = CasterMod.makeID("ShortenedChant");
+	public static final String POWER_ID = CasterMod.makeID("DeprecatedShortenedChant");
 	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;

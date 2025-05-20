@@ -5,14 +5,14 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.cards.spells.SpontaneousCombustion;
+import sts.caster.cards.spells.DeprecatedSpontaneousCombustion;
 
 public class SpontaneousCombustionAction extends AbstractGameAction {
     
-    private SpontaneousCombustion card;
+    private DeprecatedSpontaneousCombustion card;
     private int timesRepeat;
 	
-    public SpontaneousCombustionAction(SpontaneousCombustion card, int timesRepeat) {
+    public SpontaneousCombustionAction(DeprecatedSpontaneousCombustion card, int timesRepeat) {
         this.actionType = ActionType.DAMAGE;
         this.card = card;
         this.timesRepeat = timesRepeat;
