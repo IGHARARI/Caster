@@ -39,7 +39,7 @@ public class GlacialShield extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
-    private static final int BASE_BLOCK = 6;
+    private static final int BASE_BLOCK = 4;
     private static final int UPG_BLOCK = 2;
     private static final int FREEZE_AMOUNT = 1;
     private static final int BASE_RECUR = 2;
@@ -61,7 +61,6 @@ public class GlacialShield extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GainBlockAction(p, p, spellBlock));
         addToBot(new FreezeCardAction(magicNumber, !upgraded));
         addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }

@@ -33,7 +33,7 @@ public class Direct extends CasterCard {
     private static final int DRAW_AMOUNT = 1;
     private static final int UPG_DRAW_AMOUNT = 1;
     private static final int BLOCK_AMOUNT = 5;
-    private static final int UPG_BLOCK_AMOUNT = 3;
+    private static final int UPG_BLOCK_AMOUNT = 2;
 
     public Direct() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);

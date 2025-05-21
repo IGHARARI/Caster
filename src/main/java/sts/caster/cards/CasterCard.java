@@ -321,7 +321,8 @@ public abstract class CasterCard extends CustomCard {
 	}
 	
 	public void onStartOfTurnDelayEffect() {}
-	
+	public void onEndOfTurnDelayEffect() {}
+
 	@Override
 	public AbstractCard makeStatEquivalentCopy() {
 		CasterCard card = (CasterCard) super.makeStatEquivalentCopy();
@@ -419,5 +420,6 @@ public abstract class CasterCard extends CustomCard {
 	}
 	
 	public void onFrozen() {}
+	public void onThaw() {}
 	public int getIntentNumber() { return target == CardTarget.SELF ? spellBlock : spellDamage; }
 }

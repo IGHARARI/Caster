@@ -64,9 +64,7 @@ public class CastingSpellCard extends AbstractOrb {
         
 		ID = ID_PREFIX + card.uuid;
 		name = card.name;
-		CasterMod.logger.info(card.uuid + " ARGS spellDamage " + card.spellDamage);
 		this.spellCard = card.makeStatIdenticalCopy();
-		CasterMod.logger.info(this.spellCard.uuid + " SPELLCARD COPY spellDamage " + this.spellCard.spellDamage);
 		if (spellCard.cost == -1) {
 			spellCard.rawDescription += " NL Casted for " + energyOnCast + " Energy.";
 			spellCard.initializeDescription();
@@ -134,8 +132,18 @@ public class CastingSpellCard extends AbstractOrb {
 	
 	@Override
 	public void onStartOfTurn() {
-		turnsUntilFire--;
 		spellCard.onStartOfTurnDelayEffect();
+//		turnsUntilFire--;
+//		spellCard.onStartOfTurnDelayEffect();
+//		if (turnsUntilFire <= 0) {
+//			cardFireEvent();
+//		}
+	}
+
+	@Override
+	public void onEndOfTurn() {
+		turnsUntilFire--;
+		spellCard.onEndOfTurnDelayEffect();
 		if (turnsUntilFire <= 0) {
 			cardFireEvent();
 		}
@@ -151,6 +159,10 @@ public class CastingSpellCard extends AbstractOrb {
 		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction(false));
 		AbstractDungeon.actionManager.addToBottom(new QueueEvokeCardAction(this)); // modified
 
+		processRecurrenceMods();
+	}
+
+	private void processRecurrenceMods() {
 		if (CardModifierManager.hasModifier(this.spellCard, RecurringSpellCardMod.ID)) {
 			ArrayList<AbstractCardModifier> mods = CardModifierManager.getModifiers(this.spellCard, RecurringSpellCardMod.ID);
 			for (AbstractCardModifier mod : mods) {
@@ -158,8 +170,9 @@ public class CastingSpellCard extends AbstractOrb {
 
 				if (recurMod.recurAmount > 0) {
 					CasterCard cardToCast = this.spellCard;
-					AbstractDungeon.actionManager.addToBottom(new QueueRecurringEffectAction(cardToCast, cardToCast.delayTurns, energyOnCast, target));
 					recurMod.reduceRecurrence(cardToCast);
+					recurMod.onAfterRecurringAction(cardToCast);
+					AbstractDungeon.actionManager.addToBottom(new QueueRecurringEffectAction(cardToCast, cardToCast.delayTurns, energyOnCast, target));
 				}
 
 				if (recurMod.recurAmount <= 0) {

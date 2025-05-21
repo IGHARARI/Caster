@@ -252,12 +252,10 @@ public class CasterMod implements
         UnlockTracker.unlockCard(DiablosFlame.ID);
         BaseMod.addCard(new Charge());
         UnlockTracker.unlockCard(Charge.ID);
-        BaseMod.addCard(new Sleet());
-        UnlockTracker.unlockCard(Sleet.ID);
         BaseMod.addCard(new Enfeeble());
         UnlockTracker.unlockCard(Enfeeble.ID);
-        BaseMod.addCard(new Sultry());
-        UnlockTracker.unlockCard(Sultry.ID);
+        BaseMod.addCard(new Shy());
+        UnlockTracker.unlockCard(Shy.ID);
         BaseMod.addCard(new Fireball());
         UnlockTracker.unlockCard(Fireball.ID);
         BaseMod.addCard(new VoltTackle());
@@ -280,6 +278,12 @@ public class CasterMod implements
         UnlockTracker.unlockCard(FrostDriver.ID);
         BaseMod.addCard(new Mirage());
         UnlockTracker.unlockCard(Mirage.ID);
+        BaseMod.addCard(new Surge());
+        UnlockTracker.unlockCard(Surge.ID);
+        BaseMod.addCard(new Tundra());
+        UnlockTracker.unlockCard(Tundra.ID);
+        BaseMod.addCard(new Lemonade());
+        UnlockTracker.unlockCard(Lemonade.ID);
 
 
         // UNCOMMON
@@ -305,16 +309,12 @@ public class CasterMod implements
         UnlockTracker.unlockCard(StaticField.ID);
         BaseMod.addCard(new Discharge());
         UnlockTracker.unlockCard(Discharge.ID);
-        BaseMod.addCard(new Surge());
-        UnlockTracker.unlockCard(Surge.ID);
         BaseMod.addCard(new PyroclasticTide());
         UnlockTracker.unlockCard(PyroclasticTide.ID);
         BaseMod.addCard(new Illusion());
         UnlockTracker.unlockCard(Illusion.ID);
         BaseMod.addCard(new WallOfRocks());
         UnlockTracker.unlockCard(WallOfRocks.ID);
-        BaseMod.addCard(new Tundra());
-        UnlockTracker.unlockCard(Tundra.ID);
         BaseMod.addCard(new Permafrost());
         UnlockTracker.unlockCard(Permafrost.ID);
         BaseMod.addCard(new Congeal());
@@ -467,6 +467,8 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(DeprecatedGrimoire.ID);
 //        BaseMod.addCard(new DeprecatedGigaDrain());
 //        UnlockTracker.unlockCard(DeprecatedGigaDrain.ID);
+//        BaseMod.addCard(new DeprecatedSleet());
+//        UnlockTracker.unlockCard(DeprecatedSleet.ID);
 
         logger.info("Done adding cards!");
     }

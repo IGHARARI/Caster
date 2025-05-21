@@ -4,11 +4,11 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.Settings;
 import sts.caster.delayedCards.CastingSpellCard;
 
-public class DelayedCardOnStartOfTurnTriggerAction extends AbstractGameAction {
+public class DeprecatedDelayedCardOnStartOfTurnTriggerAction extends AbstractGameAction {
 
 	CastingSpellCard delayedCard;
 	
-	public DelayedCardOnStartOfTurnTriggerAction(CastingSpellCard delayedCard) {
+	public DeprecatedDelayedCardOnStartOfTurnTriggerAction(CastingSpellCard delayedCard) {
         actionType = ActionType.SPECIAL;
         this.delayedCard = delayedCard;
         this.duration = Settings.ACTION_DUR_XFAST;

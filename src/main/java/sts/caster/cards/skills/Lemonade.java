@@ -10,13 +10,13 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.core.freeze.FreezeHelper;
 
 import static sts.caster.core.CasterMod.makeCardPath;
-import static sts.caster.util.BattleHelper.getAliveMonsters;
 
-public class Sleet extends CasterCard {
+public class Lemonade extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("Sleet");
+    public static final String ID = CasterMod.makeID("Lemonade");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("sleet.png");
 
@@ -30,10 +30,10 @@ public class Sleet extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DRAW = 1;
-    private static final int BASE_BLOCK = 4;
+    private static final int BASE_BLOCK = 6;
     private static final int UPGE_BLOCK = 2;
 
-    public Sleet() {
+    public Lemonade() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_DRAW;
         baseBlock = block = BASE_BLOCK;
@@ -42,9 +42,9 @@ public class Sleet extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int monsterCount = getAliveMonsters().size();
-        addToBot(new DrawCardAction(p, magicNumber * monsterCount));
-        addToBot(new GainBlockAction(p, block * monsterCount));
+        int frozenCardCount = FreezeHelper.getFrozenCardsForPile(p.hand).size();
+        addToBot(new DrawCardAction(p, magicNumber * frozenCardCount));
+        addToBot(new GainBlockAction(p, block * frozenCardCount));
     }
 
     @Override

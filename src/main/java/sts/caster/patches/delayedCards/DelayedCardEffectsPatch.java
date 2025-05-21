@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import sts.caster.actions.DelayedEffectOnEndOfTurnTriggerAction;
 import sts.caster.actions.DelayedEffectOnStartOfTurnTriggerAction;
 import sts.caster.actions.QueueRedrawMiniCardsAction;
 import sts.caster.delayedCards.CastingSpellCard;
@@ -96,7 +97,29 @@ public class DelayedCardEffectsPatch {
 			SpellCardsArea.initializeCardArea();
 		}
 	}
-	
+
+//	END OF TURN patch
+	@SpirePatch(clz=GameActionManager.class, method="getNextAction")
+	public static class onEndOfTurnTriggerPatch {
+
+		@SpireInsertPatch(locator=Locator.class, localvars={})
+		public static void Insert(GameActionManager __instance) {
+			for (final CastingSpellCard orbCard : SpellCardsArea.spellCardsBeingCasted) {
+				AbstractDungeon.actionManager.addToBottom(new DelayedEffectOnEndOfTurnTriggerAction(orbCard));
+			}
+			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
+		}
+
+		private static class Locator extends SpireInsertLocator {
+			@Override
+			public int[] Locate(CtBehavior ctMethod) throws CannotCompileException, PatchingException {
+				Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.actions.GameActionManager", "callEndOfTurnActions");
+				return LineFinder.findInOrder(ctMethod, new ArrayList<Matcher>(), finalMatcher);
+			}
+		}
+	}
+
+	//	START OF TURN patch
 	@SpirePatch(clz=GameActionManager.class, method="getNextAction")
 	public static class onStartOfTurnTriggerPatch {
 		

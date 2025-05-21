@@ -4,7 +4,7 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import sts.caster.core.CasterMod;
+import sts.caster.actions.CardOnAfterRecurringTriggerAction;
 import sts.caster.interfaces.OnRecurringSpell;
 
 public class RecurringSpellCardMod extends AbstractCardModifier {
@@ -18,10 +18,20 @@ public class RecurringSpellCardMod extends AbstractCardModifier {
 
     public void reduceRecurrence(AbstractCard card) {
         this.recurAmount--;
+    }
+
+    public void onAfterRecurringAction(AbstractCard card) {
         if (card instanceof OnRecurringSpell) {
-            CasterMod.logger.info("Recurring spell recurred: " + card.name + " " + card.uuid);
-            ((OnRecurringSpell) card).onRecurring();
+            addToBot(new CardOnAfterRecurringTriggerAction(((OnRecurringSpell) card)));
         }
+    }
+
+    public void modifyRecurrence(int amount) {
+        this.recurAmount += amount;
+    }
+
+    public void setRecurrence(int amount) {
+        this.recurAmount = amount;
     }
 
     @Override

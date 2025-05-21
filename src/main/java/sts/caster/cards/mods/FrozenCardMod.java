@@ -9,10 +9,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import sts.caster.actions.CardOnFrozenTriggerAction;
+import sts.caster.actions.CardOnThawTriggerAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.freeze.FreezeHelper;
+import sts.caster.interfaces.IPlayableWhileFrozen;
 import sts.caster.interfaces.OnFreezePower;
 import sts.caster.interfaces.OnThawPower;
 
@@ -24,7 +26,7 @@ import static sts.caster.core.freeze.FreezeHelper.getCurrentlyAppliedOnThawPower
 public class FrozenCardMod extends AbstractCardModifier {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FrozenCardMod");
     public static final String ID = CasterMod.makeID("FrozenCardMod");
-    private static final int ON_DRAW_BLOCK_AMOUNT = 5;
+    public static final int ON_DRAW_BLOCK_AMOUNT = 2;
 
     public FrozenCardMod() {
     }
@@ -36,6 +38,10 @@ public class FrozenCardMod extends AbstractCardModifier {
 
     @Override
     public boolean canPlayCard(AbstractCard card) {
+        if (card instanceof IPlayableWhileFrozen) {
+            return true;
+        }
+        card.cantUseMessage = "Can't play a #rFrozen Card";
         return false;
     }
 
@@ -50,6 +56,7 @@ public class FrozenCardMod extends AbstractCardModifier {
         FreezeHelper.increaseFrozenThisCombatCount(1);
 
         if (card instanceof CasterCard) {
+            CasterMod.logger.info("On freeze for " + card.name + " " + card.uuid);
             addToBot(new CardOnFrozenTriggerAction((CasterCard)card));
         }
 
@@ -72,6 +79,10 @@ public class FrozenCardMod extends AbstractCardModifier {
         List<OnThawPower> onThawPowers = getCurrentlyAppliedOnThawPowers(AbstractDungeon.player);
         for (OnThawPower power : onThawPowers) {
             power.onThaw(card);
+        }
+        if (card instanceof CasterCard) {
+            CasterMod.logger.info("Thawing " + card.name + " " + card.uuid);
+            addToBot(new CardOnThawTriggerAction((CasterCard)card));
         }
     }
 

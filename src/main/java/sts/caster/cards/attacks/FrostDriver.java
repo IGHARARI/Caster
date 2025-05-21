@@ -2,6 +2,7 @@ package sts.caster.cards.attacks;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -30,14 +31,15 @@ public class FrostDriver extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DAMAGE = 10;
-    private static final int UPG_DAMAGE = 3;
+    private static final int BASE_DAMAGE = 9;
+    private static final int UPG_DAMAGE = 4;
     private static final int BASE_FREEZE = 1;
-
+    private static final int BASE_DRAW = 1;
 
     public FrostDriver() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_FREEZE;
+        m2 = baseM2 = BASE_DRAW;
         baseDamage = damage = BASE_DAMAGE;
         setCardElement(MagicElement.ICE);
     }
@@ -45,6 +47,7 @@ public class FrostDriver extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
     	addToBot(new FreezeCardAction(magicNumber, false));
+        addToBot(new DrawCardAction(p, m2));
 		addToBot(new DamageAction(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL), AttackEffect.BLUNT_LIGHT));
     }
 

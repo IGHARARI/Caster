@@ -19,7 +19,7 @@ public class QueueRecurringEffectAction extends AbstractGameAction {
     }
 
     public QueueRecurringEffectAction(final CasterCard card, final int turnsDelay, Integer energyOnUse, AbstractMonster target) {
-    	this.card = card.makeStatIdenticalCopy();
+    	this.card = card;
     	this.turnsDelay = turnsDelay;
     	actionType = ActionType.SPECIAL;
     	this.energyOnUse = energyOnUse;
@@ -32,7 +32,8 @@ public class QueueRecurringEffectAction extends AbstractGameAction {
 		if (target == null || target.isDeadOrEscaped()) {
 			target = AbstractDungeon.getRandomMonster();
 		}
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(card, turnsDelay, energyOnUse, target));
+		CasterCard cardCopy = card.makeStatIdenticalCopy();
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(cardCopy, turnsDelay, energyOnUse, target));
 
 		this.isDone = true;
     }

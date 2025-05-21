@@ -2,6 +2,7 @@ package sts.caster.cards.spells;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -19,6 +20,8 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -61,7 +64,9 @@ public class JupitelThunder extends CasterCard {
     public void applyPowers() {
         this.magicNumber = BASE_HIT_TIMES;
         if (m2 > -1) {
-            magicNumber +=  (AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - m2);
+            ArrayList<AbstractCard> combatCards = AbstractDungeon.actionManager.cardsPlayedThisCombat;
+            List<AbstractCard> cardsPlayedAfterThis = combatCards.subList(m2, combatCards.size());
+            magicNumber +=  cardsPlayedAfterThis.stream().filter(c -> c.type == CasterCardType.SPELL).collect(Collectors.toList()).size();
             isMagicNumberModified = true;
         }
         super.applyPowers();

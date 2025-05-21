@@ -40,6 +40,7 @@ public class BurnItDown extends CasterCard {
         this.exhaust = true;
         cardsToPreview = new WallOfAsh();
         setCardElement(MagicElement.FIRE);
+
     }
 
     @Override

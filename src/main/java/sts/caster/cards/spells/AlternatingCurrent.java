@@ -97,9 +97,7 @@ public class AlternatingCurrent extends CasterCard implements OnRecurringSpell {
     }
 
     @Override
-    public void onRecurring() {
-        CasterMod.logger.info("Alternating spell damage before recurring " + spellDamage);
+    public void onAfterRecurring() {
         upgradeSpellDamage(DAMAGE_BONUS_PER_RECUR);
-        CasterMod.logger.info("Alternating spell damage after recurring " + spellDamage);
     }
 }

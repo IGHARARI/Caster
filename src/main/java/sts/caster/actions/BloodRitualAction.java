@@ -17,7 +17,7 @@ public class BloodRitualAction extends AbstractGameAction {
     public void update() {
 		if (duration == Settings.ACTION_DUR_FAST) {
 			for(CastingSpellCard card : SpellCardsArea.spellCardsBeingCasted) {
-				addToBot(new DelayedCardOnStartOfTurnTriggerAction(card));
+				addToBot(new DeprecatedDelayedCardOnStartOfTurnTriggerAction(card));
 			}
 		}
         tickDuration();
