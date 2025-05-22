@@ -9,6 +9,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.core.freeze.ElectrifiedHelper;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -33,8 +34,8 @@ public class WallOfLightning extends CasterCard {
     public WallOfLightning() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseBlock = block = BASE_BLOCK;
-        if (CasterMod.cardsElectrifiedThisCombat > 0) {
-            updateCost(-CasterMod.cardsElectrifiedThisCombat);
+        if (ElectrifiedHelper.getCardsElectrifiedThisCombat() > 0) {
+            updateCost(-ElectrifiedHelper.getCardsElectrifiedThisCombat());
         }
         setCardElement(MagicElement.ELECTRIC);
     }

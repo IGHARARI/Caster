@@ -10,28 +10,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer.PlayerClass;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
-import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sts.caster.cards.CasterCardTags;
 import sts.caster.cards.attacks.*;
 import sts.caster.cards.powers.*;
 import sts.caster.cards.skills.*;
 import sts.caster.cards.spells.*;
+import sts.caster.core.freeze.ElectrifiedHelper;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.relics.MagicBookRelic;
 import sts.caster.util.TextureHelper;
@@ -53,7 +45,6 @@ public class CasterMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
-        OnCardUseSubscriber,
         PostCreateStartingDeckSubscriber,
         OnStartBattleSubscriber,
         PostBattleSubscriber,
@@ -68,10 +59,6 @@ public class CasterMod implements
 
     // SPECIAL MECHANIC ATTRIBUTES
     public static HashMap<Integer, Integer> blockLostPerTurn = new HashMap<Integer, Integer>();
-    public static int cardsElectrifiedThisCombat;
-    public static final int ELECTRIFY_DAMAGE = 2;
-
-
 
     // Character Color
     public static final Color CASTER_COLOR = CardHelper.getColor(64.0f, 70.0f, 70.0f);
@@ -508,7 +495,6 @@ public class CasterMod implements
         logger.info("Done editing strings");
     }
 
-
     @Override
     public void receiveEditKeywords() {
         Gson gson = new Gson();
@@ -528,21 +514,6 @@ public class CasterMod implements
 
 
     @Override
-    public void receiveCardUsed(AbstractCard card) {
-        if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
-            String electrifiedMessage = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings").TEXT[0];
-            AbstractDungeon.effectList.add(new BlockedWordEffect(AbstractDungeon.player, AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, electrifiedMessage));
-            int tagsBeforeRemove = card.tags.size();
-            card.tags.removeIf((tag) -> tag == CasterCardTags.ELECTRIFIED);
-            int amountElectrified = tagsBeforeRemove - card.tags.size();
-            AbstractDungeon.actionManager.addToBottom(new VFXAction(new LightningEffect(AbstractDungeon.player.drawX, AbstractDungeon.player.drawY), 0.1f));
-            AbstractDungeon.actionManager.addToBottom(new SFXAction("ORB_LIGHTNING_EVOKE"));
-            DamageInfo damage = new DamageInfo(AbstractDungeon.player, ELECTRIFY_DAMAGE * amountElectrified, DamageInfo.DamageType.NORMAL);
-            AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, damage));
-        }
-    }
-
-    @Override
     public void receivePostCreateStartingDeck(PlayerClass playerClass, CardGroup deck) {
         if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(MagicBookRelic.ID)) {
             ((MagicBookRelic) AbstractDungeon.player.getRelic(MagicBookRelic.ID)).onTrigger();
@@ -554,12 +525,12 @@ public class CasterMod implements
 //        DeprecatedFrozenPileManager.resetFrozenCount();
         resetFrozenThisCombatCount();
         blockLostPerTurn.clear();
-        cardsElectrifiedThisCombat = 0;
+        ElectrifiedHelper.resetElectrifiedThisCombatCount();
     }
 
     @Override
     public void receivePostBattle(AbstractRoom abstractRoom) {
-        cardsElectrifiedThisCombat = 0;
+        ElectrifiedHelper.resetElectrifiedThisCombatCount();
     }
 
 //    @Override

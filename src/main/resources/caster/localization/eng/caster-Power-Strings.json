@@ -77,6 +77,10 @@
 	        " random card from your hand and play it. NL Apply Blazed equal to it's cost to a random enemy." ,
 	        " random cards from your hand and play them. NL For each card exhausted, apply Blazed equal to it's cost to a random enemy."]
 	},
+	"caster:Electroplating": {
+		"NAME": "Electroplating",
+		"DESCRIPTIONS": ["Whenever you #yElectrify a card, gain #b", " Plated Armor"]
+	},
 	"caster:Ramuh": {
 	        "NAME": "Ramuh",
 	        "DESCRIPTIONS": ["Whenever you #yElectrify a card, it costs #g0 for the turn."]

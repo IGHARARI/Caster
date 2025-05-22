@@ -166,7 +166,7 @@
   },
   "caster:Electroplating": {
     "NAME": "Electroplating",
-    "DESCRIPTION": "Choose a card from your hand, caster:Electrify it !caster:M2! times. NL Gain !M! *Plated *Armor."
+    "DESCRIPTION": "Whenever you caster:Electrify a card, Gain !M! *Plated *Armor."
   },
   "caster:Thermodynamics": {
     "NAME": "Thermodynamics",

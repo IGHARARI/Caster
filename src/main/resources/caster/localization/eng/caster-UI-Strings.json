@@ -51,6 +51,9 @@
 	"FreezeOnUseCardMod": {
 		"TEXT": [ "caster:Freeze this card when it's played." ]
 	},
+	"ElectrifiedCardMod": {
+		"TEXT": [ "Electrified" ]
+	},
 	"FrozenCardMod": {
 		"TEXT": [ "Frozen" ]
 	},

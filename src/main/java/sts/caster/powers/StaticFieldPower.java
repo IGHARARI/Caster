@@ -3,18 +3,20 @@ package sts.caster.powers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import sts.caster.core.CasterMod;
+import sts.caster.interfaces.OnElectrifyPower;
 import sts.caster.util.TextureHelper;
 
 import static sts.caster.core.CasterMod.makePowerPath;
 
 //Gain 1 dex for the turn for each card played.
 
-public class StaticFieldPower extends AbstractPower {
+public class StaticFieldPower extends AbstractPower implements OnElectrifyPower {
 	public AbstractCreature source;
 
 	public static final String POWER_ID = CasterMod.makeID("StaticField");
@@ -40,15 +42,15 @@ public class StaticFieldPower extends AbstractPower {
 		updateDescription();
 	}
 
-	@Override
-	public void onSpecificTrigger() {
-		flash();
-		addToBot(new GainBlockAction(owner, owner, amount, true));
-	}
 	
 	@Override
 	public void updateDescription() {
         description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1];
 	}
 
+	@Override
+	public void onElectrify(AbstractCard c) {
+		flash();
+		addToBot(new GainBlockAction(owner, owner, amount, true));
+	}
 }

@@ -28,7 +28,7 @@ public class FreezeHelper {
     }
 
     public static List<OnFreezePower> getCurrentlyAppliedOnFreezePowers(AbstractCreature creature) {
-        List<OnFreezePower> onFreezePowers = AbstractDungeon.player.powers.stream()
+        List<OnFreezePower> onFreezePowers = creature.powers.stream()
                 .filter(OnFreezePower.class::isInstance)
                 .map(OnFreezePower.class::cast)
                 .collect(Collectors.toList());
@@ -36,7 +36,7 @@ public class FreezeHelper {
     }
 
     public static List<OnThawPower> getCurrentlyAppliedOnThawPowers(AbstractCreature creature) {
-        List<OnThawPower> onThawPowers = AbstractDungeon.player.powers.stream()
+        List<OnThawPower> onThawPowers = creature.powers.stream()
                 .filter(OnThawPower.class::isInstance)
                 .map(OnThawPower.class::cast)
                 .collect(Collectors.toList());
