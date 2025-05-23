@@ -68,7 +68,7 @@ public class ElectrifyCardsAction extends AbstractGameAction {
     
     private void electrifyCard(AbstractCard card, int times) {
         for (int i = 0; i < times; i++) {
-        	addToBot(new ElectrifySpecificCardAction(card));
+        	addToTop(new ElectrifySpecificCardAction(card));
         }
     }
 }

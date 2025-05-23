@@ -3,13 +3,13 @@ package sts.caster.powers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.abstracts.TwoAmountPower;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.powers.FocusPower;
+import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.core.CasterMod;
 import sts.caster.interfaces.OnElectrifyPower;
 import sts.caster.util.TextureHelper;
@@ -53,11 +53,17 @@ public class GainPower extends TwoAmountPower implements OnElectrifyPower {
 	}
 
 	@Override
+	public void atStartOfTurnPostDraw() {
+		addToBot(new ElectrifyCardsAction(1, 1, false));
+		addToBot(new DrawCardAction(AbstractDungeon.player, 1));
+	}
+
+	@Override
 	public void onElectrify(AbstractCard c) {
-		amount2++;
-		if (amount2 >= ELECTRIFY_TRIGGER_AMOUNT) {
-			amount2 = 0;
-			addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new FocusPower(AbstractDungeon.player, amount), amount));
-		}
+//		amount2++;
+//		if (amount2 >= ELECTRIFY_TRIGGER_AMOUNT) {
+//			amount2 = 0;
+//			addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new FocusPower(AbstractDungeon.player, amount), amount));
+//		}
 	}
 }

@@ -5,11 +5,9 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import sts.caster.cards.mods.ElectrifiedCardMod;
-import sts.caster.cards.skills.WallOfLightning;
 import sts.caster.core.freeze.ElectrifiedHelper;
 import sts.caster.interfaces.OnElectrifyPower;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ElectrifySpecificCardAction extends AbstractGameAction {
@@ -56,11 +54,5 @@ public class ElectrifySpecificCardAction extends AbstractGameAction {
 //			}
 		}
     	this.isDone = true;
-    }
-
-    private void triggerCardWasElectrifiedForGroup(ArrayList<AbstractCard> cardGroup) {
-        for (AbstractCard c : cardGroup){
-            if (c.cardID == WallOfLightning.ID) ((WallOfLightning)c).cardWasElectrified();
-        }
     }
 }

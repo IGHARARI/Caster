@@ -1,11 +1,14 @@
 package sts.caster.cards.mods;
 
 import basemod.abstracts.AbstractCardModifier;
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import sts.caster.actions.CardOnAfterRecurringTriggerAction;
 import sts.caster.interfaces.OnRecurringSpell;
+
+import java.util.ArrayList;
 
 public class RecurringSpellCardMod extends AbstractCardModifier {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("RecurringSpellCardMod");
@@ -47,5 +50,19 @@ public class RecurringSpellCardMod extends AbstractCardModifier {
     @Override
     public AbstractCardModifier makeCopy() {
         return new RecurringSpellCardMod(this.recurAmount);
+    }
+
+    public static void addRecurrence(AbstractCard card, int amount) {
+        if (CardModifierManager.hasModifier(card, RecurringSpellCardMod.ID)) {
+            ArrayList<AbstractCardModifier> mods = CardModifierManager.getModifiers(card, RecurringSpellCardMod.ID);
+            for (AbstractCardModifier mod : mods) {
+                RecurringSpellCardMod recurMod = (RecurringSpellCardMod) mod;
+                recurMod.modifyRecurrence(amount);
+                card.initializeDescription();
+            }
+        } else {
+            CardModifierManager.addModifier(card, new RecurringSpellCardMod(amount));
+        }
+
     }
 }

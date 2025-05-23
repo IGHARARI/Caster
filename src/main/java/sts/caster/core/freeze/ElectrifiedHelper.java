@@ -5,8 +5,11 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import sts.caster.cards.skills.WallOfLightning;
+import sts.caster.delayedCards.CastingSpellCard;
+import sts.caster.delayedCards.SpellCardsArea;
+import sts.caster.interfaces.ICardWasElectrifiedSubscriber;
 import sts.caster.interfaces.OnElectrifyPower;
+import sts.caster.patches.delayedCards.CastingQueuePileEnum;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,12 +28,23 @@ public class ElectrifiedHelper {
         cardsElectrifiedThisCombat += amount;
     }
     public static void triggerCardWasElectrifiedForAllGroups() {
-        getAllPiles().forEach(g -> triggerCardWasElectrifiedForGroup(g.group));
+        getAllPiles().forEach(g -> triggerCardWasElectrifiedForGroup(g));
+        triggerCardWasElectrifiedForCastingArea();
     }
 
-    private static void triggerCardWasElectrifiedForGroup(ArrayList<AbstractCard> cardGroup) {
-        for (AbstractCard c : cardGroup){
-            if (c.cardID == WallOfLightning.ID) ((WallOfLightning)c).cardWasElectrified();
+    private static void triggerCardWasElectrifiedForGroup(CardGroup cardGroup) {
+        for (AbstractCard c : cardGroup.group){
+            if (c instanceof ICardWasElectrifiedSubscriber) ((ICardWasElectrifiedSubscriber)c).cardWasElectrified(cardGroup.type);
+        }
+    }
+
+    private static void triggerCardWasElectrifiedForCastingArea() {
+        for (CastingSpellCard c : SpellCardsArea.spellCardsBeingCasted){
+            for (AbstractCard cardCopy : c.getAllCardCopies()) {
+                if (cardCopy instanceof ICardWasElectrifiedSubscriber) {
+                    ((ICardWasElectrifiedSubscriber)cardCopy).cardWasElectrified(CastingQueuePileEnum.CASTER_CASTING_QUEUE);
+                }
+            }
         }
     }
 

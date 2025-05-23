@@ -1,6 +1,7 @@
 package sts.caster.cards.skills;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -10,10 +11,12 @@ import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.core.freeze.ElectrifiedHelper;
+import sts.caster.interfaces.ICardWasElectrifiedSubscriber;
+import sts.caster.patches.delayedCards.CastingQueuePileEnum;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class WallOfLightning extends CasterCard {
+public class WallOfLightning extends CasterCard implements ICardWasElectrifiedSubscriber {
 
     public static final String ID = CasterMod.makeID("WallOfLightning");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -27,7 +30,7 @@ public class WallOfLightning extends CasterCard {
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 9;
+    private static final int COST = 6;
     private static final int BASE_BLOCK = 15;
     private static final int UPG_BLOCK = 4;
 
@@ -45,8 +48,10 @@ public class WallOfLightning extends CasterCard {
         addToBot(new GainBlockAction(p, block));
     }
 
-    public void cardWasElectrified(){
-        updateCost(-1);
+    public void cardWasElectrified(CardGroup.CardGroupType groupOfCard){
+        if (groupOfCard != CastingQueuePileEnum.CASTER_CASTING_QUEUE) {
+            updateCost(-1);
+        }
     }
 
     @Override
@@ -54,6 +59,7 @@ public class WallOfLightning extends CasterCard {
         if (!upgraded) {
             upgradeName();
             upgradeBlock(UPG_BLOCK);
+
             initializeDescription();
         }
     }

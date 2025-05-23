@@ -9,14 +9,14 @@
       "freezing",
       "Freezing"
     ],
-    "DESCRIPTION": "Frozen cards are moved to the Frozen pile until end of combat."
+    "DESCRIPTION": "Frozen card are Unplayable and Retain. At start of your turn, gain 2 block for each Frozen card in hand."
   },
   {
     "NAMES": [
       "Thaw",
       "thaw"
     ],
-    "DESCRIPTION": "Put a card from your Frozen pile into your hand."
+    "DESCRIPTION": "Remove Frozen from a card."
   },
   {
     "NAMES": [
@@ -77,7 +77,7 @@
       "electrify:",
       "electrified:"
     ],
-    "DESCRIPTION": "When playing an electrified card, receive #r2 (blockable) damage per stack, then it loses Electrified."
+    "DESCRIPTION": "Using Electrified cards deal you #r2 (blockable) damage per stack, then lose Electrified. When drawing an Electrified card, draw 1 card."
   },
   {
     "PROPER_NAME": "Cast Time N",

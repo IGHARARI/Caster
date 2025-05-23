@@ -34,6 +34,7 @@ public class FrozenModPatch {
 						@Override
 						public void update() {
 							card.superFlash(Color.BLUE.cpy());
+							isDone = true;
 						}
 					});
 				}

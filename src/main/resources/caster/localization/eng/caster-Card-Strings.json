@@ -46,7 +46,8 @@
 
   "caster:Gain": {
     "NAME": "Gain",
-    "DESCRIPTION": "Every time you caster:Electrify 4 cards, gain !M! Focus."
+    "DESCRIPTION": "At the start of your turn, caster:Electrify 1 card and draw 1 card.",
+    "UPGRADE_DESCRIPTION": "Innate. NL At the start of your turn, caster:Electrify 1 card and draw 1 card."
   },
   "caster:WallOfMirrors": {
     "NAME": "Wall Of Mirrors",
@@ -395,7 +396,12 @@
   },
   "caster:Superconduct": {
     "NAME": "Superconduct",
-    "DESCRIPTION": "caster:Electrify !caster:M2! random cards in your hand. NL caster:Cast_Time !caster:Delay! - X: NL Deal !caster:D! damage !M! times."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X *Jolt to your hand.",
+    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X+!M! *Jolt+ to your hand."
+  },
+  "caster:Jolt": {
+    "NAME": "Jolt",
+    "DESCRIPTION": "Retain. NL While in your *Casting *Queue, this gains 1 caster:Echo whenever you caster:Electrify NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
   "caster:IceWall": {
     "NAME": "Ice Wall",

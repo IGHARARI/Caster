@@ -30,8 +30,6 @@ public class Gain extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_FOCUS_BONUS = 1;
-    private static final int UPG_FOCUS_BONUS = 1;
-
 
     public Gain() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -49,7 +47,9 @@ public class Gain extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_FOCUS_BONUS);
+            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            initializeDescription();
+            this.isInnate = true;
         }
     }
 }

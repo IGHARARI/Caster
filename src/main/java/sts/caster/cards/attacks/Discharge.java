@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.DischargeAction;
+import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -37,6 +38,7 @@ public class Discharge extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new ElectrifyCardsAction(1, 1, false));
     	addToBot(new DischargeAction(baseDamage));
     }
 
