@@ -1,5 +1,6 @@
 package sts.caster.actions;
 
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.unique.SwordBoomerangAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
@@ -8,6 +9,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCardTags;
+import sts.caster.cards.mods.ElectrifiedCardMod;
 
 public class DischargeAction extends AbstractGameAction {
 	AbstractMonster target;
@@ -24,7 +26,7 @@ public class DischargeAction extends AbstractGameAction {
 			if (card.hasTag(CasterCardTags.ELECTRIFIED)) {
 				card.flash();
 				int tagsBeforeRemove = card.tags.size();
-				card.tags.removeIf((tag) -> tag == CasterCardTags.ELECTRIFIED);
+				CardModifierManager.removeModifiersById(card, ElectrifiedCardMod.ID, true);
 				int amountElectrified = tagsBeforeRemove - card.tags.size();
 				elecStacks += amountElectrified;
 			}

@@ -57,6 +57,9 @@
 	"FrozenCardMod": {
 		"TEXT": [ "Frozen" ]
 	},
+	"IgnitedCardMod": {
+		"TEXT": [ "Ignited" ]
+	},
 	"RecurringSpellCardMod": {
 		"TEXT": [ "caster:Echo ","." ]
 	}

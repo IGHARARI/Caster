@@ -74,7 +74,8 @@
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Draw !M! card."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL If this kills an enemy, cast it again with 1 more hit.",
+    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times. NL If this kills an enemy, cast it again with 1 more hit."
   },
   "caster:Thundara": {
     "NAME": "Thundara",
@@ -103,7 +104,7 @@
   },
   "caster:Discharge": {
     "NAME": "Discharge",
-    "DESCRIPTION": "Remove ALL caster:Electrify from ALL cards in your hand. NL Deal !D! damage to a random enemy for each stack removed."
+    "DESCRIPTION": "caster:Electrify 1 card. NL Remove ALL caster:Electrify from ALL cards in your hand. NL Deal !D! damage to a random enemy for each stack removed."
   },
   "caster:Kindling": {
     "NAME": "Kindling",
@@ -396,8 +397,8 @@
   },
   "caster:Superconduct": {
     "NAME": "Superconduct",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X *Jolt to your hand.",
-    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X+!M! *Jolt+ to your hand."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X *Jolt to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X+!M! *Jolt+ to your hand. NL Exhaust."
   },
   "caster:Jolt": {
     "NAME": "Jolt",
@@ -468,7 +469,7 @@
   },
   "caster:MatchBox": {
     "NAME": "Match Box",
-    "DESCRIPTION": "Innate. NL Deal !D! damage to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "Innate. NL caster:Ignite an attack or spell !M! times. NL Deal !D! damage. NL Exhaust."
   },
   "caster:WallOfLightning": {
     "NAME": "Wall Of Lightning",

@@ -45,6 +45,7 @@ public class Superconduct extends CasterCard {
         delayTurns = baseDelayTurns = DELAY_TURNS;
         magicNumber = baseMagicNumber = 0;
         cardsToPreview = new Jolt();
+        this.exhaust = true;
         setCardElement(MagicElement.ELECTRIC);
     }
 

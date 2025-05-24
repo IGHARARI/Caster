@@ -80,6 +80,15 @@
     "DESCRIPTION": "Using Electrified cards deal you #r2 (blockable) damage per stack, then lose Electrified. When drawing an Electrified card, draw 1 card."
   },
   {
+    "NAMES": [
+      "ignite",
+      "ignited",
+      "ignite:",
+      "ignited:"
+    ],
+    "DESCRIPTION": "Deals #g2 extra base damage per stack, exhausts on use."
+  },
+  {
     "PROPER_NAME": "Cast Time N",
     "NAMES": [
       "Cast Time",

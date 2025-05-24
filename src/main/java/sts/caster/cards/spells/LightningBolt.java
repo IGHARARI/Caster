@@ -2,7 +2,6 @@ package sts.caster.cards.spells;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,7 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.LightningDamageAction;
+import sts.caster.actions.LightningBoltAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -39,17 +38,16 @@ public class LightningBolt extends CasterCard {
 
     private static final int COST = 0;
     private static final int DELAY_TURNS = 1;
-    private static final int BASE_DAMAGE = 6;
-    private static final int UPGRADE_DAMAGE = 2;
-    private static final int DRAW_AMOUNT = 1;
-    private static final int UPG_DRAW_AMOUNT = 1;
+    private static final int BASE_DAMAGE = 7;
+    private static final int UPGRADE_DAMAGE = 3;
+    private static final int HITS_AMOUNT = 1;
 
 
     public LightningBolt() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         delayTurns = baseDelayTurns = DELAY_TURNS;
-        magicNumber = baseMagicNumber = DRAW_AMOUNT;
+        magicNumber = baseMagicNumber = HITS_AMOUNT;
         setCardElement(MagicElement.ELECTRIC);
     }
 
@@ -62,10 +60,18 @@ public class LightningBolt extends CasterCard {
     public ActionListSupplier actionListSupplier(Integer energySpent) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-            actionsList.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL), AttackEffect.SLASH_VERTICAL));
-            actionsList.add(new DrawCardAction(AbstractDungeon.player, c.magicNumber));
+            for (int i = 0; i < magicNumber; i++) {
+                DamageInfo damageInfo = new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageType.NORMAL);
+                actionsList.add(new LightningBoltAction(t, damageInfo, AttackEffect.SLASH_VERTICAL, this));
+            }
             return actionsList;
         };
+    }
+
+    public void upgradeNumberOfHits(int amount) {
+        upgradeMagicNumber(amount);
+        rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        initializeDescription();
     }
 
     @Override
@@ -74,7 +80,12 @@ public class LightningBolt extends CasterCard {
             upgradeName();
             initializeDescription();
             upgradeSpellDamage(UPGRADE_DAMAGE);
-            upgradeMagicNumber(UPG_DRAW_AMOUNT);
         }
+    }
+
+    @Override
+    public int getIntentNumber() {
+        this.applyPowers();
+        return spellDamage * magicNumber;
     }
 }
