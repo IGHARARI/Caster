@@ -278,8 +278,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Eruption.ID);
         BaseMod.addCard(new AbsoluteZero());
         UnlockTracker.unlockCard(AbsoluteZero.ID);
-        BaseMod.addCard(new Conflagrate());
-        UnlockTracker.unlockCard(Conflagrate.ID);
+        BaseMod.addCard(new PrimordialFlame());
+        UnlockTracker.unlockCard(PrimordialFlame.ID);
         BaseMod.addCard(new Embers());
         UnlockTracker.unlockCard(Embers.ID);
         BaseMod.addCard(new WallOfSwords());

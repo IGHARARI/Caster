@@ -81,9 +81,9 @@
     "NAME": "Thundara",
     "DESCRIPTION": "Reduce the cost of a random Spell in your hand to 0 this turn. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times. NL Cannot be Upgraded."
   },
-  "caster:Conflagrate": {
-    "NAME": "Conflagrate",
-    "DESCRIPTION": "Whenever you caster:Freeze this card, caster:Thaw up to !M! cards. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Apply !caster:M2! caster:Blazed."
+  "caster:PrimordialFlame": {
+    "NAME": "Primordial Flame",
+    "DESCRIPTION": "When you draw this, caster:Ignite it. NL When this exhausts, shuffle it into your draw pile. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
   },
   "caster:Shatter": {
     "NAME": "Shatter",
@@ -310,7 +310,7 @@
 
   "caster:Inferno": {
     "NAME": "Inferno",
-    "DESCRIPTION": "At the end of your turn, apply !M! caster:Blazed to ALL enemies."
+    "DESCRIPTION": "At the end of your turn, apply !M! caster:Blazed to ALL enemies. NL caster:Blazed cannot decrease on enemies."
   },
   "caster:Embers": {
     "NAME": "Embers",

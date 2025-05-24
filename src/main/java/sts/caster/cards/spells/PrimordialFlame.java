@@ -1,32 +1,30 @@
 package sts.caster.cards.spells;
 
+import basemod.helpers.CardModifierManager;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.MultiGroupMoveAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.QueueDelayedCardAction;
-import sts.caster.actions.ThawCardAction;
+import sts.caster.actions.RepeatHighestHPDamageAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.IgnitedCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
-import sts.caster.powers.BlazedPower;
 
 import java.util.ArrayList;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class Conflagrate extends CasterCard {
+public class PrimordialFlame extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("Conflagrate");
+    public static final String ID = CasterMod.makeID("PrimordialFlame");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("conflagrate.png");
 
@@ -39,20 +37,18 @@ public class Conflagrate extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 2;
-    private static final int BASE_DAMAGE = 16;
+    private static final int BASE_DELAY = 3;
+    private static final int UPG_DELAY = -1;
+    private static final int BASE_DAMAGE = 6;
     private static final int UPG_DAMAGE = 3;
-    private static final int THAW_BASE = 1;
-    private static final int THAW_UPG = 1;
-    private static final int BLAZE = 6;
+    private static final int HIT_TIMES = 3;
 
 
-    public Conflagrate() {
+    public PrimordialFlame() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
-        magicNumber = baseMagicNumber = THAW_BASE;
-        m2 = baseM2 = BLAZE;
+        magicNumber = baseMagicNumber = HIT_TIMES;
         setCardElement(MagicElement.FIRE);
     }
 
@@ -62,33 +58,41 @@ public class Conflagrate extends CasterCard {
     }
 
     @Override
+    public void triggerWhenDrawn() {
+        CardModifierManager.addModifier(this, new IgnitedCardMod());
+        super.triggerWhenDrawn();
+    }
+
+    @Override
+    public void triggerOnExhaust() {
+        AbstractPlayer p = AbstractDungeon.player;
+        addToBot(new MultiGroupMoveAction(p.drawPile.type, 1, c  -> c == this, p.exhaustPile.type));
+        super.triggerOnExhaust();
+    }
+
+    @Override
     public ActionListSupplier actionListSupplier(Integer energySpent) {
         return (c, t) -> {
             AbstractPlayer p = AbstractDungeon.player;
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-            actionsList.add(new DamageAction(t, new DamageInfo(p, c.spellDamage), AttackEffect.FIRE));
-            actionsList.add(new ApplyPowerAction(t, p, new BlazedPower(t, p, c.m2), c.m2));
+            actionsList.add(new RepeatHighestHPDamageAction(this, magicNumber));
             return actionsList;
         };
-    }
-
-    @Override
-    public void onFrozen() {
-        addToBot(new ThawCardAction(magicNumber, false, true, true, this));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            initializeDescription();
             upgradeDamage(UPG_DAMAGE);
-            upgradeMagicNumber(THAW_UPG);
+            upgradeDelayTurns(UPG_DELAY);
+            initializeDescription();
         }
     }
 
     @Override
     public int getIntentNumber() {
-        return spellDamage;
+        this.applyPowers();
+        return spellDamage * magicNumber;
     }
 }

@@ -44,7 +44,7 @@ public class PhoenixFlare extends CasterCard {
     private static final int COST = 1;
     private static final int BASE_DELAY = 1;
     private static final int BASE_DAMAGE = 13;
-    private static final int UPG_DAMAGE = 18;
+    private static final int UPG_DAMAGE = 7;
 
 
     public PhoenixFlare() {

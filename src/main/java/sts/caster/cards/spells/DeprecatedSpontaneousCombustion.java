@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.QueueDelayedCardAction;
-import sts.caster.actions.SpontaneousCombustionAction;
+import sts.caster.actions.RepeatHighestHPDamageAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -65,7 +65,7 @@ public class DeprecatedSpontaneousCombustion extends CasterCard {
     public ActionListSupplier actionListSupplier(Integer energySpent) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-    		if (c instanceof DeprecatedSpontaneousCombustion) actionsList.add(new SpontaneousCombustionAction((DeprecatedSpontaneousCombustion) c, magicNumber));
+    		if (c instanceof DeprecatedSpontaneousCombustion) actionsList.add(new RepeatHighestHPDamageAction((DeprecatedSpontaneousCombustion) c, magicNumber));
     		return actionsList;
     	};
     }

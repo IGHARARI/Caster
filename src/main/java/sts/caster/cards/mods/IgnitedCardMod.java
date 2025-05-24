@@ -2,6 +2,7 @@ package sts.caster.cards.mods;
 
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -75,6 +76,7 @@ public class IgnitedCardMod extends AbstractCardModifier {
         increaseIgnited(card, this);
         card.initializeDescription();
         card.applyPowers();
+        card.flash(Color.RED.cpy());
         return true;
     }
 
