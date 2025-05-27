@@ -1,8 +1,8 @@
 package sts.caster.cards.spells;
 
 import basemod.helpers.CardModifierManager;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.MultiGroupMoveAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -32,7 +32,7 @@ public class PrimordialFlame extends CasterCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
-    private static final CardTarget TARGET = CardTarget.ENEMY;
+    private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
@@ -65,8 +65,7 @@ public class PrimordialFlame extends CasterCard {
 
     @Override
     public void triggerOnExhaust() {
-        AbstractPlayer p = AbstractDungeon.player;
-        addToBot(new MultiGroupMoveAction(p.drawPile.type, 1, c  -> c == this, p.exhaustPile.type));
+        addToBot(new MakeTempCardInDrawPileAction(this, 1, true, true));
         super.triggerOnExhaust();
     }
 

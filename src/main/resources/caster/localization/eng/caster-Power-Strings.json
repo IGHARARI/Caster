@@ -102,8 +102,8 @@
 		"DESCRIPTIONS": ["This should be invisible. Spell Damage calculation helper."]
 	},
 	"caster:CongealPower": {
-	        "NAME": "Congeal",
-	        "DESCRIPTIONS": ["Whenever you play a Spell gain #g" , " Block."]
+	        "NAME": "Congealed",
+	        "DESCRIPTIONS": ["Whenever you play a Spell this enemy loses #g" , " Strength."]
 	},
 	"caster:FreezeInHellPower": {
 		"NAME": "Freeze In Hell",
@@ -130,6 +130,10 @@
 	"caster:BurnOut": {
 		"NAME": "Burn Out",
 		"DESCRIPTIONS": ["Next time #gBlazed is triggered, all #yBlazed stacks are removed."]
+	},
+	"caster:BurningSpirit": {
+		"NAME": "Burning Spirit",
+		"DESCRIPTIONS": ["At the start of your turn, #ythaw #g", " cards. Gain #g1 Energy for each card #ythawed."]
 	},
 	"caster:RarePower": {
 		"NAME": "Placeholder Power",

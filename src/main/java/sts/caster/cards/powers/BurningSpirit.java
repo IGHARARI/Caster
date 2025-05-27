@@ -9,19 +9,18 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.powers.ShivaPower;
+import sts.caster.powers.BurningSpiritPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class ShivasGrace extends CasterCard {
+public class BurningSpirit extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("ShivasGrace");
+    public static final String ID = CasterMod.makeID("BurningSpirit");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("shiva.png");
+    public static final String IMG = makeCardPath("burningspirit.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
@@ -29,26 +28,27 @@ public class ShivasGrace extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int UPGR_COST = 0;
-    private static final int PLATED_ARMOR_AMT = 1;
+    private static final int ENERGY_THAW_AMOUNT = 1;
 
-    public ShivasGrace() {
+
+    public BurningSpirit() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = PLATED_ARMOR_AMT;
-        setCardElement(MagicElement.ICE);
+        magicNumber = baseMagicNumber = ENERGY_THAW_AMOUNT;
+        setCardElement(MagicElement.FIRE);
     }
 
     @Override
-    public void use(final AbstractPlayer p, final AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new ShivaPower(p, magicNumber), magicNumber));
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new ApplyPowerAction(p, p, new BurningSpiritPower(p, p, magicNumber), magicNumber));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
+            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            this.isInnate = true;
             initializeDescription();
-            upgradeBaseCost(UPGR_COST);
         }
     }
 }

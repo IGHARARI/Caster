@@ -2,15 +2,17 @@ package sts.caster.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import sts.caster.core.CasterMod;
 import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.util.TextureHelper;
@@ -41,14 +43,15 @@ public class CongealPower extends AbstractPower {
 
 		isTurnBased = false;
 		canGoNegative = false;
-		type = PowerType.BUFF;
+		type = PowerType.DEBUFF;
 		updateDescription();
 	}
 
 	@Override
 	public void onPlayCard(AbstractCard card, AbstractMonster m) {
 		if (card.type == CasterCardType.SPELL) {
-			addToBot(new GainBlockAction(AbstractDungeon.player, amount));
+			AbstractPlayer p = AbstractDungeon.player;
+			addToBot(new ApplyPowerAction(owner, p, new StrengthPower(owner, -this.amount), -this.amount));
 		}
 		super.onPlayCard(card, m);
 	}

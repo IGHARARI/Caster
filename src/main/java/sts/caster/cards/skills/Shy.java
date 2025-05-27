@@ -52,12 +52,12 @@ public class Shy extends CasterCard {
 
     @Override
     public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        addToBot(new ThawCardAction(magicNumber, false, upgraded, this));
+        addToBot(new ThawCardAction(magicNumber, false, upgraded, this.name));
     }
 
     public void triggerWhenDrawn() {
         if (upgraded) addToBot(new DrawCardAction(m2));
-        addToBot(new ThawCardAction(magicNumber, false, this));
+        addToBot(new ThawCardAction(magicNumber, false, this.name));
         addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
         addToBot(new DiscardSpecificCardAction(this));
     }

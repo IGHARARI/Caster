@@ -1,55 +1,54 @@
-package sts.caster.cards.skills;
+package sts.caster.cards.powers;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.EnergizedPower;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.powers.ShivaPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class BurningSpirit extends CasterCard {
+public class ShivasWrath extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("BurningSpirit");
+    public static final String ID = CasterMod.makeID("ShivasWrath");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("burningspirit.png");
+    public static final String IMG = makeCardPath("shiva.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
-    private static final CardType TYPE = CardType.SKILL;
+    private static final CardType TYPE = CardType.POWER;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 0;
-    private static final int ENERGY_AMOUNT = 2;
-    private static final int UPG_ENERGY_AMOUNT = 2;
+    private static final int COST = 1;
+    private static final int UPGR_COST = 0;
+    private static final int PLATED_ARMOR_AMT = 1;
 
-
-    public BurningSpirit() {
+    public ShivasWrath() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = ENERGY_AMOUNT;
-        setCardElement(MagicElement.FIRE);
+        magicNumber = baseMagicNumber = PLATED_ARMOR_AMT;
+        setCardElement(MagicElement.ICE);
     }
 
     @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new EnergizedPower(p, magicNumber), magicNumber));
+    public void use(final AbstractPlayer p, final AbstractMonster m) {
+        addToBot(new ApplyPowerAction(p, p, new ShivaPower(p, magicNumber), magicNumber));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-            upgradeMagicNumber(UPG_ENERGY_AMOUNT);
             initializeDescription();
+            upgradeBaseCost(UPGR_COST);
         }
     }
 }

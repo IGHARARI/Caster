@@ -5,6 +5,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.WeakPower;
+import sts.caster.actions.ActionOnAllEnemiesAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -27,31 +29,34 @@ public class Congeal extends CasterCard {
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
-    private static final int UPG_COST = 0;
-    private static final int FROST_AMT = 3;
-    private static final int BASE_BLOCK = 4;
+    private static final int COST = 2;
+    private static final int STR_LOSS_AMOUNT = 1;
+    private static final int STR_LOSS_AMOUNT_UPGRADE = 1;
+    private static final int BASE_WEAK = 2;
 
     public Congeal() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = FROST_AMT;
-        baseM2 = m2 = BASE_BLOCK;
+        magicNumber = baseMagicNumber = BASE_WEAK;
+        baseM2 = m2 = STR_LOSS_AMOUNT;
+        this.exhaust = true;
         setCardElement(MagicElement.ICE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-//        addToBot(new ActionOnAllEnemiesAction(
-//                m -> new ApplyPowerAction(m, AbstractDungeon.player, new FrostPower(m, AbstractDungeon.player, magicNumber), magicNumber)
-//        ));
-        addToBot(new ApplyPowerAction(p, p, new CongealPower(p, p, m2), m2));
+        addToBot(new ActionOnAllEnemiesAction(
+                m -> new ApplyPowerAction(m, p, new WeakPower(m, magicNumber, false), magicNumber)
+        ));
+        addToBot(new ActionOnAllEnemiesAction(
+                m -> new ApplyPowerAction(m, p, new CongealPower(m, p, m2), m2)
+        ));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBaseCost(UPG_COST);
+            upgradeM2(STR_LOSS_AMOUNT_UPGRADE);
             initializeDescription();
         }
     }

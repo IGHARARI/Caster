@@ -257,8 +257,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(BurnItDown.ID);
         BaseMod.addCard(new PackedIce());
         UnlockTracker.unlockCard(PackedIce.ID);
-        BaseMod.addCard(new MagicScroll());
-        UnlockTracker.unlockCard(MagicScroll.ID);
         BaseMod.addCard(new Direct());
         UnlockTracker.unlockCard(Direct.ID);
         BaseMod.addCard(new FrostDriver());
@@ -286,8 +284,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(WallOfSwords.ID);
         BaseMod.addCard(new WallOfAsh());
         UnlockTracker.unlockCard(WallOfAsh.ID);
-        BaseMod.addCard(new ShivasGrace());
-        UnlockTracker.unlockCard(ShivasGrace.ID);
+        BaseMod.addCard(new ShivasWrath());
+        UnlockTracker.unlockCard(ShivasWrath.ID);
         BaseMod.addCard(new WallOfMirrors());
         UnlockTracker.unlockCard(WallOfMirrors.ID);
         BaseMod.addCard(new Cryogenesis());
@@ -456,6 +454,8 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(DeprecatedGigaDrain.ID);
 //        BaseMod.addCard(new DeprecatedSleet());
 //        UnlockTracker.unlockCard(DeprecatedSleet.ID);
+//        BaseMod.addCard(new DeprecatedMagicScroll());
+//        UnlockTracker.unlockCard(DeprecatedMagicScroll.ID);
 
         logger.info("Done adding cards!");
     }
@@ -537,7 +537,7 @@ public class CasterMod implements
 //    public void receivePostEnergyRecharge() {
 //        List<AbstractCard> frozenEmbers = DeprecatedFrozenPileManager.frozenPile.group.stream().filter(c -> c instanceof Embers).collect(Collectors.toList());
 //        for (AbstractCard ember : frozenEmbers) {
-//            ((Embers)ember).thawActions();
+//            ((Embers)ember).onFrozenAtStartOfTurn();
 //        }
 //    }
 }

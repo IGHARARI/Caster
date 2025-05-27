@@ -22,7 +22,7 @@ public class ThawCardAction extends AbstractGameAction {
     private boolean isRandom;
     private boolean anyNumber;
     private AbstractCard specificCard;
-    private AbstractCard sourceCard;
+    private String thawSourceText;
 
     public ThawCardAction(final AbstractCard card) {
         this.specificCard = card;
@@ -31,77 +31,19 @@ public class ThawCardAction extends AbstractGameAction {
         this.actionType = ActionType.EXHAUST;
     }
 
-    public ThawCardAction(final int amount, final boolean isRandom, final AbstractCard sourceCard) {
-        this(amount, isRandom, false, sourceCard);
+    public ThawCardAction(final int amount, final boolean isRandom, final String thawSourceText) {
+        this(amount, isRandom, false, thawSourceText);
     }
 
-    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final AbstractCard sourceCard) {
+    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final String thawSourceText) {
         this.anyNumber = anyNumber;
         this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
         this.amount = amount;
         this.duration = Settings.ACTION_DUR_FAST;
         this.actionType = ActionType.EXHAUST;
+        this.thawSourceText = thawSourceText;
     }
-
-    public ThawCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final boolean canPickZero, final AbstractCard sourceCard) {
-        this.anyNumber = anyNumber;
-        this.p = AbstractDungeon.player;
-        this.isRandom = isRandom;
-        this.amount = amount;
-        this.duration = Settings.ACTION_DUR_FAST;
-        this.actionType = ActionType.EXHAUST;
-    }
-
-//    @Override
-//    public void update() {
-//        if (specificCard != null) {
-//            if (DeprecatedFrozenPileManager.frozenPile.contains((specificCard))){
-//                thawSpecificCard(specificCard);
-//            }
-//            p.hand.refreshHandLayout();
-//            isDone = true;
-//            return;
-//        }
-//        if (duration == Settings.ACTION_DUR_FAST) {
-//            if (DeprecatedFrozenPileManager.frozenPile.size() == 0) {
-//                isDone = true;
-//                return;
-//            }
-//            if (!anyNumber && DeprecatedFrozenPileManager.frozenPile.size() <= amount) {
-//                //I copy the list to avoid CME or any visual bugs
-//                ArrayList<AbstractCard> cardsCopy = new ArrayList<AbstractCard>(DeprecatedFrozenPileManager.frozenPile.group);
-//                for (AbstractCard card : cardsCopy) {
-//                    thawSpecificCard(card);
-//                }
-//                AbstractDungeon.gridSelectScreen.selectedCards.clear();
-//                p.hand.refreshHandLayout();
-//                isDone = true;
-//                return;
-//            }
-//            if (!isRandom) {        // Thaw  +        ?(up to)           +   #N   +           (card./cards.)
-//                String thawMessage = TEXT[0] + (anyNumber? TEXT[2] : "") + amount + (amount>1? TEXT[3] : TEXT[1]);
-//                AbstractDungeon.gridSelectScreen.open(DeprecatedFrozenPileManager.frozenPile, amount, anyNumber, thawMessage);
-//                AbstractDungeon.gridSelectScreen.forClarity = false;
-//                tickDuration();
-//                return;
-//            }
-//            for (int j = 0; j < amount; ++j) {
-//            	thawSpecificCard(DeprecatedFrozenPileManager.frozenPile.getRandomCard(AbstractDungeon.cardRandomRng));
-//            }
-//            AbstractDungeon.gridSelectScreen.selectedCards.clear();
-//            p.hand.refreshHandLayout();
-//        }
-//        if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-//            for (final AbstractCard c2 : AbstractDungeon.gridSelectScreen.selectedCards) {
-//            	thawSpecificCard(c2);
-//            }
-//            AbstractDungeon.gridSelectScreen.selectedCards.clear();
-//            p.hand.refreshHandLayout();
-//        }
-//        this.tickDuration();
-//    }
-
 
     @Override
     public void update() {
@@ -133,7 +75,7 @@ public class ThawCardAction extends AbstractGameAction {
                 isDone = true;
                 return;
             }
-            String cardName = sourceCard != null ? sourceCard.name + ": " : "";
+            String cardName = thawSourceText != null ? thawSourceText + ": " : "";
             if (!isRandom) {       //[Card Name]: Thaw  +        ?(up to)           +   #N   +           (card./cards.)
                 String thawMessage = cardName + TEXT[0] + (anyNumber? TEXT[2] : "") + amount + (amount>1? TEXT[3] : TEXT[1]);
                 AbstractDungeon.gridSelectScreen.open(frozenHandGroup, amount, anyNumber, thawMessage);
@@ -159,26 +101,9 @@ public class ThawCardAction extends AbstractGameAction {
 
 
     private void thawSpecificCard(AbstractCard c) {
-//        c.stopGlowing();
-//        if (p.hand.size() < BaseMod.MAX_HAND_SIZE) {
-//        	p.hand.addToHand(c);
-//        } else {
-//        	AbstractDungeon.player.createHandIsFullDialog();
-//        	c.untip();
-//        	p.discardPile.addToRandomSpot(c);
-//        }
-//        DeprecatedFrozenPileManager.frozenPile.removeCard(c);
-//        c.unhover();
-//        c.fadingOut = false;
-//        if (AbstractDungeon.player.hasPower(ThermodynamicsPower.POWER_ID)) {
-//            ((ThermodynamicsPower)AbstractDungeon.player.getPower(ThermodynamicsPower.POWER_ID)).onThawCard();
-//        }
         c.stopGlowing();
         CardModifierManager.removeModifiersById(c, FrozenCardMod.ID, true);
         c.unhover();
         c.fadingOut = false;
-//        if (AbstractDungeon.player.hasPower(ThermodynamicsPower.POWER_ID)) {
-//            ((ThermodynamicsPower)AbstractDungeon.player.getPower(ThermodynamicsPower.POWER_ID)).onThawCard();
-//        }
     }
 }

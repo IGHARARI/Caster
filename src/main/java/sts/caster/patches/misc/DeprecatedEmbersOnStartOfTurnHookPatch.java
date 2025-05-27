@@ -11,7 +11,7 @@ public class DeprecatedEmbersOnStartOfTurnHookPatch {
 //					filter(c -> c instanceof Embers).collect(Collectors.toList());
 //
 //			for (AbstractCard ember : frozenEmbers) {
-//				((Embers)ember).thawActions();
+//				((Embers)ember).onFrozenAtStartOfTurn();
 //			}
 //		}
 //

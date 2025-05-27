@@ -16,9 +16,9 @@ import sts.caster.patches.spellCardType.CasterCardType;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class MagicScroll extends CasterCard {
+public class DeprecatedMagicScroll extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("MagicScroll");
+    public static final String ID = CasterMod.makeID("DeprecatedMagicScroll");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("magicscroll.png");
 
@@ -35,7 +35,7 @@ public class MagicScroll extends CasterCard {
     private static final int UPG_DRAW_AMOUNT = 1;
     private static final int CAST_MODIFY = 1;
 
-    public MagicScroll() {
+    public DeprecatedMagicScroll() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseMagicNumber = magicNumber = DRAW_AMOUNT;
         baseM2 = m2 = CAST_MODIFY;

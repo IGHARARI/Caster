@@ -56,7 +56,6 @@ public class FrozenCardMod extends AbstractCardModifier {
         FreezeHelper.increaseFrozenThisCombatCount(1);
 
         if (card instanceof CasterCard) {
-            CasterMod.logger.info("On freeze for " + card.name + " " + card.uuid);
             addToBot(new CardOnFrozenTriggerAction((CasterCard)card));
         }
 
@@ -81,7 +80,6 @@ public class FrozenCardMod extends AbstractCardModifier {
             power.onThaw(card);
         }
         if (card instanceof CasterCard) {
-            CasterMod.logger.info("Thawing " + card.name + " " + card.uuid);
             addToBot(new CardOnThawTriggerAction((CasterCard)card));
         }
     }

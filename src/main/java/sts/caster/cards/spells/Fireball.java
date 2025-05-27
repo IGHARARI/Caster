@@ -61,7 +61,7 @@ public class Fireball extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ThawCardAction(magicNumber, false, this));
+        addToBot(new ThawCardAction(magicNumber, false, this.name));
         addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
 

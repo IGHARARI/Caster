@@ -47,7 +47,7 @@ public class FireWall extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, block));
         addToBot(new LoseHPAction(p, p, magicNumber));
-        addToBot(new ThawCardAction(magicNumber, false, this));
+        addToBot(new ThawCardAction(magicNumber, false, this.name));
     }
 
     @Override

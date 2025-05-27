@@ -59,19 +59,18 @@ public class BlazedPower extends AbstractPower {
 	@Override
 	public void atEndOfTurn(boolean isPlayer) {
 		// Don't decrease if inferno power!
-		if (AbstractDungeon.player.hasPower(InfernoPower.POWER_ID)) {
-			return;
-		}
+		boolean canDecrease = !AbstractDungeon.player.hasPower(InfernoPower.POWER_ID);
 		if (attackedThisTurn) {
 			if (owner.hasPower(BurnOutPower.POWER_ID)) {
 				addToBot(new RemoveSpecificPowerAction(owner, source, BurnOutPower.POWER_ID));
-				addToBot(new RemoveSpecificPowerAction(owner, source, POWER_ID));
-			} else {
-				int amountToLose = (int) Math.ceil(((float)amount)/2f);
+				if (canDecrease) addToBot(new RemoveSpecificPowerAction(owner, source, POWER_ID));
+			} else if (canDecrease) {
+				int amountToLose = (int) Math.ceil(((float) amount) / 2f);
 				addToBot(new ReducePowerAction(owner, source, POWER_ID, amountToLose));
 			}
 		}
 		attackedThisTurn = false;
+		super.atEndOfTurn(isPlayer);
 	}
 	
 	@Override

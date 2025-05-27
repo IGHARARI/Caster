@@ -30,7 +30,7 @@ public class Lemonade extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_DRAW = 1;
-    private static final int BASE_BLOCK = 6;
+    private static final int BASE_BLOCK = 4;
     private static final int UPGE_BLOCK = 2;
 
     public Lemonade() {

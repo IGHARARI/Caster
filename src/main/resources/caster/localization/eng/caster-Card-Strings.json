@@ -70,7 +70,7 @@
   },
   "caster:Tundra": {
     "NAME": "Tundra",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! Vulnerable to ALL enemies. NL Apply !caster:M2! Weak to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Apply !M! Vulnerable and Weak to ALL enemies. NL Exhaust."
   },
   "caster:LightningBolt": {
     "NAME": "Lightning Bolt",
@@ -83,7 +83,7 @@
   },
   "caster:PrimordialFlame": {
     "NAME": "Primordial Flame",
-    "DESCRIPTION": "When you draw this, caster:Ignite it. NL When this exhausts, shuffle it into your draw pile. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage !M! times."
+    "DESCRIPTION": "When you draw this, caster:Ignite it. NL When this exhausts, shuffle a copy in your draw pile. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to the enemy with the highest HP, !M! times."
   },
   "caster:Shatter": {
     "NAME": "Shatter",
@@ -96,7 +96,7 @@
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
-    "DESCRIPTION": "Deal !D! damage. NL Whenever Freezing this card, double its base damage this combat."
+    "DESCRIPTION": "Deal !D! damage. NL Whenever caster:Freezing this card, double its base damage this combat."
   },
   "caster:StaticField": {
     "NAME": "Static Field",
@@ -118,7 +118,7 @@
   },
   "caster:Congeal": {
     "NAME": "Congeal",
-    "DESCRIPTION": "Apply !M! caster:Frost to ALL enemies. NL Whenever you play a Spell this turn, gain !caster:M2! Block."
+    "DESCRIPTION": "Apply !M! Weak to ALL enemies. NL Whenever you play a Spell this turn, ALL enemies lose !caster:M2! Strength. NL Exhaust."
   },
   "caster:Permafrost": {
     "NAME": "Permafrost",
@@ -222,8 +222,8 @@
     "NAME": "Meteor",
     "DESCRIPTION": "caster:Thaw !M! card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
-  "caster:ShivasGrace": {
-    "NAME": "Shiva's Grace",
+  "caster:ShivasWrath": {
+    "NAME": "Shiva's Wrath",
     "DESCRIPTION": "Whenever you caster:Freeze a card, gain !M! *Plated *Armor."
   },
   "caster:FrigidBeam": {
@@ -245,7 +245,8 @@
   },
   "caster:Eruption": {
     "NAME": "Eruption",
-    "DESCRIPTION": "Deal !D! damage. NL Add !M! *Lava to your hand."
+    "DESCRIPTION": "Deal !D! damage. NL Apply the same amount of caster:Blazed. NL Add !M! *Charred to your draw pile.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Apply the same amount of caster:Blazed. NL Add !M! *Charred to your hand."
   },
   "caster:Fira": {
     "NAME": "Fira",
@@ -314,8 +315,8 @@
   },
   "caster:Embers": {
     "NAME": "Embers",
-    "DESCRIPTION": "Unplayable. NL At the start of your turn, if this card is caster:Frozen caster:Thaw it, gain [E] and caster:Thaw up to !M! cards.",
-    "UPGRADE_DESCRIPTION": "Unplayable. NL At the start of your turn, if this card is caster:Frozen caster:Thaw it, gain [E] [E] and caster:Thaw up to !M! cards."
+    "DESCRIPTION": "When this is caster:frozen, caster:thaw it. NL caster:Thaw up to !M! cards.",
+    "UPGRADE_DESCRIPTION": "When this is caster:frozen, caster:thaw it. NL caster:Thaw up to !M! cards. NL Draw 1 card."
   },
   "caster:Shy": {
     "NAME": "Shy",
@@ -407,7 +408,7 @@
   "caster:IceWall": {
     "NAME": "Ice Wall",
     "DESCRIPTION":         "Gain !B! Block. NL Block is not removed at the start of your next turn. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Block is not removed at the start of your next turn. NL caster:Freeze this card."
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Block is not removed at the start of your next turn."
   },
   "caster:PackedIce": {
     "NAME": "Packed Ice",
@@ -417,13 +418,9 @@
     "NAME": "Lemonade",
     "DESCRIPTION": "Draw !M! card and gain !B! Block for each caster:Frozen card in hand."
   },
-  "caster:MagicScroll": {
-    "NAME": "Magic Scroll",
-    "DESCRIPTION": "Draw !M! card, reduce the Cast Time of any Spells drawn this way by !caster:M2! for this turn."
-  },
   "caster:Direct": {
     "NAME": "Direct",
-    "DESCRIPTION": "Fetch up to !M! caster:Electrified cards from your draw or dicard pile. NL Gain !B! Block."
+    "DESCRIPTION": "Fetch up to !M! caster:Electrified cards from your draw or discard pile. NL Gain !B! Block."
   },
   "caster:Mirage": {
     "NAME": "Mirage",
@@ -442,9 +439,9 @@
     "DESCRIPTION": "Double an enemy's caster:Blazed, next time caster:Blazed is triggered the enemy loses all caster:Blazed stacks. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Double an enemy's caster:Blazed, next time caster:Blazed is triggered the enemy loses all caster:Blazed stacks."
   },
-  "caster:Lava": {
-    "NAME": "Lava",
-    "DESCRIPTION": "Retain. NL While this is in your hand, Fire Attacks and Spells deal !M! more damage. NL This turn Fire Attack and Spells deal !caster:M2! more damage. NL Exhaust."
+  "caster:Charred": {
+    "NAME": "Charred",
+    "DESCRIPTION": "Retain. NL caster:Ignite all cards in your hand. NL Exhaust."
   },
   "caster:SuperCool": {
     "NAME": "Super Cool",
@@ -477,8 +474,8 @@
   },
   "caster:BurningSpirit": {
     "NAME": "Burning Spirit",
-    "DESCRIPTION": "Next turn, gain [E] [E].",
-    "UPGRADE_DESCRIPTION": "Next turn, gain [E] [E] [E] [E]."
+    "DESCRIPTION": "At the start of your turn, caster:thaw !M! card, if you do, gain [E] ",
+    "UPGRADE_DESCRIPTION": "Innate. NL At the start of your turn, caster:thaw !M! card, if you do, gain [E] "
   },
   "caster:DeprecatedSandstorm": {
     "NAME": "Sandstorm",
@@ -534,5 +531,9 @@
   "caster:DeprecatedSleet": {
     "NAME": "Sleet",
     "DESCRIPTION": "Draw !M! card and gain !B! Block for each enemy in combat."
+  },
+  "caster:DeprecatedMagicScroll": {
+    "NAME": "Magic Scroll",
+    "DESCRIPTION": "Draw !M! card, reduce the Cast Time of any Spells drawn this way by !caster:M2! for this turn."
   }
 }

@@ -1,19 +1,19 @@
 package sts.caster.cards.special;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.IgnitedCardMod;
 import sts.caster.core.CasterMod;
-import sts.caster.powers.LavaPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class Lava extends CasterCard {
+public class Charred extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("Lava");
+    public static final String ID = CasterMod.makeID("Charred");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("ashes.png");
 
@@ -26,15 +26,9 @@ public class Lava extends CasterCard {
     public static final CardColor COLOR = CardColor.COLORLESS;
 
     private static final int COST = 0;
-    private static final int PASSIVE_DAMAGE_BONUS = 3;
-    private static final int USE_DAMAGE_BONUS = 5;
 
-
-
-    public Lava() {
+    public Charred() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = PASSIVE_DAMAGE_BONUS;
-        baseM2 = m2 = USE_DAMAGE_BONUS;
         selfRetain = true;
         exhaust = true;
     }
@@ -49,6 +43,6 @@ public class Lava extends CasterCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new LavaPower(p, m2), m2));
+        p.hand.group.stream().forEach(c -> CardModifierManager.addModifier(c, new IgnitedCardMod()));
     }
 }

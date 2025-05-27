@@ -44,14 +44,12 @@ public class Tundra extends CasterCard {
     private static final int BASE_DELAY = 1;
     private static final int BASE_RECUR = 2;
     private static final int UPGR_RECUR = 4;
-    private static final int BASE_VULN = 1;
-    private static final int BASE_WEAK = 1;
+    private static final int BASE_VULN_WEAK = 1;
 
     public Tundra() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
-        baseMagicNumber = magicNumber = BASE_VULN;
-        baseM2 = m2 = BASE_WEAK;
+        baseMagicNumber = magicNumber = BASE_VULN_WEAK;
         exhaust = true;
         setCardElement(MagicElement.ICE);
     }
@@ -86,7 +84,7 @@ public class Tundra extends CasterCard {
                     m -> new ApplyPowerAction(m, AbstractDungeon.player, new VulnerablePower(m, c.magicNumber, true), c.magicNumber)
             ));
             actionsList.add(new ActionOnAllEnemiesAction(
-                    m -> new ApplyPowerAction(m, AbstractDungeon.player, new WeakPower(m, c.m2, false), c.m2)
+                    m -> new ApplyPowerAction(m, AbstractDungeon.player, new WeakPower(m, c.magicNumber, false), c.magicNumber)
             ));
 //            actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
 //            actionsList.add(new QueueDelayedCardAction(c, BASE_DELAY, t));

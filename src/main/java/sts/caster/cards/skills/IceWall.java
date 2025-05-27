@@ -39,7 +39,7 @@ public class IceWall extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int BASE_BLOCK = 24;
+    private static final int BASE_BLOCK = 22;
     private static final int UPG_BLOCK = 4;
     private static final int BASE_BLUR = 1;
     private boolean wasUsed;

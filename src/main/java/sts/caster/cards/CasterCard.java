@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
-import sts.caster.cards.special.Lava;
+import sts.caster.cards.special.Charred;
 import sts.caster.core.MagicElement;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
@@ -182,7 +182,7 @@ public abstract class CasterCard extends CustomCard {
 	private int getLavaModifiers() {
 		int totalModifier = 0;
 		for (AbstractCard c : AbstractDungeon.player.hand.group) {
-			if (Objects.equals(c.cardID, Lava.ID)) {
+			if (Objects.equals(c.cardID, Charred.ID)) {
 				totalModifier += c.magicNumber;
 			}
 		}
