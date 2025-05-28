@@ -21,7 +21,7 @@
   },
   "caster:DivertMana": {
     "NAME": "Divert Mana",
-    "DESCRIPTION": "Gain !B! Block. NL Gain !M! additional Block for each spell you're currently casting. NL Add 1 caster:Cast_Time to all Spells you are currently casting."
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! additional Block for each spell you're currently casting. NL caster:Slow-down 1."
   },
   "caster:FocusMana": {
     "NAME": "Focus Mana",
@@ -29,7 +29,7 @@
   },
   "caster:TapMana": {
     "NAME": "Tap Mana",
-    "DESCRIPTION": "Reduce the base damage and Block of all Spells you are currently casting by !M!. NL Reduce the caster:Cast_Time of all Spells you are currently casting by !M!."
+    "DESCRIPTION": "Reduce the base damage and Block of all Spells you are currently casting by !M!. NL caster:Fast-forward !M!."
   },
   "caster:ManaBlast": {
     "NAME": "Mana Blast",
@@ -122,8 +122,8 @@
   },
   "caster:Permafrost": {
     "NAME": "Permafrost",
-    "DESCRIPTION": "Add 1 caster:Cast_Time to all Spells you are currently casting. NL Gain !B! Block: equal to twice the sum of their caster:Cast_Time. NL Next turn, gain half that amount.",
-    "UPGRADE_DESCRIPTION": "Retain. NL Add 1 caster:Cast_Time to all Spells you are currently casting. NL Gain !B! Block: equal to twice the sum of their caster:Cast_Time. NL Next turn, gain half that amount."
+    "DESCRIPTION": "caster:Slow-down 1. NL You cannot lose HP for 1 turn. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "caster:Slow-down 1. NL You cannot lose HP for 1 turn."
   },
   "caster:FreezeInHell": {
     "NAME": "Freeze In Hell",
@@ -236,7 +236,7 @@
   },
   "caster:Illusion": {
     "NAME": "Illusion",
-    "DESCRIPTION": "Change the enemy intent to Block this round. NL Exhaustive !stslib:ex!"
+    "DESCRIPTION": "Change the enemy intent to Block this turn. NL Exhaust."
   },
   "caster:StormGust": {
     "NAME": "Storm Gust",
@@ -271,7 +271,7 @@
   },
   "caster:Heavy": {
     "NAME": "Heavy",
-    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage to ALL enemies equal to the damage you blocked last round. NL Cannot be Upgraded."
+    "DESCRIPTION": "Gain !caster:B! Block. NL caster:Cast_Time !caster:Delay!: NL Deal damage to ALL enemies equal to the damage you blocked last turn. NL Cannot be Upgraded."
   },
   "caster:Slick": {
     "NAME": "Slick",
@@ -450,11 +450,11 @@
   "caster:Avalanche": {
     "NAME": "Avalanche",
     "DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed into your draw pile.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed+ into your draw pile."
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed into your draw pile."
   },
   "caster:Snowed": {
     "NAME": "Snowed",
-    "DESCRIPTION": "When drawn gain !M! Block. NL Exhaust."
+    "DESCRIPTION": "Ethereal. NL When drawn caster:Freeze !M! random card."
   },
   "caster:Jumper": {
     "NAME": "Jump-Start",

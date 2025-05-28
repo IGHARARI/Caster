@@ -1,11 +1,11 @@
 package sts.caster.cards.special;
 
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import sts.caster.actions.FreezeCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 
@@ -26,27 +26,25 @@ public class Snowed extends CasterCard {
     public static final CardColor COLOR = CardColor.COLORLESS;
 
     private static final int COST = 0;
-    private static final int BLOCK_ON_DRAW = 2;
-    private static final int UPG_BLOCK_ON_DRAW = 2;
+    private static final int FREEZE_ON_DRAW = 1;
 
 
     public Snowed() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseMagicNumber = magicNumber = BLOCK_ON_DRAW;
-        this.exhaust = true;
+        baseMagicNumber = magicNumber = FREEZE_ON_DRAW;
+        this.isEthereal = true;
     }
 
     @Override
     public void triggerWhenDrawn() {
         AbstractPlayer p = AbstractDungeon.player;
-        addToBot(new GainBlockAction(p, magicNumber));
+        addToBot(new FreezeCardAction(magicNumber, true, this));
     }
     
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_BLOCK_ON_DRAW);
             initializeDescription();
         }
     }

@@ -23,11 +23,17 @@ public class FreezeCardAction extends AbstractGameAction {
     private boolean isRandom;
     private boolean anyNumber;
     private boolean canPickZero;
+    private AbstractCard exception;
     private List<AbstractCard> alreadyFrozen = new ArrayList();
     private List<AbstractCard> sortedCopyOfInitialHand = new ArrayList();
 
     public FreezeCardAction(final int amount, final boolean isRandom) {
         this(amount, isRandom, false, false);
+    }
+
+    public FreezeCardAction(final int amount, final boolean isRandom, final AbstractCard exception) {
+        this(amount, isRandom, false, false);
+        this.exception = exception;
     }
     
     public FreezeCardAction(final int amount, final boolean isRandom, final boolean anyNumber, final boolean canPickZero) {
@@ -121,6 +127,7 @@ public class FreezeCardAction extends AbstractGameAction {
             }
             // It's random, shuffle (to randomize) and freeze the bottom amount
             List<AbstractCard> handCopy = new ArrayList<AbstractCard>(p.hand.group);
+            if (exception != null) handCopy.remove(exception);
             Collections.shuffle(handCopy, new Random(AbstractDungeon.shuffleRng.randomLong()));
             for (int j = 0; j < this.amount; ++j) {
                 addToBot(new FreezeSpecificCardAction(handCopy.get(j)));

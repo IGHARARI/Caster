@@ -135,6 +135,10 @@
 		"NAME": "Burning Spirit",
 		"DESCRIPTIONS": ["At the start of your turn, #ythaw #g", " cards. Gain #g1 Energy for each card #ythawed."]
 	},
+	"caster:CannotLoseHpPower": {
+		"NAME": "Permafrozen",
+		"DESCRIPTIONS": ["Cannot lose HP for ", " turn.", " turns."]
+	},
 	"caster:RarePower": {
 		"NAME": "Placeholder Power",
 		"DESCRIPTIONS": ["At the start of your turn, TOUCH ", " enemy." , " enemies."]

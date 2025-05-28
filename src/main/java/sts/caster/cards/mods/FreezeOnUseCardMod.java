@@ -13,12 +13,12 @@ public class FreezeOnUseCardMod extends AbstractCardModifier {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("FreezeOnUseCardMod");
 
     static final String ID = "caster:FreezeOnUseCardMod";
-    private boolean removeOnTrigger;
+    private boolean removeWhenTriggered;
 
     public FreezeOnUseCardMod() { }
 
-    public FreezeOnUseCardMod(boolean removeOnTrigger) {
-        this.removeOnTrigger = removeOnTrigger;
+    public FreezeOnUseCardMod(boolean removeWhenTriggered) {
+        this.removeWhenTriggered = removeWhenTriggered;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class FreezeOnUseCardMod extends AbstractCardModifier {
 
     @Override
     public boolean removeOnCardPlayed(AbstractCard card) {
-        return removeOnTrigger;
+        return removeWhenTriggered;
     }
 
     @Override

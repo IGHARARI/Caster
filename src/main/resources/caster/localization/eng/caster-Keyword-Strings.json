@@ -119,5 +119,21 @@
       "Unique_Spell"
     ],
     "DESCRIPTION": "Multiple copies of the same spell will only count as one unique spell."
+  },
+  {
+    "PROPER_NAME": "Slow-Down",
+    "NAMES": [
+      "slowdown",
+      "slow-down"
+    ],
+    "DESCRIPTION": "Move all Spells in your Casting Queue backwards."
+  },
+  {
+    "PROPER_NAME": "Fast-Forward",
+    "NAMES": [
+      "fastforward",
+      "fast-forward"
+    ],
+    "DESCRIPTION": "Move all Spells in your Casting Queue forwards."
   }
 ]

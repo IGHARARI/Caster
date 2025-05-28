@@ -30,8 +30,9 @@ public class Avalanche extends CasterCard {
 
     private static final int COST = 3;
     private static final int UPG_COST = 2;
+    private static final int UPG_SNOWED = -1;
     private static final int BASE_DAMAGE = 21;
-    private static final int SNOWED_AMOUNT = 3;
+    private static final int SNOWED_AMOUNT = 2;
 
     public Avalanche() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -53,8 +54,8 @@ public class Avalanche extends CasterCard {
         if (!upgraded) {
             upgradeName();
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-            cardsToPreview.upgrade();
             upgradeBaseCost(UPG_COST);
+            upgradeMagicNumber(UPG_SNOWED);
             initializeDescription();
         }
     }

@@ -1,21 +1,22 @@
 package sts.caster.cards.skills;
 
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.NextTurnBlockPower;
 import sts.caster.actions.ArbitraryCardAction;
 import sts.caster.actions.ModifyCastingSpellCastTimeAction;
 import sts.caster.actions.QueueRedrawMiniCardsAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.FreezeOnUseCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
+import sts.caster.powers.CannotLoseHpPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -35,11 +36,12 @@ public class Permafrost extends CasterCard {
 
 
     private static final int CAST_TIME_INCREASE = 1;
-    private static final int COST = 2;
+    private static final int COST = 3;
+    private static final int UPGRADED_COST = 2;
 
     public Permafrost() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseBlock = block = 0;
+        exhaust = true;
         setCardElement(MagicElement.ICE);
     }
 
@@ -53,8 +55,7 @@ public class Permafrost extends CasterCard {
             }
             addToBot(new QueueRedrawMiniCardsAction());
         }));
-        addToBot(new GainBlockAction(p, block));
-        addToBot(new ApplyPowerAction(p, p, new NextTurnBlockPower(p, block / 2), block / 2));
+        addToBot(new ApplyPowerAction(p, p, new CannotLoseHpPower(p, 1)));
     }
 
     @Override
@@ -79,7 +80,9 @@ public class Permafrost extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            this.selfRetain = true;
+            this.exhaust = false;
+            upgradeBaseCost(UPGRADED_COST);
+            CardModifierManager.addModifier(this, new FreezeOnUseCardMod(false));
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             initializeDescription();
         }
