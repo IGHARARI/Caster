@@ -450,7 +450,6 @@
   "caster:Avalanche": {
     "NAME": "Avalanche",
     "DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed into your draw pile.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed into your draw pile."
   },
   "caster:Snowed": {
     "NAME": "Snowed",

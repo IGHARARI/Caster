@@ -53,7 +53,6 @@ public class Avalanche extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             upgradeBaseCost(UPG_COST);
             upgradeMagicNumber(UPG_SNOWED);
             initializeDescription();
