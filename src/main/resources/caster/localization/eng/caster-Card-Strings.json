@@ -283,7 +283,8 @@
   },
   "caster:WallOfAsh": {
     "NAME": "Wall Of Ash",
-    "DESCRIPTION": "Gain !B! Block. NL Shuffle *Ashes into your discard pile. NL Exhaust."
+    "DESCRIPTION": "Ethereal. NL Gain !B! Block. NL Shuffle a *Wall *Of *Ash into your draw and discard pile. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL Gain !B! Block. NL Shuffle a *Wall *Of *Ash+ into your draw and discard pile. NL Exhaust."
   },
   "caster:Demi": {
     "NAME": "Demi",
@@ -449,7 +450,7 @@
   },
   "caster:Avalanche": {
     "NAME": "Avalanche",
-    "DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed into your draw pile.",
+    "DESCRIPTION": "Deal !D! damage to All enemies. NL Shuffle !M! *Snowed into your draw pile."
   },
   "caster:Snowed": {
     "NAME": "Snowed",

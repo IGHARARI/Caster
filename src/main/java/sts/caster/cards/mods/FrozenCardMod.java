@@ -2,7 +2,6 @@ package sts.caster.cards.mods;
 
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -43,11 +42,6 @@ public class FrozenCardMod extends AbstractCardModifier {
         }
         card.cantUseMessage = "Can't play a #rFrozen Card";
         return false;
-    }
-
-    @Override
-    public void onDrawn(AbstractCard card) {
-        addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, ON_DRAW_BLOCK_AMOUNT));
     }
 
     @Override
