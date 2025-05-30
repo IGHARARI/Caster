@@ -126,7 +126,7 @@
       "slowdown",
       "slow-down"
     ],
-    "DESCRIPTION": "Move all Spells in your Casting Queue backwards."
+    "DESCRIPTION": "Move Spells in your Casting Queue backwards."
   },
   {
     "PROPER_NAME": "Fast-Forward",
@@ -134,6 +134,6 @@
       "fastforward",
       "fast-forward"
     ],
-    "DESCRIPTION": "Move all Spells in your Casting Queue forwards."
+    "DESCRIPTION": "Move Spells in your Casting Queue forwards."
   }
 ]

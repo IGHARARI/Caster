@@ -216,7 +216,7 @@
   },
   "caster:FireWall": {
     "NAME": "Fire Wall",
-    "DESCRIPTION": "Gain !B! Block. NL Lose !M! HP. NL caster:Thaw !caster:M2! card."
+    "DESCRIPTION": "While in your *Casting *Queue, when you caster:Ignite this gains !M! caster:Echo, when you exhaust a card caster:Fast-Forward !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
   },
   "caster:Fireball": {
     "NAME": "Meteor",
@@ -322,12 +322,11 @@
   "caster:Shy": {
     "NAME": "Shy",
     "DESCRIPTION": "Unplayable. NL When you draw this card, gain !B! Block, caster:Thaw !M! card and discard this.",
-    "UPGRADE_DESCRIPTION": "Unplayable. NL When you draw this card, gain !B! Block, caster:Thaw !M! card, draw !caster:M2! card and discard this."
+    "UPGRADE_DESCRIPTION": "Unplayable. NL When you draw this card, gain !B! Block, caster:Thaw !M! cards, draw !caster:M2! card and discard this."
   },
   "caster:BurnItDown": {
     "NAME": "Burn It Down",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Add a *Wall *of *Ash into your discard pile. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage to ALL enemies. NL Add a *Wall *of *Ash+ into your discard pile. NL Exhaust."
+    "DESCRIPTION": "{@@}caster:Ignite a card{!M!|>1= !M! times}. NL Deal !D! damage to ALL enemies."
   },
   "caster:Rectify": {
     "NAME": "Rectify",
@@ -447,6 +446,10 @@
   "caster:SuperCool": {
     "NAME": "Super Cool",
     "DESCRIPTION": "Gain !B! Block. NL All cards in your hand gain: caster:Freeze this card the next time it's played."
+  },
+  "caster:FrostSeed": {
+    "NAME": "Frost Seed",
+    "DESCRIPTION": "Gain !B! Block. NL Permanently increase this card's Block by !M! whenever you caster:Freeze it. NL Exhaust."
   },
   "caster:Avalanche": {
     "NAME": "Avalanche",

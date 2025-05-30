@@ -1,33 +1,34 @@
 package sts.caster.cards.spells;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.DelayedDamageAllEnemiesAction;
-import sts.caster.actions.ModifyCardInBattleSpellDamageAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListSupplier;
+import sts.caster.interfaces.ICardWasIgnitedSubscriber;
+import sts.caster.patches.delayedCards.CastingQueuePileEnum;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
-import java.util.function.Predicate;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class PyroclasticTide extends CasterCard {
+public class FireWall extends CasterCard implements ICardWasIgnitedSubscriber {
 
-    public static final String ID = CasterMod.makeID("PyroclasticTide");
+    public static final String ID = CasterMod.makeID("FireWall");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("pyrotide.png");
+    public static final String IMG = makeCardPath("ashes.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -37,47 +38,47 @@ public class PyroclasticTide extends CasterCard {
     private static final CardType TYPE = CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
-    private static final int BASE_DELAY = 1;
-    private static final int BASE_DAMAGE = 6;
-    private static final int DMG_UPGRADE = 3;
-    private static final int BASE_DMG_BOOST = 3;
-    private static final int UPG_DMG_BOOST = 1;
+    private static final int COST = 2;
+    private static final int CAST_TIME = 2;
+    private static final int BASE_DAMAGE = 10;
+    private static final int UPG_DAMAGE = 4;
+    private static final int ECHO_FF_GAIN = 1;
 
-    private Predicate<AbstractCard> isCardFireSpell = card -> {
-        return card.type == CasterCardType.SPELL && (card instanceof CasterCard) && ((CasterCard) card).cardElement == MagicElement.FIRE;
-    };
-
-    public PyroclasticTide() {
+    public FireWall() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseDelayTurns = delayTurns = BASE_DELAY;
-        baseSpellDamage = spellDamage = BASE_DAMAGE;
-        magicNumber = baseMagicNumber = BASE_DMG_BOOST;
+        baseDelayTurns = delayTurns = CAST_TIME;
+        spellDamage = baseSpellDamage = BASE_DAMAGE;
+        magicNumber = baseMagicNumber = ECHO_FF_GAIN;
         setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ModifyCardInBattleSpellDamageAction(isCardFireSpell, magicNumber));
-        addToBot(new QueueDelayedCardAction(this, delayTurns, m));
+        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
 
     @Override
     public ActionListSupplier actionListSupplier(Integer energySpent) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
-            actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.FIRE));
+            actionsList.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AbstractGameAction.AttackEffect.FIRE));
             return actionsList;
         };
+    }
+
+    @Override
+    public void cardWasIgnited(CardGroup.CardGroupType gType) {
+        if (gType == CastingQueuePileEnum.CASTER_CASTING_QUEUE) {
+            this.flash(Color.FIREBRICK.cpy());
+            RecurringSpellCardMod.addRecurrence(this, magicNumber);
+        }
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            initializeDescription();
-            upgradeMagicNumber(UPG_DMG_BOOST);
-            upgradeSpellDamage(DMG_UPGRADE);
+            upgradeSpellDamage(UPG_DAMAGE);
         }
     }
 }

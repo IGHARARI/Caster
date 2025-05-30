@@ -1,6 +1,5 @@
 package sts.caster.cards.spells;
 
-import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -8,10 +7,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import sts.caster.actions.IgniteSpecificCardAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.actions.RepeatHighestHPDamageAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.mods.IgnitedCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -59,7 +58,7 @@ public class PrimordialFlame extends CasterCard {
 
     @Override
     public void triggerWhenDrawn() {
-        CardModifierManager.addModifier(this, new IgnitedCardMod());
+        addToBot(new IgniteSpecificCardAction(this));
         super.triggerWhenDrawn();
     }
 

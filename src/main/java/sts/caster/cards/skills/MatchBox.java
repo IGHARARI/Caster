@@ -1,6 +1,5 @@
 package sts.caster.cards.skills;
 
-import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -11,8 +10,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import sts.caster.actions.IgniteSpecificCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.mods.IgnitedCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -38,8 +37,8 @@ public class MatchBox extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 0;
-    private static final int IGNITE_AMOUNT = 2;
-    private static final int UPGRADE_IGNITE_AMOUNT = 2;
+    private static final int IGNITE_AMOUNT = 1;
+    private static final int UPGRADE_IGNITE_AMOUNT = 1;
     private static final int BASE_DAMAGE = 14;
 
     public MatchBox() {
@@ -62,7 +61,7 @@ public class MatchBox extends CasterCard {
         Consumer<List<AbstractCard>> addIgniteToCards = list -> {
             list.forEach(c -> {
                 c.flash(Color.RED.cpy());
-                CardModifierManager.addModifier(c, new IgnitedCardMod());
+                addToTop(new IgniteSpecificCardAction(c));
             });
         };
         for (int i = 0; i < magicNumber; i++) {

@@ -1,12 +1,11 @@
 package sts.caster.cards.special;
 
-import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import sts.caster.actions.IgniteSpecificCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.mods.IgnitedCardMod;
 import sts.caster.core.CasterMod;
 
 import static sts.caster.core.CasterMod.makeCardPath;
@@ -43,6 +42,8 @@ public class Charred extends CasterCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-        p.hand.group.stream().forEach(c -> CardModifierManager.addModifier(c, new IgnitedCardMod()));
+        p.hand.group.stream().forEach(c -> {
+            addToBot(new IgniteSpecificCardAction(c));
+        });
     }
 }

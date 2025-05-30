@@ -1,18 +1,23 @@
 package sts.caster.cards.attacks;
 
+import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import sts.caster.actions.IgniteSpecificCardAction;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.skills.WallOfAsh;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -30,32 +35,40 @@ public class BurnItDown extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int DAMAGE = 9;
+    private static final int IGNITED_AMOUNT = 1;
+    private static final int UPGR_IGNITED_AMOUNT = 1;
+    private static final int DAMAGE = 7;
     private static final int UPGRADE_PLUS_DMG = 2;
 
     public BurnItDown() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDamage = DAMAGE;
+        baseMagicNumber = magicNumber = IGNITED_AMOUNT;
         isMultiDamage = true;
-        this.exhaust = true;
-        cardsToPreview = new WallOfAsh();
         setCardElement(MagicElement.FIRE);
 
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new DamageAllEnemiesAction(p, multiDamage, DamageType.NORMAL, AttackEffect.FIRE));
-		addToBot(new MakeTempCardInDiscardAction(cardsToPreview, 1));
+        Consumer<List<AbstractCard>> addIgniteToCards = list -> {
+            list.forEach(c -> {
+                c.flash(Color.RED.cpy());
+                addToTop(new IgniteSpecificCardAction(c));
+            });
+        };
+        for (int i = 0; i < magicNumber; ++i) {
+            addToBot(new SelectCardsInHandAction(1, "Ignite a card", addIgniteToCards));
+        }
+        addToBot(new DamageAllEnemiesAction(p, multiDamage, DamageType.NORMAL, AttackEffect.FIRE));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             upgradeDamage(UPGRADE_PLUS_DMG);
-            cardsToPreview.upgrade();
+            upgradeMagicNumber(UPGR_IGNITED_AMOUNT);
             initializeDescription();
         }
     }
