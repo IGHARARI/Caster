@@ -36,7 +36,7 @@ public class WallOfSwords extends CasterCard {
 
     private static final int COST = 2;
     private static final int UPG_COST = 1;
-    private static final int BASE_DELAY = 1;
+    private static final int BASE_DELAY = 2;
     private static final int BASE_MAX_THORNS = 8;
     private static final int UPG_MAX_THORNS = 3;
 

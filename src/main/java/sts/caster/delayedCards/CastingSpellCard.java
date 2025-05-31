@@ -102,6 +102,7 @@ public class CastingSpellCard extends AbstractOrb {
 
 	static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
 	public void modifyCastingDelay(int modifyAmount) {
+		if (this.beingEvoked) return;
 		turnsUntilFire += modifyAmount;
 		if (turnsUntilFire <= 0) {
 			cardFireEvent();

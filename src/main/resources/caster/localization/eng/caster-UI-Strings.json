@@ -49,7 +49,7 @@
 		"TEXT": [ "Retain." ]
 	},
 	"FreezeOnUseCardMod": {
-		"TEXT": [ "caster:Freeze this card when it's played." ]
+		"TEXT": [ "caster:Freezes when played." ]
 	},
 	"ElectrifiedCardMod": {
 		"TEXT": [ "Electrified" ]

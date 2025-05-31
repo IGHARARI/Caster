@@ -4,12 +4,13 @@
       "Freeze",
       "Frozen",
       "freeze",
+      "freezes",
       "frozen",
       "freeze:",
       "freezing",
       "Freezing"
     ],
-    "DESCRIPTION": "Frozen card are Unplayable and Retain. At start of your turn, gain 2 block for each Frozen card in hand."
+    "DESCRIPTION": "Frozen cards are #yUnplayable and #yRetain. At start of your turn, gain #b2 block for each Frozen card in hand."
   },
   {
     "NAMES": [

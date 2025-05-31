@@ -4,15 +4,13 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.monsters.AbstractMonster.Intent;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.powers.WallOfRocksPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -31,26 +29,24 @@ public class WallOfRocks extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int BLOCK_AMT = 13;
-    private static final int UPG_BLOCK_AMT = 4;
-    private static final int WEAK_AMT = 3;
+    private static final int BLOCK_AMT = 11;
+    private static final int UPG_BLOCK_AMT = 3;
+    private static final int MAX_TRIGGERS = 3;
+    private static final int STR_LOSS_AMT = 2;
+    private static final int STR_LOSS_UGPR = 1;
 
     public WallOfRocks() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         block = baseBlock = BLOCK_AMT;
-        magicNumber = baseMagicNumber = WEAK_AMT;
-        setCardElement(MagicElement.EARTH);
+        magicNumber = baseMagicNumber = STR_LOSS_AMT;
+        this.exhaust = true;
+        setCardElement(MagicElement.NEUTRAL);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, block));
-        for (AbstractMonster mon : AbstractDungeon.getMonsters().monsters) {
-            if (mon.isDeadOrEscaped()) continue;
-            if ((mon.intent == Intent.ATTACK || mon.intent == Intent.ATTACK_BUFF || mon.intent == Intent.ATTACK_DEBUFF || mon.intent == Intent.ATTACK_DEFEND)) {
-                addToBot(new ApplyPowerAction(mon, p, new WeakPower(mon, magicNumber, false), magicNumber));
-            }
-        }
+        addToBot(new ApplyPowerAction(p, p, new WallOfRocksPower(p, MAX_TRIGGERS, magicNumber)));
     }
 
     @Override
@@ -58,6 +54,7 @@ public class WallOfRocks extends CasterCard {
         if (!upgraded) {
             upgradeName();
             upgradeBlock(UPG_BLOCK_AMT);
+            upgradeMagicNumber(STR_LOSS_UGPR);
             initializeDescription();
         }
     }

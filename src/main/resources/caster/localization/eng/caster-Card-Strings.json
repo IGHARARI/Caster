@@ -55,9 +55,8 @@
   },
   "caster:WallOfRocks": {
     "NAME": "Wall Of Rocks",
-    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak to ALL attacking enemies."
+    "DESCRIPTION": "Gain !B! Block. NL This turn, the next 3 times you fully block enemy damage, that enemy loses !M! Strength. NL Exhaust."
   },
-
   "caster:Bzzzt": {
     "NAME": "BZZZT",
     "DESCRIPTION": "Can only be played if you have no *Energy. NL Gain [E]. NL Draw !M! cards. NL Exhaust.",
@@ -96,7 +95,7 @@
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
-    "DESCRIPTION": "Deal !D! damage. NL Whenever caster:Freezing this card, double its base damage this combat."
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Whenever caster:Freezing this card, double its base damage this combat."
   },
   "caster:StaticField": {
     "NAME": "Static Field",
