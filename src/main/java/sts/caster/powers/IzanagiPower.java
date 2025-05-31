@@ -2,12 +2,12 @@ package sts.caster.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import sts.caster.core.CasterMod;
+import sts.caster.core.freeze.IgnitedHelper;
 import sts.caster.util.TextureHelper;
 
 import static sts.caster.core.CasterMod.makePowerPath;
@@ -38,15 +38,15 @@ public class IzanagiPower extends AbstractPower {
 		type = PowerType.BUFF;
 		updateDescription();
 	}
-	
+
 	@Override
-	public void onGainedBlock(float blockAmount) {
-		if (blockAmount > 0) {
-			flash();
-			addToBot(new AddTemporaryHPAction(owner, owner, amount));
+	public void atStartOfTurnPostDraw() {
+		super.atStartOfTurnPostDraw();
+		for (int i = 0; i < amount; i++) {
+			addToBot(IgnitedHelper.buildSelectCardsToIgniteAction(1));
 		}
 	}
-	
+
 	@Override
 	public void updateDescription() {
     	description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1];

@@ -53,7 +53,7 @@
 	},
 	"caster:Izanagi": {
 	        "NAME": "Izanagi's Obdurance",
-	        "DESCRIPTIONS": ["Whenever you gain Block, gain #b", " #yTemporary #yHP ."]
+	        "DESCRIPTIONS": ["At the start of your turn Ignite #g", " cards."]
 	},
 	"caster:Amaterasu": {
 	        "NAME": "Amaterasu",

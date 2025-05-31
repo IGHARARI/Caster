@@ -1,7 +1,6 @@
 package sts.caster.cards.skills;
 
 import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,6 +14,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.core.freeze.IgnitedHelper;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -65,7 +65,7 @@ public class MatchBox extends CasterCard {
             });
         };
         for (int i = 0; i < magicNumber; i++) {
-            addToBot(new SelectCardsInHandAction(1, "Ignite a card", isDamageCard, addIgniteToCards));
+            addToBot(IgnitedHelper.buildSelectCardsToIgniteAction(1, isDamageCard));
         }
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.FIRE));
     }

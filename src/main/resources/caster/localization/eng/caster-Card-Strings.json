@@ -347,7 +347,8 @@
   },
   "caster:IzanagisObdurance": {
     "NAME": "Izanagi's Obdurance",
-    "DESCRIPTION": "Whenever you gain Block, gain !M! Temporary_HP."
+    "DESCRIPTION": "At the start of your turn, caster:Ignite !M! card.",
+    "UPGRADE_DESCRIPTION": "At the start of your turn, caster:Ignite !M! card. NL caster:Ignite !caster:M2! cards."
   },
   "caster:EchoingVoice": {
     "NAME": "Echoing Voice",

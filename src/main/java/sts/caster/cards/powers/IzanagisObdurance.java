@@ -9,6 +9,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.core.freeze.IgnitedHelper;
 import sts.caster.powers.IzanagiPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
@@ -23,24 +24,28 @@ public class IzanagisObdurance extends CasterCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 
-    private static final CardRarity RARITY = CardRarity.RARE;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CardType.POWER;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 2;
-    private static final int BASE_BLOCK_AMT = 1;
-    private static final int UPG_BLOCK_AMT = 1;
+    private static final int COST = 1;
+    private static final int TURN_IGNITE = 1;
+    private static final int ONPLAY_IGNITE = 2;
 
     public IzanagisObdurance() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = BASE_BLOCK_AMT;
-        setCardElement(MagicElement.EARTH);
+        magicNumber = baseMagicNumber = TURN_IGNITE;
+        m2 = baseM2 = ONPLAY_IGNITE;
+        setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new IzanagiPower(p, magicNumber), magicNumber));
+        if (upgraded) {
+            addToBot(IgnitedHelper.buildSelectCardsToIgniteAction(ONPLAY_IGNITE));
+        }
     }
 
     @Override
@@ -52,7 +57,7 @@ public class IzanagisObdurance extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_BLOCK_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
             initializeDescription();
         }
     }
