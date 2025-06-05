@@ -25,7 +25,7 @@ public class Snowed extends CasterCard {
     private static final CardType TYPE = CardType.STATUS;
     public static final CardColor COLOR = CardColor.COLORLESS;
 
-    private static final int COST = 0;
+    private static final int COST = -1;
     private static final int FREEZE_ON_DRAW = 1;
 
 

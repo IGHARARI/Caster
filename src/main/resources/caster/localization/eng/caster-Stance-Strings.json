@@ -1,0 +1,10 @@
+{
+        "caster:ElectroplasmaStance": {
+                "NAME": "Electroplasma",
+                "DESCRIPTION": ["Gain [E] when you play a spell until next turn."]
+        },
+        "caster:ShatteredStance": {
+                "NAME": "Shattered",
+                "DESCRIPTION": ["Don't lose your block at start of next turn. When you play a Spell, make an #yIce #yShard in hand."]
+        }
+}

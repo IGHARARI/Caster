@@ -49,10 +49,8 @@ public class Bzzzt extends CasterCard {
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         boolean canUse = super.canUse(p, m);
-        if (canUse) {
-            if (EnergyPanel.totalCount == 0) return true;
-            cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
-        }
+        if (canUse && EnergyPanel.totalCount == 0) return true;
+        cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
         return false;
     }
 

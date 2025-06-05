@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
+import sts.caster.core.freeze.StancesHelper;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,6 @@ public class IgnitedCardMod extends AbstractCardModifier {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-//        addToBot(new ExhaustSpecificCardAction(card));
         action.exhaustCard = true;
     }
 
@@ -66,6 +66,10 @@ public class IgnitedCardMod extends AbstractCardModifier {
 
     @Override
     public boolean shouldApply(AbstractCard card) {
+        if (StancesHelper.shouldTriggerElectroplasma(card, this)) {
+            StancesHelper.triggerElectroplasma(card);
+            return false;
+        }
         ArrayList<AbstractCardModifier> list = CardModifierManager.getModifiers(card, IgnitedCardMod.ID);
         for (AbstractCardModifier other : list) {
             increaseIgnited(card, (IgnitedCardMod)other);

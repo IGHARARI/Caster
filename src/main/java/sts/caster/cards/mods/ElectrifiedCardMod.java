@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
+import sts.caster.core.freeze.StancesHelper;
 
 import java.util.ArrayList;
 
@@ -87,6 +88,14 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
 
     @Override
     public boolean shouldApply(AbstractCard card) {
+        if (StancesHelper.shouldTriggerElectroplasma(card, this)) {
+            StancesHelper.triggerElectroplasma(card);
+            return false;
+        }
+        if (StancesHelper.shouldTriggerShatter(card, this)) {
+            StancesHelper.triggerShatter(card);
+            return false;
+        }
         ArrayList<AbstractCardModifier> list = CardModifierManager.getModifiers(card, ElectrifiedCardMod.ID);
         for (AbstractCardModifier other : list) {
             ((ElectrifiedCardMod)other).electrifiedAmount += 1;

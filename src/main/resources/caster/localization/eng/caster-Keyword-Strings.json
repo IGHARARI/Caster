@@ -136,5 +136,19 @@
       "fast-forward"
     ],
     "DESCRIPTION": "Move Spells in your Casting Queue forwards."
+  },
+  {
+    "PROPER_NAME": "Shattered",
+    "NAMES": [
+      "shattered"
+    ],
+    "DESCRIPTION": "Until next turn, make an #yIce #yShard in hand whenever you play a Spell. Next turn, don't lose #bblock at start of turn."
+  },
+  {
+    "PROPER_NAME": "Electroplasma",
+    "NAMES": [
+      "electroplasma"
+    ],
+    "DESCRIPTION": "Until next turn, whenever you play a Spell gain #b1 Energy."
   }
 ]

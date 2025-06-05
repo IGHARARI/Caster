@@ -13,6 +13,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.cards.CasterCardTags;
 import sts.caster.core.CasterMod;
 import sts.caster.core.freeze.FreezeHelper;
+import sts.caster.core.freeze.StancesHelper;
 import sts.caster.interfaces.IPlayableWhileFrozen;
 import sts.caster.interfaces.OnFreezePower;
 import sts.caster.interfaces.OnThawPower;
@@ -80,6 +81,10 @@ public class FrozenCardMod extends AbstractCardModifier {
 
     @Override
     public boolean shouldApply(AbstractCard card) {
+        if (StancesHelper.shouldTriggerShatter(card, this)) {
+            StancesHelper.triggerShatter(card);
+            return false;
+        }
         return !CardModifierManager.hasModifier(card, ID);
     }
 

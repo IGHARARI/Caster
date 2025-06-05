@@ -87,7 +87,7 @@
 	},
 	"caster:Shiva": {
 	        "NAME": "Shiva",
-	        "DESCRIPTIONS": ["Whenever you #yFreeze gain #g", " plated armor."]
+	        "DESCRIPTIONS": ["Whenever you #bFreeze an #yElectrified card, or viceversa, become #yShattered."]
 	},
 	"caster:MagicAttunement": {
 	        "NAME": "Magic Attunement",
@@ -96,6 +96,14 @@
 	"caster:Incantation": {
 	        "NAME": "Incantation",
 	        "DESCRIPTIONS": ["At the start of your turn, reduce the #yCast #yTime of ", "a card in your hand by #g1.", " cards in your hand by #g1."]
+	},
+	"caster:AetherflameCatalystPower": {
+		"NAME": "Aetherflame Catalyst",
+		"DESCRIPTIONS": ["Whenever you #yElectrify an #rIgnited card, or viceversa, become charged with #bElectroplasma."]
+	},
+	"caster:LightningRod": {
+		"NAME": "Lightning Rods",
+		"DESCRIPTIONS": ["Whenever you #yElectrify a card, loses ", "HP."]
 	},
 	"caster:SpellDamage": {
 		"NAME": "SpellDamage",

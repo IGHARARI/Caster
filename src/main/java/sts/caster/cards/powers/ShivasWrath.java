@@ -9,7 +9,7 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.powers.ShivaPower;
+import sts.caster.powers.ShivasWrathPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -29,26 +29,24 @@ public class ShivasWrath extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int UPGR_COST = 0;
-    private static final int PLATED_ARMOR_AMT = 1;
 
     public ShivasWrath() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = PLATED_ARMOR_AMT;
         setCardElement(MagicElement.ICE);
     }
 
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new ShivaPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new ShivasWrathPower(p)));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            isInnate = true;
             initializeDescription();
-            upgradeBaseCost(UPGR_COST);
         }
     }
 }

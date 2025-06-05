@@ -88,11 +88,6 @@
     "NAME": "Shatter",
     "DESCRIPTION": "Deal !D! damage. NL If the enemy has caster:Frost deal !D! damage !M! more times."
   },
-  "caster:MegaloSpark": {
-    "NAME": "Megalo Spark",
-    "DESCRIPTION": "caster:Electrify !M! random card in your hand. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies twice.",
-    "UPGRADE_DESCRIPTION": "caster:Electrify !M! card in your hand. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies twice."
-  },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL Whenever caster:Freezing this card, double its base damage this combat."
@@ -215,7 +210,7 @@
   },
   "caster:FireWall": {
     "NAME": "Fire Wall",
-    "DESCRIPTION": "While in your *Casting *Queue, when you caster:Ignite this gains !M! caster:Echo, when you exhaust a card caster:Fast-Forward !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
+    "DESCRIPTION": "While in your *Casting *Queue, when you caster:Ignite, this gains !M! caster:Echo, when you exhaust a card caster:Fast-Forward this !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
   },
   "caster:Fireball": {
     "NAME": "Meteor",
@@ -223,7 +218,17 @@
   },
   "caster:ShivasWrath": {
     "NAME": "Shiva's Wrath",
-    "DESCRIPTION": "Whenever you caster:Freeze a card, gain !M! *Plated *Armor."
+    "DESCRIPTION": "Whenever you caster:Freeze an caster:Electrified card, or viceversa, become caster:Shattered.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Freeze an caster:Electrified card, or viceversa, become caster:Shattered."
+  },
+  "caster:IceShard": {
+    "NAME": "Ice Shard",
+    "DESCRIPTION": "Ethereal. NL Can target self or enemy. NL Gain !B! Block or deal !D! damage. NL Exhaust."
+  },
+  "caster:LightningRod": {
+    "NAME": "Lightning Rod",
+    "DESCRIPTION": "For the rest of combat, whenever you caster:Electrify a card, target enemy loses !M! HP.",
+    "UPGRADE_DESCRIPTION": "Innate. NL For the rest of combat, whenever you caster:Electrify a card, target enemy loses !M! HP."
   },
   "caster:FrigidBeam": {
     "NAME": "Frigid Beam",
@@ -308,7 +313,6 @@
     "DESCRIPTION": "caster:Freeze !M! random card in your hand. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block.",
     "UPGRADE_DESCRIPTION": "caster:Freeze !M! card in your hand. NL caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block."
   },
-
   "caster:Inferno": {
     "NAME": "Inferno",
     "DESCRIPTION": "At the end of your turn, apply !M! caster:Blazed to ALL enemies. NL caster:Blazed cannot decrease on enemies."
@@ -480,6 +484,11 @@
     "DESCRIPTION": "At the start of your turn, caster:thaw !M! card, if you do, gain [E] ",
     "UPGRADE_DESCRIPTION": "Innate. NL At the start of your turn, caster:thaw !M! card, if you do, gain [E] "
   },
+  "caster:AetherflameCatalyst": {
+    "NAME": "Aetherflame Catalyst",
+    "DESCRIPTION": "Whenever you caster:Electrify an caster:Ignited card, or viceversa, enter caster:Electroplasma.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Electrify an caster:Ignited card, or viceversa, enter caster:Electroplasma."
+  },
   "caster:DeprecatedSandstorm": {
     "NAME": "Sandstorm",
     "DESCRIPTION": "ALL enemies lose !M! Strength for 1 turn and gain 1 caster:Mired. NL Lose !caster:M2! Focus until the end of next turn."
@@ -538,5 +547,10 @@
   "caster:DeprecatedMagicScroll": {
     "NAME": "Magic Scroll",
     "DESCRIPTION": "Draw !M! card, reduce the Cast Time of any Spells drawn this way by !caster:M2! for this turn."
+  },
+  "caster:DeprecatedMegaloSpark": {
+    "NAME": "Megalo Spark",
+    "DESCRIPTION": "caster:Electrify !M! random card in your hand. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies twice.",
+    "UPGRADE_DESCRIPTION": "caster:Electrify !M! card in your hand. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies twice."
   }
 }

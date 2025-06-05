@@ -342,6 +342,12 @@ public class CasterMod implements
         UnlockTracker.unlockCard(FireWall.ID);
         BaseMod.addCard(new FrostSeed());
         UnlockTracker.unlockCard(FrostSeed.ID);
+        BaseMod.addCard(new AetherflameCatalyst());
+        UnlockTracker.unlockCard(AetherflameCatalyst.ID);
+        BaseMod.addCard(new BurningSpirit());
+        UnlockTracker.unlockCard(BurningSpirit.ID);
+        BaseMod.addCard(new IzanagisObdurance());
+        UnlockTracker.unlockCard(IzanagisObdurance.ID);
 
 
         // RARE CARDS
@@ -349,8 +355,6 @@ public class CasterMod implements
         UnlockTracker.unlockCard(PhoenixFlare.ID);
         BaseMod.addCard(new LordOfVermillion());
         UnlockTracker.unlockCard(LordOfVermillion.ID);
-        BaseMod.addCard(new IzanagisObdurance());
-        UnlockTracker.unlockCard(IzanagisObdurance.ID);
         BaseMod.addCard(new SunGoddessAmaterasu());
         UnlockTracker.unlockCard(SunGoddessAmaterasu.ID);
         BaseMod.addCard(new EchoingVoice());
@@ -371,8 +375,9 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Cool.ID);
         BaseMod.addCard(new IceWall());
         UnlockTracker.unlockCard(IceWall.ID);
-        BaseMod.addCard(new BurningSpirit());
-        UnlockTracker.unlockCard(BurningSpirit.ID);
+        BaseMod.addCard(new LightningRod());
+        UnlockTracker.unlockCard(LightningRod.ID);
+
 
         // UNOBTAINABLE
 //        BaseMod.addCard(new Ashes());
@@ -502,6 +507,10 @@ public class CasterMod implements
         //UI Strings
         BaseMod.loadCustomStringsFile(UIStrings.class,
                 getModID() + "/localization/eng/caster-UI-Strings.json");
+
+        //UI Strings
+        BaseMod.loadCustomStringsFile(StanceStrings.class,
+                getModID() + "/localization/eng/caster-Stance-Strings.json");
 
         logger.info("Done editing strings");
     }

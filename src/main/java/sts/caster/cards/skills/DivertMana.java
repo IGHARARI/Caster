@@ -5,8 +5,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.ArbitraryCardAction;
-import sts.caster.actions.ModifyCastingSpellCastTimeAction;
+import sts.caster.actions.ModifyAllCastingSpellCastTimeAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
@@ -61,13 +60,7 @@ public class DivertMana extends CasterCard {
         int spellsBeingCasted = castingCards != null ? castingCards.size() : 0;
         int blockToGain = block + magicNumber * spellsBeingCasted;
         addToBot(new GainBlockAction(p, p, blockToGain));
-        addToBot(new ArbitraryCardAction(this, (c) -> {
-            if (SpellCardsArea.spellCardsBeingCasted != null) {
-                for (CastingSpellCard delayCard : SpellCardsArea.spellCardsBeingCasted) {
-                    addToBot(new ModifyCastingSpellCastTimeAction(delayCard, CAST_TIME_INCREASE));
-                }
-            }
-        }));
+        addToBot(new ModifyAllCastingSpellCastTimeAction(CAST_TIME_INCREASE));
     }
 
     @Override

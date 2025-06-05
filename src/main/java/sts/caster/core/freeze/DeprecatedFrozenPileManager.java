@@ -24,8 +24,8 @@ public class DeprecatedFrozenPileManager {
 //    }
 //
 //    private static void applyOnFrozenTriggers(AbstractCard card) {
-//        if (AbstractDungeon.player.hasPower(ShivaPower.POWER_ID)) {
-//            AbstractDungeon.player.getPower(ShivaPower.POWER_ID).onSpecificTrigger();
+//        if (AbstractDungeon.player.hasPower(ShivasWrathPower.POWER_ID)) {
+//            AbstractDungeon.player.getPower(ShivasWrathPower.POWER_ID).onSpecificTrigger();
 //        }
 //        if (AbstractDungeon.player.hasPower(ThermodynamicsPower.POWER_ID)) {
 //            ((ThermodynamicsPower) AbstractDungeon.player.getPower(ThermodynamicsPower.POWER_ID)).onFreezeCard();

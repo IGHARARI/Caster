@@ -39,7 +39,7 @@ public class RecurringSpellCardMod extends AbstractCardModifier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return uiStrings.TEXT[0] + this.recurAmount + uiStrings.TEXT[1] + " NL " + rawDescription;
+        return rawDescription + " NL " + uiStrings.TEXT[0] + this.recurAmount + uiStrings.TEXT[1];
     }
 
     @Override

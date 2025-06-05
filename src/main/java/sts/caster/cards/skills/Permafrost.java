@@ -6,9 +6,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.ArbitraryCardAction;
-import sts.caster.actions.ModifyCastingSpellCastTimeAction;
-import sts.caster.actions.QueueRedrawMiniCardsAction;
+import sts.caster.actions.ModifyAllCastingSpellCastTimeAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.mods.FreezeOnUseCardMod;
 import sts.caster.core.CasterMod;
@@ -47,14 +45,7 @@ public class Permafrost extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-        addToBot(new ArbitraryCardAction(this, (c) -> {
-            if (SpellCardsArea.spellCardsBeingCasted != null) {
-                for (CastingSpellCard delayCard : SpellCardsArea.spellCardsBeingCasted) {
-                    addToBot(new ModifyCastingSpellCastTimeAction(delayCard, CAST_TIME_INCREASE));
-                }
-            }
-            addToBot(new QueueRedrawMiniCardsAction());
-        }));
+        addToBot(new ModifyAllCastingSpellCastTimeAction(CAST_TIME_INCREASE));
         addToBot(new ApplyPowerAction(p, p, new CannotLoseHpPower(p, 1)));
     }
 
