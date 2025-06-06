@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.ModifyAllCastingSpellCastTimeAction;
-import sts.caster.actions.ModifyAllCastingSpellsEffectAction;
+import sts.caster.actions.ModifyCastingSpellsEffectAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
@@ -38,7 +38,7 @@ public class TapMana extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ModifyAllCastingSpellsEffectAction(-magicNumber, -magicNumber));
+        addToBot(new ModifyCastingSpellsEffectAction(-magicNumber, -magicNumber));
         addToBot(new ModifyAllCastingSpellCastTimeAction(-magicNumber));
     }
 

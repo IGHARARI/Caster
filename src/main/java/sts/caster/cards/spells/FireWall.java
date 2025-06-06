@@ -17,7 +17,7 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.interfaces.ICardWasIgnitedSubscriber;
-import sts.caster.patches.delayedCards.CastingQueuePileEnum;
+import sts.caster.patches.delayedCards.CastingQueueGroupEnum;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class FireWall extends CasterCard implements ICardWasIgnitedSubscriber {
 
     @Override
     public void cardWasIgnited(CardGroup.CardGroupType gType) {
-        if (gType == CastingQueuePileEnum.CASTER_CASTING_QUEUE) {
+        if (gType == CastingQueueGroupEnum.CASTER_CASTING_QUEUE) {
             this.flash(Color.FIREBRICK.cpy());
             RecurringSpellCardMod.addRecurrence(this, magicNumber);
         }

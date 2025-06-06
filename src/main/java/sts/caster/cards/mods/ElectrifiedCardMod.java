@@ -80,7 +80,7 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
 
 //        No onElectrified for cards yet
 //        if (card instanceof CasterCard) {
-//            addToBot(new CardOnFrozenTriggerAction((CasterCard)card));
+//            addToBot(new CardOnElectrifiedTriggerAction((CasterCard)card));
 //        }
         card.applyPowers();
     }

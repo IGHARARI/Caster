@@ -13,8 +13,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -42,15 +40,16 @@ public class PhoenixFlare extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 1;
+    private static final int BASE_DELAY = 2;
     private static final int BASE_DAMAGE = 13;
-    private static final int UPG_DAMAGE = 7;
-
+    private static final int EXTRA_DAMAGE = 2;
+    private static final int UPGR_EXTRA_DAMAGE = 2;
 
     public PhoenixFlare() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
+        baseMagicNumber = magicNumber = EXTRA_DAMAGE;
         exhaust = true;
         setCardElement(MagicElement.FIRE);
     }
@@ -73,14 +72,11 @@ public class PhoenixFlare extends CasterCard {
         };
     }
 
-    public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
-
-
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeSpellDamage(UPG_DAMAGE);
+            upgradeMagicNumber(UPGR_EXTRA_DAMAGE);
             initializeDescription();
         }
     }

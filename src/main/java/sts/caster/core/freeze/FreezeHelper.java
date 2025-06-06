@@ -3,10 +3,9 @@ package sts.caster.core.freeze;
 import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import sts.caster.cards.mods.FrozenCardMod;
+import sts.caster.interfaces.ICardWasFrozenSubscriber;
 import sts.caster.interfaces.OnFreezePower;
 import sts.caster.interfaces.OnThawPower;
 
@@ -14,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static sts.caster.core.freeze.ElementalModsHelper.getAllPiles;
+import static sts.caster.core.freeze.ElementalModsHelper.triggerOnElementalModAppliedForAllGroups;
 
 public class FreezeHelper {
     private static Integer frozenCardCountForCombat = 0;
@@ -25,6 +27,13 @@ public class FreezeHelper {
     }
     public static void increaseFrozenThisCombatCount(int amount) {
         frozenCardCountForCombat += amount;
+    }
+
+    public static void triggerCardWasFrozenForAllGroups() {
+        triggerOnElementalModAppliedForAllGroups(
+                ICardWasFrozenSubscriber.class,
+                (card, fromPile) -> card.cardWasFrozen(fromPile)
+        );
     }
 
     public static List<OnFreezePower> getCurrentlyAppliedOnFreezePowers(AbstractCreature creature) {
@@ -51,16 +60,6 @@ public class FreezeHelper {
         return pile.stream().filter( c ->
                 CardModifierManager.hasModifier(c, FrozenCardMod.ID)).collect(Collectors.toList()
         );
-    }
-
-    private static Collection<CardGroup> getAllPiles() {
-        AbstractPlayer p = AbstractDungeon.player;
-        List<CardGroup> allPiles = new ArrayList<>();
-        allPiles.add(p.drawPile);
-        allPiles.add(p.hand);
-        allPiles.add(p.discardPile);
-        allPiles.add(p.exhaustPile);
-        return allPiles;
     }
 
     public static List<AbstractCard> getAllFrozenCards() {

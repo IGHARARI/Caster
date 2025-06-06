@@ -41,9 +41,12 @@
   },
   "caster:PhoenixFlare": {
     "NAME": "Phoenix Flare",
-    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage. NL At the start of your turn, if this card is in your exhaust pile, put it in your hand. NL Exhaust."
+    "DESCRIPTION": "At the start of your turn, if this is exhausted put it in your hand and it gains !M! damage. Exhaust. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
-
+  "caster:IceAge": {
+    "NAME": "Ice Age",
+    "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Gain !caster:B! Block. NL Gains !M! additional Block for each card you caster:Freeze after playing this."
+  },
   "caster:Gain": {
     "NAME": "Gain",
     "DESCRIPTION": "At the start of your turn, caster:Electrify 1 card and draw 1 card.",
@@ -158,7 +161,7 @@
   },
   "caster:Ifrit": {
     "NAME": "Ifrit",
-    "DESCRIPTION": "At the start of your turn, caster:Burn a random card in your hand and play it. NL Apply 4 caster:Blazed to a random enemy."
+    "DESCRIPTION": "Whenever you exhaust a card, draw 1 extra card and gain [E] next turn."
   },
   "caster:Electroplating": {
     "NAME": "Electroplating",
@@ -210,7 +213,7 @@
   },
   "caster:FireWall": {
     "NAME": "Fire Wall",
-    "DESCRIPTION": "While in your *Casting *Queue, when you caster:Ignite, this gains !M! caster:Echo, when you exhaust a card caster:Fast-Forward this !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
+    "DESCRIPTION": "While in your *Casting *Queue, when you *Ignite, this gains !M! caster:Echo, when you exhaust a card caster:Fast-Forward this !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
   },
   "caster:Fireball": {
     "NAME": "Meteor",
@@ -227,8 +230,7 @@
   },
   "caster:LightningRod": {
     "NAME": "Lightning Rod",
-    "DESCRIPTION": "For the rest of combat, whenever you caster:Electrify a card, target enemy loses !M! HP.",
-    "UPGRADE_DESCRIPTION": "Innate. NL For the rest of combat, whenever you caster:Electrify a card, target enemy loses !M! HP."
+    "DESCRIPTION": "Apply !M! caster:Lightning_Rods. NL When you caster:Electrify a card, if this is in your discard pile, put in on top of your deck."
   },
   "caster:FrigidBeam": {
     "NAME": "Frigid Beam",

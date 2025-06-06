@@ -12,7 +12,7 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.core.freeze.ElectrifiedHelper;
 import sts.caster.interfaces.ICardWasElectrifiedSubscriber;
-import sts.caster.patches.delayedCards.CastingQueuePileEnum;
+import sts.caster.patches.delayedCards.CastingQueueGroupEnum;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -49,7 +49,7 @@ public class WallOfLightning extends CasterCard implements ICardWasElectrifiedSu
     }
 
     public void cardWasElectrified(CardGroup.CardGroupType groupOfCard){
-        if (groupOfCard != CastingQueuePileEnum.CASTER_CASTING_QUEUE) {
+        if (groupOfCard != CastingQueueGroupEnum.CASTER_CASTING_QUEUE) {
             updateCost(-1);
         }
     }

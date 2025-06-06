@@ -377,6 +377,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(IceWall.ID);
         BaseMod.addCard(new LightningRod());
         UnlockTracker.unlockCard(LightningRod.ID);
+        BaseMod.addCard(new IceAge());
+        UnlockTracker.unlockCard(IceAge.ID);
 
 
         // UNOBTAINABLE

@@ -73,9 +73,7 @@
 	},
 	"caster:Ifrit": {
 	        "NAME": "Ifrit",
-	        "DESCRIPTIONS": ["At the start of your turn, exhaust ",
-	        " random card from your hand and play it. NL Apply Blazed equal to it's cost to a random enemy." ,
-	        " random cards from your hand and play them. NL For each card exhausted, apply Blazed equal to it's cost to a random enemy."]
+	        "DESCRIPTIONS": ["Whenever you exhaust a card, draw ", " extra cards and gain ", " energy next turn"]
 	},
 	"caster:Electroplating": {
 		"NAME": "Electroplating",

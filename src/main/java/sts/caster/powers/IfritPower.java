@@ -2,11 +2,16 @@ package sts.caster.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import sts.caster.actions.IfritAction;
+import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
+import com.megacrit.cardcrawl.powers.EnergizedPower;
 import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
 
@@ -39,21 +44,18 @@ public class IfritPower extends AbstractPower {
 		type = PowerType.BUFF;
 		updateDescription();
 	}
-	
+
 	@Override
-	public void atStartOfTurnPostDraw() {
-		for (int i = 0; i < amount; i++) {
-			addToBot(new IfritAction());
-		}
+	public void onExhaust(AbstractCard card) {
+		super.onExhaust(card);
+		AbstractPlayer p = AbstractDungeon.player;
+		addToBot(new ApplyPowerAction(p, p, new DrawCardNextTurnPower(p, amount), amount));
+		addToBot(new ApplyPowerAction(p, p, new EnergizedPower(p, amount), amount));
 	}
-	
+
 	@Override
 	public void updateDescription() {
-	    if (amount == 1) {
-	    	description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1];
-	    } else {
-	    	description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[2];
-	    }
+		description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1] + amount + DESCRIPTIONS[2];
 	}
 
 }

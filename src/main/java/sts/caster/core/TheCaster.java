@@ -21,6 +21,7 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sts.caster.actions.ModifyCardInBattleSpellDamageAction;
 import sts.caster.cards.attacks.CasterStrike;
 import sts.caster.cards.skills.CasterDefend;
 import sts.caster.cards.skills.DivertMana;
@@ -32,8 +33,6 @@ import sts.caster.cards.spells.PhoenixFlare;
 import sts.caster.relics.MagicBookRelic;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static sts.caster.core.CasterMod.*;
 import static sts.caster.core.TheCaster.Enums.THE_CASTER_COLOR;
@@ -240,13 +239,24 @@ public class TheCaster extends CustomPlayer {
 
     @Override
     public void applyStartOfTurnCards() {
-        List<AbstractCard> phoenixes = AbstractDungeon.player.exhaustPile.group.stream().filter(c -> c.cardID == PhoenixFlare.ID).collect(Collectors.toList());
-        ;
-        if (phoenixes.size() > 0) {
-            for (AbstractCard c : phoenixes) {
-                AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(AbstractDungeon.player.hand, AbstractDungeon.player.exhaustPile, (c2) -> c2 == c));
-            }
-        }
+        AbstractPlayer p = AbstractDungeon.player;
+//        List<AbstractCard> phoenixes = p.exhaustPile.group.stream().filter(c -> c.cardID == PhoenixFlare.ID).collect(Collectors.toList());
+
+
+        p.exhaustPile.group.stream()
+            .filter(PhoenixFlare.class::isInstance)
+            .map(PhoenixFlare.class::cast)
+            .forEach(c -> {
+                AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(p.hand, p.exhaustPile, (c2) -> c2 == c));
+                AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(c, c.magicNumber));
+            });
+//                .collect(Collectors.toList());
+//        if (phoenixes.size() > 0) {
+//            for (PhoenixFlare c : phoenixes) {
+//                AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(p.hand, p.exhaustPile, (c2) -> c2 == c));
+//                AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(c, c.magicNumber));
+//            }
+//        }
         super.applyStartOfTurnCards();
     }
 }

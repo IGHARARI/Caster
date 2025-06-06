@@ -54,7 +54,6 @@ public class AbsoluteZero extends CasterCard {
     @Override
     public void onFrozen() {
         flash();
-
         addToBot(new ModifyCardInBattleSpellDamageAction(this, baseSpellDamage));
     }
 
