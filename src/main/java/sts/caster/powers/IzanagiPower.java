@@ -32,6 +32,7 @@ public class IzanagiPower extends AbstractPower {
 		this.amount = amount;
 		this.region128 = new TextureAtlas.AtlasRegion(tex84, 0, 0, 84, 84);
 		this.region48 = new TextureAtlas.AtlasRegion(tex32, 0, 0, 32, 32);
+		this.priority = 25;
 
 		isTurnBased = false;
 		canGoNegative = false;

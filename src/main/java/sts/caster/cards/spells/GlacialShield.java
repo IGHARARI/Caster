@@ -8,8 +8,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.FreezeCardAction;
+import sts.caster.actions.FreezeRandomCardsAction;
 import sts.caster.actions.QueueDelayedCardAction;
+import sts.caster.actions.SelectForFreezeCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
@@ -61,7 +62,14 @@ public class GlacialShield extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new FreezeCardAction(magicNumber, !upgraded));
+        if (upgraded) {
+            addToBot(new SelectForFreezeCardsAction(
+                    magicNumber,
+                    false
+            ));
+        } else {
+            addToBot(new FreezeRandomCardsAction(magicNumber));
+        }
         addToBot(new QueueDelayedCardAction(this, delayTurns, null));
     }
 

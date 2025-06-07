@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.FreezeCardAction;
+import sts.caster.actions.FreezeRandomCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 
@@ -25,9 +25,8 @@ public class Snowed extends CasterCard {
     private static final CardType TYPE = CardType.STATUS;
     public static final CardColor COLOR = CardColor.COLORLESS;
 
-    private static final int COST = -1;
+    private static final int COST = -2;
     private static final int FREEZE_ON_DRAW = 1;
-
 
     public Snowed() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
@@ -38,7 +37,7 @@ public class Snowed extends CasterCard {
     @Override
     public void triggerWhenDrawn() {
         AbstractPlayer p = AbstractDungeon.player;
-        addToBot(new FreezeCardAction(magicNumber, true, this));
+        addToBot(new FreezeRandomCardsAction(magicNumber, this));
     }
     
     @Override

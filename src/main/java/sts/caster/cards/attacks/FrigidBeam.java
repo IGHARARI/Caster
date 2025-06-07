@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.FreezeCardAction;
+import sts.caster.actions.FreezeRandomCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -43,7 +43,7 @@ public class FrigidBeam extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    	addToBot(new FreezeCardAction(magicNumber, false));
+    	addToBot(new FreezeRandomCardsAction(magicNumber));
     	addToBot(new VFXAction(p, new FrozenLaserEffect(p.hb.cX, p.hb.cY, m.hb.cX, m.hb.cY), 0.30f));
 		addToBot(new DamageAction(m, new DamageInfo(m, damage)));
     }

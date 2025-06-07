@@ -3,6 +3,7 @@ package sts.caster.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import sts.caster.core.freeze.FreezeHelper;
 
 public class CryogenesisAction extends AbstractGameAction {
 	
@@ -15,9 +16,11 @@ public class CryogenesisAction extends AbstractGameAction {
 
 	@Override
     public void update() {
-    	int cardsInHand = AbstractDungeon.player.hand.size();
-    	addToBot(new FreezeCardAction(cardsInHand, true));
-    	addToBot(new DrawCardAction(AbstractDungeon.player, drawPerFrozen*cardsInHand));
+    	int cardsInHandSize = AbstractDungeon.player.hand.size();
+		int alreadyFrozenCards = FreezeHelper.getFrozenCardsForPile(AbstractDungeon.player.hand).size();
+		int toFreeze = cardsInHandSize - alreadyFrozenCards;
+    	addToBot(new FreezeRandomCardsAction(toFreeze));
+    	addToBot(new DrawCardAction(AbstractDungeon.player, drawPerFrozen*toFreeze));
     	
 		isDone = true;
     }

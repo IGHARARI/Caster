@@ -9,8 +9,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.FreezeCardAction;
 import sts.caster.actions.QueueDelayedCardAction;
+import sts.caster.actions.SelectForFreezeCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
@@ -57,7 +57,10 @@ public class Cool extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new FreezeCardAction(magicNumber, false, false, false));
+        addToBot(new SelectForFreezeCardsAction(
+                magicNumber,
+                false
+        ));
         addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
 

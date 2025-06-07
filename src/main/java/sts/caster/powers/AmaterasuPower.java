@@ -3,7 +3,6 @@ package sts.caster.powers;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsAction;
 import com.megacrit.cardcrawl.actions.utility.ExhaustToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import sts.caster.actions.FixedSelectCardsAction;
 import sts.caster.actions.IgniteSpecificCardAction;
 import sts.caster.cards.mods.IgnitedCardMod;
 import sts.caster.core.CasterMod;
@@ -40,6 +40,7 @@ public class AmaterasuPower extends AbstractPower {
 		this.amount = amount;
 		this.region128 = new TextureAtlas.AtlasRegion(tex84, 0, 0, 84, 84);
 		this.region48 = new TextureAtlas.AtlasRegion(tex32, 0, 0, 32, 32);
+		this.priority = 50;
 
 		isTurnBased = false;
 		canGoNegative = false;
@@ -52,7 +53,7 @@ public class AmaterasuPower extends AbstractPower {
 		super.atStartOfTurnPostDraw();
 		AbstractPlayer p = AbstractDungeon.player;
 		addToBot(
-			new SelectCardsAction(
+			new FixedSelectCardsAction(
 				p.exhaustPile.group,
 				1,
 				"Select a card to fetch and Ignite",

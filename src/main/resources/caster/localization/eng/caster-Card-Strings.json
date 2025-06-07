@@ -246,8 +246,7 @@
   },
   "caster:StormGust": {
     "NAME": "Storm Gust",
-    "DESCRIPTION": "caster:Freeze !M! cards. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. NL Apply !caster:M2! caster:Frost to ALL enemies.",
-    "UPGRADE_DESCRIPTION": "caster:Freeze !M! card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. NL Apply !caster:M2! caster:Frost to ALL enemies."
+    "DESCRIPTION": "caster:Freeze up to !M! cards. Reduce caster:Cast_Time by 1 for each card caster:Frozen. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies."
   },
   "caster:Eruption": {
     "NAME": "Eruption",
@@ -294,7 +293,8 @@
   },
   "caster:Demi": {
     "NAME": "Demi",
-    "DESCRIPTION": "Ethereal. NL Remove ALL Block from the enemy. NL It loses !M! % of its current HP. NL Exhaust."
+    "DESCRIPTION": "Target loses !D! HP, plus !M!% of its current HP for each card in your exhaust pile.",
+    "EXTENDED_DESCRIPTION": ["Target loses !D! HP, plus !M!% of its current HP for each card in your exhaust pile. (!caster:M2!HP)"]
   },
   "caster:Elementalize": {
     "NAME": "Elementalize",

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -15,15 +14,16 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.DamageImpactCurvyEffect;
-import sts.caster.actions.*;
+import sts.caster.actions.DelayedDamageAllEnemiesAction;
+import sts.caster.actions.NonSkippableWaitAction;
+import sts.caster.actions.QueueDelayedCardAction;
+import sts.caster.actions.SelectForFreezeCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListSupplier;
-import sts.caster.interfaces.MonsterToActionInterface;
 import sts.caster.patches.spellCardType.CasterCardType;
-import sts.caster.powers.FrostPower;
 import sts.caster.util.TextureHelper;
 
 import java.util.ArrayList;
@@ -48,36 +48,91 @@ public class StormGust extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int BASE_DELAY = 2;
-    private static final int BASE_DAMAGE = 28;
-    private static final int BASE_FROST = 3;
-    private static final int UPG_FROST = 2;
+    private static final int BASE_DELAY = 4;
+    private static final int BASE_DAMAGE = 25;
+    private static final int UPG_DAMAGE = 7;
     private static final int BASE_CARDS_FROZEN = 2;
-    private static final int UPG_CARDS_FROZEN = -1;
-
+    private static final int UPG_CARDS_FROZEN = 1;
 
     public StormGust() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDelayTurns = delayTurns = BASE_DELAY;
         baseSpellDamage = spellDamage = BASE_DAMAGE;
         magicNumber = baseMagicNumber = BASE_CARDS_FROZEN;
-        m2 = baseM2 = BASE_FROST;
         setCardElement(MagicElement.ICE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new FreezeCardAction(magicNumber, false, false, false));
-        addToBot(new QueueDelayedCardAction(this, delayTurns, null));
+//        addToBot(new SelectCardsInHandAction(
+//                magicNumber,
+//                selectScreenMessage,
+//                true,
+//                true,
+//                c -> c != this && !CardModifierManager.hasModifier(c, FrozenCardMod.ID),
+//                selected -> {
+//                    int modifiedDelayTurns = Math.max(0, delayTurns - selected.size());
+//                    selected.forEach(card -> addToBot(new FreezeSpecificCardAction(card)));
+//                    addToBot(new QueueDelayedCardAction(this, modifiedDelayTurns, null));
+//                })
+//        );
+
+        // unglow them first cause Select Cards doesn't do it. wrap in an action just in case..
+//        addToBot(new AbstractGameAction() {
+//            @Override
+//            public void update() {
+//                p.hand.group.forEach(c -> c.stopGlowing());
+//                isDone = true;
+//            }
+//        });
+//        addToBot(new SelectCardsAction(
+//                p.hand.group,
+//                magicNumber,
+//                selectScreenMessage,
+//                true,
+//                c -> c != this && !CardModifierManager.hasModifier(c, FrozenCardMod.ID),
+//                selected -> {
+//                    int modifiedDelayTurns = Math.max(0, delayTurns - selected.size());
+//                    selected.forEach(card -> addToBot(new FreezeSpecificCardAction(card)));
+//                    addToBot(new QueueDelayedCardAction(this, modifiedDelayTurns, null));
+//                })
+//        );
+
+        addToBot(new SelectForFreezeCardsAction(
+                magicNumber,
+                true,
+                c -> c != this,
+                selected -> {
+                    int modifiedDelayTurns = Math.max(0, delayTurns - selected.size());
+                    addToBot(new QueueDelayedCardAction(this, modifiedDelayTurns, null));
+                })
+        );
     }
 
     @Override
     public ActionListSupplier actionListSupplier(Integer energySpent) {
-//        AbstractGameEffect fallingShard = new VfxBuilder(iceShard, randStartingPoint, 0,  0.5f)
-//                .setAngle(45)
-//                .setScale(1f/8)
-//                .moveX(randStartingPoint, randStartingPoint + 200f, VfxBuilder.Interpolations.LINEAR)
-//                .moveY(0, AbstractDungeon.player.drawX).build();
+        return (c, t) -> {
+            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
+            AbstractGameEffect storm = createStormGustVFX();
+            actions.add(new VFXAction(storm));
+            actions.add(new NonSkippableWaitAction(1f));
+            actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
+
+            return actions;
+        };
+    }
+
+    @Override
+    public void upgrade() {
+        if (!upgraded) {
+            upgradeName();
+            upgradeMagicNumber(UPG_CARDS_FROZEN);
+            upgradeSpellDamage(UPG_DAMAGE);
+            initializeDescription();
+        }
+    }
+
+    private AbstractGameEffect createStormGustVFX() {
         Random shardRandom = new Random();
         BiFunction<Float, Float, AbstractGameEffect> iceShardBuilder = (randStartingPoint, randEndingPoint) -> {
             Texture iceShard = TextureHelper.getTexture(makeVFXPath("iceshard.png"));
@@ -108,7 +163,7 @@ public class StormGust extends CasterCard {
                     )
                     .build();
         };
-        AbstractGameEffect storm = new VfxBuilder(2)
+        return new VfxBuilder(2)
                 .emitEvery(
                         (x, y) -> {
                             float halfScreen = Settings.WIDTH * Settings.scale / 2;
@@ -124,28 +179,5 @@ public class StormGust extends CasterCard {
                 .playSoundAt(1.05f, "ATTACK_DAGGER_4")
                 .playSoundAt(1.25f, "ATTACK_DAGGER_4")
                 .build();
-
-        return (c, t) -> {
-            ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
-            actions.add(new VFXAction(storm));
-            actions.add(new NonSkippableWaitAction(1f));
-            actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));
-            MonsterToActionInterface frostApply = (mon) -> {
-                return new ApplyPowerAction(mon, AbstractDungeon.player, new FrostPower(mon, AbstractDungeon.player, c.m2), c.m2);
-            };
-            actions.add(new ActionOnAllEnemiesAction(frostApply));
-            return actions;
-        };
-    }
-
-    @Override
-    public void upgrade() {
-        if (!upgraded) {
-            upgradeName();
-            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-            upgradeM2(UPG_FROST);
-            upgradeMagicNumber(UPG_CARDS_FROZEN);
-            initializeDescription();
-        }
     }
 }

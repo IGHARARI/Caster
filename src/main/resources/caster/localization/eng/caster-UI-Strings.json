@@ -13,7 +13,7 @@
 		"TEXT": ["Frozen", "Freeze"]
 	},
 	"FreezeCardAction": {
-		"TEXT": ["Freeze"]
+		"TEXT": ["Freeze", " up to ", " card.", " cards."]
 	},
 	"ThawCardAction": {
 		"TEXT": ["Thaw ", " card.", "up to ", " cards."]

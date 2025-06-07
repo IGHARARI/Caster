@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
-import com.megacrit.cardcrawl.actions.common.RemoveAllBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
@@ -37,14 +37,16 @@ public class Demi extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int DAMAGE_PERCENT = 25;
-    private static final int DAMAGE_PERCENT_UPG = 10;
+    private static final int UPGR_COST = 1;
+    private static final int BASE_DAMAGE = 10;
+    private static final int DAMAGE_PERCENT = 3;
+
 
     public Demi() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseMagicNumber = magicNumber = DAMAGE_PERCENT;
-        exhaust = true;
-        isEthereal = true;
+        baseDamage = damage = BASE_DAMAGE;
+        baseM2 = m2 = 0;
     }
 
     @Override
@@ -97,16 +99,42 @@ public class Demi extends CasterCard {
         demiVfx.renderBehind = true;
 
         addToBot(new VFXAction(demiVfx, 1.5f));
-    	int hpDamage = (m.currentHealth * magicNumber) / 100;
-    	addToBot(new RemoveAllBlockAction(m, p));
+
+        int exhaustedCards = p.exhaustPile.size();
+        // lose magicNumber % per each exhausted card
+    	int hpDamage = (int) Math.ceil((m.currentHealth * exhaustedCards * magicNumber) / 100d);
+        int totalDamage = damage + hpDamage;
     	addToBot(new LoseHPAction(m, p, hpDamage));
+    }
+
+    @Override
+    public void applyPowers() {
+        super.applyPowers();
+        rawDescription = DESCRIPTION;
+        initializeDescription();
+    }
+
+    @Override
+    public void calculateCardDamage(AbstractMonster mo) {
+        super.calculateCardDamage(mo);
+
+        int exhaustedCards = AbstractDungeon.player.exhaustPile.size();
+        int percentLoss = exhaustedCards * magicNumber;
+
+        int hpDamage = (int) Math.ceil((mo.currentHealth * percentLoss) / 100d);
+        int totalDamage = damage + hpDamage;
+        this.m2 = totalDamage;
+        this.isM2Modified = baseM2 != m2;
+
+        rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
+        initializeDescription();
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(DAMAGE_PERCENT_UPG);
+            upgradeBaseCost(UPGR_COST);
             initializeDescription();
         }
     }
