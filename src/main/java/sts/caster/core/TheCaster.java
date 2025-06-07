@@ -240,8 +240,6 @@ public class TheCaster extends CustomPlayer {
     @Override
     public void applyStartOfTurnCards() {
         AbstractPlayer p = AbstractDungeon.player;
-//        List<AbstractCard> phoenixes = p.exhaustPile.group.stream().filter(c -> c.cardID == PhoenixFlare.ID).collect(Collectors.toList());
-
 
         p.exhaustPile.group.stream()
             .filter(PhoenixFlare.class::isInstance)
@@ -250,13 +248,6 @@ public class TheCaster extends CustomPlayer {
                 AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(p.hand, p.exhaustPile, (c2) -> c2 == c));
                 AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(c, c.magicNumber));
             });
-//                .collect(Collectors.toList());
-//        if (phoenixes.size() > 0) {
-//            for (PhoenixFlare c : phoenixes) {
-//                AbstractDungeon.actionManager.addToBottom(new MoveCardsAction(p.hand, p.exhaustPile, (c2) -> c2 == c));
-//                AbstractDungeon.actionManager.addToBottom(new ModifyCardInBattleSpellDamageAction(c, c.magicNumber));
-//            }
-//        }
         super.applyStartOfTurnCards();
     }
 }

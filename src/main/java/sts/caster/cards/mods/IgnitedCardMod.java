@@ -42,7 +42,7 @@ public class IgnitedCardMod extends AbstractCardModifier {
 
     @Override
     public boolean removeOnCardPlayed(AbstractCard card) {
-        return true;
+        return false;
     }
 
     private void increaseIgnited(AbstractCard card, IgnitedCardMod other) {

@@ -27,6 +27,7 @@ import sts.caster.cards.powers.*;
 import sts.caster.cards.skills.*;
 import sts.caster.cards.spells.*;
 import sts.caster.core.freeze.ElectrifiedHelper;
+import sts.caster.core.freeze.IceWallRetainBlockListener;
 import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
@@ -121,7 +122,9 @@ public class CasterMod implements
     public CasterMod() {
         logger.info("Subscribe to BaseMod hooks");
 
+        // Caster listeners
         BaseMod.subscribe(this);
+        BaseMod.subscribe(IceWallRetainBlockListener.getInstance());
         setModID("caster");
 
         logger.info("Done subscribing");

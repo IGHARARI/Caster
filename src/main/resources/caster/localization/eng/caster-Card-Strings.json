@@ -363,8 +363,7 @@
   },
   "caster:SunGoddessAmaterasu": {
     "NAME": "Sun Goddess Amaterasu",
-    "DESCRIPTION": "Whenever you play a Fire Spell, increase its damage by !M! % this combat.",
-    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you play a Fire Spell, increase its damage by !M! % this combat."
+    "DESCRIPTION": "At the start of your turn, return 1 caster:Ignited Spell or Attack from your exhaust pile to hand and caster:Ignite it."
   },
   "caster:Incantation": {
     "NAME": "Incantation",
@@ -413,8 +412,8 @@
   },
   "caster:IceWall": {
     "NAME": "Ice Wall",
-    "DESCRIPTION":         "Gain !B! Block. NL Block is not removed at the start of your next turn. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Block is not removed at the start of your next turn."
+    "DESCRIPTION":         "caster:Freezes when drawn. If this is caster:Frozen in your hand, lose !M! less block at start of turn. NL Gain !B! Block. Exhaust.",
+    "UPGRADE_DESCRIPTION": "caster:Freezes when drawn. If this is caster:Frozen in your hand, lose !M! less block at start of turn. NL Gain !B! Block."
   },
   "caster:PackedIce": {
     "NAME": "Packed Ice",

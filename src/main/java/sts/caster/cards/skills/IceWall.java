@@ -40,14 +40,14 @@ public class IceWall extends CasterCard {
 
     private static final int COST = 2;
     private static final int BASE_BLOCK = 22;
-    private static final int UPG_BLOCK = 4;
-    private static final int BASE_BLUR = 1;
-    private boolean wasUsed;
+    private static final int UPG_BLOCK = 3;
+    private static final int BASE_RETAIN_BLOCK = 7;
+    private static final int UPG_RETAIN = 3;
 
     public IceWall() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseBlock = block = BASE_BLOCK;
-        baseMagicNumber = magicNumber = BASE_BLUR;
+        baseMagicNumber = magicNumber = BASE_RETAIN_BLOCK;
         exhaust = true;
         setCardElement(MagicElement.ICE);
     }
@@ -80,13 +80,19 @@ public class IceWall extends CasterCard {
     }
 
     @Override
+    public void triggerWhenDrawn() {
+        super.triggerWhenDrawn();
+        CardModifierManager.addModifier(this, new FreezeOnUseCardMod());
+    }
+
+    @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
             rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             upgradeBlock(UPG_BLOCK);
+            upgradeMagicNumber(UPG_RETAIN);
             exhaust = false;
-            CardModifierManager.addModifier(this, new FreezeOnUseCardMod());
             initializeDescription();
         }
     }

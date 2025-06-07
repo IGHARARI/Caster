@@ -29,17 +29,16 @@ public class SunGoddessAmaterasu extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;
-    private static final int PERCENT_INCREASE = 20;
+    private static final int UPGRADE_COST = 1;
 
     public SunGoddessAmaterasu() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        baseMagicNumber = magicNumber = PERCENT_INCREASE;
         setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new AmaterasuPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new AmaterasuPower(p, 1), 1));
     }
 
     @Override
@@ -51,8 +50,7 @@ public class SunGoddessAmaterasu extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            isInnate = true;
-            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            upgradeBaseCost(UPGRADE_COST);
             initializeDescription();
         }
     }

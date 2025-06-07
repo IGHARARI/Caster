@@ -57,7 +57,7 @@
 	},
 	"caster:Amaterasu": {
 	        "NAME": "Amaterasu",
-	        "DESCRIPTIONS": ["Whenever you play a Fire Spell, increase its damage by #b", "%."]
+	        "DESCRIPTIONS": ["At start of turn, return 1 #yIgnited Spell or Attack from your exhaust pile to your hand, and  apply ", " #yIgnite"]
 	},
 	"caster:ShortenedChant": {
 	        "NAME": "Shortened Chant",
