@@ -78,7 +78,7 @@
       "electrify:",
       "electrified:"
     ],
-    "DESCRIPTION": "Using Electrified cards deal you #r2 (blockable) damage per stack, then lose Electrified. When drawing an Electrified card, draw 1 card."
+    "DESCRIPTION": "Electrified cards cost 1 less Energy. When played, receive #r2 (blockable) damage per stack, then lose Electrified."
   },
   {
     "NAMES": [

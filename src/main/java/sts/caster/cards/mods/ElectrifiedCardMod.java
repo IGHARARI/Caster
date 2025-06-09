@@ -2,11 +2,8 @@ package sts.caster.cards.mods;
 
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
-import com.badlogic.gdx.graphics.Color;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -30,6 +27,8 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
     public static final int ELECTRIFY_DAMAGE = 2;
     public static final String electrifiedMessage = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings").TEXT[0];
     private int electrifiedAmount = 1;
+    private boolean wasCostModified;
+    private int originalBaseCost;
 
     public ElectrifiedCardMod() {
     }
@@ -39,17 +38,17 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
         return uiStrings.TEXT[0] +" x"+ electrifiedAmount + " NL " + rawDescription;
     }
 
-    @Override
-    public void onDrawn(AbstractCard card) {
-        addToBot(new AbstractGameAction() {
-            @Override
-            public void update() {
-                card.superFlash(Color.GOLD.cpy());
-                isDone = true;
-            }
-        });
-        addToBot(new DrawCardAction(AbstractDungeon.player, ON_DRAW_DRAW_AMOUNT));
-    }
+//    @Override
+//    public void onDrawn(AbstractCard card) {
+//        addToBot(new AbstractGameAction() {
+//            @Override
+//            public void update() {
+//                card.superFlash(Color.GOLD.cpy());
+//                isDone = true;
+//            }
+//        });
+//        addToBot(new DrawCardAction(AbstractDungeon.player, ON_DRAW_DRAW_AMOUNT));
+//    }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
@@ -62,6 +61,11 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
             addToBot(new SFXAction("ORB_LIGHTNING_EVOKE"));
             DamageInfo damage = new DamageInfo(AbstractDungeon.player, ELECTRIFY_DAMAGE * amountElectrified, DamageInfo.DamageType.NORMAL);
             addToBot(new DamageAction(AbstractDungeon.player, damage));
+
+            if (this.wasCostModified) {
+                updateCost(card, card.cost +1);
+                if (card.cost == this.originalBaseCost) card.isCostModified = false;
+            }
         }
     }
 
@@ -103,7 +107,24 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
             card.initializeDescription();
             return false;
         }
+        // First stack, reduce cost.
+        if (card.cost > 0) {
+            this.wasCostModified = true;
+            this.originalBaseCost = card.cost;
+            updateCost(card, card.cost -1);
+
+        }
         return true;
+    }
+
+    private void updateCost(AbstractCard card, int newBaseCost) {
+        int diff = card.costForTurn - card.cost;
+        card.cost = newBaseCost;
+        if (card.costForTurn > 0)
+            card.costForTurn = card.cost + diff;
+        if (card.costForTurn < 0)
+            card.costForTurn = 0;
+        card.isCostModified = true;
     }
 
     @Override

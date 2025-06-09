@@ -29,7 +29,7 @@ public class DiablosFlame extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_BLAZED = 4;
+    private static final int BASE_BLAZED = 6;
     private static final int UPGRADE_BLAZED = 3;
 
 

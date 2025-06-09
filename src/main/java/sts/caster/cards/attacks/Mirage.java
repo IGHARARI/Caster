@@ -4,7 +4,6 @@ import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
@@ -17,6 +16,7 @@ import sts.caster.cards.mods.RetainOnceCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
+import sts.caster.core.freeze.IgnitedHelper;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -34,7 +34,7 @@ public class Mirage extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int DAMAGE = 9;
+    private static final int DAMAGE = 8;
     private static final int DAMAGE_LOSS_ON_USE = 1;
     private static final int UPGRADE_PLUS_DMG = 3;
 
@@ -51,7 +51,6 @@ public class Mirage extends CasterCard {
     public void applyPowers() {
         int realBaseDamage = baseDamage;
         baseDamage -= m2;
-        CasterMod.logger.info("modifying with m2:  " + m2);
         super.applyPowers();
         if (m2 > 0) {
             isDamageModified = true;
@@ -72,7 +71,7 @@ public class Mirage extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ExhaustAction(1, false));
+        addToBot(IgnitedHelper.buildSelectCardsToIgniteAction(1));
 		addToBot(new DamageAction(m, new DamageInfo(p, damage, DamageType.NORMAL), AttackEffect.FIRE));
         AbstractCard thisCard = this;
 		addToBot(new AbstractGameAction() {

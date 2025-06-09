@@ -2,6 +2,7 @@ package sts.caster.cards.skills;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -30,6 +31,7 @@ public class Kindling extends CasterCard {
 
     private static final int COST = 1;
     private static final int BASE_BLAZED = 5;
+    private static final int BASE_BLOCK = 5;
     private static final int UPG_BLAZED = 1;
     private static final int BASE_DRAW = 1;
     private static final int UPG_DRAW = 1;
@@ -38,15 +40,14 @@ public class Kindling extends CasterCard {
     public Kindling() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         magicNumber = baseMagicNumber = BASE_BLAZED;
+        block = baseBlock = BASE_BLOCK;
         baseM2 = m2 = BASE_DRAW;
         setCardElement(MagicElement.FIRE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (m.hasPower(BlazedPower.POWER_ID)) {
-            addToBot(new ApplyPowerAction(m, p, new BlazedPower(m, p, magicNumber), magicNumber));
-        }
+        addToBot(new GainBlockAction(p, block));
         addToBot(new ApplyPowerAction(m, p, new BlazedPower(m, p, magicNumber), magicNumber));
         addToBot(new DrawCardAction(p, m2));
     }

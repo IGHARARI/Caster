@@ -32,7 +32,7 @@ public class Shy extends CasterCard {
 
     private static final int COST = -2;
     private static final int THAW_AMOUNT = 1;
-    private static final int BLOCK_AMOUNT = 5;
+    private static final int BLOCK_AMOUNT = 4;
     private static final int THAW_UPGRADE = 1;
     private static final int DRAW_AMOUNT = 1;
 

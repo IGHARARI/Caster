@@ -222,10 +222,7 @@ public class CasterMod implements
         UnlockTracker.unlockCard(FocusMana.ID);
         BaseMod.addCard(new Meteor());
         UnlockTracker.unlockCard(Meteor.ID);
-        BaseMod.addCard(new DivertFocus());
-        UnlockTracker.unlockCard(DivertFocus.ID);
-        BaseMod.addCard(new Channeling());
-        UnlockTracker.unlockCard(Channeling.ID);
+
 
         // EVENT SPECIALS
 //        BaseMod.addCard(new Fira());
@@ -477,6 +474,10 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(DeprecatedSleet.ID);
 //        BaseMod.addCard(new DeprecatedMagicScroll());
 //        UnlockTracker.unlockCard(DeprecatedMagicScroll.ID);
+//        BaseMod.addCard(new DivertFocus());
+//        UnlockTracker.unlockCard(DivertFocus.ID);
+//        BaseMod.addCard(new Channeling());
+//        UnlockTracker.unlockCard(Channeling.ID);
 
         logger.info("Done adding cards!");
     }
