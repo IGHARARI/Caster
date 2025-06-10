@@ -41,7 +41,7 @@
 	},
 	"caster:EchoingVoice": {
 	        "NAME": "Echoing Voice",
-	        "DESCRIPTIONS": ["Your next ", "#ySpell will be played twice this turn.", "#b", " #ySpells will be played twice this turn."]
+	        "DESCRIPTIONS": ["Your spells have ", " extra Echo."]
 	},
 	"caster:ManaOverflow": {
 	        "NAME": "Mana Overflow",

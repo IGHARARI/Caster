@@ -46,8 +46,8 @@
   },
   "caster:Bzzzt": {
     "NAME": "BZZZT",
-    "DESCRIPTION": "Can only be played if you have no *Energy. NL Gain [E]. NL Draw !M! cards. NL Exhaust.",
-    "EXTENDED_DESCRIPTION": ["I still have Energy..."]
+    "DESCRIPTION": "caster:Electrify !M! cards. Discard all non-electrified cards. Draw !M!. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "caster:Electrify !M! cards. Discard all non-electrified cards. Draw !M!."
   },
   "caster:GateOfBabylon": {
     "NAME": "Gate of Babylon",
@@ -247,8 +247,7 @@
   },
   "caster:EchoingVoice": {
     "NAME": "Echoing Voice",
-    "DESCRIPTION": "This turn, your next Spell is played twice.",
-    "UPGRADE_DESCRIPTION": "This turn, your next !M! Spells are played twice."
+    "DESCRIPTION": "Your spells have an additional 1 caster:Echo"
   },
   "caster:SunGoddessAmaterasu": {
     "NAME": "Sun Goddess Amaterasu",

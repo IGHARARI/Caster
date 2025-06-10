@@ -14,7 +14,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
-import sts.caster.cards.special.Charred;
 import sts.caster.core.MagicElement;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
@@ -22,7 +21,10 @@ import sts.caster.powers.ManaImbalancePower;
 import sts.caster.powers.ShortenedChantPower;
 import sts.caster.util.PowersHelper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class CasterCard extends CustomCard {
@@ -162,11 +164,6 @@ public abstract class CasterCard extends CustomCard {
 		int realBaseDamage = baseDamage;
 		int realBaseSpellDamage = baseSpellDamage;
 
-		if (this.cardElement == MagicElement.FIRE) {
-			baseDamage += getLavaModifiers();
-			baseSpellDamage += getLavaModifiers();
-		}
-
 		if (this.type == CasterCardType.SPELL) {
 			calculateCardDamage(null);
 		} else {
@@ -179,25 +176,10 @@ public abstract class CasterCard extends CustomCard {
 		isSpellDamageModified = spellDamage != baseSpellDamage;
 	}
 
-	private int getLavaModifiers() {
-		int totalModifier = 0;
-		for (AbstractCard c : AbstractDungeon.player.hand.group) {
-			if (Objects.equals(c.cardID, Charred.ID)) {
-				totalModifier += c.magicNumber;
-			}
-		}
-		return totalModifier;
-	}
-
 	@Override
 	public void calculateCardDamage(AbstractMonster mo) {
 		int realBaseDamage = baseDamage;
 		int realBaseSpellDamage = baseSpellDamage;
-
-		if (this.cardElement == MagicElement.FIRE) {
-			baseDamage += getLavaModifiers();
-			baseSpellDamage += getLavaModifiers();
-		}
 
 		if (this.type == CasterCardType.SPELL) {
 			resetCardSpellDamage();

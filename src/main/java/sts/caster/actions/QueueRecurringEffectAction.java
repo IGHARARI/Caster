@@ -33,7 +33,7 @@ public class QueueRecurringEffectAction extends AbstractGameAction {
 			target = AbstractDungeon.getRandomMonster();
 		}
 		CasterCard cardCopy = card.makeStatIdenticalCopy();
-		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(cardCopy, turnsDelay, energyOnUse, target));
+		AbstractDungeon.actionManager.addToBottom(new QueueDelayedCardAction(cardCopy, turnsDelay, energyOnUse, target, true));
 
 		this.isDone = true;
     }

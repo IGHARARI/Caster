@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import sts.caster.cards.CasterCard;
 import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
+import sts.caster.delayedCards.SpellIntentsManager;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -39,6 +40,7 @@ public class ModifyCastingSpellsEffectAction extends AbstractGameAction {
 					.forEach(castingSpell -> increaseAllCopies(castingSpell));
 			}
     	}
+		SpellIntentsManager.refreshSpellIntents();
         isDone = true;
     }
 

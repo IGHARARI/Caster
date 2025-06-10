@@ -33,7 +33,7 @@ public class LightningRod extends CasterCard implements ICardWasElectrifiedSubsc
 
     private static final int COST = 1;
     private static final int UPGR_COST = 0;
-    private static final int BASE_APPLY = 3;
+    private static final int BASE_APPLY = 4;
 
     public LightningRod() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);

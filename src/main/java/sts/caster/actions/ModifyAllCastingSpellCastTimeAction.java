@@ -3,6 +3,7 @@ package sts.caster.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
+import sts.caster.delayedCards.SpellIntentsManager;
 
 public class ModifyAllCastingSpellCastTimeAction extends AbstractGameAction {
 
@@ -21,6 +22,7 @@ public class ModifyAllCastingSpellCastTimeAction extends AbstractGameAction {
 				}
 			}
     	}
+		SpellIntentsManager.refreshSpellIntents();
         isDone = true;
     }
 }

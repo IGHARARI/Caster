@@ -26,13 +26,13 @@ public class EchoingVoice extends CasterCard {
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
-    private static final int DOUBLE_AMT = 1;
-    private static final int UPG_COUBLE_AMT = 1;
+    private static final int COST = 3;
+    private static final int ECHO_AMOUNT = 1;
+    private static final int UPG_COST = 2;
 
     public EchoingVoice() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        magicNumber = baseMagicNumber = DOUBLE_AMT;
+        magicNumber = baseMagicNumber = ECHO_AMOUNT;
     }
 
     @Override
@@ -44,8 +44,7 @@ public class EchoingVoice extends CasterCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeMagicNumber(UPG_COUBLE_AMT);
-            rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            upgradeBaseCost(UPG_COST);
             initializeDescription();
         }
     }

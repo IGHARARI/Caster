@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
+import sts.caster.delayedCards.SpellIntentsManager;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +49,7 @@ public class ModifyCastingSpellCastTimeAction extends AbstractGameAction {
 			}
 
     	}
+		SpellIntentsManager.refreshSpellIntents();
         isDone = true;
     }
 }

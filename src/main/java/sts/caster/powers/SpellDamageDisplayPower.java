@@ -7,8 +7,6 @@ import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.HealthBarRenderPowe
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.InvisiblePower;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.NonStackablePower;
 import com.megacrit.cardcrawl.core.AbstractCreature;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import sts.caster.core.CasterMod;
 import sts.caster.delayedCards.CastingSpellCard;
@@ -20,10 +18,9 @@ public class SpellDamageDisplayPower extends AbstractPower implements HealthBarR
 	public AbstractCreature source;
 	public CastingSpellCard spell;
 
-	public static final String POWER_ID = CasterMod.makeID("Blazed");
-	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
-	public static final String NAME = powerStrings.NAME;
-	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+	public static final String POWER_ID = CasterMod.makeID("SpellDamageDisplayPower");
+	public static final String NAME = "SpellDamageDisplayPower";
+	public static final String[] DESCRIPTIONS = {""};
 
 	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("blazed84.png"));
 	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("blazed32.png"));
