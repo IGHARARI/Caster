@@ -44,9 +44,9 @@ public class Explosion extends CasterCard {
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 1;
-    private static final int BASE_DELAY = 1;
+    private static final int BASE_DELAY = 2;
     private static final int BASE_DAMAGE = 33;
-    private static final int BASE_DOWNGRADE = 9;
+    private static final int BASE_DOWNGRADE = 10;
     private static final int UPG_DOWNGRADE = -4;
 
 

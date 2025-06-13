@@ -359,5 +359,9 @@
     "NAME": "Aetherflame Catalyst",
     "DESCRIPTION": "Whenever you caster:Electrify an caster:Ignited card, or viceversa, enter caster:Electroplasma.",
     "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Electrify an caster:Ignited card, or viceversa, enter caster:Electroplasma."
+  },
+  "caster:TransmuteSoul": {
+    "NAME": "Transmute Soul",
+    "DESCRIPTION": "stslib:Purge NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to the Highest HP enemy. If Fatal, gain 1 extra [E] permanently and remove this from your deck."
   }
 }

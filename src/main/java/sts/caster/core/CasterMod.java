@@ -367,8 +367,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(Susanoo.ID);
         BaseMod.addCard(new StormGust());
         UnlockTracker.unlockCard(StormGust.ID);
-        BaseMod.addCard(new GateOfBabylon());
-        UnlockTracker.unlockCard(GateOfBabylon.ID);
+//        BaseMod.addCard(new GateOfBabylon());
+//        UnlockTracker.unlockCard(GateOfBabylon.ID);
         BaseMod.addCard(new Demi());
         UnlockTracker.unlockCard(Demi.ID);
         BaseMod.addCard(new Cool());
@@ -379,7 +379,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(LightningRod.ID);
         BaseMod.addCard(new IceAge());
         UnlockTracker.unlockCard(IceAge.ID);
-
+        BaseMod.addCard(new TransmuteSoul());
+        UnlockTracker.unlockCard(TransmuteSoul.ID);
 
         // UNOBTAINABLE
 //        BaseMod.addCard(new Ashes());
