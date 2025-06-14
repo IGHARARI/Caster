@@ -76,7 +76,6 @@ public class ShatteredStance extends AbstractStance {
 
 	@Override
 	public void atStartOfTurn() {
-		CasterMod.logger.info("Stance start of trn");
 		AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction("Neutral"));
 	}
 

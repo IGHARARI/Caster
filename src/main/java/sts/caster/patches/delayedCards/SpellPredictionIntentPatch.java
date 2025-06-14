@@ -12,7 +12,6 @@ import sts.caster.delayedCards.SpellPredictionIntent;
 
 public class SpellPredictionIntentPatch {
 
-	
 	@SpirePatch(clz=AbstractPlayer.class, method="render", paramtypez = {SpriteBatch.class})
 	public static class playerRenderPatch {
 		

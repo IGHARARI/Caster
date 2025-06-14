@@ -1,6 +1,7 @@
 package sts.caster.delayedCards;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -35,7 +36,6 @@ public class SpellIntentsManager {
 	}
 
 	public static void refreshSpellIntents() {
-		logger.info("refreshing spell intents");
 		if (SpellCardsArea.spellCardsBeingCasted != null) {
 			List<CastingSpellCard> cardsToCastNext = SpellCardsArea.spellCardsBeingCasted.stream()
 					.filter(castingSpellCard -> castingSpellCard.turnsUntilFire == 1)
@@ -57,9 +57,10 @@ public class SpellIntentsManager {
 					.collect(Collectors.toList());
 
 			ArrayList<SpellPredictionIntent> intents = new ArrayList<SpellPredictionIntent>();
-
+			boolean needsUpdate = false;
 			int intentRowIndex = 0;
 			int monsterTargetIndex = 1;
+
 			List<AbstractMonster> enemiesOrderedByX = enemyTargetCardsMap.keySet().stream()
 					.sorted(Comparator.comparing(monster -> monster.hb.x))
 					.collect(Collectors.toList());
@@ -69,6 +70,9 @@ public class SpellIntentsManager {
 					CasterCard cardCopy = makePowerAppliedCopy(card);
 					return cardCopy.getIntentNumber();
 				}).sum();
+				if (!needsUpdate) {
+					needsUpdate = isSpellIntentChanged(damageAmount, targetMonster, SpellPredictionIntent.SpellIntentType.ATTACK);
+				}
 				if (damageAmount > 0) {
 					SpellPredictionIntent damageIntent = new SpellPredictionIntent(damageAmount, targetMonster, SpellPredictionIntent.SpellIntentType.ATTACK);
 					positionSpellIntent(damageIntent, monsterTargetIndex, intentRowIndex);
@@ -84,6 +88,9 @@ public class SpellIntentsManager {
 				CasterCard cardCopy = makePowerAppliedCopy(card);
 				return cardCopy.getIntentNumber();
 			}).sum();
+			if (!needsUpdate) {
+				needsUpdate = isSpellIntentChanged(allEnemyDamageAmount, SpellPredictionIntent.SpellIntentType.ATTACK_ALL);
+			}
 			if (allEnemyDamageAmount > 0) {
 				SpellPredictionIntent allEnemyPredictionIntent = new SpellPredictionIntent(allEnemyDamageAmount, SpellPredictionIntent.SpellIntentType.ATTACK_ALL);
 				positionSpellIntent(allEnemyPredictionIntent, 1, intentRowIndex);
@@ -95,6 +102,9 @@ public class SpellIntentsManager {
 				CasterCard cardCopy = makePowerAppliedCopy(card);
 				return cardCopy.getIntentNumber();
 			}).sum();
+			if (!needsUpdate) {
+				needsUpdate = isSpellIntentChanged(selfBlockAmount, SpellPredictionIntent.SpellIntentType.BLOCK);
+			}
 			if (selfBlockAmount > 0) {
 				SpellPredictionIntent blockPredictionIntent = new SpellPredictionIntent(selfBlockAmount, SpellPredictionIntent.SpellIntentType.BLOCK);
 				positionSpellIntent(blockPredictionIntent, 1, intentRowIndex);
@@ -105,13 +115,39 @@ public class SpellIntentsManager {
 //			positionSpellIntent(mockIntent);
 //			intents.add(mockIntent);
 //			logger.info("adding intent with mock dmg " + damageMock);
-
-			spellIntents = intents;
+			if (needsUpdate) {
+				spellIntents = intents;
+			}
 		}
 	}
 
+	private static boolean isSpellIntentChanged(int newAmount, SpellPredictionIntent.SpellIntentType type) {
+		List<SpellPredictionIntent> priorIntents = spellIntents.stream().filter(
+				intent -> intent.spellIntentType == type
+		).collect(Collectors.toList());
+		if ((priorIntents.size() == 0 && newAmount != 0) || (priorIntents.size() != 0 && newAmount == 0)) {
+			return true;
+		}
+		if (priorIntents.size() != 0 && priorIntents.get(0).intentAmount != newAmount) {
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean isSpellIntentChanged(int newAmount, AbstractCreature target, SpellPredictionIntent.SpellIntentType type) {
+		List<SpellPredictionIntent> priorIntents = spellIntents.stream().filter(
+				intent -> intent.spellIntentType == type && intent.hoverTarget == target
+		).collect(Collectors.toList());
+		if ((priorIntents.size() == 0 && newAmount != 0) || (priorIntents.size() != 0 && newAmount == 0)) {
+			return true;
+		}
+		if (priorIntents.size() > 1 || priorIntents.get(0).intentAmount != newAmount) {
+			return true;
+		}
+		return false;
+	}
+
 	public static void positionSpellIntent(SpellPredictionIntent spellIntent, int col, int row) {
-        logger.info("positioning spell intent with amount {}", spellIntent.intentAmount);
 
 		spellIntent.cX = AbstractDungeon.player.drawX + CARD_AREA_X_RIGHT_OFFSET + INTENT_COLUMN_WIDTH * col;
 		spellIntent.cY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb_h + INTENT_COLUMN_HEIGHT * row;

@@ -18,7 +18,6 @@ import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
 import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.interfaces.MonsterToActionInterface;
-import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
 
@@ -36,7 +35,7 @@ public class Fimbulvetr extends CasterCard {
 
     private static final CardRarity RARITY = CardRarity.SPECIAL;
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
-    private static final CardType TYPE = CasterCardType.SPELL;
+    private static final CardType TYPE = CardType.ATTACK;//CasterCardType.SPELL;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
     private static final int COST = 2;

@@ -59,7 +59,7 @@ public class FrozenCardMod extends AbstractCardModifier {
             power.onFreeze(card);
         }
 
-        card.applyPowers();
+//        if (AbstractDungeon.player!= null) card.applyPowers();
     }
 
     @Override

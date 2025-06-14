@@ -56,13 +56,10 @@ public class Tundra extends CasterCard {
 
     @Override
     protected List<AbstractCardModifier> getInitialModifiers() {
-        CasterMod.logger.info("Receiving initial mods for "+ this.uuid);
         List<AbstractCardModifier> mods = new ArrayList<>();
         if (upgraded) {
-            CasterMod.logger.info("Generating upgrader tundra with: " + UPGR_RECUR);
             mods.add(new RecurringSpellCardMod(UPGR_RECUR));
         } else {
-            CasterMod.logger.info("Generating Normal tundra with: " + BASE_RECUR);
             mods.add(new RecurringSpellCardMod(BASE_RECUR));
         }
         return mods;

@@ -1,7 +1,9 @@
 package sts.caster.cards.spells;
 
+import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,6 +13,7 @@ import sts.caster.actions.IgniteSpecificCardAction;
 import sts.caster.actions.QueueDelayedCardAction;
 import sts.caster.actions.RepeatHighestHPDamageAction;
 import sts.caster.cards.CasterCard;
+import sts.caster.cards.mods.IgnitedCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -18,6 +21,7 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -57,14 +61,18 @@ public class PrimordialFlame extends CasterCard {
     }
 
     @Override
-    public void triggerWhenDrawn() {
-        addToBot(new IgniteSpecificCardAction(this));
-        super.triggerWhenDrawn();
+    protected List<AbstractCardModifier> getInitialModifiers() {
+        ArrayList<AbstractCardModifier> mods = new ArrayList<AbstractCardModifier>();
+        mods.add(new IgnitedCardMod());
+        return mods;
     }
+
 
     @Override
     public void triggerOnExhaust() {
-        addToBot(new MakeTempCardInDrawPileAction(this, 1, true, true));
+        AbstractCard copy = this.makeStatEquivalentCopy();
+        addToBot(new IgniteSpecificCardAction(copy));
+        addToBot(new MakeTempCardInDrawPileAction(copy, 1, true, true));
         super.triggerOnExhaust();
     }
 

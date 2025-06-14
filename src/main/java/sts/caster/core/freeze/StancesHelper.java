@@ -12,7 +12,7 @@ import sts.caster.powers.ShivasWrathPower;
 
 public class StancesHelper {
     public static boolean shouldTriggerElectroplasma(AbstractCard card, AbstractCardModifier modBeingApplied) {
-        if (!AbstractDungeon.player.hasPower(AetherflameCatalystPower.POWER_ID)) return false;
+        if (AbstractDungeon.player == null || !AbstractDungeon.player.hasPower(AetherflameCatalystPower.POWER_ID)) return false;
         if (modBeingApplied instanceof ElectrifiedCardMod) return shouldTriggerElectroplasma(card, (ElectrifiedCardMod) modBeingApplied);
         if (modBeingApplied instanceof IgnitedCardMod) return shouldTriggerElectroplasma(card, (IgnitedCardMod) modBeingApplied);
         return false;
@@ -30,6 +30,7 @@ public class StancesHelper {
     }
 
     public static boolean shouldTriggerShatter(AbstractCard card, AbstractCardModifier modBeingApplied) {
+        if (AbstractDungeon.player == null || !AbstractDungeon.player.hasPower(ShivasWrathPower.POWER_ID)) return false;
         if (modBeingApplied instanceof ElectrifiedCardMod) return shouldTriggerShatter(card, (ElectrifiedCardMod) modBeingApplied);
         if (modBeingApplied instanceof FrozenCardMod) return shouldTriggerShatter(card, (FrozenCardMod) modBeingApplied);
         return false;

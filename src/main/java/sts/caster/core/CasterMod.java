@@ -10,12 +10,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer.PlayerClass;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +33,7 @@ import sts.caster.core.freeze.ElectrifiedHelper;
 import sts.caster.core.freeze.IceWallRetainBlockListener;
 import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
+import sts.caster.delayedCards.SpellIntentsManager;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
 import sts.caster.relics.MagicBookRelic;
 import sts.caster.util.TextureHelper;
@@ -55,7 +59,8 @@ public class CasterMod implements
         OnStartBattleSubscriber,
         PostBattleSubscriber,
         PostInitializeSubscriber,
-        PostExhaustSubscriber {
+        PostExhaustSubscriber,
+        PostPowerApplySubscriber {
 
     public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
     private static String modID;
@@ -381,6 +386,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(IceAge.ID);
         BaseMod.addCard(new TransmuteSoul());
         UnlockTracker.unlockCard(TransmuteSoul.ID);
+        BaseMod.addCard(new CourtainCall());
+        UnlockTracker.unlockCard(CourtainCall.ID);
 
         // UNOBTAINABLE
 //        BaseMod.addCard(new Ashes());
@@ -562,18 +569,32 @@ public class CasterMod implements
 
     @Override
     public void receivePostExhaust(AbstractCard abstractCard) {
-        CasterMod.logger.info("On exhaust for main mod");
+        boolean redraw = false;
         if (SpellCardsArea.spellCardsBeingCasted != null) {
             for (CastingSpellCard delayCard : SpellCardsArea.spellCardsBeingCasted) {
                 if (delayCard.spellCard instanceof FireWall) {
-                    CasterMod.logger.info("Found card to FF, forwarding now on main mod");
                     AbstractDungeon.actionManager.addToBottom(new ModifyCastingSpellCastTimeAction(delayCard, -delayCard.spellCard.magicNumber));
+                    redraw = true;
                 }
             }
         }
-        AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
+        if (redraw) {
+            AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
+        }
     }
 
+    @Override
+    public void receivePostPowerApplySubscriber(AbstractPower abstractPower, AbstractCreature abstractCreature, AbstractCreature abstractCreature1) {
+        if (SpellIntentsManager.spellIntents != null) {
+            AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    SpellIntentsManager.refreshSpellIntents();
+                    isDone = true;
+                }
+            });
+        }
+    }
 //    @Override
 //    public void receivePostEnergyRecharge() {
 //        List<AbstractCard> frozenEmbers = DeprecatedFrozenPileManager.frozenPile.group.stream().filter(c -> c instanceof Embers).collect(Collectors.toList());

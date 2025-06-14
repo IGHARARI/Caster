@@ -65,7 +65,7 @@
   },
   "caster:PrimordialFlame": {
     "NAME": "Primordial Flame",
-    "DESCRIPTION": "When you draw this, caster:Ignite it. NL When this exhausts, shuffle a copy in your draw pile. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to the enemy with the highest HP, !M! times."
+    "DESCRIPTION": "When this exhausts, shuffle a copy in your draw pile and caster:Ignite it. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to the enemy with the highest HP, !M! times."
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
@@ -149,7 +149,7 @@
   },
   "caster:FireWall": {
     "NAME": "Fire Wall",
-    "DESCRIPTION": "While in your *Casting *Queue, when you *Ignite, this gains !M! caster:Echo, when you exhaust a card caster:Fast-Forward this !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
+    "DESCRIPTION": "While this is *Casting, on *Ignite: gains !M! caster:Echo, on exhaust: caster:Fast-Forward this !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
   },
   "caster:Fireball": {
     "NAME": "Meteor",
@@ -363,5 +363,10 @@
   "caster:TransmuteSoul": {
     "NAME": "Transmute Soul",
     "DESCRIPTION": "stslib:Purge NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to the Highest HP enemy. If Fatal, gain 1 extra [E] permanently and remove this from your deck."
+  },
+  "caster:CourtainCall": {
+    "NAME": "Courtain Call",
+    "DESCRIPTION": "Your *Spells with caster:Echo can no longer Echo, instead they deal twice the damage.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Your *Spells with caster:Echo can no longer Echo, instead they deal twice the damage."
   }
 }

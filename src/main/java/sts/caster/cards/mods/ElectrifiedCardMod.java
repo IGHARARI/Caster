@@ -26,11 +26,21 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
     public static final int ON_DRAW_DRAW_AMOUNT = 1;
     public static final int ELECTRIFY_DAMAGE = 2;
     public static final String electrifiedMessage = CardCrawlGame.languagePack.getUIString("ElectrifiedStrings").TEXT[0];
-    private int electrifiedAmount = 1;
+    private int electrifiedAmount;
     private boolean wasCostModified;
     private int originalBaseCost;
+    private int onApplyAmount;
+
+    public int getOnApplyAmount() {
+        return onApplyAmount;
+    }
 
     public ElectrifiedCardMod() {
+        this(1);
+    }
+
+    public ElectrifiedCardMod(int onApplyAmount) {
+        this.onApplyAmount = onApplyAmount;
     }
 
     @Override
@@ -76,17 +86,21 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        increaseElectrify(card);
+        increaseElectrify(card, this);
     }
 
-    private void increaseElectrify(AbstractCard card) {
-        card.tags.add(CasterCardTags.ELECTRIFIED);
+    private void increaseElectrify(AbstractCard card, ElectrifiedCardMod modOncard) {
+        modOncard.electrifiedAmount += this.getOnApplyAmount();
+        for (int i = 0; i < this.getOnApplyAmount(); i++) {
+            card.tags.add(CasterCardTags.ELECTRIFIED);
+        }
+
 
 //        No onElectrified for cards yet
 //        if (card instanceof CasterCard) {
 //            addToBot(new CardOnElectrifiedTriggerAction((CasterCard)card));
 //        }
-        card.applyPowers();
+//        if (AbstractDungeon.player!= null) card.applyPowers();
     }
 
 
@@ -102,12 +116,11 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
         }
         ArrayList<AbstractCardModifier> list = CardModifierManager.getModifiers(card, ElectrifiedCardMod.ID);
         for (AbstractCardModifier other : list) {
-            ((ElectrifiedCardMod)other).electrifiedAmount += 1;
-            increaseElectrify(card);
+            increaseElectrify(card, ((ElectrifiedCardMod)other));
             card.initializeDescription();
             return false;
         }
-        // First stack, reduce cost.
+        // First application, reduce cost.
         if (card.cost > 0) {
             this.wasCostModified = true;
             this.originalBaseCost = card.cost;
@@ -139,6 +152,6 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new ElectrifiedCardMod();
+        return new ElectrifiedCardMod(this.electrifiedAmount);
     }
 }

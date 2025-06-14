@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import sts.caster.core.CasterMod;
 import sts.caster.util.TextureHelper;
 
 import java.util.function.BiFunction;
@@ -19,7 +18,6 @@ public class PillarExplosionEffect {
         Texture beamTexture = TextureHelper.getTexture(makeVFXPath("pillar.png"));
 
 
-        CasterMod.logger.info("Starting to build pillar explosion");
         float baseX = m.hb.cX;
         float baseScale = Math.max(
                 m.hb.width / magicCircle.getWidth(),
@@ -40,7 +38,7 @@ public class PillarExplosionEffect {
         // === Helper: create a pillar circle effect ===
         BiFunction<Float, Integer, AbstractGameEffect> createPillarCircle = (x, index) -> {
             float y = baseY + (index + 1) * pillarSpacing;
-            CasterMod.logger.info("Create pillar circle index " + index + " at Y:" + y);
+
             return new VfxBuilder(magicCircle, x, y, 0.5f)
                     .setScale(0f)
                     .fadeIn(0.1f)
@@ -56,8 +54,6 @@ public class PillarExplosionEffect {
         Function<Float, AbstractGameEffect> createBeamBlast = (x) -> {
             float beamHeight = pillarCount * pillarSpacing + 100f * Settings.scale;  // Stretch beyond final circle
             float beamY = baseY + beamHeight / 2f;  // Centered on the entire beam height
-
-            CasterMod.logger.info("Create Beam blast at Y:" + beamY + " to reach down to baseY " + baseY);
 
             AbstractGameEffect beam = new VfxBuilder(beamTexture, x, beamY, 0.2f) // slightly longer duration
                     .setScale(0.1f)
@@ -88,13 +84,12 @@ public class PillarExplosionEffect {
         for (int i = 0; i < pillarCount; i++) {
             float delay = pillarStartTime + i * pillarInterval;
             int index = i;
-            CasterMod.logger.info("Create circle in loop wtih delay" + delay + "...");
+
             builder = builder.triggerVfxAt(delay, 1, (x, y) -> {
                 return createPillarCircle.apply(x, index);
             });
         }
 
-        CasterMod.logger.info("Add blast with offset " + (pillarStartTime + pillarCount * pillarInterval) + "...");
         // === Trigger beam blast ===
         builder = builder.triggerVfxAt(
                 pillarStartTime + pillarCount * pillarInterval,
@@ -107,7 +102,6 @@ public class PillarExplosionEffect {
         .fadeOut(0.3f);
 
         // === Final effect ===
-        CasterMod.logger.info("Build the entire thing");
         AbstractGameEffect entireExplosion = builder.build();
         entireExplosion.renderBehind = true;
         return entireExplosion;

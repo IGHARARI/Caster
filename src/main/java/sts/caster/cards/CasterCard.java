@@ -36,25 +36,25 @@ public abstract class CasterCard extends CustomCard {
 
 	public int delayTurnsModificationForTurn;
 	public int delayTurns;
-	public int baseDelayTurns;	
-	public boolean upgradedDelayTurns; 
-	public boolean isDelayTurnsModified; 
-	public MagicElement cardElement; 
+	public int baseDelayTurns;
+	public boolean upgradedDelayTurns;
+	public boolean isDelayTurnsModified;
+	public MagicElement cardElement;
 
-	public int spellBlock;		
-	public int baseSpellBlock;	
-	public boolean upgradedSpellBlock; 
-	public boolean isSpellBlockModified; 
+	public int spellBlock;
+	public int baseSpellBlock;
+	public boolean upgradedSpellBlock;
+	public boolean isSpellBlockModified;
 	
-	public int spellDamage;		
-	public int baseSpellDamage;	
-	public boolean upgradedSpellDamage; 
-	public boolean isSpellDamageModified; 
+	public int spellDamage;
+	public int baseSpellDamage;
+	public boolean upgradedSpellDamage;
+	public boolean isSpellDamageModified;
 	
-	public int m2;		
-	public int baseM2;	
-	public boolean upgradedM2; 
-	public boolean isM2Modified; 
+	public int m2;
+	public int baseM2;
+	public boolean upgradedM2;
+	public boolean isM2Modified;
 
 	public CasterCard(final String id, final String name, final String img, final int cost, final String rawDescription,
 							   final CardType type, final CardColor color,
@@ -164,10 +164,9 @@ public abstract class CasterCard extends CustomCard {
 		int realBaseDamage = baseDamage;
 		int realBaseSpellDamage = baseSpellDamage;
 
+		super.applyPowers();
 		if (this.type == CasterCardType.SPELL) {
 			calculateCardDamage(null);
-		} else {
-			super.applyPowers();
 		}
 
 		baseDamage = realBaseDamage;

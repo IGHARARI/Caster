@@ -51,7 +51,6 @@ public class Cool extends CasterCard {
         baseSpellDamage = spellDamage = 0;
         magicNumber = baseMagicNumber = BASE_CARDS_FROZEN;
         cardsToPreview = new Frostbite();
-        cardsToPreview.applyPowers();
         setCardElement(MagicElement.ICE);
     }
 

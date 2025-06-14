@@ -21,8 +21,18 @@ public class IgnitedCardMod extends AbstractCardModifier {
     private int ignitedAmount;
     private boolean modifiedDamage;
     private boolean modifiedSpellDamage;
+    private int stackImmediatelyAmount;
+
+    public int getOnApplicationStacks(){
+        return stackImmediatelyAmount;
+    }
 
     public IgnitedCardMod() {
+        this(1);
+    }
+
+    public IgnitedCardMod(int stackImmediatelyAmount) {
+        this.stackImmediatelyAmount = stackImmediatelyAmount;
     }
 
     @Override
@@ -46,12 +56,13 @@ public class IgnitedCardMod extends AbstractCardModifier {
     }
 
     private void increaseIgnited(AbstractCard card, IgnitedCardMod other) {
-        other.ignitedAmount += 1;
+        int stackAmount = this.getOnApplicationStacks();
+        other.ignitedAmount += stackAmount;
         if (card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0) {
-            card.baseDamage += PER_IGNITE_DAMAGE;
+            card.baseDamage += PER_IGNITE_DAMAGE * stackAmount;
         }
         if (card instanceof CasterCard && ((CasterCard) card).baseSpellDamage > 0) {
-            ((CasterCard) card).baseSpellDamage += PER_IGNITE_DAMAGE;
+            ((CasterCard) card).baseSpellDamage += PER_IGNITE_DAMAGE * stackAmount;
         }
     }
 
@@ -72,14 +83,15 @@ public class IgnitedCardMod extends AbstractCardModifier {
         }
         ArrayList<AbstractCardModifier> list = CardModifierManager.getModifiers(card, IgnitedCardMod.ID);
         for (AbstractCardModifier other : list) {
-            increaseIgnited(card, (IgnitedCardMod)other);
+            IgnitedCardMod otherIgnite = (IgnitedCardMod) other;
+            increaseIgnited(card, otherIgnite);
             card.initializeDescription();
-            card.applyPowers();
+//            if (AbstractDungeon.player!= null) card.applyPowers();
             return false;
         }
         increaseIgnited(card, this);
         card.initializeDescription();
-        card.applyPowers();
+//        if (AbstractDungeon.player!= null) card.applyPowers();
         card.flash(Color.RED.cpy());
         return true;
     }
@@ -91,6 +103,6 @@ public class IgnitedCardMod extends AbstractCardModifier {
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new IgnitedCardMod();
+        return new IgnitedCardMod(this.ignitedAmount);
     }
 }

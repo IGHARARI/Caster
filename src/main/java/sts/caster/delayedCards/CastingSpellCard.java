@@ -28,6 +28,7 @@ import sts.caster.actions.*;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
+import sts.caster.powers.CourtainCallPower;
 import sts.caster.powers.SpellDamageDisplayPower;
 
 import java.util.ArrayList;
@@ -164,7 +165,7 @@ public class CastingSpellCard extends AbstractOrb {
 	}
 
 	private void processRecurrenceMods() {
-		if (CardModifierManager.hasModifier(this.spellCard, RecurringSpellCardMod.ID)) {
+		if (CardModifierManager.hasModifier(this.spellCard, RecurringSpellCardMod.ID) && !AbstractDungeon.player.hasPower(CourtainCallPower.POWER_ID)) {
 			ArrayList<AbstractCardModifier> mods = CardModifierManager.getModifiers(this.spellCard, RecurringSpellCardMod.ID);
 			for (AbstractCardModifier mod : mods) {
 				RecurringSpellCardMod recurMod = (RecurringSpellCardMod) mod;
@@ -297,7 +298,7 @@ public class CastingSpellCard extends AbstractOrb {
 		return hb.hovered;
 	}
 
-	private void applyPowersToAllCardCopies() {
+	public void applyPowersToAllCardCopies() {
 		cardPreviewCopy.calculateCardDamage(target);
 		cardPreviewCopy.applyPowers();
 		cardMiniCopy.calculateCardDamage(target);

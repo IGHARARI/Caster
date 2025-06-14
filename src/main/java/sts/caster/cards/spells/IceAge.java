@@ -90,9 +90,7 @@ public class IceAge extends CasterCard implements ICardWasFrozenSubscriber {
 
     @Override
     public void cardWasFrozen(CardGroup.CardGroupType thisCardGroup) {
-        CasterMod.logger.info("In ice age card was frozen " + this.uuid);
         if (thisCardGroup == CastingQueueGroupEnum.CASTER_CASTING_QUEUE) {
-            CasterMod.logger.info("In ice age this one is casting! " + this.uuid);
             addToBot(new ModifyCastingSpellsEffectAction(this, 0, magicNumber));
         }
     }

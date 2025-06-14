@@ -47,7 +47,6 @@ public class Frostbite extends CasterCard {
         baseM2 = m2 = BASE_DAMAGE;
         baseSpellDamage = spellDamage = 0;
         cardsToPreview = new Fimbulvetr();
-        cardsToPreview.applyPowers();
         setCardElement(MagicElement.ICE);
     }
 

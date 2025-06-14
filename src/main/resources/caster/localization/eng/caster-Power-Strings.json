@@ -149,8 +149,8 @@
 		"NAME": "Wall of Rocks",
 		"DESCRIPTIONS": ["Fully blocking damage will reduce ", " Strength from the attacking enemy."]
 	},
-	"caster:RarePower": {
-		"NAME": "Placeholder Power",
-		"DESCRIPTIONS": ["At the start of your turn, TOUCH ", " enemy." , " enemies."]
+	"caster:CourtainCall": {
+		"NAME": "Courtain Call",
+		"DESCRIPTIONS": ["Spells with Echo can no longer echo, instead they deal twice the damage."]
 	}
 }

@@ -51,6 +51,7 @@ public class SpellCardsArea {
 				columnIndex++;
 			}
 		}
+		SpellIntentsManager.refreshSpellIntents();
 	}
 
 	public static void redrawEvokeCards(){
@@ -62,7 +63,6 @@ public class SpellCardsArea {
 	public static void removeCardFromArea(CastingSpellCard card) {
 		spellCardsBeingCasted.remove(card);
 		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
-		SpellIntentsManager.refreshSpellIntents();
 	}
 	
 	public static void addCardToArea(CastingSpellCard card) {
@@ -70,9 +70,9 @@ public class SpellCardsArea {
 		if (card.turnsUntilFire == 0) {
 			card.cardFireEvent();
 			removeCardFromArea(card);
+		} else {
+			AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
 		}
-		AbstractDungeon.actionManager.addToBottom(new QueueRedrawMiniCardsAction());
-		SpellIntentsManager.refreshSpellIntents();
 	}
 	
 	public static void positionCardInCardArea(int columnNumber, int indexInColumn, CastingSpellCard card) {

@@ -91,7 +91,6 @@ public class Mirage extends CasterCard {
     public void triggerOnEndOfPlayerTurn() {
         super.triggerOnEndOfPlayerTurn();
         m2 = 0;
-        CasterMod.logger.info("Mirage end of turn, m2 set to: " + m2);
     }
 
     @Override
