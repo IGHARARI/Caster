@@ -10,8 +10,11 @@ import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
 import sts.caster.powers.EchoingVoicePower;
 
+import java.util.UUID;
+
 public class QueueDelayedCardAction extends AbstractGameAction {
-    private CasterCard card;
+	private final UUID originalUUID;
+	private CasterCard card;
     private int turnsDelay;
 	private Integer energyOnUse;
 	AbstractMonster target;
@@ -22,6 +25,7 @@ public class QueueDelayedCardAction extends AbstractGameAction {
     }
 
 	public QueueDelayedCardAction(final CasterCard card, final int turnsDelay, Integer energyOnUse, AbstractMonster target, boolean isRecurrence) {
+		this.originalUUID = card.uuid;
 		this.card = card.makeStatIdenticalCopy();
 		this.turnsDelay = turnsDelay;
 		actionType = ActionType.SPECIAL;
@@ -42,7 +46,7 @@ public class QueueDelayedCardAction extends AbstractGameAction {
 				RecurringSpellCardMod.addRecurrence(card, echoPower.amount);
 			}
 		}
-		CastingSpellCard delayedCard = new CastingSpellCard(card, turnsDelay, energyOnUse, target);
+		CastingSpellCard delayedCard = new CastingSpellCard(card, turnsDelay, energyOnUse, target, originalUUID);
 		SpellCardsArea.addCardToArea(delayedCard);
 		SpellCardsArea.repositionMiniCards();
         isDone = true;

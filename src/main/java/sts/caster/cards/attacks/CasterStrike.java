@@ -2,7 +2,6 @@ package sts.caster.cards.attacks;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -11,7 +10,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.core.CasterMod;
 import sts.caster.core.TheCaster;
-import sts.caster.vfx.PillarExplosionEffect;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -42,7 +40,7 @@ public class CasterStrike extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new VFXAction(PillarExplosionEffect.buildPillarExplosion(m), 2.4f));
+//        addToBot(new VFXAction(PillarExplosionEffect.buildPillarExplosion(m), 2.4f));
         addToBot(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AttackEffect.SLASH_HORIZONTAL));
     }
 

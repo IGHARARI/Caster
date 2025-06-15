@@ -12,8 +12,6 @@ import sts.caster.cards.mods.FreezeOnUseCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.delayedCards.CastingSpellCard;
-import sts.caster.delayedCards.SpellCardsArea;
 import sts.caster.powers.CannotLoseHpPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
@@ -47,24 +45,6 @@ public class Permafrost extends CasterCard {
     public void use(AbstractPlayer p, AbstractMonster monster) {
         addToBot(new ModifyAllCastingSpellCastTimeAction(CAST_TIME_INCREASE));
         addToBot(new ApplyPowerAction(p, p, new CannotLoseHpPower(p, 1)));
-    }
-
-    @Override
-    public void applyPowers() {
-        baseBlock = sumCastingTimeInCastArea() * 2;
-        block = baseBlock;
-        isBlockModified = true;
-        super.applyPowers();
-    }
-
-    private int sumCastingTimeInCastArea() {
-        int sum = 0;
-        if (SpellCardsArea.spellCardsBeingCasted != null) {
-            for (CastingSpellCard delayCard : SpellCardsArea.spellCardsBeingCasted) {
-                sum += delayCard.turnsUntilFire + 1;
-            }
-        }
-        return sum;
     }
 
     @Override

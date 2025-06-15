@@ -25,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sts.caster.actions.ModifyCastingSpellCastTimeAction;
 import sts.caster.actions.QueueRedrawMiniCardsAction;
+import sts.caster.actions.ShowCardVeryBrieflyAction;
 import sts.caster.cards.attacks.*;
 import sts.caster.cards.powers.*;
 import sts.caster.cards.skills.*;
@@ -386,8 +387,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(IceAge.ID);
         BaseMod.addCard(new TransmuteSoul());
         UnlockTracker.unlockCard(TransmuteSoul.ID);
-        BaseMod.addCard(new CourtainCall());
-        UnlockTracker.unlockCard(CourtainCall.ID);
+        BaseMod.addCard(new CurtainCall());
+        UnlockTracker.unlockCard(CurtainCall.ID);
 
         // UNOBTAINABLE
 //        BaseMod.addCard(new Ashes());
@@ -574,6 +575,7 @@ public class CasterMod implements
             for (CastingSpellCard delayCard : SpellCardsArea.spellCardsBeingCasted) {
                 if (delayCard.spellCard instanceof FireWall) {
                     AbstractDungeon.actionManager.addToBottom(new ModifyCastingSpellCastTimeAction(delayCard, -delayCard.spellCard.magicNumber));
+                    AbstractDungeon.actionManager.addToBottom(new ShowCardVeryBrieflyAction(delayCard.cardMiniCopy, 0.6f, 0.6f, true));
                     redraw = true;
                 }
             }

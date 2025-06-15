@@ -21,6 +21,7 @@ import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -74,7 +75,7 @@ public class GlacialShield extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
             actionsList.add(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, c.spellBlock));

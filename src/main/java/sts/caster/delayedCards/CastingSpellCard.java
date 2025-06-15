@@ -28,14 +28,16 @@ import sts.caster.actions.*;
 import sts.caster.cards.CasterCard;
 import sts.caster.cards.mods.RecurringSpellCardMod;
 import sts.caster.core.CasterMod;
-import sts.caster.powers.CourtainCallPower;
+import sts.caster.powers.CurtainCallPower;
 import sts.caster.powers.SpellDamageDisplayPower;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class CastingSpellCard extends AbstractOrb {
+	private final UUID originalUUID;
 	public int turnsUntilFire;
 
 	public static final String ID_PREFIX = "DelayedCard:";
@@ -56,15 +58,13 @@ public class CastingSpellCard extends AbstractOrb {
 	private Boolean isPowersApplied = false;
 	private boolean beingEvoked;
 	private SpellDamageDisplayPower damageDisplayPower;
-
-	public CastingSpellCard(CasterCard card, int delayTurns, AbstractMonster target) {
-		this(card, delayTurns, 0, target);
-	}
-	public CastingSpellCard(CasterCard card, int delayTurns, Integer energyOnCast, AbstractMonster target) {
+	
+	public CastingSpellCard(CasterCard card, int delayTurns, Integer energyOnCast, AbstractMonster target, UUID originalUUID) {
         super();
         
 		ID = ID_PREFIX + card.uuid;
 		name = card.name;
+		this.originalUUID = originalUUID;
 		this.spellCard = card.makeStatIdenticalCopy();
 		if (spellCard.cost == -1) {
 			spellCard.rawDescription += " NL Casted for " + energyOnCast + " Energy.";
@@ -165,7 +165,7 @@ public class CastingSpellCard extends AbstractOrb {
 	}
 
 	private void processRecurrenceMods() {
-		if (CardModifierManager.hasModifier(this.spellCard, RecurringSpellCardMod.ID) && !AbstractDungeon.player.hasPower(CourtainCallPower.POWER_ID)) {
+		if (CardModifierManager.hasModifier(this.spellCard, RecurringSpellCardMod.ID) && !AbstractDungeon.player.hasPower(CurtainCallPower.POWER_ID)) {
 			ArrayList<AbstractCardModifier> mods = CardModifierManager.getModifiers(this.spellCard, RecurringSpellCardMod.ID);
 			for (AbstractCardModifier mod : mods) {
 				RecurringSpellCardMod recurMod = (RecurringSpellCardMod) mod;
@@ -194,7 +194,7 @@ public class CastingSpellCard extends AbstractOrb {
 		AbstractDungeon.actionManager.addToTop(new RemoveEvokingSpellCard(this)); // modified
 		applyPowersToAllCardCopies();
 //		spellCard.calculateCardDamage(target);
-		ArrayList<AbstractGameAction> delayedActions = spellCard.actionListSupplier(energyOnCast).getActionList(spellCard, target);
+		ArrayList<AbstractGameAction> delayedActions = spellCard.actionListSupplier(energyOnCast, originalUUID).getActionList(spellCard, target);
 		for (int i = delayedActions.size() -1; i >= 0; i--) {
 			AbstractGameAction action = delayedActions.get(i);
 			AbstractDungeon.actionManager.addToTop(action);
@@ -325,7 +325,7 @@ public class CastingSpellCard extends AbstractOrb {
 
 	@Override
 	public AbstractOrb makeCopy() {
-		return new CastingSpellCard(this.spellCard, turnsUntilFire, energyOnCast, target);
+		return new CastingSpellCard(this.spellCard, turnsUntilFire, energyOnCast, target, this.originalUUID);
 	}
 
 	@Override

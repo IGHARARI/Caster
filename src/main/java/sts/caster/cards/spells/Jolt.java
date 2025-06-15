@@ -23,6 +23,7 @@ import sts.caster.patches.delayedCards.CastingQueueGroupEnum;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -61,7 +62,7 @@ public class Jolt extends CasterCard implements ICardWasElectrifiedSubscriber {
     }
     
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
     	return (c, t) -> {
     		ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             actions.add(new LightningDamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage, DamageInfo.DamageType.NORMAL), AttackEffect.LIGHTNING));

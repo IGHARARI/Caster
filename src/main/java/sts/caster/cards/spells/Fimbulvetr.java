@@ -20,6 +20,7 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.interfaces.MonsterToActionInterface;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 import static sts.caster.core.freeze.FreezeHelper.getFrozenThisCombatCount;
@@ -66,7 +67,7 @@ public class Fimbulvetr extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             actions.add(new DelayedDamageAllEnemiesAction(AbstractDungeon.player, c.spellDamage, c.cardElement, AttackEffect.SMASH));

@@ -9,13 +9,13 @@ import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
-import sts.caster.powers.CourtainCallPower;
+import sts.caster.powers.CurtainCallPower;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
-public class CourtainCall extends CasterCard {
+public class CurtainCall extends CasterCard {
 
-    public static final String ID = CasterMod.makeID("CourtainCall");
+    public static final String ID = CasterMod.makeID("CurtainCall");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String IMG = makeCardPath("ashes.png");
 
@@ -30,14 +30,14 @@ public class CourtainCall extends CasterCard {
 
     private static final int COST = 1;
 
-    public CourtainCall() {
+    public CurtainCall() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         setCardElement(MagicElement.NEUTRAL);
     }
 
     @Override
     public void use(final AbstractPlayer p, final AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new CourtainCallPower(p), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new CurtainCallPower(p), magicNumber));
     }
 
     @Override

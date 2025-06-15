@@ -22,6 +22,7 @@ import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -42,7 +43,7 @@ public class PrimordialFlame extends CasterCard {
     private static final int COST = 1;
     private static final int BASE_DELAY = 3;
     private static final int UPG_DELAY = -1;
-    private static final int BASE_DAMAGE = 6;
+    private static final int BASE_DAMAGE = 4;
     private static final int UPG_DAMAGE = 3;
     private static final int HIT_TIMES = 3;
 
@@ -77,7 +78,7 @@ public class PrimordialFlame extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             AbstractPlayer p = AbstractDungeon.player;
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();

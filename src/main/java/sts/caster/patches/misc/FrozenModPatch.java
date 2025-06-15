@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import sts.caster.actions.ShowCardVeryBrieflyAction;
 import sts.caster.cards.mods.FrozenCardMod;
 
 import java.util.ArrayList;
@@ -28,15 +29,15 @@ public class FrozenModPatch {
 			AbstractPlayer p = AbstractDungeon.player;
 			for (final AbstractCard card : p.hand.group) {
 				if (CardModifierManager.hasModifier(card, FrozenCardMod.ID)) {
-
-					AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, FrozenCardMod.ON_DRAW_BLOCK_AMOUNT));
-					AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+					AbstractDungeon.actionManager.addToTop(new AbstractGameAction() {
 						@Override
 						public void update() {
 							card.superFlash(Color.BLUE.cpy());
 							isDone = true;
 						}
 					});
+					AbstractDungeon.actionManager.addToTop(new GainBlockAction(p, FrozenCardMod.ON_DRAW_BLOCK_AMOUNT));
+					AbstractDungeon.actionManager.addToTop(new ShowCardVeryBrieflyAction(card));
 				}
 			}
 		}

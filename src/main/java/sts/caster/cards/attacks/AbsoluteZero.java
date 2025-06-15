@@ -20,6 +20,7 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -63,7 +64,7 @@ public class AbsoluteZero extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
             actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, spellDamage), AbstractGameAction.AttackEffect.SLASH_HEAVY));

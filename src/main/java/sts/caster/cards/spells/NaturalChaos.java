@@ -18,6 +18,7 @@ import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.powers.MiredPower;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -56,7 +57,7 @@ public class NaturalChaos extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             actions.add(new ActionOnAllEnemiesAction(monster -> new ApplyPowerAction(monster, AbstractDungeon.player, new MiredPower(monster, AbstractDungeon.player, c.magicNumber), c.magicNumber)));

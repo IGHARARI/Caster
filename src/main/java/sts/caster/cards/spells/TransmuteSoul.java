@@ -22,6 +22,7 @@ import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.util.TextureHelper;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 import static sts.caster.core.CasterMod.makeVFXPath;
@@ -41,7 +42,7 @@ public class TransmuteSoul extends CasterCard {
 
     private static final int COST = 2;
     private static final int BASE_DELAY = 5;
-    private static final int BASE_DAMAGE = 13;
+    private static final int BASE_DAMAGE = 9;
     private static final int UPGRADE_DELAY = -2;
 
     public TransmuteSoul() {
@@ -55,17 +56,19 @@ public class TransmuteSoul extends CasterCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        CasterMod.logger.info("Used transmute soul with card with uuid {}", this.uuid);
         addToBot(new QueueDelayedCardAction(this, delayTurns, m));
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         TransmuteSoul thisCard = this;
         return (c, t) -> {
             ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             AbstractMonster target = findHighestHPEnemy();
             actions.add(new VFXAction(createExplosionCircle(target), 1.4f));
-            actions.add(new TransmuteSoulAction(target, magicNumber, (TransmuteSoul) c, thisCard));
+            CasterMod.logger.info("Creating actions for transmute soul with card with uuid {}", originalUUID);
+            actions.add(new TransmuteSoulAction(target, magicNumber, (TransmuteSoul) c, originalUUID));
             return actions;
         };
     }

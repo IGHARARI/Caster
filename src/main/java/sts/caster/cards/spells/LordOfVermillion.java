@@ -20,6 +20,7 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -71,7 +72,7 @@ public class LordOfVermillion extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer spentEnergy) {
+    public ActionListSupplier actionListSupplier(Integer spentEnergy, UUID originalUUID) {
         return (c, t) -> {
             int energyMultiplier = spentEnergy;
             if (AbstractDungeon.player.hasRelic(ChemicalX.ID)) energyMultiplier += 2;

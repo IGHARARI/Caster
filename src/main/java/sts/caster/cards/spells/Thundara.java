@@ -22,6 +22,7 @@ import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static sts.caster.core.CasterMod.makeCardPath;
@@ -70,7 +71,7 @@ public class Thundara extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
             for (int i = 0; i < magicNumber; i++) {

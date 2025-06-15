@@ -5,17 +5,15 @@ import basemod.helpers.VfxBuilder;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.BlurPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.mods.FreezeOnUseCardMod;
+import sts.caster.cards.mods.FrozenCardMod;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -76,13 +74,12 @@ public class IceWall extends CasterCard {
 
         addToBot(new VFXAction(wallVfx, 0.6f));
         addToBot(new GainBlockAction(p, p, block));
-        addToBot(new ApplyPowerAction(p, p, new BlurPower(p, magicNumber), magicNumber));
     }
 
     @Override
     public void triggerWhenDrawn() {
         super.triggerWhenDrawn();
-        CardModifierManager.addModifier(this, new FreezeOnUseCardMod());
+        CardModifierManager.addModifier(this, new FrozenCardMod());
     }
 
     @Override

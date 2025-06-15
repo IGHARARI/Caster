@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import sts.caster.actions.CardOnAfterRecurringTriggerAction;
 import sts.caster.interfaces.OnRecurringSpell;
-import sts.caster.powers.CourtainCallPower;
+import sts.caster.powers.CurtainCallPower;
 
 import java.util.ArrayList;
 
@@ -47,7 +47,7 @@ public class RecurringSpellCardMod extends AbstractCardModifier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasPower(CourtainCallPower.POWER_ID)) {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasPower(CurtainCallPower.POWER_ID)) {
             return rawDescription + " NL " + uiStrings.TEXT[0] + uiStrings.TEXT[2];
         }
         return rawDescription + " NL " + uiStrings.TEXT[0] + this.recurAmount + uiStrings.TEXT[1];

@@ -61,6 +61,6 @@
 		"TEXT": [ "Ignited" ]
 	},
 	"RecurringSpellCardMod": {
-		"TEXT": [ "caster:Echo ", ".", "Courtain Called."]
+		"TEXT": [ "caster:Echo ", ".", "Curtain Called."]
 	}
 }

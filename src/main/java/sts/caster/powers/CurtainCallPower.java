@@ -17,10 +17,10 @@ import static sts.caster.core.CasterMod.makePowerPath;
 
 //Gain 1 dex for the turn for each card played.
 
-public class CourtainCallPower extends AbstractPower {
+public class CurtainCallPower extends AbstractPower {
 	public AbstractCreature source;
 
-	public static final String POWER_ID = CasterMod.makeID("CourtainCall");
+	public static final String POWER_ID = CasterMod.makeID("CurtainCall");
 	private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -28,7 +28,7 @@ public class CourtainCallPower extends AbstractPower {
 	private static final Texture tex84 = TextureHelper.getTexture(makePowerPath("izanagi84.png"));
 	private static final Texture tex32 = TextureHelper.getTexture(makePowerPath("izanagi32.png"));
 
-	public CourtainCallPower(final AbstractCreature owner) {
+	public CurtainCallPower(final AbstractCreature owner) {
 		name = NAME;
 		ID = POWER_ID;
 		this.owner = owner;

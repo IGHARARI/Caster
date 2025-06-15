@@ -3,11 +3,13 @@ package sts.caster.cards.skills;
 import com.megacrit.cardcrawl.actions.common.DiscardSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import sts.caster.actions.ShowCardVeryBrieflyAction;
 import sts.caster.actions.ThawCardAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
@@ -56,10 +58,13 @@ public class Shy extends CasterCard {
     }
 
     public void triggerWhenDrawn() {
-        if (upgraded) addToBot(new DrawCardAction(m2));
-        addToBot(new ThawCardAction(magicNumber, false, this.name));
-        addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
-        addToBot(new DiscardSpecificCardAction(this));
+        addToTop(new DiscardSpecificCardAction(this));
+        addToTop(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
+        addToTop(new ThawCardAction(magicNumber, false, this.name));
+        if (upgraded) addToTop(new DrawCardAction(m2));
+        AbstractCard showCopy = this.makeStatEquivalentCopy();
+        addToTop(new ShowCardVeryBrieflyAction(this));
+
     }
 
     @Override

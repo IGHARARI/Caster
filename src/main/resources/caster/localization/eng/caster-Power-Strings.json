@@ -149,8 +149,8 @@
 		"NAME": "Wall of Rocks",
 		"DESCRIPTIONS": ["Fully blocking damage will reduce ", " Strength from the attacking enemy."]
 	},
-	"caster:CourtainCall": {
-		"NAME": "Courtain Call",
+	"caster:CurtainCall": {
+		"NAME": "Curtain Call",
 		"DESCRIPTIONS": ["Spells with Echo can no longer echo, instead they deal twice the damage."]
 	}
 }

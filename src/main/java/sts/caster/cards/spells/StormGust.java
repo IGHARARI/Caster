@@ -28,6 +28,7 @@ import sts.caster.util.TextureHelper;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 import java.util.function.BiFunction;
 
 import static sts.caster.core.CasterMod.makeCardPath;
@@ -110,7 +111,7 @@ public class StormGust extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             AbstractGameEffect storm = createStormGustVFX();

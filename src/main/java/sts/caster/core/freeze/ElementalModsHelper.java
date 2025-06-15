@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import sts.caster.actions.ShowCardVeryBrieflyAction;
 import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
 import sts.caster.patches.delayedCards.CastingQueueGroupEnum;
@@ -32,6 +33,7 @@ public class ElementalModsHelper {
         for (AbstractCard c : cardGroup.group) {
             if (subscriberType.isInstance(c)) {
                 methodInvoker.accept(subscriberType.cast(c), cardGroup.type);
+                AbstractDungeon.actionManager.addToBottom(new ShowCardVeryBrieflyAction(c, 0.75f, 0.6f, false));
             }
         }
     }
@@ -41,10 +43,15 @@ public class ElementalModsHelper {
             BiConsumer<T, CardGroup.CardGroupType> methodInvoker
     ) {
         for (CastingSpellCard c : SpellCardsArea.spellCardsBeingCasted) {
+            boolean showEffect = false;
             for (AbstractCard cardCopy : c.getAllCardCopies()) {
                 if (subscriberType.isInstance(cardCopy)) {
                     methodInvoker.accept(subscriberType.cast(cardCopy), CastingQueueGroupEnum.CASTER_CASTING_QUEUE);
+                    showEffect = true;
                 }
+            }
+            if (showEffect) {
+                AbstractDungeon.actionManager.addToBottom(new ShowCardVeryBrieflyAction(c.cardMiniCopy, 0.75f, 0.6f, true));
             }
         }
     }

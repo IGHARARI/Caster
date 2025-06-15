@@ -1,12 +1,10 @@
 package sts.caster.cards.special;
 
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import sts.caster.actions.ElectrifySpecificCardAction;
+import sts.caster.actions.ElectrifyCardsAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 
@@ -27,9 +25,13 @@ public class Shocked extends CasterCard {
     public static final CardColor COLOR = CardColor.COLORLESS;
 
     private static final int COST = -2;
+    private static final int CARDS_TO_SHOCK = 1;
+    private static final int ELEC_AMOUNT = 3;
 
     public Shocked() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        magicNumber = baseMagicNumber = ELEC_AMOUNT;
+        m2 = baseM2 = CARDS_TO_SHOCK;
         this.isEthereal = true;
     }
 
@@ -40,10 +42,7 @@ public class Shocked extends CasterCard {
 
     @Override
     public void triggerWhenDrawn() {
-        AbstractPlayer p = AbstractDungeon.player;
-        for (AbstractCard c : p.hand.group) {
-        	addToTop(new ElectrifySpecificCardAction(c));
-        }
+        addToBot(new ElectrifyCardsAction(m2, magicNumber, true, this));
     }
     
     @Override

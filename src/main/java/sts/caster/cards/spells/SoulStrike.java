@@ -20,6 +20,7 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -57,7 +58,7 @@ public class SoulStrike extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             actions.add(new SFXAction("ATTACK_MAGIC_FAST_1"));

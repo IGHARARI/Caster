@@ -21,10 +21,7 @@ import sts.caster.powers.ManaImbalancePower;
 import sts.caster.powers.ShortenedChantPower;
 import sts.caster.util.PowersHelper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 public abstract class CasterCard extends CustomCard {
@@ -147,7 +144,7 @@ public abstract class CasterCard extends CustomCard {
 	}
 	
 	// Return an empty list by default to prevent NPEs on cards accidentally not overriding this.
-	public ActionListSupplier actionListSupplier(Integer energySpent) {return (c, t)-> {return new ArrayList<AbstractGameAction>();};}
+	public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {return (c, t)-> {return new ArrayList<AbstractGameAction>();};}
 
 //	@Override
 //	public void triggerOnGlowCheck() {

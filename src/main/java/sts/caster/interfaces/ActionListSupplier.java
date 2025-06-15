@@ -7,5 +7,5 @@ import sts.caster.cards.CasterCard;
 import java.util.ArrayList;
 
 public interface ActionListSupplier {
-	public ArrayList<AbstractGameAction> getActionList(CasterCard card, AbstractMonster target);
+	ArrayList<AbstractGameAction> getActionList(CasterCard card, AbstractMonster target);
 }

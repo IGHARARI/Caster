@@ -28,7 +28,7 @@ public class Gain extends CasterCard {
     private static final CardType TYPE = CardType.POWER;
     public static final CardColor COLOR = TheCaster.Enums.THE_CASTER_COLOR;
 
-    private static final int COST = 1;
+    private static final int COST = 2;
     private static final int BASE_FOCUS_BONUS = 1;
 
     public Gain() {

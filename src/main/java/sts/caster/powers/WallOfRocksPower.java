@@ -58,11 +58,6 @@ public class WallOfRocksPower extends TwoAmountPower implements OnLoseBlockPower
 	}
 
 	@Override
-	public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
-		return 0;
-	}
-
-	@Override
 	public void updateDescription() {
 		description = DESCRIPTIONS[0] + amount2 + DESCRIPTIONS[1];
 	}
@@ -70,7 +65,7 @@ public class WallOfRocksPower extends TwoAmountPower implements OnLoseBlockPower
 	@Override
 	public int onLoseBlock(DamageInfo damageInfo, int damageAmount) {
 		AbstractPlayer p = AbstractDungeon.player;
-		if (damageInfo.type != DamageInfo.DamageType.HP_LOSS && p.currentBlock > 0 && damageAmount <= p.currentBlock) {
+		if (p != damageInfo.owner && damageInfo.type != DamageInfo.DamageType.HP_LOSS && p.currentBlock > 0 && damageAmount <= p.currentBlock) {
 			AbstractCreature target = damageInfo.owner;
 			addToTop(new ApplyPowerAction(target, owner, new StrengthPower(target, -amount2)));
 			if (this.amount > 1) {

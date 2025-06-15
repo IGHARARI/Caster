@@ -364,8 +364,8 @@
     "NAME": "Transmute Soul",
     "DESCRIPTION": "stslib:Purge NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to the Highest HP enemy. If Fatal, gain 1 extra [E] permanently and remove this from your deck."
   },
-  "caster:CourtainCall": {
-    "NAME": "Courtain Call",
+  "caster:CurtainCall": {
+    "NAME": "Curtain Call",
     "DESCRIPTION": "Your *Spells with caster:Echo can no longer Echo, instead they deal twice the damage.",
     "UPGRADE_DESCRIPTION": "Innate. NL Your *Spells with caster:Echo can no longer Echo, instead they deal twice the damage."
   }

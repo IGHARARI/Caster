@@ -8,7 +8,13 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public class ElectrifyCardsAction extends AbstractGameAction {
+    private final AbstractCard exception;
     private AbstractPlayer p;
     private boolean isRandom;
     private int amount;
@@ -18,15 +24,20 @@ public class ElectrifyCardsAction extends AbstractGameAction {
     private final int electrifyAmount;
 
     public ElectrifyCardsAction(int cardsAmount, boolean isRandom) {
-        this(cardsAmount, 1 , isRandom);
+        this(cardsAmount, 1 , isRandom, null);
     }
 
     public ElectrifyCardsAction(int cardsAmount, int electrifyAmount, boolean isRandom) {
+        this(cardsAmount, electrifyAmount, isRandom, null);
+    }
+
+    public ElectrifyCardsAction(int cardsAmount, int electrifyAmount, boolean isRandom, AbstractCard exception) {
         this.p = AbstractDungeon.player;
         this.isRandom = isRandom;
         this.duration = Settings.ACTION_DUR_FAST;
         this.actionType = ActionType.CARD_MANIPULATION;
         this.amount = cardsAmount;
+        this.exception = exception;
         this.electrifyAmount = electrifyAmount;
     }
     
@@ -51,8 +62,12 @@ public class ElectrifyCardsAction extends AbstractGameAction {
                 this.tickDuration();
                 return;
             }
+            List<AbstractCard> handCopy = new ArrayList<AbstractCard>(p.hand.group);
+            if (exception != null) handCopy.remove(exception);
+            Collections.shuffle(handCopy, new Random(AbstractDungeon.cardRandomRng.randomLong()));
+            if (handCopy.size() < this.amount) this.amount = handCopy.size();
             for (int i = 0; i < this.amount; i++) { //else select targets randomly
-            	AbstractCard c = p.hand.getRandomCard(AbstractDungeon.cardRandomRng);
+            	AbstractCard c = handCopy.get(i);
             	electrifyCard(c, electrifyAmount);
             }
         }

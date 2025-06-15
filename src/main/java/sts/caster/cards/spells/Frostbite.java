@@ -17,6 +17,7 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 import static sts.caster.core.freeze.FreezeHelper.getFrozenThisCombatCount;
@@ -62,7 +63,7 @@ public class Frostbite extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actions = new ArrayList<AbstractGameAction>();
             CasterCard fimbulvetr = (CasterCard) c.cardsToPreview;

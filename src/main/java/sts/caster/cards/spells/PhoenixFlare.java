@@ -22,6 +22,7 @@ import sts.caster.interfaces.ActionListSupplier;
 import sts.caster.patches.spellCardType.CasterCardType;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static sts.caster.core.CasterMod.makeCardPath;
 
@@ -60,7 +61,7 @@ public class PhoenixFlare extends CasterCard {
     }
 
     @Override
-    public ActionListSupplier actionListSupplier(Integer energySpent) {
+    public ActionListSupplier actionListSupplier(Integer energySpent, UUID originalUUID) {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
             for (int i = 0; i < 8; i++) {
