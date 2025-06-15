@@ -71,7 +71,7 @@ public class SpellIntentsManager {
 					return cardCopy.getIntentNumber();
 				}).sum();
 				if (!needsUpdate) {
-					needsUpdate = isSpellIntentChanged(damageAmount, targetMonster, SpellPredictionIntent.SpellIntentType.ATTACK);
+					needsUpdate = isSpellIntentChanged(damageAmount, SpellPredictionIntent.SpellIntentType.ATTACK, targetMonster);
 				}
 				if (damageAmount > 0) {
 					SpellPredictionIntent damageIntent = new SpellPredictionIntent(damageAmount, targetMonster, SpellPredictionIntent.SpellIntentType.ATTACK);
@@ -122,26 +122,17 @@ public class SpellIntentsManager {
 	}
 
 	private static boolean isSpellIntentChanged(int newAmount, SpellPredictionIntent.SpellIntentType type) {
+		return isSpellIntentChanged(newAmount, type, null);
+	}
+
+	private static boolean isSpellIntentChanged(int newAmount, SpellPredictionIntent.SpellIntentType type, AbstractCreature target) {
 		List<SpellPredictionIntent> priorIntents = spellIntents.stream().filter(
-				intent -> intent.spellIntentType == type
+				intent -> intent.spellIntentType == type && (target == null || intent.hoverTarget == target)
 		).collect(Collectors.toList());
 		if ((priorIntents.size() == 0 && newAmount != 0) || (priorIntents.size() != 0 && newAmount == 0)) {
 			return true;
 		}
 		if (priorIntents.size() != 0 && priorIntents.get(0).intentAmount != newAmount) {
-			return true;
-		}
-		return false;
-	}
-
-	private static boolean isSpellIntentChanged(int newAmount, AbstractCreature target, SpellPredictionIntent.SpellIntentType type) {
-		List<SpellPredictionIntent> priorIntents = spellIntents.stream().filter(
-				intent -> intent.spellIntentType == type && intent.hoverTarget == target
-		).collect(Collectors.toList());
-		if ((priorIntents.size() == 0 && newAmount != 0) || (priorIntents.size() != 0 && newAmount == 0)) {
-			return true;
-		}
-		if (priorIntents.size() > 1 || priorIntents.get(0).intentAmount != newAmount) {
 			return true;
 		}
 		return false;

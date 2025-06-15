@@ -33,7 +33,9 @@ public class ElementalModsHelper {
         for (AbstractCard c : cardGroup.group) {
             if (subscriberType.isInstance(c)) {
                 methodInvoker.accept(subscriberType.cast(c), cardGroup.type);
-                AbstractDungeon.actionManager.addToBottom(new ShowCardVeryBrieflyAction(c, 0.75f, 0.6f, false));
+                if (cardGroup.type == CardGroup.CardGroupType.HAND) {
+                    AbstractDungeon.actionManager.addToBottom(new ShowCardVeryBrieflyAction(c, 0.75f, 0.6f, false));
+                }
             }
         }
     }

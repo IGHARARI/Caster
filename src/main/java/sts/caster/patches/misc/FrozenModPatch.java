@@ -36,7 +36,7 @@ public class FrozenModPatch {
 							isDone = true;
 						}
 					});
-					AbstractDungeon.actionManager.addToTop(new GainBlockAction(p, FrozenCardMod.ON_DRAW_BLOCK_AMOUNT));
+					AbstractDungeon.actionManager.addToTop(new GainBlockAction(p, FrozenCardMod.ON_DRAW_BLOCK_AMOUNT, true));
 					AbstractDungeon.actionManager.addToTop(new ShowCardVeryBrieflyAction(card));
 				}
 			}
