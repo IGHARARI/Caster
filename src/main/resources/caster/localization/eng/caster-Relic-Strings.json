@@ -29,5 +29,12 @@
       "The #yCasting #yTime of ", " is reduced by 1. You can change the memorized Spell at a Rest site.",
       "Select a card to memorize on the ", "."
     ]
+  },
+  "caster:FuzzyScroll": {
+    "NAME": "Fuzzy Scroll",
+    "FLAVOR": "You can aaaalmost read it through the sticky fog.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, add a #yRune #yMagic to your hand.",
+    ]
   }
 }

@@ -29,6 +29,9 @@ import sts.caster.actions.ShowCardVeryBrieflyAction;
 import sts.caster.cards.attacks.*;
 import sts.caster.cards.powers.*;
 import sts.caster.cards.skills.*;
+import sts.caster.cards.special.Charred;
+import sts.caster.cards.special.Shocked;
+import sts.caster.cards.special.Snowed;
 import sts.caster.cards.spells.*;
 import sts.caster.core.freeze.ElectrifiedHelper;
 import sts.caster.core.freeze.IceWallRetainBlockListener;
@@ -36,6 +39,7 @@ import sts.caster.delayedCards.CastingSpellCard;
 import sts.caster.delayedCards.SpellCardsArea;
 import sts.caster.delayedCards.SpellIntentsManager;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
+import sts.caster.relics.FuzzyScroll;
 import sts.caster.relics.MagicBookRelic;
 import sts.caster.util.TextureHelper;
 import sts.caster.variables.DelayTurns;
@@ -196,6 +200,7 @@ public class CasterMod implements
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
         BaseMod.addRelicToCustomPool(new MagicBookRelic(), TheCaster.Enums.THE_CASTER_COLOR);
         BaseMod.registerBottleRelic(MagicBookMemorizedCardField.inMagicBookField, new MagicBookRelic());
+        BaseMod.addRelicToCustomPool(new FuzzyScroll(), TheCaster.Enums.THE_CASTER_COLOR);
 
         logger.info("Done adding relics!");
     }
@@ -218,14 +223,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(CasterStrike.ID);
         BaseMod.addCard(new CasterDefend());
         UnlockTracker.unlockCard(CasterDefend.ID);
-        BaseMod.addCard(new ManaBlast());
-        UnlockTracker.unlockCard(ManaBlast.ID);
         BaseMod.addCard(new DivertMana());
         UnlockTracker.unlockCard(DivertMana.ID);
-        BaseMod.addCard(new TapMana());
-        UnlockTracker.unlockCard(TapMana.ID);
-        BaseMod.addCard(new FocusMana());
-        UnlockTracker.unlockCard(FocusMana.ID);
         BaseMod.addCard(new Meteor());
         UnlockTracker.unlockCard(Meteor.ID);
 
@@ -241,6 +240,8 @@ public class CasterMod implements
 //        UnlockTracker.unlockCard(Slick.ID);
 
         // COMMON CARDS
+        BaseMod.addCard(new Intensify());
+        UnlockTracker.unlockCard(Intensify.ID);
         BaseMod.addCard(new JupitelThunder());
         UnlockTracker.unlockCard(JupitelThunder.ID);
         BaseMod.addCard(new MagicResonance());
@@ -391,6 +392,14 @@ public class CasterMod implements
         UnlockTracker.unlockCard(CurtainCall.ID);
 
         // UNOBTAINABLE
+        BaseMod.addCard(new Shocked());
+        UnlockTracker.unlockCard(Shocked.ID);
+        BaseMod.addCard(new Snowed());
+        UnlockTracker.unlockCard(Snowed.ID);
+        BaseMod.addCard(new Charred());
+        UnlockTracker.unlockCard(Charred.ID);
+        BaseMod.addCard(new RuneMagic());
+        UnlockTracker.unlockCard(RuneMagic.ID);
 //        BaseMod.addCard(new Ashes());
 //        UnlockTracker.unlockCard(Ashes.ID);
 //        BaseMod.addCard(new SoulStrike());

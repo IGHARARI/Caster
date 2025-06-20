@@ -9,15 +9,15 @@
   },
   "caster:DivertMana": {
     "NAME": "Divert Mana",
-    "DESCRIPTION": "Gain !B! Block. NL Gain !M! additional Block for each spell you're currently casting. NL caster:Slow-down 1."
+    "DESCRIPTION": "caster:Slow-down 1. NL Gain !B! Block. NL Gains !M! additional Block for each spell you're casting."
   },
-  "caster:FocusMana": {
-    "NAME": "Focus Mana",
+  "caster:Intensify": {
+    "NAME": "Intensify",
     "DESCRIPTION": "Increase the base damage and Block of all Spells you are currently casting by !M!. Draw 1 card."
   },
-  "caster:TapMana": {
-    "NAME": "Tap Mana",
-    "DESCRIPTION": "Reduce the base damage and Block of all Spells you are currently casting by !M!. NL caster:Fast-forward !M!."
+  "caster:RuneMagic": {
+    "NAME": "Rune Magic",
+    "DESCRIPTION": "Retain. NL Gain !B! block. NL caster:Fast-forward !M!. NL Exhaust."
   },
   "caster:ManaBlast": {
     "NAME": "Mana Blast",
@@ -152,7 +152,7 @@
     "DESCRIPTION": "While this is *Casting, on *Ignite: gains !M! caster:Echo, on exhaust: caster:Fast-Forward this !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
   },
   "caster:Fireball": {
-    "NAME": "Meteor",
+    "NAME": "Fireball",
     "DESCRIPTION": "caster:Thaw !M! card. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
   "caster:ShivasWrath": {
@@ -166,7 +166,7 @@
   },
   "caster:LightningRod": {
     "NAME": "Lightning Rod",
-    "DESCRIPTION": "Apply !M! caster:Lightning_Rods. NL When you caster:Electrify a card, if this is in your discard pile, put in on top of your deck."
+    "DESCRIPTION": "Apply !M! caster:Lightning_Rods. NL When you caster:Electrify, if this is in your discard pile put it on top of your deck."
   },
   "caster:Illusion": {
     "NAME": "Illusion",
@@ -274,7 +274,7 @@
   "caster:Superconduct": {
     "NAME": "Superconduct",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X *Jolt to your hand. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X+!M! *Jolt+ to your hand. NL Exhaust."
+    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X+!M! *Jolt+ NL to your hand. NL Exhaust."
   },
   "caster:Jolt": {
     "NAME": "Jolt",

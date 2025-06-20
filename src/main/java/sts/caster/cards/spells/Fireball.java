@@ -1,6 +1,7 @@
 package sts.caster.cards.spells;
 
 import basemod.helpers.VfxBuilder;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
@@ -9,7 +10,6 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -71,25 +71,29 @@ public class Fireball extends CasterCard {
         return (c, t) -> {
             ArrayList<AbstractGameAction> actionsList = new ArrayList<AbstractGameAction>();
             Texture meteor = TextureHelper.getTexture(makeVFXPath("meteor.png"));
-            float screenTop = Settings.HEIGHT * Settings.scale;
-            float charX = AbstractDungeon.player.drawX;
-            AbstractGameEffect meteorvfx = new VfxBuilder(meteor, charX, screenTop, 1f)
-                    .setAngle(15f)
-                    .setScale(0.6f)
-                    .moveX(charX, t.hb.cX, VfxBuilder.Interpolations.EXP5IN)
-                    .moveY(screenTop, t.hb.y, VfxBuilder.Interpolations.EXP5IN)
-                    .playSoundAt(0.1f, "ATTACK_FLAME_BARRIER")
-                    .andThen(0.5f)
-                    .fadeOut(0.3f)
-                    .triggerVfxAt(1f, 1,
-                            (x2, y2) -> {
-                                return new FireballEffect(x2, y2, x2 + 10f, y2 + 10f);
-                            }
-                    )
-                    .playSoundAt(.6f, "BLUNT_HEAVY")
+            float charX = AbstractDungeon.player.drawX + AbstractDungeon.player.hb.width * 0.5f;
+            float charY = AbstractDungeon.player.drawY + AbstractDungeon.player.hb.height * 0.5f;
+            float targetX = t.hb.cX - t.hb.width/4;
+            float targetY = t.hb.cY;
+
+            AbstractGameEffect fireball = new VfxBuilder(meteor, charX, charY, 0.6f) // Charge phase duration
+                    .setScale(0.1f)
+                    .useAdditiveBlending()
+                    .fadeIn(0.1f)
+                    .setColor(Color.RED.cpy())
+                    .rotate(920f) // full spin while charging
+                    .scale(0.1f, 0.5f, VfxBuilder.Interpolations.ELASTICOUT)
+                    .playSoundAt(0.1f, "ATTACK_FLAME_BARRIER") // charging sound
+                    .andThen(0.4f) // Launch phase
+                    .moveX(charX, targetX, VfxBuilder.Interpolations.EXP5IN)
+                    .moveY(charY, targetY, VfxBuilder.Interpolations.EXP5IN)
+                    .playSoundAt(0.05f, "BLUNT_HEAVY") // impact sound
+                    .andThen(0.2f)
+                    .triggerVfxAt(0.2f, 1, (x, y) -> new FireballEffect(x, y, x + 10f, y + 10f)) // impact fx
+                    .fadeOut(0.2f)
                     .build();
 
-            actionsList.add(new VFXAction(meteorvfx, 1f));
+            actionsList.add(new VFXAction(fireball, 1.4f));
             actionsList.add(new DamageAction(t, new DamageInfo(AbstractDungeon.player, c.spellDamage), AttackEffect.FIRE));
             return actionsList;
         };

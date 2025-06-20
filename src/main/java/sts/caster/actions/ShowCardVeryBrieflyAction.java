@@ -40,7 +40,7 @@ public class ShowCardVeryBrieflyAction extends AbstractGameAction {
 	}
 
 	public ShowCardVeryBrieflyAction(AbstractCard cardToShow) {
-		this(cardToShow, 1.7f, 1.2f, true);
+		this(cardToShow, 1.0f, 1.2f, true);
 	}
 
 	@Override
