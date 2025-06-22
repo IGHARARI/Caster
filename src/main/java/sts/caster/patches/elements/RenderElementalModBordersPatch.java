@@ -30,20 +30,21 @@ public class RenderElementalModBordersPatch {
 					float drawY = __card.current_y;
 					Method renderHelperMethod = AbstractCard.class.getDeclaredMethod("renderHelper", SpriteBatch.class, Color.class, AtlasRegion.class, float.class, float.class);
 					renderHelperMethod.setAccessible(true);
+					Color drawColor = new Color(1, 1, 1, __card.transparency);
 					if (CardModifierManager.hasModifier(__card, IgnitedCardMod.ID)) {
 						Texture ignitedTexture = TextureHelper.getTexture("caster/images/512/ignited_border.png");
 						AtlasRegion frozenRegion = new AtlasRegion(ignitedTexture, 0, 0, ignitedTexture.getWidth(), ignitedTexture.getHeight());
-						renderHelperMethod.invoke(__card, __sb, Color.WHITE.cpy(), frozenRegion, drawX, drawY);
+						renderHelperMethod.invoke(__card, __sb, drawColor, frozenRegion, drawX, drawY);
 					}
 					if (__card.hasTag(CasterCardTags.ELECTRIFIED)) {
 						Texture electrifiedTexture = TextureHelper.getTexture("caster/images/512/electrified_border.png");
 						AtlasRegion frozenRegion = new AtlasRegion(electrifiedTexture, 0, 0, electrifiedTexture.getWidth(), electrifiedTexture.getHeight());
-						renderHelperMethod.invoke(__card, __sb, Color.WHITE.cpy(), frozenRegion, drawX, drawY);
+						renderHelperMethod.invoke(__card, __sb, drawColor, frozenRegion, drawX, drawY);
 					}
 	                if (__card.hasTag(CasterCardTags.FROZEN)) {
 						Texture frozenTexture = TextureHelper.getTexture("caster/images/512/frozen_border_t2.png");
 						AtlasRegion frozenRegion = new AtlasRegion(frozenTexture, 0, 0, frozenTexture.getWidth(), frozenTexture.getHeight());
-	                	renderHelperMethod.invoke(__card, __sb, Color.WHITE.cpy(), frozenRegion, drawX, drawY);
+	                	renderHelperMethod.invoke(__card, __sb, drawColor, frozenRegion, drawX, drawY);
 	                }
 
 	            }
