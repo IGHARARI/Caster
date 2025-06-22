@@ -33,7 +33,7 @@ public class FrozenCardMod extends AbstractCardModifier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return uiStrings.TEXT[0] + " NL " + rawDescription;
+        return rawDescription; //uiStrings.TEXT[0] + " NL " + rawDescription;
     }
 
     @Override

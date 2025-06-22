@@ -27,6 +27,10 @@ public class IgnitedCardMod extends AbstractCardModifier {
         return stackImmediatelyAmount;
     }
 
+    public int getIgnitedAmount() {
+        return ignitedAmount;
+    }
+
     public IgnitedCardMod() {
         this(1);
     }
@@ -37,7 +41,7 @@ public class IgnitedCardMod extends AbstractCardModifier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return uiStrings.TEXT[0] +" x"+ ignitedAmount + " NL " + rawDescription;
+        return rawDescription; //uiStrings.TEXT[0] +" x"+ ignitedAmount + " NL " + rawDescription;
     }
 
     @Override

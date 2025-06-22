@@ -94,7 +94,7 @@ public class CasterMod implements
     private static final String ENERGY_ORB_DEFAULT_GRAY_PORTRAIT = "caster/images/1024/card_default_gray_orb.png";
 
     public static final String ELECTRIFIED_TAG_IMAGE = "caster/images/512/electrified_blank_tag.png";
-
+    public static final String FROZEN_CARD_VFX = "caster/images/512/frozen_vfx.png";
     // Character assets
     private static final String THE_DEFAULT_BUTTON = "caster/images/charSelect/hatbutton.png";
     private static final String THE_DEFAULT_PORTRAIT = "caster/images/charSelect/casterselect.png";

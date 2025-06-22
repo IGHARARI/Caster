@@ -65,7 +65,7 @@ public class SpellPredictionIntent extends AbstractOrb {
 	@Override
 	public void update() {
         this.hb.update();
-		TipHelper.renderGenericTip(this.tX + 96.0f * Settings.scale, this.tY + 64.0f * Settings.scale, this.name,
+		TipHelper.renderGenericTip(this.tX + 96.0f * Settings.scale, this.tY + 64.0f * Settings.scale, String.valueOf(this.spellIntentType),
 				"Will deal damage: " + intentAmount);
         this.fontScale = MathHelper.scaleLerpSnap(this.fontScale, 0.7f);
 	}

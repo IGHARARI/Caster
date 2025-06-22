@@ -274,7 +274,7 @@
   "caster:Superconduct": {
     "NAME": "Superconduct",
     "DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X *Jolt to your hand. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X+!M! *Jolt+ NL to your hand. NL Exhaust."
+    "UPGRADE_DESCRIPTION": "caster:Cast_Time !caster:Delay!: NL Add X+!M! *Jolt+ to NL your hand. NL Exhaust."
   },
   "caster:Jolt": {
     "NAME": "Jolt",

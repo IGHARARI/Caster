@@ -45,7 +45,7 @@ public class ElectrifiedCardMod extends AbstractCardModifier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return uiStrings.TEXT[0] +" x"+ electrifiedAmount + " NL " + rawDescription;
+        return rawDescription; //uiStrings.TEXT[0] +" x"+ electrifiedAmount + " NL " + rawDescription;
     }
 
 //    @Override
