@@ -43,8 +43,10 @@ public class Lemonade extends CasterCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         int frozenCardCount = FreezeHelper.getFrozenCardsForPile(p.hand).size();
-        addToBot(new DrawCardAction(p, magicNumber * frozenCardCount));
-        addToBot(new GainBlockAction(p, block * frozenCardCount));
+        if (frozenCardCount > 0) {
+            addToBot(new DrawCardAction(p, magicNumber * frozenCardCount));
+            addToBot(new GainBlockAction(p, block * frozenCardCount));
+        }
     }
 
     @Override

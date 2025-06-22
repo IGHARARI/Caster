@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.cards.CasterCard;
-import sts.caster.cards.special.Ashes;
 import sts.caster.core.CasterMod;
 import sts.caster.core.MagicElement;
 import sts.caster.core.TheCaster;
@@ -34,7 +33,6 @@ public class Ifrit extends CasterCard {
 
     public Ifrit() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        cardsToPreview = new Ashes();
         setCardElement(MagicElement.FIRE);
     }
 

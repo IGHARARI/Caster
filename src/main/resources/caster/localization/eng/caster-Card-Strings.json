@@ -25,7 +25,7 @@
   },
   "caster:PhoenixFlare": {
     "NAME": "Phoenix Flare",
-    "DESCRIPTION": "At the start of your turn, if this is exhausted put it in your hand and it gains !M! damage. Exhaust. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
+    "DESCRIPTION": "At the start of your turn, if this is Exhausted put it in your hand and it gains !M! damage. Exhaust. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage."
   },
   "caster:IceAge": {
     "NAME": "Ice Age",
@@ -65,7 +65,7 @@
   },
   "caster:PrimordialFlame": {
     "NAME": "Primordial Flame",
-    "DESCRIPTION": "When this exhausts, shuffle a copy in your draw pile and caster:Ignite it. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to the enemy with the highest HP, !M! times."
+    "DESCRIPTION": "When this Exhausts, shuffle a copy in your draw pile and caster:Ignite it. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to the enemy with the highest HP, !M! times."
   },
   "caster:AbsoluteZero": {
     "NAME": "Absolute Zero",
@@ -113,7 +113,7 @@
   },
   "caster:Ifrit": {
     "NAME": "Ifrit",
-    "DESCRIPTION": "Whenever you exhaust a card, draw 1 extra card and gain [E] next turn."
+    "DESCRIPTION": "Whenever you Exhaust a card, draw 1 extra card and gain [E] next turn."
   },
   "caster:Electroplating": {
     "NAME": "Electroplating",
@@ -149,7 +149,7 @@
   },
   "caster:FireWall": {
     "NAME": "Fire Wall",
-    "DESCRIPTION": "While this is *Casting, on *Ignite: gains !M! caster:Echo, on exhaust: caster:Fast-Forward this !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
+    "DESCRIPTION": "While this is *Casting, on *Ignite: gains !M! caster:Echo, on Exhaust: caster:Fast-Forward this !M!. NL caster:Cast_Time !caster:Delay!: NL Deal !caster:D! damage to ALL enemies. "
   },
   "caster:Fireball": {
     "NAME": "Fireball",
@@ -166,7 +166,7 @@
   },
   "caster:LightningRod": {
     "NAME": "Lightning Rod",
-    "DESCRIPTION": "Apply !M! caster:Lightning_Rods. NL When you caster:Electrify, if this is in your discard pile put it on top of your deck."
+    "DESCRIPTION": "Apply !M! caster:Lightning_Rods. NL When you caster:Electrify, if this is in your discard pile put it on top of your draw pile."
   },
   "caster:Illusion": {
     "NAME": "Illusion",
@@ -204,8 +204,8 @@
   },
   "caster:Demi": {
     "NAME": "Demi",
-    "DESCRIPTION": "Target loses !D! HP, plus !M!% of its current HP for each card in your exhaust pile.",
-    "EXTENDED_DESCRIPTION": ["Target loses !D! HP, plus !M!% of its current HP for each card in your exhaust pile. (!caster:M2!HP)"]
+    "DESCRIPTION": "Target loses !D! HP, plus !M!% of its current HP for each card in your Exhaust pile.",
+    "EXTENDED_DESCRIPTION": ["Target loses !D! HP, plus !M!% of its current HP for each card in your Exhaust pile. (!caster:M2!HP)"]
   },
   "caster:Enfeeble": {
     "NAME": "Enfeeble",
@@ -243,7 +243,7 @@
   "caster:IzanagisObdurance": {
     "NAME": "Izanagi's Obdurance",
     "DESCRIPTION": "At the start of your turn, caster:Ignite !M! card.",
-    "UPGRADE_DESCRIPTION": "At the start of your turn, caster:Ignite !M! card. NL caster:Ignite !caster:M2! cards."
+    "UPGRADE_DESCRIPTION": "caster:Ignite !caster:M2! cards. NL At the start of your turn, caster:Ignite !M! card."
   },
   "caster:EchoingVoice": {
     "NAME": "Echoing Voice",
@@ -251,7 +251,7 @@
   },
   "caster:SunGoddessAmaterasu": {
     "NAME": "Sun Goddess Amaterasu",
-    "DESCRIPTION": "At the start of your turn, return 1 caster:Ignited Spell or Attack from your exhaust pile to hand and caster:Ignite it."
+    "DESCRIPTION": "At the start of your turn, return 1 caster:Ignited Spell or Attack from your Exhaust pile to hand and caster:Ignite it."
   },
   "caster:WallOfThorns": {
     "NAME": "Wall Of Thorns",
@@ -307,7 +307,7 @@
   },
   "caster:Shocked": {
     "NAME": "Shocked",
-    "DESCRIPTION": "Unplayable. NL When this is drawn, caster:Electrify all cards in your hand. NL Ethereal."
+    "DESCRIPTION": "Unplayable. NL When this is drawn, caster:Electrify 1 card in your hand !M! times. NL Ethereal."
   },
   "caster:BurnOut": {
     "NAME": "Burn Out",
@@ -344,7 +344,7 @@
   },
   "caster:MatchBox": {
     "NAME": "Match Box",
-    "DESCRIPTION": "Innate. NL caster:Ignite an attack or spell !M! times. NL Deal !D! damage. NL Exhaust."
+    "DESCRIPTION": "Innate. NL caster:Ignite an *Attack or *Spell !M! times. NL Deal !D! damage. NL Exhaust."
   },
   "caster:WallOfLightning": {
     "NAME": "Wall Of Lightning",
@@ -357,8 +357,8 @@
   },
   "caster:AetherflameCatalyst": {
     "NAME": "Aetherflame Catalyst",
-    "DESCRIPTION": "Whenever you caster:Electrify an caster:Ignited card, or viceversa, enter caster:Electroplasma.",
-    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Electrify an caster:Ignited card, or viceversa, enter caster:Electroplasma."
+    "DESCRIPTION": "Whenever you caster:Electrify an caster:Ignited card, or vice versa, enter caster:Electroplasma.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you caster:Electrify an caster:Ignited card, or vice versa, enter caster:Electroplasma."
   },
   "caster:TransmuteSoul": {
     "NAME": "Transmute Soul",
