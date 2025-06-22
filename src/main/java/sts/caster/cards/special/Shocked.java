@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sts.caster.actions.ElectrifyCardsAction;
+import sts.caster.actions.ShowCardVeryBrieflyAction;
 import sts.caster.cards.CasterCard;
 import sts.caster.core.CasterMod;
 
@@ -42,6 +43,7 @@ public class Shocked extends CasterCard {
 
     @Override
     public void triggerWhenDrawn() {
+        addToBot(new ShowCardVeryBrieflyAction(this));
         addToBot(new ElectrifyCardsAction(m2, magicNumber, true, this));
     }
     

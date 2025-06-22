@@ -368,5 +368,9 @@
     "NAME": "Curtain Call",
     "DESCRIPTION": "Your *Spells with caster:Echo can no longer Echo, instead they deal twice the damage.",
     "UPGRADE_DESCRIPTION": "Innate. NL Your *Spells with caster:Echo can no longer Echo, instead they deal twice the damage."
+  },
+  "caster:RewindingCodex": {
+    "NAME": "Rewinding Codex",
+    "DESCRIPTION": "Play a copy of the last *Spell you used this combat. Then play a copy of all other spells copied by *Rewinding *Codex this combat."
   }
 }

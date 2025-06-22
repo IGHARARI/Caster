@@ -36,9 +36,11 @@ import sts.caster.cards.spells.*;
 import sts.caster.core.freeze.ElectrifiedHelper;
 import sts.caster.core.freeze.IceWallRetainBlockListener;
 import sts.caster.delayedCards.CastingSpellCard;
+import sts.caster.delayedCards.RewindingCodexManager;
 import sts.caster.delayedCards.SpellCardsArea;
 import sts.caster.delayedCards.SpellIntentsManager;
 import sts.caster.patches.relics.MagicBookMemorizedCardField;
+import sts.caster.patches.spellCardType.CasterCardType;
 import sts.caster.relics.FuzzyScroll;
 import sts.caster.relics.MagicBookRelic;
 import sts.caster.util.TextureHelper;
@@ -65,7 +67,8 @@ public class CasterMod implements
         PostBattleSubscriber,
         PostInitializeSubscriber,
         PostExhaustSubscriber,
-        PostPowerApplySubscriber {
+        PostPowerApplySubscriber,
+        OnCardUseSubscriber {
 
     public static final Logger logger = LogManager.getLogger(CasterMod.class.getName());
     private static String modID;
@@ -390,6 +393,8 @@ public class CasterMod implements
         UnlockTracker.unlockCard(TransmuteSoul.ID);
         BaseMod.addCard(new CurtainCall());
         UnlockTracker.unlockCard(CurtainCall.ID);
+        BaseMod.addCard(new RewindingCodex());
+        UnlockTracker.unlockCard(RewindingCodex.ID);
 
         // UNOBTAINABLE
         BaseMod.addCard(new Shocked());
@@ -570,6 +575,7 @@ public class CasterMod implements
         resetFrozenThisCombatCount();
         blockLostPerTurn.clear();
         ElectrifiedHelper.resetElectrifiedThisCombatCount();
+        RewindingCodexManager.resetOnStartOfCombat();
     }
 
     @Override
@@ -604,6 +610,13 @@ public class CasterMod implements
                     isDone = true;
                 }
             });
+        }
+    }
+
+    @Override
+    public void receiveCardUsed(AbstractCard abstractCard) {
+        if (AbstractDungeon.player != null && abstractCard.type == CasterCardType.SPELL) {
+            RewindingCodexManager.lastSpellUsed = abstractCard.makeSameInstanceOf();
         }
     }
 //    @Override
