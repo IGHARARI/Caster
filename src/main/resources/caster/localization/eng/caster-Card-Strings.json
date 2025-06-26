@@ -165,7 +165,7 @@
     "DESCRIPTION": "Ethereal. NL Can target self or enemy. NL Gain !B! Block or deal !D! damage. NL Exhaust."
   },
   "caster:LightningRod": {
-    "NAME": "Lightning Rod",
+    "NAME": "Lightning Rods",
     "DESCRIPTION": "Apply !M! caster:Lightning_Rods. NL When you caster:Electrify, if this is in your discard pile put it on top of your draw pile."
   },
   "caster:Illusion": {

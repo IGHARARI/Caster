@@ -21,7 +21,7 @@ public class LightningRod extends CasterCard implements ICardWasElectrifiedSubsc
 
     public static final String ID = CasterMod.makeID("LightningRod");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String IMG = makeCardPath("ashes.png");
+    public static final String IMG = makeCardPath("lightning_rods.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
